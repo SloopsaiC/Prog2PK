@@ -13,4 +13,5 @@ public class Held extends LebendigesObjekt
 	private Ruestung ruestung = null; //Dir Ruestung die dieser Held angelegt hat
 	private Accessoire[] accessoires = null; //Alle Accessiores die dieser Held traegt
 	private Faehigkeit[] faehigkeiten = null;
+	private int sterbeZaehler = 0;
 }

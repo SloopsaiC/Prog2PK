@@ -1,8 +1,11 @@
 package de.pk.model.spielbrett.spielbrettTeile;
 
+import java.util.HashMap;
+
 import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjekt;
+import de.pk.utils.Position;
 
 public class Kachel
 {
-	private SpielbrettObjekt stehendesObjekt = null; //Das Spielbrett-Objekt welches auf dieser Kachel steht
+	private HashMap<Position, SpielbrettObjekt> kachellObjekte = null;
 }
