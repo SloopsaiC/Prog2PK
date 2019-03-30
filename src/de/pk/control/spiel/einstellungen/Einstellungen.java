@@ -5,6 +5,7 @@ package de.pk.control.spiel.einstellungen;
  * */
 public class Einstellungen
 {
+	public static boolean DEBUG_MODUS = false;
 	
 	private static final class EinstellungsBehaelter
 	{

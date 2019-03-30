@@ -1,4 +1,4 @@
-package de.pk.utils;
+package de.pk.model.position;
 
 public class Position
 {

@@ -1,6 +1,6 @@
 package de.pk.model.gegenstaende.ausruestung;
 
-public class Ruestung
+public class Ruestung extends Ausruestung
 {
 
 }

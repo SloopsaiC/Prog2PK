@@ -12,4 +12,5 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 	private Aktion[] aktionen = null; //Alle Aktionen die dieses lebendige Objekt ausfuehren kann
 	private StatusEffekt[] statusEffekte = null; //Alle Statuseffekte die auf dieses Objekt wirken
 	
+	
 }

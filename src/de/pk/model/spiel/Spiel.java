@@ -7,61 +7,26 @@ import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 public class Spiel
 {
 	private Weltkarte weltkarte = null;
-	private Held[] helden = null;
-	private int anzahlAktiverHelden = 0;
-	private Dungeon aktiverDungeon = null;
+	private Dungeon aktiverDungeon = null; // Der momentan aktive Dungeon, null falls sich der Spieler auf der
+											// "Weltkarte" befindet
 
-	public Spiel(int maxHelden)
+	public Spiel()
 	{
-		this(maxHelden, new Weltkarte());
+		//TODO: Konstanten
+		this(new Weltkarte(1));
 	}
 
-	public Spiel(int maxHelden, Weltkarte weltkarte)
+	public Spiel(Weltkarte weltkarte)
 	{
 		this.weltkarte = weltkarte;
-		this.helden = new Held[maxHelden];
-	}
-
-	public int getMaxAnzahlHelden()
-	{
-		return this.helden.length;
 	}
 
 	/**
-	 * Fuegt einen Helden zu diesem Spiel hinzu
-	 * 
-	 * @param held Der Held welcher hinzugefuegt werden soll.
-	 */
-	public void heldHinzufuegen(Held held)
-	{
-		if (this.anzahlAktiverHelden < this.getMaxAnzahlHelden())
-		{
-			// Synchronized da es sonst zu IndexOutOfBounds Exceptions kommen koennte
-			synchronized (this)
-			{
-				this.helden[this.anzahlAktiverHelden++] = held;
-			}
-		} else
-		{
-			// TODO: Exception message
-			throw new IllegalStateException();
-		}
-	}
-
-	/**
-	 * @return Die Weltkarte
+	 * @return Die Weltkarte dieses Spiels
 	 */
 	public Weltkarte getWeltkarte()
 	{
 		return this.weltkarte;
-	}
-
-	/**
-	 * @return Die Helden
-	 */
-	public Held[] getHelden()
-	{
-		return this.helden;
 	}
 
 	/**
@@ -72,6 +37,14 @@ public class Spiel
 	public void aendereAktivenDungeon(Dungeon dungeon)
 	{
 		this.aktiverDungeon = dungeon;
+	}
+
+	/**
+	 * @return Der in diesem Spiel momentan aktive Dungeon
+	 */
+	public Dungeon getAktiverDungeon()
+	{
+		return this.aktiverDungeon;
 	}
 
 }

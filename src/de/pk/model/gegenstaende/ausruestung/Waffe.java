@@ -1,6 +1,6 @@
 package de.pk.model.gegenstaende.ausruestung;
 
-public class Waffe
+public class Waffe extends Ausruestung
 {
 
 }

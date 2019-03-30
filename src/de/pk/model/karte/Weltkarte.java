@@ -8,10 +8,11 @@ import de.pk.model.dungeon.Dungeon;
 public class Weltkarte
 {
 	private Dungeon[] dungeons = null;
+	private int enhalteneDungeons = 0;
 
-	public Weltkarte()
+	public Weltkarte(int groesse)
 	{
-		this.dungeons = new Dungeon[1];
+		this.dungeons = new Dungeon[groesse];
 	}
 
 	public Dungeon getDungeonBei(int index)
@@ -23,4 +24,10 @@ public class Weltkarte
 		}
 		return this.dungeons[index];
 	}
+	
+	public void fuegeDungeonHinzu(Dungeon hinzufuegen) {
+		this.dungeons[this.enhalteneDungeons++] = hinzufuegen;
+	}
+	
+	
 }
