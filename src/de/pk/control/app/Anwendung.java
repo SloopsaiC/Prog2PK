@@ -41,7 +41,7 @@ public class Anwendung
 	private void initSpiel()
 	{
 		this.aktivesSpiel.aendereAktivenDungeon(this.aktivesSpiel.getWeltkarte().getDungeonBei(0));
-		this.aktivesSpiel.getAktiverDungeon().heldHinzufuegen(new Held());
+		this.aktivesSpiel.getAktiverDungeon().heldHinzufuegen(new Held(null, 0, 0));
 		this.aktivesSpiel.getAktiverDungeon().registrierePhase(new HeldenPhase());
 	}
 

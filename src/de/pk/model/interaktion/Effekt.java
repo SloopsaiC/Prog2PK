@@ -1,6 +1,12 @@
 package de.pk.model.interaktion;
 
-public class Effekt
+import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
+
+
+public abstract class Effekt
 {
-	
+
+    public abstract void wirke (LebendigesObjekt ziel);
+
+
 }

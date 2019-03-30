@@ -1,6 +1,8 @@
 package de.pk.model.interaktion;
 
-public class StatusEffekt extends Effekt
+
+public abstract class StatusEffekt extends Effekt
 {
+
 
 }
