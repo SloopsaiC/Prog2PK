@@ -1,62 +1,98 @@
 package de.pk.control.app;
 
-import de.pk.control.spiel.phasen.HeldenPhase;
+import java.util.Scanner;
+
+import de.pk.control.spiel.Spiel;
+import de.pk.control.spiel.einstellungen.Einstellungen;
 import de.pk.model.dungeon.Dungeon;
 import de.pk.model.karte.Weltkarte;
-import de.pk.model.spiel.Spiel;
-import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
+import de.pk.utils.DebugAusgabeKlasse;
 
+/**
+ * Die Anwendung verwaltet die Auswahl eines Spielstandes, die Bearbeitung von
+ * Optionen und das Starten eines Spiels.
+ *
+ * @author Dylan
+ */
 public class Anwendung
 {
+
 	private Spiel aktivesSpiel = null;
-	private boolean amLeben = false;
-
-	public static void main(String[] args)
-	{
-		Anwendung a = new Anwendung();
-		a.run();
-	}
+	private Einstellungen anwendungsEinstellungen = null;
 
 	/**
-	 * Startet die Anwendung.
-	 */
-	private void start()
-	{
-		this.amLeben = true;
-		// Nur fuers testen, spaeter wird ein Spiel erst initialisiert falls eins
-		// geladen wird / der Startbildschirm verlassen wird um ein Spiel zu starten
-
-		Weltkarte weltkarte = new Weltkarte(1);
-		weltkarte.fuegeDungeonHinzu(new Dungeon(4));
-		this.aktivesSpiel = new Spiel(weltkarte);
-		initSpiel();
-	}
-
-	private void run()
-	{
-		this.start();
-		anwendungsSchleife();
-	}
-
-	private void initSpiel()
-	{
-		this.aktivesSpiel.aendereAktivenDungeon(this.aktivesSpiel.getWeltkarte().getDungeonBei(0));
-		this.aktivesSpiel.getAktiverDungeon().heldHinzufuegen(new Held(null, 0, 0));
-		this.aktivesSpiel.getAktiverDungeon().registrierePhase(new HeldenPhase());
-	}
-
-	/**
-	 * Sorgt dafuer, dass das aktuelle Spiel laueft und (gerendert) wird.
+	 * Die Anwendungsschleife fuehrt den Nutzer in das Hauptmenue und ruft je nach
+	 * Eingabe die entsprechenden Optionen auf.
 	 */
 	private void anwendungsSchleife()
 	{
-		while (this.amLeben)
+		while (true)
 		{
-			if (this.aktivesSpiel.getAktiverDungeon() != null)
+			DebugAusgabeKlasse.ausgeben("\n\nHauptmenue ^^");
+			DebugAusgabeKlasse.ausgeben("Was wollen Sie tun?");
+			Scanner s = new Scanner(System.in);
+			DebugAusgabeKlasse.ausgeben("\tn = neues Spiel starten " + "\n\ts = gespeichertes Spiel laden "
+					+ "\n\to = Optionen und Einstellungen \n\tx = beenden");
+			switch (s.nextLine().charAt(0))
 			{
-				this.aktivesSpiel.getAktiverDungeon().behandleNaechstePhase();
+			case 'n':
+				this.neuesSpiel();
+				break;
+			case 's':
+				this.spielLaden();
+				break;
+			case 'o':
+				this.anwendungsEinstellungen.einstellungenBearbeiten();
+				break;
+			case 'x':
+				System.exit(0);
+				break;
+			default:
+				DebugAusgabeKlasse.ausgeben("Inkorrekte Eingabe\n\n");
 			}
 		}
+	}
+
+	/**
+	 * Die Anwendung wird initialisiert, Einstellungen uebernommen.
+	 */
+	private void initAnwendung()
+	{
+		this.anwendungsEinstellungen = Einstellungen.getEinstellungen();
+	}
+
+	/**
+	 * Wird im Hauptmenue der Punkt "Neues Spiel" gewaehlt, wird hier ein neues
+	 * Spiel initialisiert.
+	 */
+	private void neuesSpiel()
+	{
+		Weltkarte weltkarte = new Weltkarte(2);
+		weltkarte.fuegeDungeonHinzu(new Dungeon("TestDungeonEins"));
+		weltkarte.fuegeDungeonHinzu(new Dungeon("TestDungeonZwei"));
+		this.aktivesSpiel = new Spiel(weltkarte);
+		this.aktivesSpiel.waehleDungeon();
+		this.aktivesSpiel.starteSpiel(); // TODO: null bei Abbruch6
+	}
+
+	/**
+	 * Wird im Hauptmenue die Option "Spiel Laden" gewaehlt, wird dies hier
+	 * behandelt.
+	 */
+	private void spielLaden()
+	{
+		DebugAusgabeKlasse.ausgeben("Spiel laden^^");
+		this.aktivesSpiel = null;
+	}
+
+	/**
+	 * Initialisiert zunaechst die Anwendung und startet dann die
+	 * Anwendungsschleife.
+	 */
+	public void starteAnwendung()
+	{
+		this.initAnwendung();
+		this.anwendungsSchleife();
 	}
 
 }

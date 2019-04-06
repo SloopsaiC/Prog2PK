@@ -7,6 +7,7 @@ import de.pk.model.dungeon.Dungeon;
  */
 public class Weltkarte
 {
+
 	private Dungeon[] dungeons = null;
 	private int enhalteneDungeons = 0;
 
@@ -15,19 +16,24 @@ public class Weltkarte
 		this.dungeons = new Dungeon[groesse];
 	}
 
+	public void fuegeDungeonHinzu(Dungeon hinzufuegen)
+	{
+		this.dungeons[this.enhalteneDungeons++] = hinzufuegen;
+	}
+
 	public Dungeon getDungeonBei(int index)
 	{
-		if (!(index < this.dungeons.length && index > -1))
+		if (!((index < this.dungeons.length) && (index > -1)))
 		{
 			// TODO: Exception message
 			throw new IllegalArgumentException();
 		}
 		return this.dungeons[index];
 	}
-	
-	public void fuegeDungeonHinzu(Dungeon hinzufuegen) {
-		this.dungeons[this.enhalteneDungeons++] = hinzufuegen;
+
+	public int getEnhalteneDungeons()
+	{
+		return this.enhalteneDungeons;
 	}
-	
-	
+
 }

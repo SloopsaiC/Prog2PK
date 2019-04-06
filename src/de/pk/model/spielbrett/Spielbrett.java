@@ -8,5 +8,5 @@ import de.pk.model.spielbrett.spielbrettTeile.Kachel;
 public class Spielbrett
 {
 	private HashMap<Position, Kachel> spielbrettTeile = null;
-	
+
 }
