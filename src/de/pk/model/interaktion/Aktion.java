@@ -10,11 +10,11 @@ public class Aktion
     private Effekt selbstEffekt = null; //Der Effekt welcher auf das ausfuehrende Objekt angewendet wird
     private Effekt zielEffekt = null; //Der Effekt welcher auf das von dieser Aktion angezielte Objekt angewendet wird
 
-    public void wendeAn (LebendigesObjekt ziel)
+    public void wendeAn (LebendigesObjekt selbst, LebendigesObjekt ziel)
     {
         try
         {
-            this.selbstEffekt.wirke(ziel);
+            this.selbstEffekt.wirke(selbst);
         }
         catch (NullPointerException e)
         {

@@ -57,7 +57,7 @@ public class Held extends LebendigesObjekt
      */
     public void agiere (Aktion aktion, LebendigesObjekt ziel)
     {
-        aktion.wendeAn(ziel);
+        aktion.wendeAn(this, ziel);
     }
 
 

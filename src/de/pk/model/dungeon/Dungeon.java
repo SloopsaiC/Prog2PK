@@ -94,6 +94,31 @@ public class Dungeon
 	}
 
 	/**
+	 * Registriert eine Phase die dieser SpielController auf sein Spiel anwenden
+	 * wird. Die angebebene Position (0 basierend) ist die Position an der die Phase
+	 * ausgefuehrt werden soll.
+	 * 
+	 * @param phase    Die Phase welche registriert wird,
+	 * @param position Die Position an welche diese Phase im Phasenzyklus gesetzt
+	 *                 wird (0 basierend)
+	 */
+	public void registrierePhase(Phase phase, int position)
+	{
+		if (!testeArgumenteRegistierePhase(phase, position))
+		{
+			// TODO: Exception message
+			throw new IllegalArgumentException();
+		}
+		synchronized (this)
+		{
+			Phase[] neuesPhasenArray = new Phase[this.phasen.length + 1];
+			System.arraycopy(this.phasen, 0, neuesPhasenArray, 0, this.phasen.length);
+			neuesPhasenArray = setzePhaseAnPosition(neuesPhasenArray, phase, position);
+			this.phasen = neuesPhasenArray;
+		}
+	}
+
+	/**
 	 * Setzt eine Phase an eine bestimmte Stelle in einem PhasenArray.
 	 * 
 	 * @param ausgangsArray Das Array in welchem die Phase gesetzt werden soll
@@ -118,31 +143,6 @@ public class Dungeon
 		// Dann wird die Phase an die nun "freie" Position gesetzt
 		clone[position] = zuSetzen;
 		return clone;
-	}
-
-	/**
-	 * Registriert eine Phase die dieser SpielController auf sein Spiel anwenden
-	 * wird. Die angebebene Position (0 basierend) ist die Position an der die Phase
-	 * ausgefuehrt werden soll.
-	 * 
-	 * @param phase    Die Phase welche registriert wird,
-	 * @param position Die Position an welche diese Phase im Phasenzyklus gesetzt
-	 *                 wird (0 basierend)
-	 */
-	public void registrierePhase(Phase phase, int position)
-	{
-		if (!testeArgumenteRegistierePhase(phase, position))
-		{
-			// TODO: Exception message
-			throw new IllegalArgumentException();
-		}
-		synchronized (this)
-		{
-			Phase[] neuesPhasenArray = new Phase[this.phasen.length + 1];
-			System.arraycopy(this.phasen, 0, neuesPhasenArray, 0, this.phasen.length);
-			neuesPhasenArray = setzePhaseAnPosition(neuesPhasenArray, phase, position);
-			this.phasen = neuesPhasenArray;
-		}
 	}
 
 	/**
