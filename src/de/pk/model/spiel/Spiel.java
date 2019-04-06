@@ -3,6 +3,7 @@ package de.pk.model.spiel;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import de.pk.control.karte.WeltkarteController;
 import de.pk.control.spiel.DungeonController;
 import de.pk.control.spiel.phasen.ExplorationsPhase;
 import de.pk.control.spiel.phasen.HeldenPhase;
@@ -13,7 +14,7 @@ import de.pk.utils.DebugAusgabeKlasse;
 public class Spiel
 {
 
-	private Weltkarte weltkarte = null;
+	private WeltkarteController weltkarte = null;
 	private DungeonController aktiverDungeonController = null; // Der Controller des momentan aktiven Dungeons,
 //null falls sich der Spieler auf der "Weltkarte" befindet
 
@@ -22,7 +23,7 @@ public class Spiel
 	 *
 	 * @param weltkarte Die Weltkarte mit Dungeons fuer das neue Spiel.
 	 */
-	public Spiel(Weltkarte weltkarte)
+	public Spiel(WeltkarteController weltkarte)
 	{
 		this.weltkarte = weltkarte;
 	}
@@ -49,7 +50,7 @@ public class Spiel
 	/**
 	 * @return Die Weltkarte dieses Spiels
 	 */
-	public Weltkarte getWeltkarte()
+	public WeltkarteController getWeltkarte()
 	{
 		return this.weltkarte;
 	}

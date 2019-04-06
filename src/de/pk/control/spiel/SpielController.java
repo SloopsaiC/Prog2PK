@@ -3,6 +3,7 @@ package de.pk.control.spiel;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import de.pk.control.karte.WeltkarteController;
 import de.pk.model.karte.Weltkarte;
 import de.pk.model.spiel.Spiel;
 import de.pk.utils.DebugAusgabeKlasse;
@@ -11,7 +12,7 @@ public class SpielController
 {
 	private Spiel spielModell = null;
 
-	public SpielController(Weltkarte weltkarte)
+	public SpielController(WeltkarteController weltkarte)
 	{
 		this.spielModell = new Spiel(weltkarte);
 	}
@@ -21,7 +22,7 @@ public class SpielController
 	 */
 	public SpielController()
 	{
-		this(new Weltkarte(1));
+		this(new WeltkarteController(1));
 	}
 
 	public void waehleDungeon()
@@ -33,7 +34,7 @@ public class SpielController
 		{
 			DebugAusgabeKlasse.ausgeben("Welchen Dungeon wollen wie wählen?");
 			s = new Scanner(System.in);
-			for (int i = 0; i < this.getWeltkarte().getEnhalteneDungeonsAnzahl(); i++)
+			for (int i = 0; i < this.getWeltkarte().getEnthalteneDungeonsAnzahl(); i++)
 			{
 				DebugAusgabeKlasse.ausgeben("\t" + (i + 1) + " = Dungeon " + (i + 1) + "\n");
 			}
@@ -85,7 +86,7 @@ public class SpielController
 		return this.spielModell.getAktivenDungeonController();
 	}
 
-	public Weltkarte getWeltkarte()
+	public WeltkarteController getWeltkarte()
 	{
 		return this.spielModell.getWeltkarte();
 	}

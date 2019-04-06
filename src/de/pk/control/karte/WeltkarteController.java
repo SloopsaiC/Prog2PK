@@ -32,7 +32,7 @@ public class WeltkarteController
 		// Synchronized -> IndexOutOfBounds check
 		synchronized (this)
 		{
-			if (this.weltkarteModell.getDungeons().length < this.weltkarteModell.getEnhalteneDungeonsAnzahl())
+			if (this.weltkarteModell.getDungeons().length < this.weltkarteModell.getEnthalteneDungeonsAnzahl())
 			{
 				this.weltkarteModell.fuegeDungeonHinzu(hinzufuegen);
 			} else
@@ -41,6 +41,11 @@ public class WeltkarteController
 				throw new IllegalStateException();
 			}
 		}
+	}
+
+	public int getEnthalteneDungeonsAnzahl()
+	{
+		return this.weltkarteModell.getEnthalteneDungeonsAnzahl();
 	}
 
 	private DungeonController[] getDungeons()

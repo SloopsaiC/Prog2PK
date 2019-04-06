@@ -26,7 +26,7 @@ public class Weltkarte
 		return this.dungeons;
 	}
 
-	public int getEnhalteneDungeonsAnzahl()
+	public int getEnthalteneDungeonsAnzahl()
 	{
 		return this.enhalteneDungeons;
 	}

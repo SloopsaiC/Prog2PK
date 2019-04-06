@@ -2,6 +2,7 @@ package de.pk.control.app;
 
 import java.util.Scanner;
 
+import de.pk.control.karte.WeltkarteController;
 import de.pk.control.spiel.DungeonController;
 import de.pk.control.spiel.SpielController;
 import de.pk.control.spiel.einstellungen.Einstellungen;
@@ -69,7 +70,7 @@ public class Anwendung
 	 */
 	private void neuesSpiel()
 	{
-		Weltkarte weltkarte = new Weltkarte(2);
+		WeltkarteController weltkarte = new WeltkarteController(2);
 		weltkarte.fuegeDungeonHinzu(new DungeonController("TestDungeonEins", 2));
 		weltkarte.fuegeDungeonHinzu(new DungeonController("TestDungeonZwei", 2));
 		this.aktivesSpiel = new SpielController(weltkarte);
