@@ -3,7 +3,7 @@ package de.pk.control.app;
 import java.util.Scanner;
 
 import de.pk.control.spiel.DungeonController;
-import de.pk.control.spiel.Spiel;
+import de.pk.control.spiel.SpielController;
 import de.pk.control.spiel.einstellungen.Einstellungen;
 import de.pk.model.karte.Weltkarte;
 import de.pk.utils.DebugAusgabeKlasse;
@@ -17,7 +17,7 @@ import de.pk.utils.DebugAusgabeKlasse;
 public class Anwendung
 {
 
-	private Spiel aktivesSpiel = null;
+	private SpielController aktivesSpiel = null;
 	private Einstellungen anwendungsEinstellungen = null;
 
 	/**
@@ -72,7 +72,7 @@ public class Anwendung
 		Weltkarte weltkarte = new Weltkarte(2);
 		weltkarte.fuegeDungeonHinzu(new DungeonController("TestDungeonEins", 2));
 		weltkarte.fuegeDungeonHinzu(new DungeonController("TestDungeonZwei", 2));
-		this.aktivesSpiel = new Spiel(weltkarte);
+		this.aktivesSpiel = new SpielController(weltkarte);
 		this.aktivesSpiel.starteSpiel();
 	}
 

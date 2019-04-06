@@ -21,17 +21,12 @@ public class Weltkarte
 		this.dungeons[this.enhalteneDungeons++] = hinzufuegen;
 	}
 
-	public DungeonController getDungeonBei(int index)
+	public DungeonController[] getDungeons()
 	{
-		if (!((index < this.dungeons.length) && (index > -1)))
-		{
-			// TODO: Exception message
-			throw new IllegalArgumentException();
-		}
-		return this.dungeons[index];
+		return this.dungeons;
 	}
 
-	public int getEnhalteneDungeons()
+	public int getEnhalteneDungeonsAnzahl()
 	{
 		return this.enhalteneDungeons;
 	}
