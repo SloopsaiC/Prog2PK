@@ -64,11 +64,9 @@ public class Spiel
 
 	private void initDungeon(int dungeonNummer)
 	{
-		this.aktiverDungeonController = new DungeonController(4);
-		this.aktiverDungeonController.setAktiverDungeon(this.getWeltkarte().getDungeonBei(dungeonNummer));
 		this.aktiverDungeonController.heldHinzufuegen(new Held(null, 0, 0));
-		this.aktiverDungeonController.getAktiverDungeon().registrierePhase(new HeldenPhase());
-		this.aktiverDungeonController.getAktiverDungeon().registrierePhase(new ExplorationsPhase());
+		this.aktiverDungeonController.registrierePhase(new HeldenPhase());
+		this.aktiverDungeonController.registrierePhase(new ExplorationsPhase());
 	}
 
 	/**
@@ -77,6 +75,7 @@ public class Spiel
 	 */
 	public void starteSpiel()
 	{
+		this.waehleDungeon();
 		if (this.aktiverDungeonController != null)
 		{
 			this.aktiverDungeonController.dungeonAblaufSchleife();
@@ -86,10 +85,11 @@ public class Spiel
 	public void waehleDungeon()
 	{
 		DebugAusgabeKlasse.ausgeben("\n\nSie sind nun auf der Weltkarte des Spiels");
+		Scanner s = null;
 		while (true)
 		{
 			DebugAusgabeKlasse.ausgeben("Welchen Dungeon wollen wie wählen?");
-			Scanner s = new Scanner(System.in);
+			s = new Scanner(System.in);
 			for (int i = 0; i < this.weltkarte.getEnhalteneDungeons(); i++)
 			{
 				DebugAusgabeKlasse.ausgeben("\t" + (i + 1) + " = Dungeon " + (i + 1) + "\n");

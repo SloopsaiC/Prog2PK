@@ -1,7 +1,9 @@
 package de.pk.control.spiel;
 
+import java.util.List;
 import java.util.Scanner;
 
+import de.pk.control.spiel.phasen.Phase;
 import de.pk.model.dungeon.Dungeon;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 import de.pk.utils.DebugAusgabeKlasse;
@@ -13,15 +15,11 @@ import de.pk.utils.DebugAusgabeKlasse;
  */
 public class DungeonController
 {
+	private Dungeon dungeonModell = null;
 
-	private Dungeon aktiverDungeon = null;
-	private Held[] helden = null;
-	private int anzahlAktiverHelden = 0;
-	private int naechstePhaseIndex = 0;
-
-	public DungeonController(int maxAnzahlHelden)
+	public DungeonController(String dungeonName, int maxAnzahlHelden)
 	{
-		this.helden = new Held[maxAnzahlHelden];
+		this.dungeonModell = new Dungeon(dungeonName, maxAnzahlHelden);
 	}
 
 	/**
@@ -29,8 +27,8 @@ public class DungeonController
 	 */
 	private void behandleNaechstePhase()
 	{
-		this.aktiverDungeon.getPhasen()[this.naechstePhaseIndex].fuerePhaseAus(this);
-		this.naechstePhaseIndex = (this.naechstePhaseIndex + 1) % this.aktiverDungeon.getPhasen().length;
+		this.dungeonModell.getNaechstePhase().fuerePhaseAus(this);
+		this.dungeonModell.naechstePhaseAktivieren();
 	}
 
 	/**
@@ -40,7 +38,7 @@ public class DungeonController
 	 */
 	public boolean brauchtEingabeFuerNaechstePhase()
 	{
-		return this.aktiverDungeon.getPhasen()[this.naechstePhaseIndex].brauchtEingabe();
+		return this.dungeonModell.getNaechstePhase().brauchtEingabe();
 	}
 
 	/**
@@ -49,7 +47,7 @@ public class DungeonController
 	 */
 	public void dungeonAblaufSchleife()
 	{
-		while (!this.aktiverDungeon.aufgabeIstErfuellt())
+		while (!this.dungeonModell.aufgabeIstErfuellt())
 		{
 			if (this.brauchtEingabeFuerNaechstePhase())
 			{
@@ -60,17 +58,12 @@ public class DungeonController
 		}
 	}
 
-	public Dungeon getAktiverDungeon()
-	{
-		return this.aktiverDungeon;
-	}
-
 	/**
 	 * @return the anzahlAktiverHelden
 	 */
 	public int getAnzahlAktiverHelden()
 	{
-		return this.anzahlAktiverHelden;
+		return this.dungeonModell.getAnzahlAktiverHelden();
 	}
 
 	/**
@@ -78,7 +71,7 @@ public class DungeonController
 	 */
 	public Held[] getHelden()
 	{
-		return this.helden;
+		return this.dungeonModell.getHelden();
 	}
 
 	private void getInput()
@@ -93,7 +86,7 @@ public class DungeonController
 
 	public int getMaxAnzahlHelden()
 	{
-		return this.helden.length;
+		return this.dungeonModell.getHelden().length;
 	}
 
 	/**
@@ -108,28 +101,75 @@ public class DungeonController
 			// TODO: Exception Message
 			throw new NullPointerException();
 		}
-		synchronized (this)
-		{
-			if (this.anzahlAktiverHelden < this.getMaxAnzahlHelden())
-			{
-				// Synchronized da es sonst zu IndexOutOfBounds Exceptions kommen koennte
-				this.helden[this.anzahlAktiverHelden++] = held;
+		this.dungeonModell.heldHinzufuegen(held);
+	}
 
-			} else
-			{
-				// TODO: Exception message
-				throw new IllegalStateException();
-			}
+	/**
+	 * Testet ob die Argumente fuer die Methode registrierePhase(Phase, int) gueltig
+	 * sind.
+	 *
+	 * @param phase   Das Phasen-Argument welches getestet wird
+	 * @param positon Die Position welche geprueft wird
+	 *
+	 * @return True falls die Argumente gueltig sind, sonst false
+	 */
+	private boolean testeArgumenteRegistierePhase(Phase phase, int position)
+	{
+		// Test ob die Phase gueltig und die Position generell plausibel ist
+		if ((phase == null) || (position < 0))
+		{
+			return false;
 		}
+		// Teste ob die Position gueltig ist, nachdem die Phase eingefuegt wurde (length
+		// + 1)
+		if (position > (this.getPhasen().size() + 1))
+		{
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Registriert eine Phase die dieser SpielController auf sein Spiel anwenden
+	 * wird. Die angebebene Position (0 basierend) ist die Position an der die Phase
+	 * ausgefuehrt werden soll.
+	 *
+	 * @param phase    Die Phase welche registriert wird,
+	 * @param position Die Position an welche diese Phase im Phasenzyklus gesetzt
+	 *                 wird (0 basierend)
+	 */
+	public void registrierePhase(Phase phase, int position)
+	{
+		if (!this.testeArgumenteRegistierePhase(phase, position))
+		{
+			// TODO: Exception message
+			throw new IllegalArgumentException();
+		}
+		this.getPhasen().add(position, phase);
+	}
+
+	/**
+	 * Registriert das Argument als momentan letzte Phase.
+	 *
+	 * @param phase Die Phase welche registriert wird
+	 */
+	public void registrierePhase(Phase phase)
+	{
+		this.registrierePhase(phase, this.getPhasen().size());
+	}
+
+	public List<Phase> getPhasen()
+	{
+		return this.dungeonModell.getPhasen();
+	}
+
+	public void setPhasen(List<Phase> phasen)
+	{
+		this.dungeonModell.setPhasen(phasen);
 	}
 
 	private void rendern()
 	{
-	}
-
-	public void setAktiverDungeon(Dungeon aktiverDungeon)
-	{
-		this.aktiverDungeon = aktiverDungeon;
 	}
 
 }

@@ -2,9 +2,9 @@ package de.pk.control.app;
 
 import java.util.Scanner;
 
+import de.pk.control.spiel.DungeonController;
 import de.pk.control.spiel.Spiel;
 import de.pk.control.spiel.einstellungen.Einstellungen;
-import de.pk.model.dungeon.Dungeon;
 import de.pk.model.karte.Weltkarte;
 import de.pk.utils.DebugAusgabeKlasse;
 
@@ -26,11 +26,12 @@ public class Anwendung
 	 */
 	private void anwendungsSchleife()
 	{
+		Scanner s = null;
 		while (true)
 		{
 			DebugAusgabeKlasse.ausgeben("\n\nHauptmenue ^^");
 			DebugAusgabeKlasse.ausgeben("Was wollen Sie tun?");
-			Scanner s = new Scanner(System.in);
+			s = new Scanner(System.in);
 			DebugAusgabeKlasse.ausgeben("\tn = neues Spiel starten " + "\n\ts = gespeichertes Spiel laden "
 					+ "\n\to = Optionen und Einstellungen \n\tx = beenden");
 			switch (s.nextLine().charAt(0))
@@ -51,6 +52,7 @@ public class Anwendung
 				DebugAusgabeKlasse.ausgeben("Inkorrekte Eingabe\n\n");
 			}
 		}
+
 	}
 
 	/**
@@ -68,11 +70,10 @@ public class Anwendung
 	private void neuesSpiel()
 	{
 		Weltkarte weltkarte = new Weltkarte(2);
-		weltkarte.fuegeDungeonHinzu(new Dungeon("TestDungeonEins"));
-		weltkarte.fuegeDungeonHinzu(new Dungeon("TestDungeonZwei"));
+		weltkarte.fuegeDungeonHinzu(new DungeonController("TestDungeonEins", 2));
+		weltkarte.fuegeDungeonHinzu(new DungeonController("TestDungeonZwei", 2));
 		this.aktivesSpiel = new Spiel(weltkarte);
-		this.aktivesSpiel.waehleDungeon();
-		this.aktivesSpiel.starteSpiel(); // TODO: null bei Abbruch6
+		this.aktivesSpiel.starteSpiel();
 	}
 
 	/**

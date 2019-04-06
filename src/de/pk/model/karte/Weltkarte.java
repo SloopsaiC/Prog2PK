@@ -1,6 +1,6 @@
 package de.pk.model.karte;
 
-import de.pk.model.dungeon.Dungeon;
+import de.pk.control.spiel.DungeonController;
 
 /**
  * Modell der Weltkarte des Spiels
@@ -8,20 +8,20 @@ import de.pk.model.dungeon.Dungeon;
 public class Weltkarte
 {
 
-	private Dungeon[] dungeons = null;
+	private DungeonController[] dungeons = null;
 	private int enhalteneDungeons = 0;
 
 	public Weltkarte(int groesse)
 	{
-		this.dungeons = new Dungeon[groesse];
+		this.dungeons = new DungeonController[groesse];
 	}
 
-	public void fuegeDungeonHinzu(Dungeon hinzufuegen)
+	public void fuegeDungeonHinzu(DungeonController hinzufuegen)
 	{
 		this.dungeons[this.enhalteneDungeons++] = hinzufuegen;
 	}
 
-	public Dungeon getDungeonBei(int index)
+	public DungeonController getDungeonBei(int index)
 	{
 		if (!((index < this.dungeons.length) && (index > -1)))
 		{

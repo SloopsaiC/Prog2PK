@@ -7,5 +7,5 @@ import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjekt;
 
 public class Kachel
 {
-	private HashMap<Position, SpielbrettObjekt> kachellObjekte = null;
+	private HashMap<Position, SpielbrettObjekt> kachelObjekte = null;
 }

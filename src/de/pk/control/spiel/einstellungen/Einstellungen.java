@@ -36,7 +36,8 @@ public class Einstellungen
 	 */
 	public void einstellungenBearbeiten()
 	{
-		zurHauptschleife: while (true)
+		boolean aktiv = true;
+		while (aktiv)
 		{
 			DebugAusgabeKlasse.ausgeben("\n\nOptionsmenue ^^");
 			DebugAusgabeKlasse.ausgeben("Welche Optionen moechten Sie bearbeiten?");
@@ -56,7 +57,8 @@ public class Einstellungen
 				DebugAusgabeKlasse.ausgeben("Denglisch"); // sinnlose Testausgabe
 				break;
 			case 4:
-				break zurHauptschleife;
+				aktiv = false;
+				break;
 			default:
 				DebugAusgabeKlasse.ausgeben("Inkorrekte Eingabe\n\n");
 			}
