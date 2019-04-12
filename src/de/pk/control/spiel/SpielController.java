@@ -4,7 +4,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import de.pk.control.karte.WeltkarteController;
-import de.pk.model.karte.Weltkarte;
 import de.pk.model.spiel.Spiel;
 import de.pk.utils.DebugAusgabeKlasse;
 

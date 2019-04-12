@@ -21,7 +21,7 @@ public class WeltkarteController
 	{
 		if (!((index < this.getDungeons().length) && (index > -1)))
 		{
-			// TODO: Exception message
+			// TODO: Exception messages
 			throw new IllegalArgumentException();
 		}
 		return this.getDungeons()[index];

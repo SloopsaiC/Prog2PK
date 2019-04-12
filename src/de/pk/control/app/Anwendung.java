@@ -6,7 +6,6 @@ import de.pk.control.karte.WeltkarteController;
 import de.pk.control.spiel.DungeonController;
 import de.pk.control.spiel.SpielController;
 import de.pk.control.spiel.einstellungen.Einstellungen;
-import de.pk.model.karte.Weltkarte;
 import de.pk.utils.DebugAusgabeKlasse;
 
 /**
