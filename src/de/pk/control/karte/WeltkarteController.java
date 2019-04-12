@@ -14,12 +14,12 @@ public class WeltkarteController
 
 	public boolean hatDungeon(int index)
 	{
-		return index < this.getDungeons().length && this.getDungeons()[index] != null;
+		return index >= 0 && index < this.getDungeons().length && this.getDungeons()[index] != null;
 	}
 
 	public DungeonController getDungeonBei(int index)
 	{
-		if (!((index < this.getDungeons().length) && (index > -1)))
+		if (!this.hatDungeon(index))
 		{
 			// TODO: Exception messages
 			throw new IllegalArgumentException();
