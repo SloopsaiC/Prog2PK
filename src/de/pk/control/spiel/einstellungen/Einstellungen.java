@@ -3,6 +3,7 @@ package de.pk.control.spiel.einstellungen;
 import java.util.Scanner;
 
 import de.pk.utils.DebugAusgabeKlasse;
+import de.pk.utils.DebugEingabeKlasse;
 
 /**
  *
@@ -41,11 +42,10 @@ public class Einstellungen
 		{
 			DebugAusgabeKlasse.ausgeben("\n\nOptionsmenue ^^");
 			DebugAusgabeKlasse.ausgeben("Welche Optionen moechten Sie bearbeiten?");
-			Scanner s = new Scanner(System.in);
 			DebugAusgabeKlasse.ausgeben(
 					"\t1 = Schwierigkeitsgrad " + "\n\t2 = Sound " + "\n\t3 = Sprache \n\t4 = zurueck zum Hauptmenue");
 
-			switch (s.nextInt())
+			switch (Integer.valueOf(DebugEingabeKlasse.leseZeileEin()))
 			{
 			case 1:
 				DebugAusgabeKlasse.ausgeben("sehr schwer"); // sinnlose Testausgabe
