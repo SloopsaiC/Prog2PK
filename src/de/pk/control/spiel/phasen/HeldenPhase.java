@@ -20,7 +20,7 @@ public class HeldenPhase extends Phase
 	}
 
 	@Override
-	public void fuerePhaseAus(DungeonController aktiverDungeonController)
+	public void fuerePhaseAus(DungeonController aktiverDungeonController, Held aktiverHeld)
 	{
 		DebugAusgabeKlasse.ausgeben("Heldenphase:");
 		for (Held held : aktiverDungeonController.getHelden())

@@ -2,6 +2,7 @@ package de.pk.control.app;
 
 import de.pk.control.spiel.einstellungen.Einstellungen;
 import de.pk.utils.DebugAusgabeKlasse;
+import de.pk.utils.DebugEingabeKlasse;
 
 /**
  * Main Klasse startet die Anwendung.
@@ -10,6 +11,15 @@ import de.pk.utils.DebugAusgabeKlasse;
  */
 public class Main
 {
+
+	/**
+	 * Beendet die Anwendung und schliest offene Ressourcen.
+	 */
+	public static void anwendungBeenden()
+	{
+		DebugEingabeKlasse.schliesseScanner();
+		System.exit(0);
+	}
 
 	/**
 	 * Startet die Anwendung (Das Spiel insgesamt).

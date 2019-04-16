@@ -1,12 +1,13 @@
 package de.pk.control.app;
 
-import java.util.Scanner;
-
 import de.pk.control.karte.WeltkarteController;
+import de.pk.control.spiel.CraftingController;
 import de.pk.control.spiel.DungeonController;
 import de.pk.control.spiel.SpielController;
 import de.pk.control.spiel.einstellungen.Einstellungen;
 import de.pk.utils.DebugAusgabeKlasse;
+import de.pk.utils.DebugEingabeKlasse;
+import de.pk.utils.Spielkonstanten;
 
 /**
  * Die Anwendung verwaltet die Auswahl eines Spielstandes, die Bearbeitung von
@@ -21,39 +22,47 @@ public class Anwendung
 	private Einstellungen anwendungsEinstellungen = null;
 
 	/**
-	 * Die Anwendungsschleife fuehrt den Nutzer in das Hauptmenue und ruft je nach
-	 * Eingabe die entsprechenden Optionen auf.
-	 */
-	private void anwendungsSchleife()
-	{
-		Scanner s = null;
-		while (true)
-		{
-			DebugAusgabeKlasse.ausgeben("\n\nHauptmenue ^^");
-			DebugAusgabeKlasse.ausgeben("Was wollen Sie tun?");
-			s = new Scanner(System.in);
-			DebugAusgabeKlasse.ausgeben("\tn = neues Spiel starten " + "\n\ts = gespeichertes Spiel laden "
-					+ "\n\to = Optionen und Einstellungen \n\tx = beenden");
-			switch (s.nextLine().charAt(0))
-			{
-			case 'n':
-				this.neuesSpiel();
-				break;
-			case 's':
-				this.spielLaden();
-				break;
-			case 'o':
-				this.anwendungsEinstellungen.einstellungenBearbeiten();
-				break;
-			case 'x':
-				System.exit(0);
-				break;
-			default:
-				DebugAusgabeKlasse.ausgeben("Inkorrekte Eingabe\n\n");
-			}
-		}
+     * Die Anwendungsschleife fuehrt den Nutzer in das Hauptmenue und ruft je nach Eingabe die entsprechenden Optionen
+     * auf.
+     */
+    private void anwendungsSchleife ()
+    {
+        boolean amLeben = true;
+        while (amLeben)
+        {
+            DebugAusgabeKlasse.ausgeben("\n\nHauptmenue ^^");
+            DebugAusgabeKlasse.ausgeben("Was wollen Sie tun?");
+            DebugAusgabeKlasse.ausgeben("\tn = neues Spiel starten " + "\n\ts = gespeichertes Spiel laden "
+                    + "\n\tc = Crafting" + "\n\to = Optionen und Einstellungen \n\tx = beenden");
+            switch (DebugEingabeKlasse.leseZeileEin().charAt(0))
+            {
+                case 'n':
+                    this.neuesSpiel();
+                    break;
+                case 's':
+                    this.spielLaden();
+                    break;
+                case 'c':
+                    this.crafting();
+                    break;
+                case 'o':
+                    this.anwendungsEinstellungen.einstellungenBearbeiten();
+                    break;
+                case 'x':
+                    amLeben = false;
+                    break;
+                default:
+                    DebugAusgabeKlasse.ausgeben("Inkorrekte Eingabe\n\n");
+            }
+        }
+    }
+    
+    private void crafting ()
+    {
+        CraftingController cc = new CraftingController();
+        cc.craftingMenue();
+    }
 
-	}
 
 	/**
 	 * Die Anwendung wird initialisiert, Einstellungen uebernommen.
@@ -69,10 +78,9 @@ public class Anwendung
 	 */
 	private void neuesSpiel()
 	{
-		WeltkarteController weltkarte = new WeltkarteController(2);
-		weltkarte.fuegeDungeonHinzu(new DungeonController("TestDungeonEins", 2));
-		weltkarte.fuegeDungeonHinzu(new DungeonController("TestDungeonZwei", 2));
-		this.aktivesSpiel = new SpielController(weltkarte);
+		WeltkarteController weltkarte = new WeltkarteController(new DungeonController("TestDungeonEins"),
+				new DungeonController("TestDungeonZwei"));
+		this.aktivesSpiel = new SpielController(weltkarte, Spielkonstanten.STANDARD_HELDEN);
 		this.aktivesSpiel.starteSpiel();
 	}
 

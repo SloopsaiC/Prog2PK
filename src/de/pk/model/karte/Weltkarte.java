@@ -1,5 +1,9 @@
 package de.pk.model.karte;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import de.pk.control.spiel.DungeonController;
 
 /**
@@ -8,27 +12,26 @@ import de.pk.control.spiel.DungeonController;
 public class Weltkarte
 {
 
-	private DungeonController[] dungeons = null;
-	private int enhalteneDungeons = 0;
+	private List<DungeonController> dungeons = null;
 
-	public Weltkarte(int groesse)
+	public Weltkarte(DungeonController[] dungeons)
 	{
-		this.dungeons = new DungeonController[groesse];
+		// Liste von Arrays hat eine fixe Groesse (Groesse des Arrays) und muss deshalb
+		// so "kopiert" werden.
+		List<DungeonController> liste = Arrays.asList(dungeons);
+		this.dungeons = new ArrayList<>();
+		this.dungeons.addAll(liste);
 	}
 
 	public void fuegeDungeonHinzu(DungeonController hinzufuegen)
 	{
-		this.dungeons[this.enhalteneDungeons++] = hinzufuegen;
+		this.dungeons.add(hinzufuegen);
 	}
 
 	public DungeonController[] getDungeons()
 	{
-		return this.dungeons;
-	}
-
-	public int getEnthalteneDungeonsAnzahl()
-	{
-		return this.enhalteneDungeons;
+		return this.dungeons.toArray(new DungeonController[]
+		{});
 	}
 
 }

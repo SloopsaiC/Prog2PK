@@ -1,12 +1,14 @@
 package de.pk.control.spiel;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.ArrayList;
 
+import de.pk.control.app.Main;
 import de.pk.control.spiel.phasen.Phase;
 import de.pk.model.dungeon.Dungeon;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 import de.pk.utils.DebugAusgabeKlasse;
+import de.pk.utils.DebugEingabeKlasse;
+import de.pk.utils.Spielkonstanten;
 
 /**
  * Verwaltet ein Dungeon und sorgt fuer den Ablauf des Spiels.
@@ -17,18 +19,31 @@ public class DungeonController
 {
 	private Dungeon dungeonModell = null;
 
-	public DungeonController(String dungeonName, int maxAnzahlHelden)
+	public DungeonController(String dungeonName, Phase[] phasen)
 	{
-		this.dungeonModell = new Dungeon(dungeonName, maxAnzahlHelden);
+		this.dungeonModell = new Dungeon(dungeonName);
+		this.initModell(phasen);
+	}
+
+	public DungeonController(String dungeonName)
+	{
+		this(dungeonName, Spielkonstanten.STANDARD_PHASEN);
+	}
+
+	private void initModell(Phase[] phasen)
+	{
+		for (Phase phase : phasen)
+		{
+			this.registrierePhase(phase);
+		}
 	}
 
 	/**
 	 * Fuehrt die jeweils naechste Phase des Dungeons aus.
 	 */
-	private void behandleNaechstePhase()
+	private void behandlePhase()
 	{
-		this.dungeonModell.getNaechstePhase().fuerePhaseAus(this);
-		this.dungeonModell.naechstePhaseAktivieren();
+		this.dungeonModell.getMomentanePhase().fuerePhaseAus(this, this.dungeonModell.getAktivenHeld());
 	}
 
 	/**
@@ -36,34 +51,28 @@ public class DungeonController
 	 *
 	 * @return
 	 */
-	public boolean brauchtEingabeFuerNaechstePhase()
+	public boolean brauchtEingabeFuerPhase()
 	{
-		return this.dungeonModell.getNaechstePhase().brauchtEingabe();
+		return this.dungeonModell.getMomentanePhase().brauchtEingabe();
 	}
 
 	/**
 	 * Game-Loop des Spiels, es werden die Phasen nacheinander ausgefuehrt, bis das
 	 * Ziel des Dungeons erreicht ist.
 	 */
-	public void dungeonAblaufSchleife()
+	public void dungeonAblaufSchleife(Held[] helden)
 	{
+		this.dungeonModell.setHelden(helden);
 		while (!this.dungeonModell.aufgabeIstErfuellt())
 		{
-			if (this.brauchtEingabeFuerNaechstePhase())
+			if (this.brauchtEingabeFuerPhase())
 			{
 				this.getInput();
 			}
-			this.behandleNaechstePhase();
+			this.behandlePhase();
 			this.rendern();
+			this.dungeonModell.naechstePhaseAktivieren();
 		}
-	}
-
-	/**
-	 * @return the anzahlAktiverHelden
-	 */
-	public int getAnzahlAktiverHelden()
-	{
-		return this.dungeonModell.getAnzahlAktiverHelden();
 	}
 
 	/**
@@ -76,32 +85,12 @@ public class DungeonController
 
 	private void getInput()
 	{
-		Scanner inputScanner = new Scanner(System.in);
 		DebugAusgabeKlasse.ausgeben("Geben Sie Input ein. (x = beenden)");
-		if (inputScanner.nextLine().charAt(0) == 'x')
+		char eingabe = DebugEingabeKlasse.leseZeileEin().charAt(0);
+		if (eingabe == 'x')
 		{
-			System.exit(0);
+			Main.anwendungBeenden();
 		}
-	}
-
-	public int getMaxAnzahlHelden()
-	{
-		return this.dungeonModell.getHelden().length;
-	}
-
-	/**
-	 * Fuegt einen Helden zu diesem Spiel hinzu
-	 *
-	 * @param held Der Held welcher hinzugefuegt werden soll.
-	 */
-	public void heldHinzufuegen(Held held)
-	{
-		if (held == null)
-		{
-			// TODO: Exception Message
-			throw new NullPointerException();
-		}
-		this.dungeonModell.heldHinzufuegen(held);
 	}
 
 	/**
@@ -158,12 +147,12 @@ public class DungeonController
 		this.registrierePhase(phase, this.getPhasen().size());
 	}
 
-	public List<Phase> getPhasen()
+	public ArrayList<Phase> getPhasen()
 	{
 		return this.dungeonModell.getPhasen();
 	}
 
-	public void setPhasen(List<Phase> phasen)
+	public void setPhasen(ArrayList<Phase> phasen)
 	{
 		this.dungeonModell.setPhasen(phasen);
 	}

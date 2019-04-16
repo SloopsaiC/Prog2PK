@@ -1,56 +1,55 @@
 package de.pk.control.spiel;
 
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 import de.pk.control.karte.WeltkarteController;
 import de.pk.model.spiel.Spiel;
+import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 import de.pk.utils.DebugAusgabeKlasse;
+import de.pk.utils.DebugEingabeKlasse;
 
 public class SpielController
 {
 	private Spiel spielModell = null;
 
-	public SpielController(WeltkarteController weltkarte)
+	public SpielController(WeltkarteController weltkarte, Held[] helden)
 	{
-		this.spielModell = new Spiel(weltkarte);
+		this.spielModell = new Spiel(weltkarte, helden);
 	}
 
 	/**
 	 * Erstellt ein Spiel mit default Weltkarte
 	 */
-	public SpielController()
+	public SpielController(Held[] helden)
 	{
-		this(new WeltkarteController(1));
+		this(new WeltkarteController(), helden);
 	}
 
 	public void waehleDungeon()
 	{
-		DebugAusgabeKlasse.ausgeben("\n\nSie sind nun auf der Weltkarte des Spiels");
 		boolean ausgewaehlt = false;
-		Scanner s = null;
+		DebugAusgabeKlasse.ausgeben("\n\nSie sind nun auf der Weltkarte des Spiels");
 		while (!ausgewaehlt)
 		{
-			DebugAusgabeKlasse.ausgeben("Welchen Dungeon wollen wie wählen?");
-			s = new Scanner(System.in);
-			for (int i = 0; i < this.getWeltkarte().getEnthalteneDungeonsAnzahl(); i++)
+			DebugAusgabeKlasse.ausgeben("Welchen Dungeon wollen wie waehlen?");
+			for (int i = 0; this.spielModell.getWeltkarte().hatDungeon(i); i++)
 			{
 				DebugAusgabeKlasse.ausgeben("\t" + (i + 1) + " = Dungeon " + (i + 1) + "\n");
 			}
 			DebugAusgabeKlasse.ausgeben("\t0 = zurueck zum Hauptmenue\n");
 			try
 			{
-				int eingabe = s.nextInt();
-				if (eingabe == 0)
+				int dungeonWahl = Integer.valueOf(DebugEingabeKlasse.leseZeileEin());
+				if (dungeonWahl == 0)
 				{
-					this.spielModell.aendereAktivenDungeon(null);
 					ausgewaehlt = true;
-					break;
+					this.spielModell.aendereAktivenDungeon(null);
+					return;
 				} else
 				{
-					this.initDungeon(eingabe - 1);
 					ausgewaehlt = true;
-					break;
+					this.initDungeon(dungeonWahl - 1);
+					return;
 				}
 			} catch (InputMismatchException ex)
 			{
@@ -76,7 +75,7 @@ public class SpielController
 		this.waehleDungeon();
 		if (this.getAktiverDungeonController() != null)
 		{
-			this.getAktiverDungeonController().dungeonAblaufSchleife();
+			this.getAktiverDungeonController().dungeonAblaufSchleife(this.spielModell.getHelden());
 		}
 	}
 

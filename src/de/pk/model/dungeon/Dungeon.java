@@ -1,8 +1,6 @@
 package de.pk.model.dungeon;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import de.pk.control.spiel.phasen.Phase;
 import de.pk.model.spielbrett.Spielbrett;
@@ -14,18 +12,18 @@ public class Dungeon
 	private Spielbrett spielbrett = null;
 
 	private String name = null;
-
-	private List<Phase> phasen = null;
+	// Repraesentation der Phasen und der aktuell im Dungeon behandelten Phase
+	private ArrayList<Phase> phasen = null;
+	private int momentanePhaseIndex = 0;
 	private Held[] helden = null;
-	private int anzahlAktiverHelden = 0;
-	private int naechstePhaseIndex = 0;
+	private int aktiverHeldIndex = 0;
 
-	public Dungeon(String name, int maximaleAnzahlHelden)
+	public Dungeon(String name)
 	{
 		this.spielbrett = new Spielbrett();
 		this.name = name;
-		this.phasen = Collections.synchronizedList(new ArrayList<Phase>());
-		this.helden = new Held[maximaleAnzahlHelden];
+		this.phasen = new ArrayList<>();
+		this.helden = new Held[0];
 	}
 
 	public boolean aufgabeIstErfuellt()
@@ -44,12 +42,12 @@ public class Dungeon
 	/**
 	 * @return the phasen
 	 */
-	public List<Phase> getPhasen()
+	public ArrayList<Phase> getPhasen()
 	{
 		return this.phasen;
 	}
 
-	public void setPhasen(List<Phase> phasen)
+	public void setPhasen(ArrayList<Phase> phasen)
 	{
 		this.phasen = phasen;
 	}
@@ -70,46 +68,28 @@ public class Dungeon
 		return this.helden;
 	}
 
-	/**
-	 * @return the anzahlAktiverHelden
-	 */
-	public int getAnzahlAktiverHelden()
+	public Held getAktivenHeld()
 	{
-		return this.anzahlAktiverHelden;
+		return this.helden[this.aktiverHeldIndex];
 	}
 
-	/**
-	 * @return the naechstePhaseIndex
-	 */
-	public int getNaechstePhaseIndex()
+	public void setHelden(Held[] helden)
 	{
-		return this.naechstePhaseIndex;
+		this.helden = helden;
+	}
+
+	public void naechsterHeld()
+	{
+		this.aktiverHeldIndex = ++this.aktiverHeldIndex % this.helden.length;
+	}
+
+	public Phase getMomentanePhase()
+	{
+		return this.phasen.get(this.momentanePhaseIndex);
 	}
 
 	public void naechstePhaseAktivieren()
 	{
-		this.naechstePhaseIndex = (this.naechstePhaseIndex + 1) % this.getPhasen().size();
+		this.momentanePhaseIndex = ++this.momentanePhaseIndex % this.phasen.size();
 	}
-
-	public Phase getNaechstePhase()
-	{
-		return this.phasen.get(this.naechstePhaseIndex);
-	}
-
-	public void heldHinzufuegen(Held hinzufuegen)
-	{
-		// Synchronized -> IndexOutOfBounds nach Increment
-		synchronized (this)
-		{
-			if (this.anzahlAktiverHelden < this.helden.length)
-			{
-				this.helden[this.anzahlAktiverHelden++] = hinzufuegen;
-			} else
-			{
-				// TODO: Exception Messages
-				throw new IllegalStateException();
-			}
-		}
-	}
-
 }

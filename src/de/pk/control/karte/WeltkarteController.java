@@ -7,9 +7,9 @@ public class WeltkarteController
 {
 	private Weltkarte weltkarteModell = null;
 
-	public WeltkarteController(int groesse)
+	public WeltkarteController(DungeonController... dungeons)
 	{
-		this.weltkarteModell = new Weltkarte(groesse);
+		this.weltkarteModell = new Weltkarte(dungeons);
 	}
 
 	public boolean hatDungeon(int index)
@@ -29,23 +29,7 @@ public class WeltkarteController
 
 	public void fuegeDungeonHinzu(DungeonController hinzufuegen)
 	{
-		// Synchronized -> IndexOutOfBounds check
-		synchronized (this)
-		{
-			if (this.weltkarteModell.getDungeons().length < this.weltkarteModell.getEnthalteneDungeonsAnzahl())
-			{
-				this.weltkarteModell.fuegeDungeonHinzu(hinzufuegen);
-			} else
-			{
-				// TODO: Exception messages
-				throw new IllegalStateException();
-			}
-		}
-	}
-
-	public int getEnthalteneDungeonsAnzahl()
-	{
-		return this.weltkarteModell.getEnthalteneDungeonsAnzahl();
+		this.weltkarteModell.fuegeDungeonHinzu(hinzufuegen);
 	}
 
 	private DungeonController[] getDungeons()

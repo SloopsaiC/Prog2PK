@@ -1,6 +1,7 @@
 package de.pk.control.spiel.phasen;
 
 import de.pk.control.spiel.DungeonController;
+import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 
 public abstract class Phase
 {
@@ -20,6 +21,6 @@ public abstract class Phase
 		return Phase.BRAUCHT_EINGABE_DEFAULT_WERT;
 	}
 
-	public abstract void fuerePhaseAus(DungeonController aktiverDungeonController);
+	public abstract void fuerePhaseAus(DungeonController aktiverDungeonController, Held aktiverHeld);
 
 }
