@@ -19,23 +19,15 @@ public class DungeonController
 {
 	private Dungeon dungeonModell = null;
 
-	public DungeonController(String dungeonName, Phase[] phasen)
-	{
-		this.dungeonModell = new Dungeon(dungeonName);
-		this.initModell(phasen);
-	}
-
 	public DungeonController(String dungeonName)
 	{
 		this(dungeonName, Spielkonstanten.STANDARD_PHASEN);
 	}
 
-	private void initModell(Phase[] phasen)
+	public DungeonController(String dungeonName, Phase[] phasen)
 	{
-		for (Phase phase : phasen)
-		{
-			this.registrierePhase(phase);
-		}
+		this.dungeonModell = new Dungeon(dungeonName);
+		this.initModell(phasen);
 	}
 
 	/**
@@ -93,6 +85,57 @@ public class DungeonController
 		}
 	}
 
+	public ArrayList<Phase> getPhasen()
+	{
+		return this.dungeonModell.getPhasen();
+	}
+
+	private void initModell(Phase[] phasen)
+	{
+		for (Phase phase : phasen)
+		{
+			this.registrierePhase(phase);
+		}
+	}
+
+	/**
+	 * Registriert das Argument als momentan letzte Phase.
+	 *
+	 * @param phase Die Phase welche registriert wird
+	 */
+	public void registrierePhase(Phase phase)
+	{
+		this.registrierePhase(phase, this.getPhasen().size());
+	}
+
+	/**
+	 * Registriert eine Phase die dieser SpielController auf sein Spiel anwenden
+	 * wird. Die angebebene Position (0 basierend) ist die Position an der die Phase
+	 * ausgefuehrt werden soll.
+	 *
+	 * @param phase    Die Phase welche registriert wird,
+	 * @param position Die Position an welche diese Phase im Phasenzyklus gesetzt
+	 *                 wird (0 basierend)
+	 */
+	public void registrierePhase(Phase phase, int position)
+	{
+		if (!this.testeArgumenteRegistierePhase(phase, position))
+		{
+			// TODO: Exception message
+			throw new IllegalArgumentException();
+		}
+		this.getPhasen().add(position, phase);
+	}
+
+	private void rendern()
+	{
+	}
+
+	public void setPhasen(ArrayList<Phase> phasen)
+	{
+		this.dungeonModell.setPhasen(phasen);
+	}
+
 	/**
 	 * Testet ob die Argumente fuer die Methode registrierePhase(Phase, int) gueltig
 	 * sind.
@@ -116,49 +159,6 @@ public class DungeonController
 			return false;
 		}
 		return true;
-	}
-
-	/**
-	 * Registriert eine Phase die dieser SpielController auf sein Spiel anwenden
-	 * wird. Die angebebene Position (0 basierend) ist die Position an der die Phase
-	 * ausgefuehrt werden soll.
-	 *
-	 * @param phase    Die Phase welche registriert wird,
-	 * @param position Die Position an welche diese Phase im Phasenzyklus gesetzt
-	 *                 wird (0 basierend)
-	 */
-	public void registrierePhase(Phase phase, int position)
-	{
-		if (!this.testeArgumenteRegistierePhase(phase, position))
-		{
-			// TODO: Exception message
-			throw new IllegalArgumentException();
-		}
-		this.getPhasen().add(position, phase);
-	}
-
-	/**
-	 * Registriert das Argument als momentan letzte Phase.
-	 *
-	 * @param phase Die Phase welche registriert wird
-	 */
-	public void registrierePhase(Phase phase)
-	{
-		this.registrierePhase(phase, this.getPhasen().size());
-	}
-
-	public ArrayList<Phase> getPhasen()
-	{
-		return this.dungeonModell.getPhasen();
-	}
-
-	public void setPhasen(ArrayList<Phase> phasen)
-	{
-		this.dungeonModell.setPhasen(phasen);
-	}
-
-	private void rendern()
-	{
 	}
 
 }

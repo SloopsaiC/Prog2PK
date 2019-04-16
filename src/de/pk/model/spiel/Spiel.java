@@ -42,17 +42,17 @@ public class Spiel
 		return this.aktiverDungeonController;
 	}
 
+	public Held[] getHelden()
+	{
+		return this.helden;
+	}
+
 	/**
 	 * @return Die Weltkarte dieses Spiels
 	 */
 	public WeltkarteController getWeltkarte()
 	{
 		return this.weltkarte;
-	}
-
-	public Held[] getHelden()
-	{
-		return this.helden;
 	}
 
 	public void setHelden(Held[] helden)

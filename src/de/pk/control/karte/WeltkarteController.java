@@ -12,9 +12,9 @@ public class WeltkarteController
 		this.weltkarteModell = new Weltkarte(dungeons);
 	}
 
-	public boolean hatDungeon(int index)
+	public void fuegeDungeonHinzu(DungeonController hinzufuegen)
 	{
-		return index >= 0 && index < this.getDungeons().length && this.getDungeons()[index] != null;
+		this.weltkarteModell.fuegeDungeonHinzu(hinzufuegen);
 	}
 
 	public DungeonController getDungeonBei(int index)
@@ -27,14 +27,14 @@ public class WeltkarteController
 		return this.getDungeons()[index];
 	}
 
-	public void fuegeDungeonHinzu(DungeonController hinzufuegen)
-	{
-		this.weltkarteModell.fuegeDungeonHinzu(hinzufuegen);
-	}
-
 	private DungeonController[] getDungeons()
 	{
 		return this.weltkarteModell.getDungeons();
+	}
+
+	public boolean hatDungeon(int index)
+	{
+		return (index >= 0) && (index < this.getDungeons().length) && (this.getDungeons()[index] != null);
 	}
 
 }

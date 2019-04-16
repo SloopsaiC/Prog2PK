@@ -8,14 +8,14 @@ public class GegenstandsHaufen
 {
 	private final GegenstandsHaufenModell modell;
 
-	public GegenstandsHaufen(Gegenstand inhalt, int menge, int maximaleAnzahl)
-	{
-		this.modell = new GegenstandsHaufenModell(inhalt, menge, maximaleAnzahl);
-	}
-
 	public GegenstandsHaufen(Gegenstand inhalt, int menge)
 	{
 		this(inhalt, menge, Spielkonstanten.STANDARD_MAX_ANZAHL_INHALT_GEGENSTANDS_HAUFEN);
+	}
+
+	public GegenstandsHaufen(Gegenstand inhalt, int menge, int maximaleAnzahl)
+	{
+		this.modell = new GegenstandsHaufenModell(inhalt, menge, maximaleAnzahl);
 	}
 
 	public GegenstandsHaufen entnehmen(int anzahl)
@@ -30,11 +30,14 @@ public class GegenstandsHaufen
 		return new GegenstandsHaufen(this.modell.getInhalt(), anzahl, this.modell.getMaximaleAnzahl());
 	}
 
-	private GegenstandsHaufen ueberflussBeimHinzutuen(GegenstandsHaufen ueberfluss)
+	public Gegenstand getInhalt()
 	{
-		ueberfluss.entnehmen(this.modell.getMaximaleAnzahl() - this.modell.getMenge());
-		this.modell.setMenge(this.modell.getMaximaleAnzahl());
-		return ueberfluss;
+		return this.modell.getInhalt();
+	}
+
+	public int getMenge()
+	{
+		return this.modell.getMenge();
 	}
 
 	public GegenstandsHaufen hinzutuen(GegenstandsHaufen zusatzInhalt)
@@ -50,18 +53,15 @@ public class GegenstandsHaufen
 			zusatzInhalt.entnehmen(zusatzInhalt.getMenge());
 		} catch (IllegalArgumentException ueberfluss)
 		{
-			return ueberflussBeimHinzutuen(zusatzInhalt);
+			return this.ueberflussBeimHinzutuen(zusatzInhalt);
 		}
 		return null;
 	}
 
-	public Gegenstand getInhalt()
+	private GegenstandsHaufen ueberflussBeimHinzutuen(GegenstandsHaufen ueberfluss)
 	{
-		return this.modell.getInhalt();
-	}
-
-	public int getMenge()
-	{
-		return this.modell.getMenge();
+		ueberfluss.entnehmen(this.modell.getMaximaleAnzahl() - this.modell.getMenge());
+		this.modell.setMenge(this.modell.getMaximaleAnzahl());
+		return ueberfluss;
 	}
 }

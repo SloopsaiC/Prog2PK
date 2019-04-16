@@ -18,6 +18,11 @@ public class GegenstandsHaufenModell
 		return this.inhalt;
 	}
 
+	public int getMaximaleAnzahl()
+	{
+		return this.maximaleAnzahl;
+	}
+
 	public int getMenge()
 	{
 		return this.menge;
@@ -25,16 +30,11 @@ public class GegenstandsHaufenModell
 
 	public void setMenge(int neueMenge)
 	{
-		if (neueMenge > this.maximaleAnzahl || neueMenge < 0)
+		if ((neueMenge > this.maximaleAnzahl) || (neueMenge < 0))
 		{
 			// TODO: Exception Message
 			throw new IllegalArgumentException();
 		}
 		this.menge = neueMenge;
-	}
-
-	public int getMaximaleAnzahl()
-	{
-		return this.maximaleAnzahl;
 	}
 }

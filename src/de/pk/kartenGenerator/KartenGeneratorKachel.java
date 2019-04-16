@@ -19,7 +19,7 @@ public abstract class KartenGeneratorKachel
 	{
 		int xEntfernung = xPosition1 - xPosition2;
 		int yEntfernung = yPosition1 - yPosition2;
-		if (xEntfernung == 0 && yEntfernung == 0)
+		if ((xEntfernung == 0) && (yEntfernung == 0))
 		{
 			return 0f;
 		}
@@ -81,7 +81,7 @@ public abstract class KartenGeneratorKachel
 
 		for (int var = 0; var < range; var++)
 		{
-			if (this.inhalt[var * yVarMult + yOffset][var * xVarMult + xOffset].istBetretbar())
+			if (this.inhalt[(var * yVarMult) + yOffset][(var * xVarMult) + xOffset].istBetretbar())
 			{
 				return true;
 			}
@@ -91,17 +91,6 @@ public abstract class KartenGeneratorKachel
 
 	@Override
 	public abstract KartenGeneratorKachel clone();
-
-	public KachelWertigkeit[][] getInhalt()
-	{
-		return this.inhalt;
-	}
-
-	/**
-	 * Get the probability of this tile generating at any given positon (Args look
-	 * others with same argument structure)
-	 */
-	public abstract float getVorkommensWahrscheinlichkeit(int maxSizeX, int maxSizeY, int currentPosX, int currentPosY);
 
 	/**
 	 * Turns this tile in the given direction
@@ -130,5 +119,16 @@ public abstract class KartenGeneratorKachel
 		}
 		this.inhalt = newContent;
 	}
+
+	public KachelWertigkeit[][] getInhalt()
+	{
+		return this.inhalt;
+	}
+
+	/**
+	 * Get the probability of this tile generating at any given positon (Args look
+	 * others with same argument structure)
+	 */
+	public abstract float getVorkommensWahrscheinlichkeit(int maxSizeX, int maxSizeY, int currentPosX, int currentPosY);
 
 }

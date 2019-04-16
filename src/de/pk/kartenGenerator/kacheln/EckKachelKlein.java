@@ -9,11 +9,16 @@ public class EckKachelKlein extends KartenGeneratorKachel
 	private static final float STANDART_WAHRSCHEINLICHKEIT_ERHOEUNG_WENN_IN_ECKE = 0.5f;
 	private static final KachelWertigkeit[][] STANDART =
 	{
-			{ KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT },
-			{ KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT },
-			{ KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI },
-			{ KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI },
-			{ KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI } };
+			{ KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT,
+					KachelWertigkeit.LEICHT },
+			{ KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT,
+					KachelWertigkeit.LEICHT },
+			{ KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.FREI, KachelWertigkeit.FREI,
+					KachelWertigkeit.FREI },
+			{ KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.FREI, KachelWertigkeit.FREI,
+					KachelWertigkeit.FREI },
+			{ KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.FREI, KachelWertigkeit.FREI,
+					KachelWertigkeit.FREI } };
 
 	public EckKachelKlein()
 	{
@@ -31,8 +36,8 @@ public class EckKachelKlein extends KartenGeneratorKachel
 			int aktuellePositionY)
 	{
 		// Check if in a map corner
-		if (aktuellePositionX == maximalGroesseX - 1 && aktuellePositionY == maximalGroesseY - 1
-				|| aktuellePositionX == 0 && aktuellePositionY == 0)
+		if (((aktuellePositionX == (maximalGroesseX - 1)) && (aktuellePositionY == (maximalGroesseY - 1)))
+				|| ((aktuellePositionX == 0) && (aktuellePositionY == 0)))
 		{
 			return 1f;
 		}
@@ -48,9 +53,10 @@ public class EckKachelKlein extends KartenGeneratorKachel
 				|| this.pruefenObInRechteck(maximalGroesseX - 1, maximalGroesseY - 1, einZentelDerMaximalgroesseX,
 						einZentelDerMaximalgroesseY, aktuellePositionX, aktuellePositionY))
 		{
-			return STANDART_WAHRSCHEINLICHKEIT + STANDART_WAHRSCHEINLICHKEIT_ERHOEUNG_WENN_IN_ECKE;
+			return EckKachelKlein.STANDART_WAHRSCHEINLICHKEIT
+					+ EckKachelKlein.STANDART_WAHRSCHEINLICHKEIT_ERHOEUNG_WENN_IN_ECKE;
 		}
-		return STANDART_WAHRSCHEINLICHKEIT;
+		return EckKachelKlein.STANDART_WAHRSCHEINLICHKEIT;
 	}
 
 	/**
@@ -60,8 +66,8 @@ public class EckKachelKlein extends KartenGeneratorKachel
 	private boolean pruefenObInRechteck(int positionX, int positionY, int groesseX, int groesseY, int ueberpruefenX,
 			int ueberpruefenY)
 	{
-		return positionX - groesseX < ueberpruefenX && positionX + groesseX > ueberpruefenX
-				&& positionY - groesseY < ueberpruefenY && positionX + groesseY > ueberpruefenX;
+		return ((positionX - groesseX) < ueberpruefenX) && ((positionX + groesseX) > ueberpruefenX)
+				&& ((positionY - groesseY) < ueberpruefenY) && ((positionX + groesseY) > ueberpruefenX);
 	}
 
 }

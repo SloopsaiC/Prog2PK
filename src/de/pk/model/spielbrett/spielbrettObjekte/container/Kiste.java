@@ -4,14 +4,14 @@ import de.pk.utils.Spielkonstanten;
 
 public class Kiste extends Container
 {
+	public Kiste()
+	{
+		super(Spielkonstanten.STANDARD_MAX_ANZAHL_INHALT_KISTE);
+	}
+
 	public Kiste(int maximaleGroesse)
 	{
 		super(maximaleGroesse);
 	}
 
-	public Kiste()
-	{
-		super(Spielkonstanten.STANDARD_MAX_ANZAHL_INHALT_KISTE);
-	}
-	
 }

@@ -9,10 +9,14 @@ public class SackgasseKachel extends KartenGeneratorKachel
 	private static final float STANDART_WAHRSCHEINLICHKEITS_ERHOEHUNG_PRO_ZENTEL = 0.04f;
 	private static final KachelWertigkeit[][] STANDART =
 	{
-			{ KachelWertigkeit.SCHWER, KachelWertigkeit.SCHWER, KachelWertigkeit.SCHWER, KachelWertigkeit.SCHWER, KachelWertigkeit.SCHWER },
-			{ KachelWertigkeit.SCHWER, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.FREI },
-			{ KachelWertigkeit.SCHWER, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.FREI, KachelWertigkeit.FREI },
-			{ KachelWertigkeit.SCHWER, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.FREI },
+			{ KachelWertigkeit.SCHWER, KachelWertigkeit.SCHWER, KachelWertigkeit.SCHWER, KachelWertigkeit.SCHWER,
+					KachelWertigkeit.SCHWER },
+			{ KachelWertigkeit.SCHWER, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT,
+					KachelWertigkeit.FREI },
+			{ KachelWertigkeit.SCHWER, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.FREI,
+					KachelWertigkeit.FREI },
+			{ KachelWertigkeit.SCHWER, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT, KachelWertigkeit.LEICHT,
+					KachelWertigkeit.FREI },
 			{ KachelWertigkeit.SCHWER, KachelWertigkeit.SCHWER, KachelWertigkeit.SCHWER, KachelWertigkeit.SCHWER,
 					KachelWertigkeit.SCHWER } };
 
@@ -36,9 +40,9 @@ public class SackgasseKachel extends KartenGeneratorKachel
 		float einZentel = distanzZurMitte / 10;
 		if (distanzZurMitte == 0f)
 		{
-			return STANDART_WAHRSCHEINLICHKEIT;
+			return SackgasseKachel.STANDART_WAHRSCHEINLICHKEIT;
 		}
-		return STANDART_WAHRSCHEINLICHKEIT
-				+ distanzZurMitte / einZentel * STANDART_WAHRSCHEINLICHKEITS_ERHOEHUNG_PRO_ZENTEL;
+		return SackgasseKachel.STANDART_WAHRSCHEINLICHKEIT
+				+ ((distanzZurMitte / einZentel) * SackgasseKachel.STANDART_WAHRSCHEINLICHKEITS_ERHOEHUNG_PRO_ZENTEL);
 	}
 }

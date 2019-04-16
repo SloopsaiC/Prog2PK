@@ -31,6 +31,24 @@ public class Dungeon
 		return false;
 	}
 
+	public Held getAktivenHeld()
+	{
+		return this.helden[this.aktiverHeldIndex];
+	}
+
+	/**
+	 * @return the helden
+	 */
+	public Held[] getHelden()
+	{
+		return this.helden;
+	}
+
+	public Phase getMomentanePhase()
+	{
+		return this.phasen.get(this.momentanePhaseIndex);
+	}
+
 	/**
 	 * @return the name
 	 */
@@ -47,11 +65,6 @@ public class Dungeon
 		return this.phasen;
 	}
 
-	public void setPhasen(ArrayList<Phase> phasen)
-	{
-		this.phasen = phasen;
-	}
-
 	/**
 	 * @return the spielbrett
 	 */
@@ -60,22 +73,9 @@ public class Dungeon
 		return this.spielbrett;
 	}
 
-	/**
-	 * @return the helden
-	 */
-	public Held[] getHelden()
+	public void naechstePhaseAktivieren()
 	{
-		return this.helden;
-	}
-
-	public Held getAktivenHeld()
-	{
-		return this.helden[this.aktiverHeldIndex];
-	}
-
-	public void setHelden(Held[] helden)
-	{
-		this.helden = helden;
+		this.momentanePhaseIndex = ++this.momentanePhaseIndex % this.phasen.size();
 	}
 
 	public void naechsterHeld()
@@ -83,13 +83,13 @@ public class Dungeon
 		this.aktiverHeldIndex = ++this.aktiverHeldIndex % this.helden.length;
 	}
 
-	public Phase getMomentanePhase()
+	public void setHelden(Held[] helden)
 	{
-		return this.phasen.get(this.momentanePhaseIndex);
+		this.helden = helden;
 	}
 
-	public void naechstePhaseAktivieren()
+	public void setPhasen(ArrayList<Phase> phasen)
 	{
-		this.momentanePhaseIndex = ++this.momentanePhaseIndex % this.phasen.size();
+		this.phasen = phasen;
 	}
 }

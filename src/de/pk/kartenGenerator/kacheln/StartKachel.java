@@ -8,11 +8,16 @@ public class StartKachel extends KartenGeneratorKachel
 	private static final float STANDART_WAHRSCHEINLICHKEITS_REDUZIERUNG_PRO_ZENTEL = 0.00f;
 	private static final KachelWertigkeit[][] STANDART =
 	{
-			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI },
-			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI },
-			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.ENDE, KachelWertigkeit.FREI, KachelWertigkeit.FREI },
-			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI },
-			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI } };
+			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI,
+					KachelWertigkeit.FREI },
+			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI,
+					KachelWertigkeit.FREI },
+			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.ENDE, KachelWertigkeit.FREI,
+					KachelWertigkeit.FREI },
+			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI,
+					KachelWertigkeit.FREI },
+			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI,
+					KachelWertigkeit.FREI } };
 
 	public StartKachel()
 	{
@@ -40,6 +45,6 @@ public class StartKachel extends KartenGeneratorKachel
 		// Get the default probability and minus it to with how many tenths it moved
 		// towards the outside times the specified decrease
 		return StartKachel.STANDART_WAHRSCHEINLICHKEIT
-				- distanzZurMitte / einZentel * StartKachel.STANDART_WAHRSCHEINLICHKEITS_REDUZIERUNG_PRO_ZENTEL;
+				- ((distanzZurMitte / einZentel) * StartKachel.STANDART_WAHRSCHEINLICHKEITS_REDUZIERUNG_PRO_ZENTEL);
 	}
 }

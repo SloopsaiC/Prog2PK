@@ -22,47 +22,46 @@ public class Anwendung
 	private Einstellungen anwendungsEinstellungen = null;
 
 	/**
-     * Die Anwendungsschleife fuehrt den Nutzer in das Hauptmenue und ruft je nach Eingabe die entsprechenden Optionen
-     * auf.
-     */
-    private void anwendungsSchleife ()
-    {
-        boolean amLeben = true;
-        while (amLeben)
-        {
-            DebugAusgabeKlasse.ausgeben("\n\nHauptmenue ^^");
-            DebugAusgabeKlasse.ausgeben("Was wollen Sie tun?");
-            DebugAusgabeKlasse.ausgeben("\tn = neues Spiel starten " + "\n\ts = gespeichertes Spiel laden "
-                    + "\n\tc = Crafting" + "\n\to = Optionen und Einstellungen \n\tx = beenden");
-            switch (DebugEingabeKlasse.leseZeileEin().charAt(0))
-            {
-                case 'n':
-                    this.neuesSpiel();
-                    break;
-                case 's':
-                    this.spielLaden();
-                    break;
-                case 'c':
-                    this.crafting();
-                    break;
-                case 'o':
-                    this.anwendungsEinstellungen.einstellungenBearbeiten();
-                    break;
-                case 'x':
-                    amLeben = false;
-                    break;
-                default:
-                    DebugAusgabeKlasse.ausgeben("Inkorrekte Eingabe\n\n");
-            }
-        }
-    }
-    
-    private void crafting ()
-    {
-        CraftingController cc = new CraftingController();
-        cc.craftingMenue();
-    }
+	 * Die Anwendungsschleife fuehrt den Nutzer in das Hauptmenue und ruft je nach
+	 * Eingabe die entsprechenden Optionen auf.
+	 */
+	private void anwendungsSchleife()
+	{
+		boolean amLeben = true;
+		while (amLeben)
+		{
+			DebugAusgabeKlasse.ausgeben("\n\nHauptmenue ^^");
+			DebugAusgabeKlasse.ausgeben("Was wollen Sie tun?");
+			DebugAusgabeKlasse.ausgeben("\tn = neues Spiel starten " + "\n\ts = gespeichertes Spiel laden "
+					+ "\n\tc = Crafting" + "\n\to = Optionen und Einstellungen \n\tx = beenden");
+			switch (DebugEingabeKlasse.leseZeileEin().charAt(0))
+			{
+			case 'n':
+				this.neuesSpiel();
+				break;
+			case 's':
+				this.spielLaden();
+				break;
+			case 'c':
+				this.crafting();
+				break;
+			case 'o':
+				this.anwendungsEinstellungen.einstellungenBearbeiten();
+				break;
+			case 'x':
+				amLeben = false;
+				break;
+			default:
+				DebugAusgabeKlasse.ausgeben("Inkorrekte Eingabe\n\n");
+			}
+		}
+	}
 
+	private void crafting()
+	{
+		CraftingController cc = new CraftingController();
+		cc.craftingMenue();
+	}
 
 	/**
 	 * Die Anwendung wird initialisiert, Einstellungen uebernommen.

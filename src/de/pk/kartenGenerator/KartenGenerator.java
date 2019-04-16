@@ -12,15 +12,17 @@ public class KartenGenerator
 	}
 
 	/**
-	 * Generiert eine Kachel passend zur gegebenen Kachel in der bestimmten Richtung.
-	 * Die Kachelwahrscheinlichkeit ist abhaengig von der aktuellen Position
+	 * Generiert eine Kachel passend zur gegebenen Kachel in der bestimmten
+	 * Richtung. Die Kachelwahrscheinlichkeit ist abhaengig von der aktuellen
+	 * Position
 	 *
 	 * @param anzahlKachelnX    Maximale Anzahl der Kacheln in X-Richtung
 	 * @param anzahlKachelnY    Maximale Anzahl der Kacheln in Y-Richtung
 	 * @param aktuellePositionX Aktuelle Position in X-Richtung
 	 * @param aktuellePositionY Aktuelle Position in Y-Richtung
 	 * @param richtung          Die Richtung in der die neue Kachel generiert wird
-	 * @param aktuelleKarte     Die Karte fuer die, die Kachel generiert (aber noch nicht gesetzt) wird
+	 * @param aktuelleKarte     Die Karte fuer die, die Kachel generiert (aber noch
+	 *                          nicht gesetzt) wird
 	 *
 	 * @return KartenGeneratorKachel: Die Kachel die generiert wurde
 	 */
@@ -43,12 +45,14 @@ public class KartenGenerator
 
 	/**
 	 * Bestimmt die Kachel die generiert werden soll, dies basiert auf den
-         * Wahrscheinlichkeiten
+	 * Wahrscheinlichkeiten
 	 *
 	 * @param anzahlKachelnX     Maximale Anzahl der Kacheln in X-Richtung
 	 * @param anzahlKachelnY     Maximale Anzahl der Kacheln in Y-Richtung
-	 * @param generierePositionX X-Position auf der die Kachel generiert werden sollte
-	 * @param generierePositionY Y-Position auf der die Kachel generiert werden sollte
+	 * @param generierePositionX X-Position auf der die Kachel generiert werden
+	 *                           sollte
+	 * @param generierePositionY Y-Position auf der die Kachel generiert werden
+	 *                           sollte
 	 *
 	 * @return KartenGeneratorKachel A tile fitting the current Position
 	 */
@@ -56,11 +60,12 @@ public class KartenGenerator
 			int generierePositionY)
 	{
 		// Holt alle Wahrscheinlichkeiten von den Kacheln
-		float[] wahrscheinlichkeiten = this.getWahrscheinlichkeitVonKacheln(anzahlKachelnX, anzahlKachelnY, generierePositionX,
-				generierePositionY);
+		float[] wahrscheinlichkeiten = this.getWahrscheinlichkeitVonKacheln(anzahlKachelnX, anzahlKachelnY,
+				generierePositionX, generierePositionY);
 		if (KartenGeneratorUtils.getKachelDieGeneriertWerdenMuss(wahrscheinlichkeiten) >= 0)
 		{
-			return this.registrierteKacheln.get(KartenGeneratorUtils.getKachelDieGeneriertWerdenMuss(wahrscheinlichkeiten));
+			return this.registrierteKacheln
+					.get(KartenGeneratorUtils.getKachelDieGeneriertWerdenMuss(wahrscheinlichkeiten));
 		}
 		return this.registrierteKacheln.get(KartenGeneratorUtils.getIndexVonWahrscheinlichkeit(wahrscheinlichkeiten));
 
@@ -86,6 +91,22 @@ public class KartenGenerator
 		return wahrscheinlichkeit;
 	}
 
+	/**
+	 * Regestriert die Kacheln die der Generator erzeugen soll.
+	 *
+	 * @param insRegister Die Kachel ins Register
+	 */
+	public void registriereKachel(KartenGeneratorKachel insRegister)
+	{
+		if (this.ueberpruefeRegistrierendeKachel(insRegister))
+		{
+			this.registrierteKacheln.add(insRegister);
+		} else
+		{
+			throw new IllegalArgumentException("Kacheln muessen mindestens ein begehbares Feld am Rand haben!");
+		}
+	}
+
 	private boolean ueberpruefeFreiesRandFeld(KartenGeneratorKachel zuUeberpruefen)
 	{
 		for (int val = 0; val < KartenGeneratorKachelInterface.KACHEL_GROESSE_X; val++)
@@ -105,25 +126,12 @@ public class KartenGenerator
 
 	private boolean ueberpruefeRegistrierendeKachel(KartenGeneratorKachel zuUeberpruefen)
 	{
-		return ueberpruefeFreiesRandFeld(zuUeberpruefen);   // Wir sollten vielleicht auch pruefen ob die Kachel sinnvolle
-                                                                    // Werte fuer ihre Wahrscheinlichkeit wieder gibt, falls man
-                                                                    // Kacheln von ausserhalb zulassen moechte (Modding etc.)
-	}
-
-	/**
-	 * Regestriert die Kacheln die der Generator erzeugen soll.
-	 *
-	 * @param insRegister Die Kachel ins Register
-	 */
-	public void registriereKachel(KartenGeneratorKachel insRegister)
-	{
-		if (ueberpruefeRegistrierendeKachel(insRegister))
-		{
-			this.registrierteKacheln.add(insRegister);
-		} else
-		{
-			throw new IllegalArgumentException("Kacheln muessen mindestens ein begehbares Feld am Rand haben!");
-		}
+		return this.ueberpruefeFreiesRandFeld(zuUeberpruefen); // Wir sollten vielleicht auch pruefen ob die Kachel
+																// sinnvolle
+																// Werte fuer ihre Wahrscheinlichkeit wieder gibt, falls
+																// man
+																// Kacheln von ausserhalb zulassen moechte (Modding
+																// etc.)
 	}
 
 }

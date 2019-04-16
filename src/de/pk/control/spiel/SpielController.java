@@ -12,17 +12,48 @@ public class SpielController
 {
 	private Spiel spielModell = null;
 
-	public SpielController(WeltkarteController weltkarte, Held[] helden)
-	{
-		this.spielModell = new Spiel(weltkarte, helden);
-	}
-
 	/**
 	 * Erstellt ein Spiel mit default Weltkarte
 	 */
 	public SpielController(Held[] helden)
 	{
 		this(new WeltkarteController(), helden);
+	}
+
+	public SpielController(WeltkarteController weltkarte, Held[] helden)
+	{
+		this.spielModell = new Spiel(weltkarte, helden);
+	}
+
+	public DungeonController getAktiverDungeonController()
+	{
+		return this.spielModell.getAktivenDungeonController();
+	}
+
+	public WeltkarteController getWeltkarte()
+	{
+		return this.spielModell.getWeltkarte();
+	}
+
+	private void initDungeon(int index)
+	{
+		if (this.getWeltkarte().hatDungeon(index))
+		{
+			this.spielModell.aendereAktivenDungeon(this.getWeltkarte().getDungeonBei(index));
+		}
+	}
+
+	/**
+	 * Sorgt dafuer, dass das aktuelle Spiel laueft, startet den GameLoop im
+	 * DungeonController.
+	 */
+	public void starteSpiel()
+	{
+		this.waehleDungeon();
+		if (this.getAktiverDungeonController() != null)
+		{
+			this.getAktiverDungeonController().dungeonAblaufSchleife(this.spielModell.getHelden());
+		}
 	}
 
 	public void waehleDungeon()
@@ -56,36 +87,5 @@ public class SpielController
 				DebugAusgabeKlasse.ausgeben("Inkorrekte Eingabe\n\n");
 			}
 		}
-	}
-
-	private void initDungeon(int index)
-	{
-		if (this.getWeltkarte().hatDungeon(index))
-		{
-			this.spielModell.aendereAktivenDungeon(this.getWeltkarte().getDungeonBei(index));
-		}
-	}
-
-	/**
-	 * Sorgt dafuer, dass das aktuelle Spiel laueft, startet den GameLoop im
-	 * DungeonController.
-	 */
-	public void starteSpiel()
-	{
-		this.waehleDungeon();
-		if (this.getAktiverDungeonController() != null)
-		{
-			this.getAktiverDungeonController().dungeonAblaufSchleife(this.spielModell.getHelden());
-		}
-	}
-
-	public DungeonController getAktiverDungeonController()
-	{
-		return this.spielModell.getAktivenDungeonController();
-	}
-
-	public WeltkarteController getWeltkarte()
-	{
-		return this.spielModell.getWeltkarte();
 	}
 }
