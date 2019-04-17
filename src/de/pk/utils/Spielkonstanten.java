@@ -3,6 +3,7 @@ package de.pk.utils;
 import de.pk.control.spiel.phasen.ExplorationsPhase;
 import de.pk.control.spiel.phasen.HeldenPhase;
 import de.pk.control.spiel.phasen.Phase;
+import de.pk.kartenGenerator.KartenGenerator;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 
 public class Spielkonstanten
@@ -16,4 +17,5 @@ public class Spielkonstanten
 	{ new HeldenPhase(), new ExplorationsPhase() };
 	public static final Held[] STANDARD_HELDEN =
 	{ new Held("Test", 10, 10) };
+	
 }

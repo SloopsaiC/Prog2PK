@@ -3,6 +3,8 @@ package de.pk.model.dungeon;
 import java.util.ArrayList;
 
 import de.pk.control.spiel.phasen.Phase;
+import de.pk.kartenGenerator.KartenGenerator;
+import de.pk.kartenGenerator.KartenGeneratorKachelInterface;
 import de.pk.model.spielbrett.Spielbrett;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 
@@ -17,6 +19,7 @@ public class Dungeon
 	private int momentanePhaseIndex = 0;
 	private Held[] helden = null;
 	private int aktiverHeldIndex = 0;
+	private KartenGenerator kartenGenerator = null;
 
 	public Dungeon(String name)
 	{
@@ -24,6 +27,12 @@ public class Dungeon
 		this.name = name;
 		this.phasen = new ArrayList<>();
 		this.helden = new Held[0];
+		this.kartenGenerator = new KartenGenerator(KartenGeneratorKachelInterface.alleKacheln);
+	}
+
+	public KartenGenerator getKartenGenerator()
+	{
+		return this.kartenGenerator;
 	}
 
 	public boolean aufgabeIstErfuellt()

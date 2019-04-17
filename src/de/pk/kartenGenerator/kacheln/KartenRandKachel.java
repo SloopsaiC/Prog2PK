@@ -1,6 +1,7 @@
 package de.pk.kartenGenerator.kacheln;
 
 import de.pk.kartenGenerator.KartenGeneratorKachel;
+import de.pk.model.position.Position;
 
 public class KartenRandKachel extends KartenGeneratorKachel
 {
@@ -32,10 +33,9 @@ public class KartenRandKachel extends KartenGeneratorKachel
 	}
 
 	@Override
-	public float getVorkommensWahrscheinlichkeit(int maximalGroesseX, int maximalGroesseY, int aktuellePositionX,
-			int aktuellePositionY)
+	public float getVorkommensWahrscheinlichkeit(int maximalGroesseX, int maximalGroesseY, Position pos)
 	{
-		if (this.pruefeObAmRand(maximalGroesseX, maximalGroesseY, aktuellePositionX, aktuellePositionY))
+		if (this.pruefeObAmRand(maximalGroesseX, maximalGroesseY, pos))
 		{
 			return KartenRandKachel.STANDART_WAHRSCHEINLICHKEIT_WENN_AM_RAND;
 		}
@@ -43,11 +43,10 @@ public class KartenRandKachel extends KartenGeneratorKachel
 
 	}
 
-	private boolean pruefeObAmRand(int maximaleGroesseX, int maximaleGroesseY, int aktuellePositionX,
-			int aktuellePositionY)
+	private boolean pruefeObAmRand(int maximaleGroesseX, int maximaleGroesseY, Position pos)
 	{
-		return ((maximaleGroesseX - 1) == aktuellePositionX) || ((maximaleGroesseY - 1) == aktuellePositionY)
-				|| (aktuellePositionX == 0) || (aktuellePositionY == 0);
+		return ((maximaleGroesseX - 1) == pos.getX()) || ((maximaleGroesseY - 1) == pos.getY())
+				|| (pos.getX() == 0) || (pos.getY() == 0);
 	}
 
 }

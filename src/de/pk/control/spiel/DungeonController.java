@@ -47,6 +47,8 @@ public class DungeonController
 	{
 		return this.dungeonModell.getMomentanePhase().brauchtEingabe();
 	}
+	
+	
 
 	/**
 	 * Game-Loop des Spiels, es werden die Phasen nacheinander ausgefuehrt, bis das

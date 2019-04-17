@@ -1,6 +1,7 @@
 package de.pk.kartenGenerator.kacheln;
 
 import de.pk.kartenGenerator.KartenGeneratorKachel;
+import de.pk.model.position.Position;
 
 public class SackgasseKachel extends KartenGeneratorKachel
 {
@@ -32,11 +33,10 @@ public class SackgasseKachel extends KartenGeneratorKachel
 	}
 
 	@Override
-	public float getVorkommensWahrscheinlichkeit(int maximalGroesseX, int maximalGroesseY, int auktuellePositionX,
-			int aktuellePositionY)
+	public float getVorkommensWahrscheinlichkeit(int maximalGroesseX, int maximalGroesseY, Position pos)
 	{
-		float distanzZurMitte = KartenGeneratorKachel.getEntfernung(maximalGroesseX / 2, maximalGroesseY / 2,
-				auktuellePositionX, aktuellePositionY);
+		float distanzZurMitte = Position.getEntfernung(new Position(maximalGroesseX / 2, maximalGroesseY / 2),
+				pos);
 		float einZentel = distanzZurMitte / 10;
 		if (distanzZurMitte == 0f)
 		{

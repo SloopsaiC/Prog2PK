@@ -1,6 +1,7 @@
 package de.pk.kartenGenerator.kacheln;
 
 import de.pk.kartenGenerator.KartenGeneratorKachel;
+import de.pk.model.position.Position;
 
 public class SchlauchKachelGross extends KartenGeneratorKachel
 {
@@ -31,8 +32,7 @@ public class SchlauchKachelGross extends KartenGeneratorKachel
 	}
 
 	@Override
-	public float getVorkommensWahrscheinlichkeit(int maximalGroesseX, int maximaleGroesseY, int aktuellePositionX,
-			int aktuellePositionY)
+	public float getVorkommensWahrscheinlichkeit(int maximalGroesseX, int maximaleGroesseY, Position pos)
 	{
 		return SchlauchKachelGross.STANDART_WAHRSCHEINLICHKEIT;
 	}

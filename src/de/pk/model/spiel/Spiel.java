@@ -2,6 +2,8 @@ package de.pk.model.spiel;
 
 import de.pk.control.karte.WeltkarteController;
 import de.pk.control.spiel.DungeonController;
+import de.pk.kartenGenerator.KartenGenerator;
+import de.pk.kartenGenerator.KartenGeneratorKachelInterface;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 
 public class Spiel
@@ -34,6 +36,8 @@ public class Spiel
 		this.aktiverDungeonController = dungeonController;
 	}
 
+	
+	
 	/**
 	 * @return Der in diesem Spiel momentan aktive Dungeon
 	 */

@@ -1,32 +1,13 @@
 package de.pk.kartenGenerator;
 
 import de.pk.kartenGenerator.kacheln.KachelWertigkeit;
+import de.pk.model.position.Position;
 
 /**
  * Repraesentiert die Kachel zum Generieren
  */
 public abstract class KartenGeneratorKachel
 {
-	/**
-	 * Gibt die Position zwischen zwei Punkten wieder
-	 *
-	 * @param xPosition1 Die X-Position von position 1
-	 * @param yPosition1 Die Y-Position von position 1
-	 * @param xPosition2 Die X-Position von position 2
-	 * @param yPosition2 Die Y-Position von position 2
-	 */
-	protected static float getEntfernung(int xPosition1, int yPosition1, int xPosition2, int yPosition2)
-	{
-		int xEntfernung = xPosition1 - xPosition2;
-		int yEntfernung = yPosition1 - yPosition2;
-		if ((xEntfernung == 0) && (yEntfernung == 0))
-		{
-			return 0f;
-		}
-		float entfernung = (float) Math.sqrt(Math.pow(xEntfernung, 2) + Math.pow(yEntfernung, 2));
-		return entfernung;
-	}
-
 	private KachelWertigkeit[][] inhalt = null;
 
 	/**
@@ -124,11 +105,21 @@ public abstract class KartenGeneratorKachel
 	{
 		return this.inhalt;
 	}
+	
+	protected void setInhalt(KachelWertigkeit[][] inhalt)
+	{
+		this.inhalt = inhalt;
+	}
+
+	public KachelWertigkeit getInhaltBei(Position pos)
+	{
+		return this.getInhalt()[pos.getY()][pos.getX()];
+	}
 
 	/**
 	 * Get the probability of this tile generating at any given positon (Args look
 	 * others with same argument structure)
 	 */
-	public abstract float getVorkommensWahrscheinlichkeit(int maxSizeX, int maxSizeY, int currentPosX, int currentPosY);
+	public abstract float getVorkommensWahrscheinlichkeit(int maxSizeX, int maxSizeY, Position pos);
 
 }

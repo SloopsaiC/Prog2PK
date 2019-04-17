@@ -1,7 +1,6 @@
 package de.pk.kartenGenerator;
 
-import de.pk.kartenGenerator.kacheln.EckKachelGross;
-import de.pk.kartenGenerator.kacheln.EckKachelKlein;
+import de.pk.kartenGenerator.kacheln.EckKachel;
 import de.pk.kartenGenerator.kacheln.FreieKachelGross;
 import de.pk.kartenGenerator.kacheln.KartenRandKachel;
 import de.pk.kartenGenerator.kacheln.SackgasseKachel;
@@ -33,9 +32,12 @@ public class KartenGeneratorKachelInterface
 	// zB 0 auf 4 ?!?!
 
 	public static final KartenGeneratorKachel SACKGASSE = new SackgasseKachel(); // > 5
-	public static final KartenGeneratorKachel ECKE_GROSS = new EckKachelGross(); // < 2
-	public static final KartenGeneratorKachel ECKE_KLEIN = new EckKachelKlein(); // < 2
+	public static final KartenGeneratorKachel ECKE_GROSS = new EckKachel(); // < 2
 	// TODO: auch die Ecken noch in 2 < X < 4 und 4 < X < 9 implementieren
 	public static final KartenGeneratorKachel KARTENRAND = new KartenRandKachel(); // 9
+
+	public static final KartenGeneratorKachel[] alleKacheln =
+	{ new FreieKachelGross(), new SchlauchKachelGross(), new SchlauchKachelKlein(), new SackgasseKachel(),
+			new EckKachel(), new KartenRandKachel() };
 
 }

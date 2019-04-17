@@ -1,14 +1,29 @@
 package de.pk.kartenGenerator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import de.pk.model.position.Position;
+import de.pk.utils.WahrscheinlichkeitsUtils;
 
 public class KartenGenerator
 {
 	private ArrayList<KartenGeneratorKachel> registrierteKacheln = null;
 
+	public KartenGenerator(ArrayList<KartenGeneratorKachel> kacheln)
+	{
+		this.registrierteKacheln = kacheln;
+	}
+
 	public KartenGenerator()
 	{
-		this.registrierteKacheln = new ArrayList<>();
+		this(new ArrayList<>());
+	}
+
+	public KartenGenerator(KartenGeneratorKachel... generatorKacheln)
+	{
+		this();
+		this.registrierteKacheln.addAll(Arrays.asList(generatorKacheln));
 	}
 
 	/**
@@ -26,12 +41,17 @@ public class KartenGenerator
 	 *
 	 * @return KartenGeneratorKachel: Die Kachel die generiert wurde
 	 */
-	public KartenGeneratorKachel generiereNeueKachel(int anzahlKachelnX, int anzahlKachelnY, int aktuellePositionX,
-			int aktuellePositionY, Richtung richtung, KartenGeneratorKachel aktuelleKachel)
+	public KartenGeneratorKachel generiereNeueKachel(int anzahlKachelnX, int anzahlKachelnY, Position aktuellePosition,
+			Richtung richtung, KartenGeneratorKachel aktuelleKachel)
 	{
+		if (this.registrierteKacheln.size() < 1)
+		{
+			// TODO: Exception Messages
+			throw new IllegalStateException();
+		}
 		int[] versatz = KartenGeneratorUtils.getVersatzVonRichtung(richtung);
 		KartenGeneratorKachel generiert = this.getKachelZumGenerieren(anzahlKachelnX, anzahlKachelnY,
-				aktuellePositionX + versatz[0], aktuellePositionY + versatz[1]);
+				aktuellePosition.addiere(versatz[0], versatz[1]));
 		if (!KartenGeneratorUtils.pruefeVerbindung(aktuelleKachel, generiert, richtung))
 		{
 			generiert = generiert.clone();
@@ -56,18 +76,20 @@ public class KartenGenerator
 	 *
 	 * @return KartenGeneratorKachel A tile fitting the current Position
 	 */
-	private KartenGeneratorKachel getKachelZumGenerieren(int anzahlKachelnX, int anzahlKachelnY, int generierePositionX,
-			int generierePositionY)
+	private KartenGeneratorKachel getKachelZumGenerieren(int anzahlKachelnX, int anzahlKachelnY,
+			Position generierePosition)
 	{
 		// Holt alle Wahrscheinlichkeiten von den Kacheln
 		float[] wahrscheinlichkeiten = this.getWahrscheinlichkeitVonKacheln(anzahlKachelnX, anzahlKachelnY,
-				generierePositionX, generierePositionY);
+				generierePosition);
+		// TODO: Eliminiere Doppel-Loop, koennte eine Methode checken
 		if (KartenGeneratorUtils.getKachelDieGeneriertWerdenMuss(wahrscheinlichkeiten) >= 0)
 		{
 			return this.registrierteKacheln
 					.get(KartenGeneratorUtils.getKachelDieGeneriertWerdenMuss(wahrscheinlichkeiten));
 		}
-		return this.registrierteKacheln.get(KartenGeneratorUtils.getIndexVonWahrscheinlichkeit(wahrscheinlichkeiten));
+		return this.registrierteKacheln
+				.get(WahrscheinlichkeitsUtils.getIndexAusWahrscheinlichkeiten(wahrscheinlichkeiten));
 
 	}
 
@@ -79,14 +101,13 @@ public class KartenGenerator
 	 * @param positionX      The X-Position to get the probability for
 	 * @param positionY      The Y-Position to get the probability for
 	 */
-	private float[] getWahrscheinlichkeitVonKacheln(int anzahlKachelnX, int anzahlKachelnY, int positionX,
-			int positionY)
+	private float[] getWahrscheinlichkeitVonKacheln(int anzahlKachelnX, int anzahlKachelnY, Position pos)
 	{
 		float[] wahrscheinlichkeit = new float[this.registrierteKacheln.size()];
 		for (int i = 0; i < wahrscheinlichkeit.length; i++)
 		{
 			wahrscheinlichkeit[i] = this.registrierteKacheln.get(i).getVorkommensWahrscheinlichkeit(anzahlKachelnX,
-					anzahlKachelnY, positionX, positionY);
+					anzahlKachelnY, pos);
 		}
 		return wahrscheinlichkeit;
 	}

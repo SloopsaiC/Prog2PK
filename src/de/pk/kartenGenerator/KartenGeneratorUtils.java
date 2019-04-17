@@ -4,37 +4,6 @@ public class KartenGeneratorUtils
 {
 
 	/**
-	 * Bestimmt ein Verzeichnis, basierend auf den Werten in dem Argument. Das
-	 * Argument beinhaltet Werte, die auf 100% skaliert und dann "verzufaelligt"
-	 * werden Basiert auf der Gewichtung der Wahrscheinlichkeiten
-	 */
-	static int getIndexVonWahrscheinlichkeit(float[] wahrscheinlichkeit)
-	{
-		// Summiert alle Werte
-		float gesamtWahrscheinlichkeit = 0f;
-		for (Float f : wahrscheinlichkeit)
-		{
-			gesamtWahrscheinlichkeit += f;
-		}
-		// Generiert einen Wert der > 0 aber < der Summe der Werte ist.
-		float zufall = (float) (Math.random() * gesamtWahrscheinlichkeit);
-		float aktuelleSumme = 0f;
-		// Addiert alle Werte, bis die Summe groesser ist als der ZufallsWert ist
-		for (int i = 0; i < wahrscheinlichkeit.length; i++)
-		{
-			aktuelleSumme += wahrscheinlichkeit[i];
-			if (aktuelleSumme >= zufall)
-			{
-				// Gibt den Index zurueck
-				return i;
-			}
-		}
-		// falls etwas fehlschlaegt (sollte nicht
-		// passieren)
-		return -1;
-	}
-
-	/**
 	 * Prueft ob eine Kachel den hoechst moeglichen Wert wiedergibt (Float.MAX_VALUE), dies wird
 	 * in jedem Fall generiert.
 	 *
