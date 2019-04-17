@@ -19,27 +19,26 @@ public class KartenGeneratorUtils
 		// Generiert einen Wert der > 0 aber < der Summe der Werte ist.
 		float zufall = (float) (Math.random() * gesamtWahrscheinlichkeit);
 		float aktuelleSumme = 0f;
-		// Addiert alle Werte, bis die Summe groesser ist als die ZufallsWerte
-		// Die Zufallswerte betonen die dann die aktuellen Werte
+		// Addiert alle Werte, bis die Summe groesser ist als der ZufallsWert ist
 		for (int i = 0; i < wahrscheinlichkeit.length; i++)
 		{
 			aktuelleSumme += wahrscheinlichkeit[i];
 			if (aktuelleSumme >= zufall)
 			{
-				// Gibt das Verzeichnis zurueck
+				// Gibt den Index zurueck
 				return i;
 			}
 		}
-		// falls etwas fehlschlaegt wird es allen zurueckgegeben (sollte nicht
+		// falls etwas fehlschlaegt (sollte nicht
 		// passieren)
 		return -1;
 	}
 
 	/**
-	 * Prueft ob eine Kachel den hoechst moeglichen Wert wiedergibt (1), dies wird
+	 * Prueft ob eine Kachel den hoechst moeglichen Wert wiedergibt (Float.MAX_VALUE), dies wird
 	 * in jedem Fall generiert.
 	 *
-	 * @param wahrscheinlichkeit All probabilities to be checked
+	 * @param wahrscheinlichkeit Alle Wahrscheinlichkeiten die ueberprueft werden sollen
 	 */
 	static int getKachelDieGeneriertWerdenMuss(float[] wahrscheinlichkeit)
 	{
@@ -84,10 +83,10 @@ public class KartenGeneratorUtils
 		}
 	}
 
-	static boolean pruefeLinksZuRechtsVerbindung(KartenGeneratorKachel von, KartenGeneratorKachel zu, Richtung richtung)
+	private static boolean pruefeLinksZuRechtsVerbindung(KartenGeneratorKachel von, KartenGeneratorKachel zu, Richtung richtung)
 	{
 		// Der X-Wert der Kachel, von der aus geguckt wird
-		// Wenn die Richtung "WESTEN" ist, wird die linke Seite (0) der "vom-Kachel"
+		// Wenn die Richtung "WESTEN" ist, wird die linke Seite (0) der "von-Kachel"
 		// mit der OSTEN Seite (maximum Wert) der "zu-Kachel" verglichen
 		int vonX = 0;
 		int zuX = KartenGeneratorKachelInterface.KACHEL_GROESSE_X - 1;
@@ -109,7 +108,7 @@ public class KartenGeneratorUtils
 		return false;
 	}
 
-	static boolean pruefeObenZuUntenVerbindung(KartenGeneratorKachel von, KartenGeneratorKachel zu, Richtung richtung)
+	private static boolean pruefeObenZuUntenVerbindung(KartenGeneratorKachel von, KartenGeneratorKachel zu, Richtung richtung)
 	{
 		// Gleiches Verfahren wie bei OSTEN/WESTEN, nur jetzt fuer NORDEN/SUEDEN
 		int vonY = 0;
@@ -137,7 +136,7 @@ public class KartenGeneratorUtils
 	 *
 	 * @param von      Die Kachel "von der" aus geguckt wird
 	 * @param zu       die Kachel "zu der" geguckt wird
-	 * @param richtung The direction
+	 * @param richtung Die Richtung
 	 *
 	 * @return "true" wenn eine Verbindung besteht, anderfalls "false"
 	 */
