@@ -4,6 +4,7 @@ import de.pk.control.spiel.phasen.ExplorationsPhase;
 import de.pk.control.spiel.phasen.HeldenPhase;
 import de.pk.control.spiel.phasen.Phase;
 import de.pk.kartenGenerator.KartenGenerator;
+import de.pk.model.interaktion.Wuerfel;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 
 public class Spielkonstanten
@@ -17,5 +18,10 @@ public class Spielkonstanten
 	{ new HeldenPhase(), new ExplorationsPhase() };
 	public static final Held[] STANDARD_HELDEN =
 	{ new Held("Test", 10, 10) };
+	
+	public static final int STANDARD_GROESSE_DUNGEON_X = 30;
+	public static final int STANDARD_GROESSE_DUNGEON_Y = 30;
+	
+	public static final Wuerfel D20 = new Wuerfel(20);
 	
 }

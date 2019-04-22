@@ -2,29 +2,38 @@ package de.pk.model.position;
 
 public class Position
 {
-	private int xKoordinate = 0; // Die X-Koordinate der Position (kartesisches Koordinatensystem)
-	private int yKoordinate = 0; // Die Y-Koordinate der Position (kartesisches Koordinatensystem)
+	private int x = 0; // Die X-Koordinate der Position (kartesisches Koordinatensystem)
+	private int y = 0; // Die Y-Koordinate der Position (kartesisches Koordinatensystem)
 
 	public Position(int x, int y)
 	{
-		this.xKoordinate = x;
-		this.yKoordinate = y;
+		this.x = x;
+		this.y = y;
 	}
 
 	public int getX()
 	{
-		return this.xKoordinate;
+		return this.x;
 	}
 
 	public int getY()
 	{
-		return this.yKoordinate;
+		return this.y;
 	}
 
 	public Position addiere(int x, int y)
 	{
-		this.xKoordinate += x;
-		this.yKoordinate += y;
+		this.x += x;
+		this.y += y;
+		return this;
+	}
+
+	public Position addiere(Vektor vek)
+	{
+		if (vek != null)
+		{
+			return this.addiere(vek.getX(), vek.getY());
+		}
 		return this;
 	}
 
@@ -45,4 +54,5 @@ public class Position
 		// Pythagoras
 		return (float) Math.sqrt(Math.pow(xEntfernung, 2) + Math.pow(yEntfernung, 2));
 	}
+
 }

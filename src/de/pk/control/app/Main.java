@@ -1,6 +1,7 @@
 package de.pk.control.app;
 
 import de.pk.control.spiel.einstellungen.Einstellungen;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldController;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
 

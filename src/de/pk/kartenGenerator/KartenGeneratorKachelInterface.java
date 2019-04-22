@@ -1,12 +1,12 @@
 package de.pk.kartenGenerator;
 
-import de.pk.kartenGenerator.kacheln.EckKachel;
-import de.pk.kartenGenerator.kacheln.FreieKachelGross;
-import de.pk.kartenGenerator.kacheln.KartenRandKachel;
-import de.pk.kartenGenerator.kacheln.SackgasseKachel;
-import de.pk.kartenGenerator.kacheln.SchlauchKachelGross;
-import de.pk.kartenGenerator.kacheln.SchlauchKachelKlein;
-import de.pk.kartenGenerator.kacheln.StartKachel;
+import de.pk.kartenGenerator.untergruende.EckUntergrund;
+import de.pk.kartenGenerator.untergruende.FreierUntergrundGross;
+import de.pk.kartenGenerator.untergruende.KartenRandUntergrund;
+import de.pk.kartenGenerator.untergruende.SackgasseUntergrund;
+import de.pk.kartenGenerator.untergruende.SchlauchUntergrundGross;
+import de.pk.kartenGenerator.untergruende.SchlauchUntergrundKlein;
+import de.pk.kartenGenerator.untergruende.StartUntergrund;
 
 public class KartenGeneratorKachelInterface
 {
@@ -18,12 +18,12 @@ public class KartenGeneratorKachelInterface
 	// die Zahl hinter den Zeilen gibt die Durchschnittswertigkeit der Felder an
 	// (0=frei bis 9=voll)
 
-	public static final KartenGeneratorKachel STARTKACHEL = new StartKachel(); // 0
-	public static final KartenGeneratorKachel FREI_GROSS = new FreieKachelGross(); // 0
+	public static final KartenGeneratorKachel STARTKACHEL = new StartUntergrund(); // 0
+	public static final KartenGeneratorKachel FREI_GROSS = new FreierUntergrundGross(); // 0
 	// TODO: freie Kachel Klein
 	// TODO: Unebene freie Kachel (1-2) //0 < X < 4
-	public static final KartenGeneratorKachel SCHLAUCH_GROSS = new SchlauchKachelGross(); // < 2
-	public static final KartenGeneratorKachel SCHLAUCH_KLEIN = new SchlauchKachelKlein(); // < 2
+	public static final KartenGeneratorKachel SCHLAUCH_GROSS = new SchlauchUntergrundGross(); // < 2
+	public static final KartenGeneratorKachel SCHLAUCH_KLEIN = new SchlauchUntergrundKlein(); // < 2
 	// TODO: Schlauchkacheln // 2 < X < 4
 	// TODO: Schlauchkacheln // 4 < X < 9 //Geile idee, schlauchgassen mit 4ren in
 	// der Mitte, diese wege
@@ -31,13 +31,13 @@ public class KartenGeneratorKachelInterface
 	// überlegen wie diese Teile dann an andere gelegt werden dürfen
 	// zB 0 auf 4 ?!?!
 
-	public static final KartenGeneratorKachel SACKGASSE = new SackgasseKachel(); // > 5
-	public static final KartenGeneratorKachel ECKE_GROSS = new EckKachel(); // < 2
+	public static final KartenGeneratorKachel SACKGASSE = new SackgasseUntergrund(); // > 5
+	public static final KartenGeneratorKachel ECKE_GROSS = new EckUntergrund(); // < 2
 	// TODO: auch die Ecken noch in 2 < X < 4 und 4 < X < 9 implementieren
-	public static final KartenGeneratorKachel KARTENRAND = new KartenRandKachel(); // 9
+	public static final KartenGeneratorKachel KARTENRAND = new KartenRandUntergrund(); // 9
 
 	public static final KartenGeneratorKachel[] alleKacheln =
-	{ new FreieKachelGross(), new SchlauchKachelGross(), new SchlauchKachelKlein(), new SackgasseKachel(),
-			new EckKachel(), new KartenRandKachel() };
+	{ new FreierUntergrundGross(), new SchlauchUntergrundGross(), new SchlauchUntergrundKlein(), new SackgasseUntergrund(),
+			new EckUntergrund(), new KartenRandUntergrund() };
 
 }

@@ -1,7 +1,9 @@
 package de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte;
 
+import java.util.ArrayList;
+
 import de.pk.model.interaktion.Aktion;
-import de.pk.model.interaktion.StatusEffekt;
+import de.pk.model.interaktion.Effekt;
 import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjekt;
 import de.pk.model.spielbrett.spielbrettObjekte.container.Container;
 
@@ -12,7 +14,7 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 	private int bewegungsPunkte = 0;
 	private int ruestungsPunkte = 0;
 	private Aktion[] aktionen = null; // Alle Aktionen die dieses lebendige Objekt ausfuehren kann
-	private StatusEffekt[] statusEffekte = null; // Alle Statuseffekte die auf dieses Objekt wirken
+	private ArrayList<Effekt> effekte = null; // Alle Statuseffekte die auf dieses Objekt wirken
 
 	/**
 	 * Dient lediglich als super-Konstruktor fuer abgeleitete
@@ -68,9 +70,17 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 	 *
 	 * @return Array mit allen Statuseffekten des Lebendigen Objekts
 	 */
-	public StatusEffekt[] getStatusEffekte()
+	public ArrayList<Effekt> getEffekte()
 	{
-		return this.statusEffekte;
+		return this.effekte;
+	}
+
+	/**
+	 * Fuegt einen Effekt hinzu der auf diesen Helden wirkt
+	 */
+	public void fuegeEffektHinzu(Effekt hinzufuegen)
+	{
+		this.effekte.add(hinzufuegen);
 	}
 
 	/**
@@ -82,6 +92,11 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 		this.bewegungsPunkte = bewegungsPunkte;
 	}
 
+	public void aendereBewegungsPunkte(int aenderung)
+	{
+		this.setBewegungsPunkte(this.getBewegungsPunkte() + aenderung);
+	}
+
 	/**
 	 *
 	 * @param lebensPunkte Neue Anzahl Lebenspunkte
@@ -91,6 +106,11 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 		this.lebensPunkte = lebensPunkte;
 	}
 
+	public void aendereLebensPunkte(int aenderung)
+	{
+		this.setLebensPunkte(this.getLebensPunkte() + aenderung);
+	}
+
 	/**
 	 *
 	 * @param ruestungsPunkte Neue Anzahl Ruestungspunkte
@@ -98,6 +118,11 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 	public void setRuestungsPunkte(int ruestungsPunkte)
 	{
 		this.ruestungsPunkte = ruestungsPunkte;
+	}
+
+	public void aendereRuestungsPunkte(int aenderung)
+	{
+		this.setRuestungsPunkte(this.getRuestungsPunkte() + aenderung);
 	}
 
 	/**

@@ -1,6 +1,6 @@
-package de.pk.kartenGenerator.kacheln;
+package de.pk.kartenGenerator.untergruende;
 
-public enum KachelWertigkeit
+public enum KachelUntergrundWertigkeit
 {
 	/**
 	 * 

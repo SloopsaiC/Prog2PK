@@ -1,6 +1,6 @@
 package de.pk.kartenGenerator;
 
-import de.pk.kartenGenerator.kacheln.KachelWertigkeit;
+import de.pk.kartenGenerator.untergruende.KachelUntergrundWertigkeit;
 import de.pk.model.position.Position;
 
 /**
@@ -8,13 +8,13 @@ import de.pk.model.position.Position;
  */
 public abstract class KartenGeneratorKachel
 {
-	private KachelWertigkeit[][] inhalt = null;
+	private KachelUntergrundWertigkeit[][] inhalt = null;
 
 	/**
 	 * Content is determined in child class, that gives the inhalt to it's super
 	 * constructor
 	 */
-	protected KartenGeneratorKachel(KachelWertigkeit[][] inhalt)
+	protected KartenGeneratorKachel(KachelUntergrundWertigkeit[][] inhalt)
 	{
 		this.inhalt = inhalt;
 	}
@@ -81,7 +81,7 @@ public abstract class KartenGeneratorKachel
 	public void drehe(Richtung dir)
 	{
 		// Generate the new inhalt
-		KachelWertigkeit[][] newContent = new KachelWertigkeit[this.inhalt.length][this.inhalt[0].length];
+		KachelUntergrundWertigkeit[][] newContent = new KachelUntergrundWertigkeit[this.inhalt.length][this.inhalt[0].length];
 		for (int x = 0; x < this.inhalt[0].length; x++)
 		{
 			for (int y = 0; y < this.inhalt.length; y++)
@@ -101,17 +101,17 @@ public abstract class KartenGeneratorKachel
 		this.inhalt = newContent;
 	}
 
-	public KachelWertigkeit[][] getInhalt()
+	public KachelUntergrundWertigkeit[][] getInhalt()
 	{
 		return this.inhalt;
 	}
 	
-	protected void setInhalt(KachelWertigkeit[][] inhalt)
+	protected void setInhalt(KachelUntergrundWertigkeit[][] inhalt)
 	{
 		this.inhalt = inhalt;
 	}
 
-	public KachelWertigkeit getInhaltBei(Position pos)
+	public KachelUntergrundWertigkeit getInhaltBei(Position pos)
 	{
 		return this.getInhalt()[pos.getY()][pos.getX()];
 	}

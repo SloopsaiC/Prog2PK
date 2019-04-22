@@ -4,7 +4,6 @@ import de.pk.model.faehigkeiten.Faehigkeit;
 import de.pk.model.gegenstaende.ausruestung.Accessoire;
 import de.pk.model.gegenstaende.ausruestung.Ruestung;
 import de.pk.model.gegenstaende.ausruestung.Waffe;
-import de.pk.model.interaktion.Aktion;
 import de.pk.model.spielbrett.spielbrettObjekte.container.Container;
 import de.pk.utils.DebugAusgabeKlasse;
 
@@ -30,17 +29,6 @@ public class Held extends LebendigesObjekt
 	{
 		super(lebensPunkte, bewegungsPunkte);
 		this.name = name;
-	}
-
-	/**
-	 * Fuehre eine Aktion auf das Lebendige Objekt ziel an
-	 *
-	 * @param aktion auszufuehrende Aktion
-	 * @param ziel   Ziel, auf das die Aktion ausgefuehrt werden soll
-	 */
-	public void agiere(Aktion aktion, LebendigesObjekt ziel)
-	{
-		aktion.wendeAn(this, ziel);
 	}
 
 	public Accessoire[] getAccessoires()

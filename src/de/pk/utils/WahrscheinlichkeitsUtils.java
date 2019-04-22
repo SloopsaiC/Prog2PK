@@ -1,16 +1,17 @@
 package de.pk.utils;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class WahrscheinlichkeitsUtils
 {
+
 	/**
 	 * Addiert ein Float array und gibt die Summe zurueck.
 	 * 
 	 * @param array Das zu addierende Array
 	 * 
 	 * @return Die Summe dieses Arrays
-	 * */
+	 */
 	private static float addiereFloatArray(float[] array)
 	{
 		float sum = 0f;
@@ -33,7 +34,7 @@ public class WahrscheinlichkeitsUtils
 	public static int getIndexAusWahrscheinlichkeiten(float... wahrscheinlichkeiten)
 	{
 		float summe = addiereFloatArray(wahrscheinlichkeiten);
-		float zufallsZahl = new Random().nextFloat() * summe;
+		float zufallsZahl = ThreadLocalRandom.current().nextFloat() * summe;
 		float momentaneSumme = 0f;
 		for (int i = 0; i < wahrscheinlichkeiten.length; i++)
 		{
