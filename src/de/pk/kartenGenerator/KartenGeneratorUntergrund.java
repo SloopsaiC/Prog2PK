@@ -27,7 +27,7 @@ public abstract class KartenGeneratorUntergrund
 	 *
 	 * @return true falls eine Verbindung besteht, false wenn nicht
 	 */
-	public boolean prueftObVerbindung(Richtung richtung)
+	public boolean pruefeObVerbindung(Richtung richtung)
 	{
                 // Variablen in Ordnung um sie fuer den Loop zu nutzen
 		// Der Versatz in X und X Richtung um zu starten
