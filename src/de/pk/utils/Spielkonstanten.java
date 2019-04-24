@@ -20,7 +20,7 @@ public class Spielkonstanten
 
 	public static final int STANDARD_GROESSE_DUNGEON_X = 30;
 	public static final int STANDARD_GROESSE_DUNGEON_Y = 30;
-
+	public static final int ANZAHL_MAXIMALE_DREHUNGEN_REZEPT = 4;
 	public static final Wuerfel D20 = new Wuerfel(20);
 
 }

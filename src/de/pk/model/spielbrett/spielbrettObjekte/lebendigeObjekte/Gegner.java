@@ -3,7 +3,7 @@ package de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte;
 import de.pk.model.spielbrett.spielbrettObjekte.container.Container;
 import de.pk.utils.DebugAusgabeKlasse;
 
-public abstract class Gegner extends LebendigesObjekt
+public class Gegner extends LebendigesObjekt
 {
 
 	private float hauDraufModifkator = 0f; // Die Staerke dieses Gegners
@@ -26,7 +26,10 @@ public abstract class Gegner extends LebendigesObjekt
 	 *
 	 * @return Auswurf
 	 */
-	abstract Container generiereAuswurf();
+	public Container generiereAuswurf()
+	{
+		return null;
+	}
 
 	public float getHauDraufModifkator()
 	{

@@ -11,6 +11,8 @@ public class Spiel
 	private DungeonController aktiverDungeonController = null; // Der Controller des momentan aktiven Dungeons,
 //null falls sich der Spieler auf der "Weltkarte" befindet
 	private Held[] helden = null;
+	private int goldAnzahl = 0;
+	private int fragmentAnzahl = 0;
 
 	/**
 	 * Erstellt ein neues Spiel mit der uebergebenen Weltkarte.

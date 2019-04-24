@@ -3,7 +3,6 @@ package de.pk.model.gegenstaende;
 import static de.pk.model.gegenstaende.Material.EISEN;
 import static de.pk.model.gegenstaende.Material.HOLZ;
 import static de.pk.model.gegenstaende.Material.LEER;
-
 import de.pk.model.gegenstaende.ausruestung.Ruestung;
 import de.pk.model.gegenstaende.ausruestung.Waffe;
 
@@ -58,5 +57,7 @@ public enum CraftingRezept
 	{
 		return this.craftingMaterialMuster;
 	}
+
+	public static final int MATERIAL_MUSTER_DIMENSION = 3;
 
 }

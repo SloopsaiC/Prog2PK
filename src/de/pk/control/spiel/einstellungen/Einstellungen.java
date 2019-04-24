@@ -2,6 +2,7 @@ package de.pk.control.spiel.einstellungen;
 
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
+import de.pk.utils.lokalisierung.DE_de;
 
 /**
  *
@@ -30,35 +31,31 @@ public class Einstellungen
 	{
 	}
 
-	/**
-	 * Menue zum Auswaehlen der einzelnen Einstellungsoptionen.
-	 */
 	public void einstellungenBearbeiten()
 	{
-		boolean aktiv = true;
-		while (aktiv)
+		boolean amLeben = true;
+		while (amLeben)
 		{
-			DebugAusgabeKlasse.ausgeben("\n\nOptionsmenue ^^");
-			DebugAusgabeKlasse.ausgeben("Welche Optionen moechten Sie bearbeiten?");
-			DebugAusgabeKlasse.ausgeben(
-					"\t1 = Schwierigkeitsgrad " + "\n\t2 = Sound " + "\n\t3 = Sprache \n\t4 = zurueck zum Hauptmenue");
+			DebugAusgabeKlasse.ausgeben(DE_de.OPTIONSMENUE);
+			DebugAusgabeKlasse.ausgeben(DE_de.MENUE_WAS_TUN);
+			DebugAusgabeKlasse.ausgeben(DE_de.OPTIONSMENUE_AKTIONSAUSWAHL);
 
 			switch (Integer.valueOf(DebugEingabeKlasse.leseZeileEin()))
 			{
 			case 1:
-				DebugAusgabeKlasse.ausgeben("sehr schwer"); // sinnlose Testausgabe
+				DebugAusgabeKlasse.ausgeben(DE_de.TESTAUSGABE_OPTIONSMENUE_SCHWIERIGKEIT); // sinnlose Testausgabe
 				break;
 			case 2:
-				DebugAusgabeKlasse.ausgeben("fetter Sound"); // sinnlose Testausgabe
+				DebugAusgabeKlasse.ausgeben(DE_de.TESTAUSGABE_OPTIONSMENUE_SOUND); // sinnlose Testausgabe
 				break;
 			case 3:
-				DebugAusgabeKlasse.ausgeben("Denglisch"); // sinnlose Testausgabe
+				DebugAusgabeKlasse.ausgeben(DE_de.TESTAUSGABE_OPTIONSMENUE_SPRACHE); // sinnlose Testausgabe
 				break;
 			case 4:
-				aktiv = false;
+				amLeben = false;
 				break;
 			default:
-				DebugAusgabeKlasse.ausgeben("Inkorrekte Eingabe\n\n");
+				DebugAusgabeKlasse.ausgeben(DE_de.MENUE_INKORREKTE_KONSOLEN_EINGABE);
 			}
 		}
 	}

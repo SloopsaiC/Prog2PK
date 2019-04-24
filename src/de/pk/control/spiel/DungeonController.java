@@ -10,6 +10,7 @@ import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
 import de.pk.utils.Spielkonstanten;
+import de.pk.utils.lokalisierung.DE_de;
 
 /**
  * Verwaltet ein Dungeon und sorgt fuer den Ablauf des Spiels.
@@ -77,15 +78,20 @@ public class DungeonController
 		return this.dungeonModell.getHelden();
 	}
 
-	private void getInput()
-	{
-		DebugAusgabeKlasse.ausgeben("Geben Sie Input ein. (x = beenden)");
-		char eingabe = DebugEingabeKlasse.leseZeileEin().charAt(0);
-		if (eingabe == 'x')
-		{
-			Main.anwendungBeenden();
-		}
-	}
+
+    /**
+     * Liest (Konsolen)-Input ein.
+     */
+    private void getInput ()
+    {
+        DebugAusgabeKlasse.ausgeben(DE_de.DUNGEON_ABLAUF_INPUT_AUFFORDERUNG);
+        char eingabe = DebugEingabeKlasse.leseZeileEin().charAt(0);
+        if (eingabe == 'x')
+        {
+            Main.anwendungBeenden();
+        }
+    }
+
 
 	public ArrayList<Phase> getPhasen()
 	{
