@@ -3,29 +3,16 @@ package de.pk.model.spielbrett.spielbrettTeile;
 import java.util.HashMap;
 import java.util.Observable;
 
-<<<<<<< HEAD
-=======
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjektController;
->>>>>>> refs/heads/Mattheo
 import de.pk.kartenGenerator.KartenGeneratorUntergrund;
 import de.pk.kartenGenerator.untergruende.KachelUntergrundWertigkeit;
 import de.pk.model.position.Position;
-import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjekt;
 
 public class Kachel extends Observable
 {
-<<<<<<< HEAD
-	private HashMap<Position, SpielbrettObjekt> kachelObjekte = null;
-=======
 	private HashMap<Position, SpielbrettObjektController> kachelObjekte = null;
->>>>>>> refs/heads/Mattheo
 	private KartenGeneratorUntergrund untergrund = null;
-
-<<<<<<< HEAD
-	public Kachel(HashMap<Position, SpielbrettObjekt> objekte, KartenGeneratorUntergrund untergrund)
-=======
 	public Kachel(HashMap<Position, SpielbrettObjektController> objekte, KartenGeneratorUntergrund untergrund)
->>>>>>> refs/heads/Mattheo
 	{
 		this.kachelObjekte = objekte;
 		this.untergrund = untergrund;

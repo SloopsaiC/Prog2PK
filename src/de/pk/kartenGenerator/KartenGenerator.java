@@ -114,7 +114,7 @@ public class KartenGenerator
 	 */
 	public void registriereKachel(KartenGeneratorUntergrund insRegister)
 	{
-		if (this.ueberpruefeRegistrierendeKachel(insRegister))
+		if (this.ueberpruefeRegistrierendeUntergrundKachel(insRegister))
 		{
 			this.registrierteKacheln.add(insRegister);
 		} else
