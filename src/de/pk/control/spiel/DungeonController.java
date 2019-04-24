@@ -4,8 +4,11 @@ import java.util.ArrayList;
 
 import de.pk.control.app.Main;
 import de.pk.control.spiel.phasen.Phase;
+import de.pk.kartenGenerator.untergruende.StartUntergrund;
 import de.pk.model.dungeon.Dungeon;
+import de.pk.model.position.Position;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
+import de.pk.model.spielbrett.spielbrettTeile.Kachel;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
 import de.pk.utils.Spielkonstanten;
@@ -28,6 +31,7 @@ public class DungeonController
 	{
 		this.dungeonModell = new Dungeon(dungeonName);
 		this.initModell(phasen);
+		this.initSpielbrett();
 	}
 
 	/**
@@ -47,8 +51,6 @@ public class DungeonController
 	{
 		return this.dungeonModell.getMomentanePhase().brauchtEingabe();
 	}
-	
-	
 
 	/**
 	 * Game-Loop des Spiels, es werden die Phasen nacheinander ausgefuehrt, bis das
@@ -64,7 +66,7 @@ public class DungeonController
 				this.getInput();
 			}
 			this.behandlePhase();
-			this.rendern();
+			//rendern();
 			this.dungeonModell.naechstePhaseAktivieren();
 		}
 	}
@@ -129,9 +131,6 @@ public class DungeonController
 		this.getPhasen().add(position, phase);
 	}
 
-	private void rendern()
-	{
-	}
 
 	public void setPhasen(ArrayList<Phase> phasen)
 	{
@@ -161,6 +160,12 @@ public class DungeonController
 			return false;
 		}
 		return true;
+	}
+
+	private void initSpielbrett()
+	{
+		this.dungeonModell.getSpielbrett().setzeKachel(new Kachel(new StartUntergrund()),
+				new Position(Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
 	}
 
 }

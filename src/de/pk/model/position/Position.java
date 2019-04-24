@@ -1,30 +1,41 @@
 package de.pk.model.position;
 
+import java.util.Objects;
+
 public class Position
 {
-	private int xKoordinate = 0; // Die X-Koordinate der Position (kartesisches Koordinatensystem)
-	private int yKoordinate = 0; // Die Y-Koordinate der Position (kartesisches Koordinatensystem)
+	private int x = 0; // Die X-Koordinate der Position (kartesisches Koordinatensystem)
+	private int y = 0; // Die Y-Koordinate der Position (kartesisches Koordinatensystem)
 
 	public Position(int x, int y)
 	{
-		this.xKoordinate = x;
-		this.yKoordinate = y;
+		this.x = x;
+		this.y = y;
 	}
 
 	public int getX()
 	{
-		return this.xKoordinate;
+		return this.x;
 	}
 
 	public int getY()
 	{
-		return this.yKoordinate;
+		return this.y;
 	}
 
 	public Position addiere(int x, int y)
 	{
-		this.xKoordinate += x;
-		this.yKoordinate += y;
+		this.x += x;
+		this.y += y;
+		return this;
+	}
+
+	public Position addiere(Vektor vek)
+	{
+		if (vek != null)
+		{
+			return this.addiere(vek.getX(), vek.getY());
+		}
 		return this;
 	}
 
@@ -45,4 +56,30 @@ public class Position
 		// Pythagoras
 		return (float) Math.sqrt(Math.pow(xEntfernung, 2) + Math.pow(yEntfernung, 2));
 	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(this.getX(), this.getY());
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+		{
+			return true;
+		}
+		if (obj == null)
+		{
+			return false;
+		}
+		if (getClass() != obj.getClass())
+		{
+			return false;
+		}
+		Position other = (Position) obj;
+		return this.x == other.x && this.y == other.y;
+	}
+
 }

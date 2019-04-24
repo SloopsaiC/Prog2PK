@@ -5,6 +5,8 @@ import de.pk.control.spiel.CraftingController;
 import de.pk.control.spiel.DungeonController;
 import de.pk.control.spiel.SpielController;
 import de.pk.control.spiel.einstellungen.Einstellungen;
+import de.pk.control.spiel.speichern.SpeicherUtils;
+import de.pk.model.position.Position;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
 import de.pk.utils.Spielkonstanten;
@@ -80,6 +82,8 @@ public class Anwendung
 		WeltkarteController weltkarte = new WeltkarteController(new DungeonController("TestDungeonEins"),
 				new DungeonController("TestDungeonZwei"));
 		this.aktivesSpiel = new SpielController(weltkarte, Spielkonstanten.STANDARD_HELDEN);
+		SpeicherUtils.speichere(this.aktivesSpiel, "speicherTest");
+		//SpielController geladen = SpeicherUtils.ladeSpiel("speicherTest");
 		this.aktivesSpiel.starteSpiel();
 	}
 

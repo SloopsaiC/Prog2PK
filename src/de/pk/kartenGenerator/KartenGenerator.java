@@ -26,9 +26,9 @@ public class KartenGenerator
 	}
 
 	/**
-	 * Generiert eine Kachel passend zur gegebenen Kachel in der bestimmten
-	 * Richtung.Die Kachelwahrscheinlichkeit ist abhaengig von der aktuellen
-         * Position
+	 * Generiert einen Untergrund fuer eine Kachel passend zur gegebenen Kachel in
+	 * der bestimmten Richtung. Die Kachelwahrscheinlichkeit ist abhaengig von der
+	 * aktuellen Position
 	 *
 	 * @param anzahlKachelnX    Maximale Anzahl der Kacheln in X-Richtung
 	 * @param anzahlKachelnY    Maximale Anzahl der Kacheln in Y-Richtung
@@ -38,15 +38,16 @@ public class KartenGenerator
 	 *
 	 * @return KartenGeneratorKachel: Die Kachel die generiert wurde
 	 */
-	public KartenGeneratorUntergrund generiereNeueKachel(int anzahlKachelnX, int anzahlKachelnY, Position aktuellePosition,
-			Richtung richtung, KartenGeneratorUntergrund aktuelleKachel)
+	public KartenGeneratorUntergrund generiereNeueUntergrundKachel(int anzahlKachelnX, int anzahlKachelnY,
+			Position aktuellePosition, Richtung richtung, KartenGeneratorUntergrund aktuelleKachel)
 	{
 		if (this.registrierteKacheln.size() < 1)
 		{
+			// TODO: Exception Messages
 			throw new IllegalStateException();
 		}
 		int[] versatz = KartenGeneratorUtils.getVersatzVonRichtung(richtung);
-		KartenGeneratorUntergrund generiert = this.getKachelZumGenerieren(anzahlKachelnX, anzahlKachelnY,
+		KartenGeneratorUntergrund generiert = this.getUntergrundKachelZumGenerieren(anzahlKachelnX, anzahlKachelnY,
 				aktuellePosition.addiere(versatz[0], versatz[1]));
 		if (!KartenGeneratorUtils.pruefeVerbindung(aktuelleKachel, generiert, richtung))
 		{
@@ -72,7 +73,7 @@ public class KartenGenerator
 	 *
 	 * @return KartenGeneratorKachel A tile fitting the current Position
 	 */
-	private KartenGeneratorUntergrund getKachelZumGenerieren(int anzahlKachelnX, int anzahlKachelnY,
+	private KartenGeneratorUntergrund getUntergrundKachelZumGenerieren(int anzahlKachelnX, int anzahlKachelnY,
 			Position generierePosition)
 	{
 		// Holt alle Wahrscheinlichkeiten von den Kacheln
@@ -139,7 +140,7 @@ public class KartenGenerator
 		return false;
 	}
 
-	private boolean ueberpruefeRegistrierendeKachel(KartenGeneratorUntergrund zuUeberpruefen)
+	private boolean ueberpruefeRegistrierendeUntergrundKachel(KartenGeneratorUntergrund zuUeberpruefen)
 	{
 		return this.ueberpruefeFreiesRandFeld(zuUeberpruefen);
 	}

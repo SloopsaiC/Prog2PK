@@ -1,31 +1,55 @@
 package de.pk.model.interaktion;
 
-import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
-import de.pk.utils.DebugAusgabeKlasse;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektController;
 
 public class Aktion
 {
 
-	private Effekt selbstEffekt = null; // Der Effekt welcher auf das ausfuehrende Objekt angewendet wird
-	private Effekt zielEffekt = null; // Der Effekt welcher auf das von dieser Aktion angezielte Objekt angewendet
-										// wird
+	private Effekt[] selbstEffekte = null; // Der Effekt welcher auf das ausfuehrende Objekt angewendet wird
+	private Effekt[] zielEffekte = null; // Der Effekt welcher auf das von dieser Aktion angezielte Objekt angewendet
+											// wird
+	private float grundErfolgsWahrscheinlichkeit = 0.0f;
 
-	public void wendeAn(LebendigesObjekt selbst, LebendigesObjekt ziel)
+	public Aktion(Effekt[] selbstEffekt, Effekt[] zielEffekt, float erfolgsWahrscheinlichkeit)
 	{
-		try
+		this.selbstEffekte = selbstEffekt;
+		this.zielEffekte = zielEffekt;
+		this.grundErfolgsWahrscheinlichkeit = erfolgsWahrscheinlichkeit;
+	}
+
+	private boolean wuerfelWurfErfolgreich(Wuerfel wuerfel, float erfolgsWahrscheinlichkeit)
+	{
+		synchronized (wuerfel)
 		{
-			this.selbstEffekt.wirke(selbst);
-		} catch (NullPointerException e)
-		{
-			DebugAusgabeKlasse.ausgeben("Aktion hat keinen Selbsteffekt");
+			wuerfel.wuerfeln();
+			return wuerfel.letzteAugenZahlAlsFloat() < erfolgsWahrscheinlichkeit;
 		}
-		try
+	}
+
+	private float berechneErfolgsWahrscheinlichkeit(LebendigesObjektController wirker, LebendigesObjektController ziel)
+	{
+		return this.grundErfolgsWahrscheinlichkeit;
+	}
+
+	/**
+	 * Wendet eine Aktion auf ein Ziel und auf den Ausfuehrenden an. Der Erfolg wird
+	 * dabei durch einen Wuerfel bestimmt
+	 * 
+	 * @param wirker  Das ausfuehrende LebendigeObjekt
+	 * @param ziel    Das Ziel dieser Aktion
+	 * @param wuerfel Der Wuerfel der fuer diese Aktion genutzt wird
+	 * 
+	 * @return true, falls die Aktion erfolgreich ausgefuehrt wurde, sonst false
+	 */
+	public boolean wendeAn(LebendigesObjektController wirker, LebendigesObjektController ziel, Wuerfel wuerfel)
+	{
+		if (wuerfelWurfErfolgreich(wuerfel, berechneErfolgsWahrscheinlichkeit(wirker, ziel)))
 		{
-			this.zielEffekt.wirke(ziel);
-		} catch (NullPointerException e)
-		{
-			DebugAusgabeKlasse.ausgeben("Aktion hat keinen Zieleffekt");
+			wirker.fuegeEffekteHinzu(this.selbstEffekte);
+			ziel.fuegeEffekteHinzu(this.zielEffekte);
+			return true;
 		}
+		return false;
 	}
 
 }
