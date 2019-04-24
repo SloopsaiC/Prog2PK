@@ -1,21 +1,21 @@
 package de.pk.kartenGenerator;
 
-import de.pk.kartenGenerator.kacheln.KachelWertigkeit;
+import de.pk.kartenGenerator.untergruende.KachelUntergrundWertigkeit;
 import de.pk.model.position.Position;
 
 /**
  * Repraesentiert die Kachel zum Generieren
  */
-public abstract class KartenGeneratorKachel
+public abstract class KartenGeneratorUntergrund
 {
-	private KachelWertigkeit[][] inhalt = null;
+	private KachelUntergrundWertigkeit[][] inhalt = null;
 
 	/**
          * Der Inhalt wird in der Unterklasse beschlossen und von dort in
          * den super-Konstruktor weitergegeben.
          * @param inhalt    
 	 */
-	protected KartenGeneratorKachel(KachelWertigkeit[][] inhalt)
+	protected KartenGeneratorUntergrund(KachelUntergrundWertigkeit[][] inhalt)
 	{
 		this.inhalt = inhalt;
 	}
@@ -73,7 +73,7 @@ public abstract class KartenGeneratorKachel
 	}
 
 	@Override
-	public abstract KartenGeneratorKachel clone();
+	public abstract KartenGeneratorUntergrund clone();
 
 	/**
          * Bewegt die Kachel in die gegebene Richtung
@@ -83,7 +83,7 @@ public abstract class KartenGeneratorKachel
 	public void drehe(Richtung richtung)
 	{
 		// Generiert den neuen Inhalt
-		KachelWertigkeit[][] neuerInhalt = new KachelWertigkeit[this.inhalt.length][this.inhalt[0].length];
+		KachelUntergrundWertigkeit[][] neuerInhalt = new KachelUntergrundWertigkeit[this.inhalt.length][this.inhalt[0].length];
 		for (int x = 0; x < this.inhalt[0].length; x++)
 		{
 			for (int y = 0; y < this.inhalt.length; y++)
@@ -102,17 +102,17 @@ public abstract class KartenGeneratorKachel
 		this.inhalt = neuerInhalt;
 	}
 
-	public KachelWertigkeit[][] getInhalt()
+	public KachelUntergrundWertigkeit[][] getInhalt()
 	{
 		return this.inhalt;
 	}
 	
-	protected void setInhalt(KachelWertigkeit[][] inhalt)
+	protected void setInhalt(KachelUntergrundWertigkeit[][] inhalt)
 	{
 		this.inhalt = inhalt;
 	}
 
-	public KachelWertigkeit getInhaltBei(Position pos)
+	public KachelUntergrundWertigkeit getInhaltBei(Position pos)
 	{
 		return this.getInhalt()[pos.getY()][pos.getX()];
 	}

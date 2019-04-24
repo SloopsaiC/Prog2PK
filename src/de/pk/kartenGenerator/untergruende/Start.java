@@ -1,13 +1,13 @@
-package de.pk.kartenGenerator.kacheln;
+package de.pk.kartenGenerator.untergruende;
 
-import de.pk.kartenGenerator.KartenGeneratorKachel;
+import de.pk.kartenGenerator.KartenGeneratorUntergrund;
 import de.pk.model.position.Position;
 
-public class Start extends KartenGeneratorKachel
+public class Start extends KartenGeneratorUntergrund
 {
 	private static final float STANDART_WAHRSCHEINLICHKEIT = 0.0f;
 	private static final float STANDART_WAHRSCHEINLICHKEITS_REDUZIERUNG_PRO_ZENTEL = 0.00f;
-	private static final KachelWertigkeit[][] STANDART =
+	private static final KachelUntergrundWertigkeit[][] STANDART =
 	{               /*
                         0 0 0 0 0
                         0 0 0 0 0 
@@ -15,16 +15,16 @@ public class Start extends KartenGeneratorKachel
                         0 0 0 0 0 
                         0 0 0 0 0
                          */
-			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI,
-					KachelWertigkeit.FREI },
-			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI,
-					KachelWertigkeit.FREI },
-			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FELS, KachelWertigkeit.FREI,
-					KachelWertigkeit.FREI },
-			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI,
-					KachelWertigkeit.FREI },
-			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI,
-					KachelWertigkeit.FREI } };
+			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI },
+			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI },
+			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI },
+			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI },
+			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI } };
 
 	public Start()
 	{
