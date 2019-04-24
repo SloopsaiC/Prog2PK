@@ -22,7 +22,7 @@ public class KartenGeneratorUtils
 	}
 
 	/**
-	 * Bekommt eienn Versatz, der zu der Position addiert wird, um eine Position in
+	 * Bekommt einen Versatz, der zu der Position addiert wird, um eine Position in
 	 * der bestimmten Richtung zu bekommen.
 	 *
 	 * @param richtung Die Richtung
@@ -124,5 +124,4 @@ public class KartenGeneratorUtils
 			return false;
 		}
 	}
-
 }

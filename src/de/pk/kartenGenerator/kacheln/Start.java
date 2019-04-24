@@ -3,32 +3,38 @@ package de.pk.kartenGenerator.kacheln;
 import de.pk.kartenGenerator.KartenGeneratorKachel;
 import de.pk.model.position.Position;
 
-public class StartKachel extends KartenGeneratorKachel
+public class Start extends KartenGeneratorKachel
 {
 	private static final float STANDART_WAHRSCHEINLICHKEIT = 0.0f;
 	private static final float STANDART_WAHRSCHEINLICHKEITS_REDUZIERUNG_PRO_ZENTEL = 0.00f;
 	private static final KachelWertigkeit[][] STANDART =
-	{
+	{               /*
+                        0 0 0 0 0
+                        0 0 0 0 0 
+                        0 0 7 0 0 
+                        0 0 0 0 0 
+                        0 0 0 0 0
+                         */
 			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI,
 					KachelWertigkeit.FREI },
 			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI,
 					KachelWertigkeit.FREI },
-			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.ENDE, KachelWertigkeit.FREI,
+			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FELS, KachelWertigkeit.FREI,
 					KachelWertigkeit.FREI },
 			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI,
 					KachelWertigkeit.FREI },
 			{ KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI, KachelWertigkeit.FREI,
 					KachelWertigkeit.FREI } };
 
-	public StartKachel()
+	public Start()
 	{
-		super(StartKachel.STANDART);
+		super(Start.STANDART);
 	}
 
 	@Override
-	public StartKachel clone()
+	public Start clone()
 	{
-		return new StartKachel();
+		return new Start();
 	}
 
 	@Override
@@ -38,13 +44,13 @@ public class StartKachel extends KartenGeneratorKachel
 				pos);
 		if (distanzZurMitte == 0f)
 		{
-			return StartKachel.STANDART_WAHRSCHEINLICHKEIT;
+			return Start.STANDART_WAHRSCHEINLICHKEIT;
 		}
 		// Berechnet die Zentel
 		float einZentel = distanzZurMitte / 10;
 		// Get the default probability and minus it to with how many tenths it moved
 		// towards the outside times the specified decrease
-		return StartKachel.STANDART_WAHRSCHEINLICHKEIT
-				- ((distanzZurMitte / einZentel) * StartKachel.STANDART_WAHRSCHEINLICHKEITS_REDUZIERUNG_PRO_ZENTEL);
+		return Start.STANDART_WAHRSCHEINLICHKEIT
+				- ((distanzZurMitte / einZentel) * Start.STANDART_WAHRSCHEINLICHKEITS_REDUZIERUNG_PRO_ZENTEL);
 	}
 }

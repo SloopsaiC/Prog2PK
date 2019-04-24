@@ -2,7 +2,6 @@ package de.pk.kartenGenerator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import de.pk.model.position.Position;
 import de.pk.utils.WahrscheinlichkeitsUtils;
 
@@ -28,16 +27,14 @@ public class KartenGenerator
 
 	/**
 	 * Generiert eine Kachel passend zur gegebenen Kachel in der bestimmten
-	 * Richtung. Die Kachelwahrscheinlichkeit ist abhaengig von der aktuellen
-	 * Position
+	 * Richtung.Die Kachelwahrscheinlichkeit ist abhaengig von der aktuellen
+         * Position
 	 *
 	 * @param anzahlKachelnX    Maximale Anzahl der Kacheln in X-Richtung
 	 * @param anzahlKachelnY    Maximale Anzahl der Kacheln in Y-Richtung
-	 * @param aktuellePositionX Aktuelle Position in X-Richtung
-	 * @param aktuellePositionY Aktuelle Position in Y-Richtung
+         * @param aktuellePosition  Die Position in der Kachel
 	 * @param richtung          Die Richtung in der die neue Kachel generiert wird
-	 * @param aktuelleKarte     Die Karte fuer die, die Kachel generiert (aber noch
-	 *                          nicht gesetzt) wird
+         * @param aktuelleKachel    Die betroffende Kachel
 	 *
 	 * @return KartenGeneratorKachel: Die Kachel die generiert wurde
 	 */
@@ -46,7 +43,6 @@ public class KartenGenerator
 	{
 		if (this.registrierteKacheln.size() < 1)
 		{
-			// TODO: Exception Messages
 			throw new IllegalStateException();
 		}
 		int[] versatz = KartenGeneratorUtils.getVersatzVonRichtung(richtung);
@@ -82,7 +78,6 @@ public class KartenGenerator
 		// Holt alle Wahrscheinlichkeiten von den Kacheln
 		float[] wahrscheinlichkeiten = this.getWahrscheinlichkeitVonKacheln(anzahlKachelnX, anzahlKachelnY,
 				generierePosition);
-		// TODO: Eliminiere Doppel-Loop, koennte eine Methode checken
 		if (KartenGeneratorUtils.getKachelDieGeneriertWerdenMuss(wahrscheinlichkeiten) >= 0)
 		{
 			return this.registrierteKacheln
@@ -90,7 +85,6 @@ public class KartenGenerator
 		}
 		return this.registrierteKacheln
 				.get(WahrscheinlichkeitsUtils.getIndexAusWahrscheinlichkeiten(wahrscheinlichkeiten));
-
 	}
 
 	/**
@@ -147,12 +141,6 @@ public class KartenGenerator
 
 	private boolean ueberpruefeRegistrierendeKachel(KartenGeneratorKachel zuUeberpruefen)
 	{
-		return this.ueberpruefeFreiesRandFeld(zuUeberpruefen); // Wir sollten vielleicht auch pruefen ob die Kachel
-																// sinnvolle
-																// Werte fuer ihre Wahrscheinlichkeit wieder gibt, falls
-																// man
-																// Kacheln von ausserhalb zulassen moechte (Modding
-																// etc.)
+		return this.ueberpruefeFreiesRandFeld(zuUeberpruefen);
 	}
-
 }

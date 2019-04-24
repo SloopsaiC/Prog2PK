@@ -6,15 +6,14 @@ public enum KachelWertigkeit
 	 * 
 	 * Beizeichnung plus Erklaerung der Wertigkeiten:
 	 */
-	FREI, // 0 FÃ¼r alle und jeden frei begehbar (normaler weg)
-	LEICHT, // 1 FÃ¼r alle begehbar, jedoch wird man verlangsamt oder Ã¤hnliches
-	SCHWER, // 2 nicht fÃ¼r alle begehbar, zb nur fÃ¼r fliegende Objekte
-	HELDEN_VERAENDERBAR, // 3 von niemandem begehbar, aber vom Held reduzierbar auf 2 o. 1
-	KARTEN_EFFEKT_VERAENDERBAR, // 4 nicht begehbar und nicht veraenderbar, wenn dann aendert sich der wert um
-								// -1/-2 bei erdbeben, oder Ã¤hnlichem
-	WASSER, // 5 (vielleicht ne kack idee)
+	FREI, // 0 Für alle und jeden frei begehbar (normaler weg)
+	LEICHT, // 1 Für alle begehbar, jedoch wird man verlangsamt oder ähnliches
+	SCHWER, // 2 nicht für alle begehbar, zb nur für fliegende Objekte
+	HELD_VERAENDERBAR, // 3 von niemandem begehbar, aber vom Held reduzierbar auf 2 o. 1
+	KARTEN_EFFEKT_VERAENDERBAR, // 4 nicht begehbar und nicht veraenderbar, wenn dann aendert sich der wert um 1/-2 bei erdbeben, oder ähnliches							
+	BUSCH, // 5 nicht begehbar, i.d.R. auch nicht veraenderbar (KARTENSTRUKTUR)
 	BAUM, // 6 nicht begehbar, i.d.R. auch nicht veraenderbar (KARTENSTRUKTUR)
-	FELSEN, // 7 nicht begehbar, nicht veraenderbar (KARTENSTRUKTUR)
+	FELS, // 7 nicht begehbar, nicht veraenderbar (KARTENSTRUKTUR)
 	ENDE; // 8 nicht begehbar, nicht veraenderbar (KARTENSTRUKTUR)
 
 	public int getIntegerWert()
@@ -24,6 +23,6 @@ public enum KachelWertigkeit
 
 	public boolean istBetretbar()
 	{
-		return this.compareTo(HELDEN_VERAENDERBAR) < 0;
+		return this.compareTo(HELD_VERAENDERBAR) < 0;
 	}
 }

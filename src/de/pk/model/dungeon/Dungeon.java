@@ -27,7 +27,7 @@ public class Dungeon
 		this.name = name;
 		this.phasen = new ArrayList<>();
 		this.helden = new Held[0];
-		this.kartenGenerator = new KartenGenerator(KartenGeneratorKachelInterface.alleKacheln);
+		this.kartenGenerator = new KartenGenerator(KartenGeneratorKachelInterface.ALLEKACHELN);
 	}
 
 	public KartenGenerator getKartenGenerator()
