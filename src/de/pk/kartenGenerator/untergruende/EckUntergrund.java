@@ -1,10 +1,10 @@
 package de.pk.kartenGenerator.untergruende;
 
-import de.pk.kartenGenerator.KartenGeneratorKachel;
+import de.pk.kartenGenerator.KartenGeneratorUntergrund;
 import de.pk.model.position.Position;
 import de.pk.utils.WahrscheinlichkeitsUtils;
 
-public class EckUntergrund extends KartenGeneratorKachel
+public class EckUntergrund extends KartenGeneratorUntergrund
 {
 
 	private static final float STANDART_WAHRSCHEINLICHKEIT = 0.1f;

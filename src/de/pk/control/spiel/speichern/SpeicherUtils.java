@@ -79,4 +79,6 @@ public class SpeicherUtils
 		schreiber.println(gsonRes);
 		schreiber.close();
 	}
+	
+	//TODO: Einstellungen laden
 }

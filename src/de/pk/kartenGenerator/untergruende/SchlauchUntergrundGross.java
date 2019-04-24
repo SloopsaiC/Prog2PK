@@ -1,9 +1,9 @@
 package de.pk.kartenGenerator.untergruende;
 
-import de.pk.kartenGenerator.KartenGeneratorKachel;
+import de.pk.kartenGenerator.KartenGeneratorUntergrund;
 import de.pk.model.position.Position;
 
-public class SchlauchUntergrundGross extends KartenGeneratorKachel
+public class SchlauchUntergrundGross extends KartenGeneratorUntergrund
 {
 
 	private static final float STANDART_WAHRSCHEINLICHKEIT = 0.3f;

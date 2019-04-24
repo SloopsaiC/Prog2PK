@@ -52,7 +52,7 @@ public class KartenGeneratorUtils
 		}
 	}
 
-	private static boolean pruefeLinksZuRechtsVerbindung(KartenGeneratorKachel von, KartenGeneratorKachel zu, Richtung richtung)
+	private static boolean pruefeLinksZuRechtsVerbindung(KartenGeneratorUntergrund von, KartenGeneratorUntergrund zu, Richtung richtung)
 	{
 		// Der X-Wert der Kachel, von der aus geguckt wird
 		// Wenn die Richtung "WESTEN" ist, wird die linke Seite (0) der "von-Kachel"
@@ -77,7 +77,7 @@ public class KartenGeneratorUtils
 		return false;
 	}
 
-	private static boolean pruefeObenZuUntenVerbindung(KartenGeneratorKachel von, KartenGeneratorKachel zu, Richtung richtung)
+	private static boolean pruefeObenZuUntenVerbindung(KartenGeneratorUntergrund von, KartenGeneratorUntergrund zu, Richtung richtung)
 	{
 		// Gleiches Verfahren wie bei OSTEN/WESTEN, nur jetzt fuer NORDEN/SUEDEN
 		int vonY = 0;
@@ -109,7 +109,7 @@ public class KartenGeneratorUtils
 	 *
 	 * @return "true" wenn eine Verbindung besteht, anderfalls "false"
 	 */
-	static boolean pruefeVerbindung(KartenGeneratorKachel von, KartenGeneratorKachel zu, Richtung richtung)
+	static boolean pruefeVerbindung(KartenGeneratorUntergrund von, KartenGeneratorUntergrund zu, Richtung richtung)
 	{
 
 		switch (richtung)

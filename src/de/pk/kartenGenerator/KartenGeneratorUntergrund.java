@@ -6,7 +6,7 @@ import de.pk.model.position.Position;
 /**
  * Repraesentiert die Kachel zum Generieren
  */
-public abstract class KartenGeneratorKachel
+public abstract class KartenGeneratorUntergrund
 {
 	private KachelUntergrundWertigkeit[][] inhalt = null;
 
@@ -14,7 +14,7 @@ public abstract class KartenGeneratorKachel
 	 * Content is determined in child class, that gives the inhalt to it's super
 	 * constructor
 	 */
-	protected KartenGeneratorKachel(KachelUntergrundWertigkeit[][] inhalt)
+	protected KartenGeneratorUntergrund(KachelUntergrundWertigkeit[][] inhalt)
 	{
 		this.inhalt = inhalt;
 	}
@@ -71,7 +71,7 @@ public abstract class KartenGeneratorKachel
 	}
 
 	@Override
-	public abstract KartenGeneratorKachel clone();
+	public abstract KartenGeneratorUntergrund clone();
 
 	/**
 	 * Turns this tile in the given direction

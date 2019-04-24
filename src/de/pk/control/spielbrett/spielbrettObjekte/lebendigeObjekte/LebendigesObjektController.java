@@ -2,11 +2,12 @@ package de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte;
 
 import java.util.ListIterator;
 
+import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjektController;
 import de.pk.model.interaktion.Effekt;
 import de.pk.model.position.Vektor;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
 
-public abstract class LebendigesObjektController
+public abstract class LebendigesObjektController extends SpielbrettObjektController
 {
 	private final LebendigesObjekt modell;
 

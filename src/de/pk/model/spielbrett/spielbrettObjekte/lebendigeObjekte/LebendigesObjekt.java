@@ -125,6 +125,12 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 		this.setRuestungsPunkte(this.getRuestungsPunkte() + aenderung);
 	}
 
+	@Override
+	public boolean istLebendig()
+	{
+		return true;
+	}
+
 	/**
 	 * Definiert das Sterben eines Lebendigen Objekts
 	 *
