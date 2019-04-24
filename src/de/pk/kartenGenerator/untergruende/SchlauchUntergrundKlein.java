@@ -9,16 +9,16 @@ public class SchlauchUntergrundKlein extends KartenGeneratorUntergrund
 	private static final float STANDART_WAHRSCHEINLICHKEIT = 0.3f;
 	private static final KachelUntergrundWertigkeit[][] STANDART =
 	{
-			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER,
-					KachelUntergrundWertigkeit.SCHWER },
-			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT,
-					KachelUntergrundWertigkeit.LEICHT },
-			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
-					KachelUntergrundWertigkeit.FREI },
-			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT,
-					KachelUntergrundWertigkeit.LEICHT },
-			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER,
-					KachelUntergrundWertigkeit.SCHWER } };
+			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER,
+					KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER },
+			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT,
+					KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT },
+			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
+			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT,
+					KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT },
+			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER,
+					KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER } };
 
 	public SchlauchUntergrundKlein()
 	{

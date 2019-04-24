@@ -9,16 +9,16 @@ public class StartUntergrund extends KartenGeneratorUntergrund
 	private static final float STANDART_WAHRSCHEINLICHKEITS_REDUZIERUNG_PRO_ZENTEL = 0.00f;
 	private static final KachelUntergrundWertigkeit[][] STANDART =
 	{
-			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
-					KachelUntergrundWertigkeit.FREI },
-			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
-					KachelUntergrundWertigkeit.FREI },
-			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.FREI,
-					KachelUntergrundWertigkeit.FREI },
-			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
-					KachelUntergrundWertigkeit.FREI },
-			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
-					KachelUntergrundWertigkeit.FREI } };
+			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
+			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
+			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.ENDE,
+					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
+			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
+			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI } };
 
 	public StartUntergrund()
 	{
@@ -34,8 +34,7 @@ public class StartUntergrund extends KartenGeneratorUntergrund
 	@Override
 	public float getVorkommensWahrscheinlichkeit(int maximalGroesseX, int maximaleGroesseY, Position pos)
 	{
-		float distanzZurMitte = Position.getEntfernung(new Position(maximalGroesseX / 2, maximaleGroesseY / 2),
-				pos);
+		float distanzZurMitte = Position.getEntfernung(new Position(maximalGroesseX / 2, maximaleGroesseY / 2), pos);
 		if (distanzZurMitte == 0f)
 		{
 			return StartUntergrund.STANDART_WAHRSCHEINLICHKEIT;

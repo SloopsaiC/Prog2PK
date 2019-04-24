@@ -12,24 +12,24 @@ public class Wuerfel
 		this.maxAugenZahl = maxAugenZahl;
 	}
 
-	public int getMaxAugenZahl()
-	{
-		return this.maxAugenZahl;
-	}
-
 	public int getLetzteAugenZahl()
 	{
 		return this.letzteAugenZahl;
 	}
 
-	public boolean letzteAugenZahlIstMaximal()
+	public int getMaxAugenZahl()
 	{
-		return this.getLetzteAugenZahl() == this.maxAugenZahl;
+		return this.maxAugenZahl;
 	}
 
 	public float letzteAugenZahlAlsFloat()
 	{
 		return (float) this.getLetzteAugenZahl() / (float) this.getMaxAugenZahl();
+	}
+
+	public boolean letzteAugenZahlIstMaximal()
+	{
+		return this.getLetzteAugenZahl() == this.maxAugenZahl;
 	}
 
 	public int wuerfeln()

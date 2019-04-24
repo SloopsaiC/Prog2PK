@@ -4,41 +4,6 @@ import java.util.Objects;
 
 public class Position
 {
-	private int x = 0; // Die X-Koordinate der Position (kartesisches Koordinatensystem)
-	private int y = 0; // Die Y-Koordinate der Position (kartesisches Koordinatensystem)
-
-	public Position(int x, int y)
-	{
-		this.x = x;
-		this.y = y;
-	}
-
-	public int getX()
-	{
-		return this.x;
-	}
-
-	public int getY()
-	{
-		return this.y;
-	}
-
-	public Position addiere(int x, int y)
-	{
-		this.x += x;
-		this.y += y;
-		return this;
-	}
-
-	public Position addiere(Vektor vek)
-	{
-		if (vek != null)
-		{
-			return this.addiere(vek.getX(), vek.getY());
-		}
-		return this;
-	}
-
 	/**
 	 * Gibt die Position zwischen zwei Punkten wieder
 	 *
@@ -57,10 +22,30 @@ public class Position
 		return (float) Math.sqrt(Math.pow(xEntfernung, 2) + Math.pow(yEntfernung, 2));
 	}
 
-	@Override
-	public int hashCode()
+	private int x = 0; // Die X-Koordinate der Position (kartesisches Koordinatensystem)
+
+	private int y = 0; // Die Y-Koordinate der Position (kartesisches Koordinatensystem)
+
+	public Position(int x, int y)
 	{
-		return Objects.hash(this.getX(), this.getY());
+		this.x = x;
+		this.y = y;
+	}
+
+	public Position addiere(int x, int y)
+	{
+		this.x += x;
+		this.y += y;
+		return this;
+	}
+
+	public Position addiere(Vektor vek)
+	{
+		if (vek != null)
+		{
+			return this.addiere(vek.getX(), vek.getY());
+		}
+		return this;
 	}
 
 	@Override
@@ -74,12 +59,28 @@ public class Position
 		{
 			return false;
 		}
-		if (getClass() != obj.getClass())
+		if (this.getClass() != obj.getClass())
 		{
 			return false;
 		}
 		Position other = (Position) obj;
-		return this.x == other.x && this.y == other.y;
+		return (this.x == other.x) && (this.y == other.y);
+	}
+
+	public int getX()
+	{
+		return this.x;
+	}
+
+	public int getY()
+	{
+		return this.y;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(this.getX(), this.getY());
 	}
 
 }

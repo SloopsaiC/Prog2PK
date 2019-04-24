@@ -11,6 +11,12 @@ public class Effekt
 	private Vektor positionsAenderung = null;
 
 	public Effekt(int bewegungsPunkteAenderung, int ruestungsPunkteAenderung, int lebensPunkteAenderung,
+			int anzahlWirkTicks)
+	{
+		this(bewegungsPunkteAenderung, ruestungsPunkteAenderung, lebensPunkteAenderung, anzahlWirkTicks, null);
+	}
+
+	public Effekt(int bewegungsPunkteAenderung, int ruestungsPunkteAenderung, int lebensPunkteAenderung,
 			int anzahlWirkTicks, Vektor positionsAenderung)
 	{
 		this.bewegungsPunkteAenderung = bewegungsPunkteAenderung;
@@ -18,12 +24,6 @@ public class Effekt
 		this.lebensPunkteAenderung = lebensPunkteAenderung;
 		this.anzahlWirkTicks = anzahlWirkTicks;
 		this.positionsAenderung = positionsAenderung;
-	}
-
-	public Effekt(int bewegungsPunkteAenderung, int ruestungsPunkteAenderung, int lebensPunkteAenderung,
-			int anzahlWirkTicks)
-	{
-		this(bewegungsPunkteAenderung, ruestungsPunkteAenderung, lebensPunkteAenderung, anzahlWirkTicks, null);
 	}
 
 	/**
@@ -35,19 +35,27 @@ public class Effekt
 	}
 
 	/**
-	 * @return the ruestungsPunkteAenderung
-	 */
-	public int getRuestungsPunkteAenderung()
-	{
-		return this.ruestungsPunkteAenderung;
-	}
-
-	/**
 	 * @return the lebensPunkteAenderung
 	 */
 	public int getLebensPunkteAenderung()
 	{
 		return this.lebensPunkteAenderung;
+	}
+
+	/**
+	 * @return the positionsAenderung
+	 */
+	public Vektor getPositionsAenderung()
+	{
+		return this.positionsAenderung;
+	}
+
+	/**
+	 * @return the ruestungsPunkteAenderung
+	 */
+	public int getRuestungsPunkteAenderung()
+	{
+		return this.ruestungsPunkteAenderung;
 	}
 
 	public boolean istAbgeklungen()
@@ -61,14 +69,6 @@ public class Effekt
 		{
 			this.anzahlWirkTicks--;
 		}
-	}
-
-	/**
-	 * @return the positionsAenderung
-	 */
-	public Vektor getPositionsAenderung()
-	{
-		return this.positionsAenderung;
 	}
 
 }

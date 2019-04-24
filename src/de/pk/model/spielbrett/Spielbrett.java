@@ -16,25 +16,25 @@ public class Spielbrett implements Observer
 	private HashMap<Position, Kachel> spielbrettTeile = null;
 	private ArrayList<LebendigesObjekt> alleLebendigenObjekte = new ArrayList<>();
 
-	public Spielbrett(HashMap<Position, Kachel> spielbrettTeile)
-	{
-		this.spielbrettTeile = spielbrettTeile;
-	}
-
 	public Spielbrett()
 	{
 		this(new HashMap<Position, Kachel>());
 	}
 
-	public Kachel getKachelBei(Position pos)
+	public Spielbrett(HashMap<Position, Kachel> spielbrettTeile)
 	{
-		return this.spielbrettTeile.get(pos);
+		this.spielbrettTeile = spielbrettTeile;
 	}
 
-	public void setzeKachel(Kachel kachel, Position pos)
+	public void bewege(SpielbrettObjektController zuBewegen, Kachel neueKachel, Position neuePosition)
 	{
-		kachel.addObserver(this);
-		this.spielbrettTeile.put(pos, kachel);
+		this.entferneAusAlterPosition(zuBewegen);
+		neueKachel.stelleAufKachel(neuePosition, zuBewegen);
+	}
+
+	public void bewege(SpielbrettObjektController zuBewegen, Position kachelPosition, Position neuePositionAufKachel)
+	{
+		this.bewege(zuBewegen, this.getKachelBei(kachelPosition), neuePositionAufKachel);
 	}
 
 	private void entferneAusAlterPosition(SpielbrettObjektController zuEntfernen)
@@ -55,15 +55,15 @@ public class Spielbrett implements Observer
 		throw new IllegalArgumentException();
 	}
 
-	public void bewege(SpielbrettObjektController zuBewegen, Kachel neueKachel, Position neuePosition)
+	public Kachel getKachelBei(Position pos)
 	{
-		this.entferneAusAlterPosition(zuBewegen);
-		neueKachel.stelleAufKachel(neuePosition, zuBewegen);
+		return this.spielbrettTeile.get(pos);
 	}
 
-	public void bewege(SpielbrettObjektController zuBewegen, Position kachelPosition, Position neuePositionAufKachel)
+	public void setzeKachel(Kachel kachel, Position pos)
 	{
-		this.bewege(zuBewegen, this.getKachelBei(kachelPosition), neuePositionAufKachel);
+		kachel.addObserver(this);
+		this.spielbrettTeile.put(pos, kachel);
 	}
 
 	@Override

@@ -30,11 +30,6 @@ public class Dungeon
 		this.kartenGenerator = new KartenGenerator(KartenGeneratorKachelInterface.ALLEKACHELN);
 	}
 
-	public KartenGenerator getKartenGenerator()
-	{
-		return this.kartenGenerator;
-	}
-
 	public boolean aufgabeIstErfuellt()
 	{
 		return false;
@@ -51,6 +46,11 @@ public class Dungeon
 	public Held[] getHelden()
 	{
 		return this.helden;
+	}
+
+	public KartenGenerator getKartenGenerator()
+	{
+		return this.kartenGenerator;
 	}
 
 	public Phase getMomentanePhase()

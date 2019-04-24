@@ -1,7 +1,5 @@
 package de.pk.control.spiel.einstellungen;
 
-import java.util.Scanner;
-
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
 

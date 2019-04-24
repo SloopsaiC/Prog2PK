@@ -29,6 +29,29 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 		this.bewegungsPunkte = bewegungsPunkte;
 	}
 
+	public void aendereBewegungsPunkte(int aenderung)
+	{
+		this.setBewegungsPunkte(this.getBewegungsPunkte() + aenderung);
+	}
+
+	public void aendereLebensPunkte(int aenderung)
+	{
+		this.setLebensPunkte(this.getLebensPunkte() + aenderung);
+	}
+
+	public void aendereRuestungsPunkte(int aenderung)
+	{
+		this.setRuestungsPunkte(this.getRuestungsPunkte() + aenderung);
+	}
+
+	/**
+	 * Fuegt einen Effekt hinzu der auf diesen Helden wirkt
+	 */
+	public void fuegeEffektHinzu(Effekt hinzufuegen)
+	{
+		this.effekte.add(hinzufuegen);
+	}
+
 	/**
 	 *
 	 * @return Array mit allen Aktionen des Lebendigen Objekts
@@ -45,6 +68,15 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 	public int getBewegungsPunkte()
 	{
 		return this.bewegungsPunkte;
+	}
+
+	/**
+	 *
+	 * @return Array mit allen Statuseffekten des Lebendigen Objekts
+	 */
+	public ArrayList<Effekt> getEffekte()
+	{
+		return this.effekte;
 	}
 
 	/**
@@ -66,21 +98,10 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 		return this.ruestungsPunkte;
 	}
 
-	/**
-	 *
-	 * @return Array mit allen Statuseffekten des Lebendigen Objekts
-	 */
-	public ArrayList<Effekt> getEffekte()
+	@Override
+	public boolean istLebendig()
 	{
-		return this.effekte;
-	}
-
-	/**
-	 * Fuegt einen Effekt hinzu der auf diesen Helden wirkt
-	 */
-	public void fuegeEffektHinzu(Effekt hinzufuegen)
-	{
-		this.effekte.add(hinzufuegen);
+		return true;
 	}
 
 	/**
@@ -92,11 +113,6 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 		this.bewegungsPunkte = bewegungsPunkte;
 	}
 
-	public void aendereBewegungsPunkte(int aenderung)
-	{
-		this.setBewegungsPunkte(this.getBewegungsPunkte() + aenderung);
-	}
-
 	/**
 	 *
 	 * @param lebensPunkte Neue Anzahl Lebenspunkte
@@ -106,11 +122,6 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 		this.lebensPunkte = lebensPunkte;
 	}
 
-	public void aendereLebensPunkte(int aenderung)
-	{
-		this.setLebensPunkte(this.getLebensPunkte() + aenderung);
-	}
-
 	/**
 	 *
 	 * @param ruestungsPunkte Neue Anzahl Ruestungspunkte
@@ -118,17 +129,6 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 	public void setRuestungsPunkte(int ruestungsPunkte)
 	{
 		this.ruestungsPunkte = ruestungsPunkte;
-	}
-
-	public void aendereRuestungsPunkte(int aenderung)
-	{
-		this.setRuestungsPunkte(this.getRuestungsPunkte() + aenderung);
-	}
-
-	@Override
-	public boolean istLebendig()
-	{
-		return true;
 	}
 
 	/**

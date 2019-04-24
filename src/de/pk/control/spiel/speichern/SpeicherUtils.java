@@ -11,23 +11,9 @@ import com.google.gson.GsonBuilder;
 
 import de.pk.control.spiel.SpielController;
 import de.pk.control.spiel.einstellungen.Einstellungen;
-import de.pk.utils.Spielkonstanten;
 
 public class SpeicherUtils
 {
-	private static PrintWriter erstelleWriterInDatei(File datei)
-	{
-		PrintWriter schreiber = null;
-		try
-		{
-			schreiber = new PrintWriter(datei);
-		} catch (FileNotFoundException e)
-		{
-			return null;
-		}
-		return schreiber;
-	}
-
 	private static File erstelleDatei(String pfad)
 	{
 		File f = new File(pfad);
@@ -44,13 +30,17 @@ public class SpeicherUtils
 		return f;
 	}
 
-	public static void speichereSpiel(SpielController zuSpeichern, String name)
+	private static PrintWriter erstelleWriterInDatei(File datei)
 	{
-		PrintWriter schreiber = erstelleWriterInDatei(erstelleDatei(name));
-		Gson gson = new Gson();
-		String gsonRes = gson.toJson(zuSpeichern);
-		schreiber.println(gsonRes);
-		schreiber.close();
+		PrintWriter schreiber = null;
+		try
+		{
+			schreiber = new PrintWriter(datei);
+		} catch (FileNotFoundException e)
+		{
+			return null;
+		}
+		return schreiber;
 	}
 
 	public static SpielController ladeSpiel(String pfad)
@@ -67,18 +57,27 @@ public class SpeicherUtils
 
 	public static void speichere(Object objekt, String name)
 	{
-		PrintWriter writer = erstelleWriterInDatei(erstelleDatei(name));
-		new GsonBuilder().create().toJson(objekt, SpielController.class,  writer);
+		PrintWriter writer = SpeicherUtils.erstelleWriterInDatei(SpeicherUtils.erstelleDatei(name));
+		new GsonBuilder().create().toJson(objekt, SpielController.class, writer);
 		writer.close();
 	}
 
 	public static void speichereEinstellungen(Einstellungen zuSpeichern, String name)
 	{
-		PrintWriter schreiber = erstelleWriterInDatei(erstelleDatei(name));
+		PrintWriter schreiber = SpeicherUtils.erstelleWriterInDatei(SpeicherUtils.erstelleDatei(name));
 		String gsonRes = new Gson().toJson(zuSpeichern);
 		schreiber.println(gsonRes);
 		schreiber.close();
 	}
-	
-	//TODO: Einstellungen laden
+
+	public static void speichereSpiel(SpielController zuSpeichern, String name)
+	{
+		PrintWriter schreiber = SpeicherUtils.erstelleWriterInDatei(SpeicherUtils.erstelleDatei(name));
+		Gson gson = new Gson();
+		String gsonRes = gson.toJson(zuSpeichern);
+		schreiber.println(gsonRes);
+		schreiber.close();
+	}
+
+	// TODO: Einstellungen laden
 }

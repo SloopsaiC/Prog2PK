@@ -10,16 +10,16 @@ public class KartenRandUntergrund extends KartenGeneratorUntergrund
 	private static final float STANDART_WAHRSCHEINLICHKEIT_WENN_AM_RAND = Float.MAX_VALUE;
 	private static final KachelUntergrundWertigkeit[][] STANDART =
 	{
-			{ KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE,
-					KachelUntergrundWertigkeit.ENDE },
-			{ KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE,
-					KachelUntergrundWertigkeit.ENDE },
-			{ KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE,
-					KachelUntergrundWertigkeit.ENDE },
-			{ KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE,
-					KachelUntergrundWertigkeit.ENDE },
-			{ KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
-					KachelUntergrundWertigkeit.ENDE } };
+			{ KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE,
+					KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE },
+			{ KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE,
+					KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE },
+			{ KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE,
+					KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE },
+			{ KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE,
+					KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE },
+			{ KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.ENDE } };
 
 	public KartenRandUntergrund()
 	{
@@ -45,8 +45,8 @@ public class KartenRandUntergrund extends KartenGeneratorUntergrund
 
 	private boolean pruefeObAmRand(int maximaleGroesseX, int maximaleGroesseY, Position pos)
 	{
-		return ((maximaleGroesseX - 1) == pos.getX()) || ((maximaleGroesseY - 1) == pos.getY())
-				|| (pos.getX() == 0) || (pos.getY() == 0);
+		return ((maximaleGroesseX - 1) == pos.getX()) || ((maximaleGroesseY - 1) == pos.getY()) || (pos.getX() == 0)
+				|| (pos.getY() == 0);
 	}
 
 }

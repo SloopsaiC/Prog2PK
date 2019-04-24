@@ -66,7 +66,7 @@ public class DungeonController
 				this.getInput();
 			}
 			this.behandlePhase();
-			//rendern();
+			// rendern();
 			this.dungeonModell.naechstePhaseAktivieren();
 		}
 	}
@@ -102,6 +102,12 @@ public class DungeonController
 		}
 	}
 
+	private void initSpielbrett()
+	{
+		this.dungeonModell.getSpielbrett().setzeKachel(new Kachel(new StartUntergrund()), new Position(
+				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
+	}
+
 	/**
 	 * Registriert das Argument als momentan letzte Phase.
 	 *
@@ -131,7 +137,6 @@ public class DungeonController
 		this.getPhasen().add(position, phase);
 	}
 
-
 	public void setPhasen(ArrayList<Phase> phasen)
 	{
 		this.dungeonModell.setPhasen(phasen);
@@ -160,12 +165,6 @@ public class DungeonController
 			return false;
 		}
 		return true;
-	}
-
-	private void initSpielbrett()
-	{
-		this.dungeonModell.getSpielbrett().setzeKachel(new Kachel(new StartUntergrund()),
-				new Position(Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
 	}
 
 }

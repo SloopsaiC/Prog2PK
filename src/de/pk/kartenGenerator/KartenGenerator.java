@@ -2,6 +2,7 @@ package de.pk.kartenGenerator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import de.pk.model.position.Position;
 import de.pk.utils.WahrscheinlichkeitsUtils;
 
@@ -9,14 +10,14 @@ public class KartenGenerator
 {
 	private ArrayList<KartenGeneratorUntergrund> registrierteKacheln = null;
 
-	public KartenGenerator(ArrayList<KartenGeneratorUntergrund> kacheln)
-	{
-		this.registrierteKacheln = kacheln;
-	}
-
 	public KartenGenerator()
 	{
 		this(new ArrayList<>());
+	}
+
+	public KartenGenerator(ArrayList<KartenGeneratorUntergrund> kacheln)
+	{
+		this.registrierteKacheln = kacheln;
 	}
 
 	public KartenGenerator(KartenGeneratorUntergrund... generatorKacheln)
@@ -30,11 +31,11 @@ public class KartenGenerator
 	 * der bestimmten Richtung. Die Kachelwahrscheinlichkeit ist abhaengig von der
 	 * aktuellen Position
 	 *
-	 * @param anzahlKachelnX    Maximale Anzahl der Kacheln in X-Richtung
-	 * @param anzahlKachelnY    Maximale Anzahl der Kacheln in Y-Richtung
-         * @param aktuellePosition  Die Position in der Kachel
-	 * @param richtung          Die Richtung in der die neue Kachel generiert wird
-         * @param aktuelleKachel    Die betroffende Kachel
+	 * @param anzahlKachelnX   Maximale Anzahl der Kacheln in X-Richtung
+	 * @param anzahlKachelnY   Maximale Anzahl der Kacheln in Y-Richtung
+	 * @param aktuellePosition Die Position in der Kachel
+	 * @param richtung         Die Richtung in der die neue Kachel generiert wird
+	 * @param aktuelleKachel   Die betroffende Kachel
 	 *
 	 * @return KartenGeneratorKachel: Die Kachel die generiert wurde
 	 */

@@ -11,6 +11,13 @@ public class Vektor
 		this.y = y;
 	}
 
+	public Vektor addiere(Vektor zuAddieren)
+	{
+		this.x += zuAddieren.getX();
+		this.y += zuAddieren.getY();
+		return this;
+	}
+
 	/**
 	 * @return the x
 	 */
@@ -25,13 +32,6 @@ public class Vektor
 	public int getY()
 	{
 		return this.y;
-	}
-
-	public Vektor addiere(Vektor zuAddieren)
-	{
-		this.x += zuAddieren.getX();
-		this.y += zuAddieren.getY();
-		return this;
 	}
 
 }

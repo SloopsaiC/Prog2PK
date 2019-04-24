@@ -16,6 +16,17 @@ public abstract class LebendigesObjektController extends SpielbrettObjektControl
 		this.modell = modell;
 	}
 
+	public void fuegeEffekteHinzu(Effekt... hinzufuegen)
+	{
+		if (hinzufuegen != null)
+		{
+			for (Effekt effekt : hinzufuegen)
+			{
+				this.modell.fuegeEffektHinzu(effekt);
+			}
+		}
+	}
+
 	protected LebendigesObjekt getModell()
 	{
 		return this.modell;
@@ -43,16 +54,5 @@ public abstract class LebendigesObjektController extends SpielbrettObjektControl
 			}
 		}
 		return positionsAenderung;
-	}
-
-	public void fuegeEffekteHinzu(Effekt... hinzufuegen)
-	{
-		if (hinzufuegen != null)
-		{
-			for (Effekt effekt : hinzufuegen)
-			{
-				this.modell.fuegeEffektHinzu(effekt);
-			}
-		}
 	}
 }

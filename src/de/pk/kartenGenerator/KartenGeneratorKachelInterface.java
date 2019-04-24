@@ -19,8 +19,7 @@ public class KartenGeneratorKachelInterface
 	public static final KartenGeneratorUntergrund SACKGASSE = new Sackgasse();
 	public static final KartenGeneratorUntergrund ECKE_GROSS = new Ecke();
 	public static final KartenGeneratorUntergrund KARTENRAND = new Kartenrand();
-        public static final KartenGeneratorUntergrund[] ALLEKACHELN =
-	{ new Frei(), new Schlucht(), new Sackgasse(),
-			new Ecke(), new Kartenrand() };
+	public static final KartenGeneratorUntergrund[] ALLEKACHELN =
+	{ new Frei(), new Schlucht(), new Sackgasse(), new Ecke(), new Kartenrand() };
 
 }

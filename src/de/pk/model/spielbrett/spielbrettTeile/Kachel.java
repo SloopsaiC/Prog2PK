@@ -12,6 +12,7 @@ public class Kachel extends Observable
 {
 	private HashMap<Position, SpielbrettObjektController> kachelObjekte = null;
 	private KartenGeneratorUntergrund untergrund = null;
+
 	public Kachel(HashMap<Position, SpielbrettObjektController> objekte, KartenGeneratorUntergrund untergrund)
 	{
 		this.kachelObjekte = objekte;
@@ -21,21 +22,6 @@ public class Kachel extends Observable
 	public Kachel(KartenGeneratorUntergrund untergrund)
 	{
 		this(new HashMap<Position, SpielbrettObjektController>(), untergrund);
-	}
-
-	public KachelUntergrundWertigkeit getUntergrundBei(Position pos)
-	{
-		return this.untergrund.getInhaltBei(pos);
-	}
-
-	public KartenGeneratorUntergrund getUntergrund()
-	{
-		return this.untergrund;
-	}
-
-	public SpielbrettObjektController getSpielbrettObjektBei(Position pos)
-	{
-		return this.kachelObjekte.get(pos);
 	}
 
 	public void entferneObjekt(SpielbrettObjektController zuEntfernen)
@@ -53,6 +39,21 @@ public class Kachel extends Observable
 				return;
 			}
 		}
+	}
+
+	public SpielbrettObjektController getSpielbrettObjektBei(Position pos)
+	{
+		return this.kachelObjekte.get(pos);
+	}
+
+	public KartenGeneratorUntergrund getUntergrund()
+	{
+		return this.untergrund;
+	}
+
+	public KachelUntergrundWertigkeit getUntergrundBei(Position pos)
+	{
+		return this.untergrund.getInhaltBei(pos);
 	}
 
 	public void stelleAufKachel(Position pos, SpielbrettObjektController obj)

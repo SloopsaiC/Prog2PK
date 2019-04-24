@@ -4,10 +4,11 @@ public class KartenGeneratorUtils
 {
 
 	/**
-	 * Prueft ob eine Kachel den hoechst moeglichen Wert wiedergibt (Float.MAX_VALUE), dies wird
-	 * in jedem Fall generiert.
+	 * Prueft ob eine Kachel den hoechst moeglichen Wert wiedergibt
+	 * (Float.MAX_VALUE), dies wird in jedem Fall generiert.
 	 *
-	 * @param wahrscheinlichkeit Alle Wahrscheinlichkeiten die ueberprueft werden sollen
+	 * @param wahrscheinlichkeit Alle Wahrscheinlichkeiten die ueberprueft werden
+	 *                           sollen
 	 */
 	static int getKachelDieGeneriertWerdenMuss(float[] wahrscheinlichkeit)
 	{
@@ -52,7 +53,8 @@ public class KartenGeneratorUtils
 		}
 	}
 
-	private static boolean pruefeLinksZuRechtsVerbindung(KartenGeneratorUntergrund von, KartenGeneratorUntergrund zu, Richtung richtung)
+	private static boolean pruefeLinksZuRechtsVerbindung(KartenGeneratorUntergrund von, KartenGeneratorUntergrund zu,
+			Richtung richtung)
 	{
 		// Der X-Wert der Kachel, von der aus geguckt wird
 		// Wenn die Richtung "WESTEN" ist, wird die linke Seite (0) der "von-Kachel"
@@ -77,7 +79,8 @@ public class KartenGeneratorUtils
 		return false;
 	}
 
-	private static boolean pruefeObenZuUntenVerbindung(KartenGeneratorUntergrund von, KartenGeneratorUntergrund zu, Richtung richtung)
+	private static boolean pruefeObenZuUntenVerbindung(KartenGeneratorUntergrund von, KartenGeneratorUntergrund zu,
+			Richtung richtung)
 	{
 		// Gleiches Verfahren wie bei OSTEN/WESTEN, nur jetzt fuer NORDEN/SUEDEN
 		int vonY = 0;

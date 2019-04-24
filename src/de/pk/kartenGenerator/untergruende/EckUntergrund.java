@@ -11,39 +11,39 @@ public class EckUntergrund extends KartenGeneratorUntergrund
 	private static final float STANDART_WAHRSCHEINLICHKEIT_ERHOEUNG_WENN_IN_ECKE = 0.5f;
 	private static final KachelUntergrundWertigkeit[][] GROSS =
 	{
-			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER,
-					KachelUntergrundWertigkeit.SCHWER },
-			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
-					KachelUntergrundWertigkeit.FREI },
-			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
-					KachelUntergrundWertigkeit.FREI },
-			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
-					KachelUntergrundWertigkeit.FREI },
-			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
-					KachelUntergrundWertigkeit.LEICHT } };
+			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER,
+					KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER },
+			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
+			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
+			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
+			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.LEICHT } };
 	private static final float GROSS_WAHRSCHEINLICHKEIT = 0.3f;
 
 	private static final KachelUntergrundWertigkeit[][] KLEIN =
 	{
-			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT,
-					KachelUntergrundWertigkeit.LEICHT },
-			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT,
-					KachelUntergrundWertigkeit.LEICHT },
-			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
-					KachelUntergrundWertigkeit.FREI },
-			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
-					KachelUntergrundWertigkeit.FREI },
-			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
-					KachelUntergrundWertigkeit.FREI } };
+			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT,
+					KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT },
+			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT,
+					KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT },
+			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
+			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
+			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.FREI,
+					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI } };
 	private static final float KLEIN_WAHRSCHEINLICHKEIT = 0.7f;
 
 	public EckUntergrund()
 	{
 		super(EckUntergrund.GROSS);
-		if (WahrscheinlichkeitsUtils.getIndexAusWahrscheinlichkeiten(GROSS_WAHRSCHEINLICHKEIT,
-				KLEIN_WAHRSCHEINLICHKEIT) == 1)
+		if (WahrscheinlichkeitsUtils.getIndexAusWahrscheinlichkeiten(EckUntergrund.GROSS_WAHRSCHEINLICHKEIT,
+				EckUntergrund.KLEIN_WAHRSCHEINLICHKEIT) == 1)
 		{
-			super.setInhalt(KLEIN);
+			super.setInhalt(EckUntergrund.KLEIN);
 		}
 	}
 
@@ -53,10 +53,11 @@ public class EckUntergrund extends KartenGeneratorUntergrund
 		return new EckUntergrund();
 	}
 
+	@Override
 	public float getVorkommensWahrscheinlichkeit(int maximalGroesseX, int maximalGroesseY, Position aktuellePosition)
 	{
 		// Increase corner probability if near to a corner
-		if (istInEcke(aktuellePosition, maximalGroesseX, maximalGroesseY))
+		if (this.istInEcke(aktuellePosition, maximalGroesseX, maximalGroesseY))
 		{
 			return EckUntergrund.STANDART_WAHRSCHEINLICHKEIT
 					+ EckUntergrund.STANDART_WAHRSCHEINLICHKEIT_ERHOEUNG_WENN_IN_ECKE;
