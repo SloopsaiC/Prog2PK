@@ -3,7 +3,9 @@ package de.pk.kartenGenerator;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import de.pk.kartenGenerator.untergruende.Start;
 import de.pk.model.position.Position;
+import de.pk.model.spielbrett.spielbrettTeile.Kachel;
 import de.pk.utils.WahrscheinlichkeitsUtils;
 
 public class KartenGenerator
@@ -24,6 +26,19 @@ public class KartenGenerator
 	{
 		this();
 		this.registrierteKacheln.addAll(Arrays.asList(generatorKacheln));
+	}
+
+	public Kachel generiereNeueKachel(int anzahlKachelnX, int anzahlKachelnY, Position aktuellePosition,
+			Richtung richtung, Kachel aktuelleKachel)
+	{
+		KartenGeneratorUntergrund untergrund = this.generiereNeueUntergrundKachel(anzahlKachelnX, anzahlKachelnY,
+				aktuellePosition, richtung, aktuelleKachel.getUntergrund());
+		return new Kachel(untergrund);
+	}
+
+	public Kachel generiereStartKachel()
+	{
+		return new Kachel(new Start());
 	}
 
 	/**

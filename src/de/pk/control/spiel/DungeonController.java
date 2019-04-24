@@ -4,11 +4,9 @@ import java.util.ArrayList;
 
 import de.pk.control.app.Main;
 import de.pk.control.spiel.phasen.Phase;
-import de.pk.kartenGenerator.untergruende.StartUntergrund;
 import de.pk.model.dungeon.Dungeon;
 import de.pk.model.position.Position;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
-import de.pk.model.spielbrett.spielbrettTeile.Kachel;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
 import de.pk.utils.Spielkonstanten;
@@ -104,8 +102,9 @@ public class DungeonController
 
 	private void initSpielbrett()
 	{
-		this.dungeonModell.getSpielbrett().setzeKachel(new Kachel(new StartUntergrund()), new Position(
-				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
+		this.dungeonModell.getSpielbrett().setzeKachel(this.dungeonModell.getKartenGenerator().generiereStartKachel(),
+				new Position(Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2,
+						Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
 	}
 
 	/**
