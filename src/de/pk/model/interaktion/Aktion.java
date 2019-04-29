@@ -8,32 +8,25 @@ public class Aktion
 	private Effekt[] selbstEffekte = null; // Der Effekt welcher auf das ausfuehrende Objekt angewendet wird
 	private Effekt[] zielEffekte = null; // Der Effekt welcher auf das von dieser Aktion angezielte Objekt angewendet
 											// wird
-	private String name = null;
 	private float grundErfolgsWahrscheinlichkeit = 0.0f;
 
-	public Aktion(String name, Effekt[] selbstEffekt, Effekt[] zielEffekt, float erfolgsWahrscheinlichkeit)
+	public Aktion(Effekt selbstEffekt, Effekt zielEffekt, float erfolgsWahrscheinlichkeit)
 	{
-		this.name = name;
+		this(new Effekt[]
+		{ selbstEffekt }, new Effekt[]
+		{ zielEffekt }, erfolgsWahrscheinlichkeit);
+	}
+
+	public Aktion(Effekt[] selbstEffekt, Effekt[] zielEffekt, float erfolgsWahrscheinlichkeit)
+	{
 		this.selbstEffekte = selbstEffekt;
 		this.zielEffekte = zielEffekt;
 		this.grundErfolgsWahrscheinlichkeit = erfolgsWahrscheinlichkeit;
 	}
 
-	public Aktion(String name, Effekt selbstEffekt, Effekt zielEffekt, float erfolgsWahrscheinlichkeit)
-	{
-		this(name, new Effekt[]
-		{ selbstEffekt }, new Effekt[]
-		{ zielEffekt }, erfolgsWahrscheinlichkeit);
-	}
-
 	private float berechneErfolgsWahrscheinlichkeit(LebendigesObjektController wirker, LebendigesObjektController ziel)
 	{
 		return this.grundErfolgsWahrscheinlichkeit;
-	}
-
-	public String getName()
-	{
-		return this.name;
 	}
 
 	private boolean ueberpruefeAktion(LebendigesObjektController wirker)
@@ -58,7 +51,7 @@ public class Aktion
 	 */
 	public boolean wendeAn(LebendigesObjektController wirker, LebendigesObjektController ziel, Wuerfel wuerfel)
 	{
-		if (ueberpruefeAktion(wirker)
+		if (this.ueberpruefeAktion(wirker)
 				&& this.wuerfelWurfErfolgreich(wuerfel, this.berechneErfolgsWahrscheinlichkeit(wirker, ziel)))
 		{
 			wirker.fuegeEffekteHinzu(this.selbstEffekte);

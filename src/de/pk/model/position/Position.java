@@ -34,11 +34,19 @@ public class Position
 
 	public Position addiere(int x, int y)
 	{
-		this.x += x;
-		this.y += y;
-		return this;
+		return new Position(this.getX() + x, this.getY() + y);
 	}
 
+	/**
+	 * Generiert eine Position die mit dem Eingabevektor addiert wurde, sollte
+	 * dieser null sein, wird die Referenz auf die Position auf welcher diese
+	 * Methode angewendet wurde wieder gegeben
+	 *
+	 * @param vek Der Vektor der auf die Position addiert wird
+	 *
+	 * @return Die Position die sich aus der Addition der Position auf welche diese
+	 *         Methode angewendet wird und dem Vektor ergibt
+	 */
 	public Position addiere(Vektor vek)
 	{
 		if (vek != null)

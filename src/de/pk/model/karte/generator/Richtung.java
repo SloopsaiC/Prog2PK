@@ -1,4 +1,4 @@
-package de.pk.control.kartekartenGenerator;
+package de.pk.model.karte.generator;
 
 public enum Richtung
 {

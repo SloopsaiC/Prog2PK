@@ -7,11 +7,15 @@ import de.pk.control.spiel.phasen.Phase;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldController;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektController;
 import de.pk.model.dungeon.Dungeon;
+import de.pk.model.karte.generator.Richtung;
 import de.pk.model.position.Position;
 import de.pk.model.position.Vektor;
+import de.pk.model.spielbrett.Spielbrett;
+import de.pk.model.spielbrett.spielbrettTeile.Kachel;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
 import de.pk.utils.Spielkonstanten;
+import de.pk.utils.karte.generator.KartenGeneratorUtils;
 import de.pk.utils.lokalisierung.DE_de;
 
 /**
@@ -21,7 +25,7 @@ import de.pk.utils.lokalisierung.DE_de;
  */
 public class DungeonController
 {
-	private Dungeon dungeonModell = null;
+	private Dungeon modell = null;
 
 	public DungeonController(String dungeonName)
 	{
@@ -30,7 +34,7 @@ public class DungeonController
 
 	public DungeonController(String dungeonName, Phase[] phasen)
 	{
-		this.dungeonModell = new Dungeon(dungeonName);
+		this.modell = new Dungeon(dungeonName);
 		this.initModell(phasen);
 		this.initSpielbrett();
 	}
@@ -42,19 +46,7 @@ public class DungeonController
 	 */
 	public boolean brauchtEingabeFuerPhase()
 	{
-		return this.dungeonModell.getMomentanePhase().brauchtEingabe();
-	}
-
-	private void lebendigeObjekteTick()
-	{
-		for (LebendigesObjektController objekt : this.dungeonModell.getSpielbrett().getAlleLebendigenObjekte())
-		{
-			Vektor positionsAenderung = objekt.update();
-			if (positionsAenderung.laenge() > 0f)
-			{
-				this.dungeonModell.getSpielbrett().bewege(objekt, positionsAenderung);
-			}
-		}
+		return this.modell.getMomentanePhase().brauchtEingabe();
 	}
 
 	/**
@@ -63,26 +55,35 @@ public class DungeonController
 	 */
 	public void dungeonAblaufSchleife(HeldController[] helden)
 	{
-		this.dungeonModell.setHelden(helden);
-		while (!this.dungeonModell.aufgabeIstErfuellt())
+		this.modell.setHelden(helden);
+		while (!this.modell.aufgabeIstErfuellt())
 		{
-			synchronized (this.dungeonModell)
+			synchronized (this.modell)
 			{
-				Phase momentanePhase = this.dungeonModell.getMomentanePhase();
+				Phase momentanePhase = this.modell.getMomentanePhase();
 				while (!momentanePhase.istFertig())
 				{
 					if (this.brauchtEingabeFuerPhase())
 					{
 						this.getInput();
 					}
-					momentanePhase.phasenTick(this, this.dungeonModell.getAktivenHeld());
+					momentanePhase.phasenTick(this, this.modell.getAktivenHeld());
 					this.lebendigeObjekteTick();
 				}
 				// rendern();
 				momentanePhase.reset();
 			}
-			this.dungeonModell.naechstePhaseAktivieren();
+			this.modell.naechstePhaseAktivieren();
 		}
+	}
+
+	public void fuegeNeueKachelZuSpielbrettHinzu(Richtung richtung, Position momentanePos)
+	{
+		Kachel neueKachel = this.modell.getKartenGenerator().generiereNeueKachel(
+				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y, momentanePos,
+				richtung, this.getSpielbrett().getKachelBei(momentanePos));
+		this.modell.getSpielbrett().setzeKachel(neueKachel,
+				momentanePos.addiere(KartenGeneratorUtils.getVersatzVonRichtung(richtung)));
 	}
 
 	/**
@@ -90,7 +91,7 @@ public class DungeonController
 	 */
 	public HeldController[] getHelden()
 	{
-		return this.dungeonModell.getHelden();
+		return this.modell.getHelden();
 	}
 
 	/**
@@ -108,7 +109,12 @@ public class DungeonController
 
 	public ArrayList<Phase> getPhasen()
 	{
-		return this.dungeonModell.getPhasen();
+		return this.modell.getPhasen();
+	}
+
+	public Spielbrett getSpielbrett()
+	{
+		return this.modell.getSpielbrett();
 	}
 
 	private void initModell(Phase[] phasen)
@@ -121,9 +127,20 @@ public class DungeonController
 
 	private void initSpielbrett()
 	{
-		this.dungeonModell.getSpielbrett().setzeKachel(this.dungeonModell.getKartenGenerator().generiereStartKachel(),
-				new Position(Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2,
-						Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
+		this.modell.getSpielbrett().setzeKachel(this.modell.getKartenGenerator().generiereStartKachel(), new Position(
+				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
+	}
+
+	private void lebendigeObjekteTick()
+	{
+		for (LebendigesObjektController objekt : this.modell.getSpielbrett().getAlleLebendigenObjekte())
+		{
+			Vektor positionsAenderung = objekt.update();
+			if (positionsAenderung.laenge() > 0f)
+			{
+				this.modell.getSpielbrett().bewege(objekt, positionsAenderung);
+			}
+		}
 	}
 
 	/**
@@ -157,7 +174,7 @@ public class DungeonController
 
 	public void setPhasen(ArrayList<Phase> phasen)
 	{
-		this.dungeonModell.setPhasen(phasen);
+		this.modell.setPhasen(phasen);
 	}
 
 	/**

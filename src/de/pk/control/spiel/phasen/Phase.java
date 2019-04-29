@@ -22,17 +22,17 @@ public abstract class Phase
 		return Phase.BRAUCHT_EINGABE_DEFAULT_WERT;
 	}
 
-	public abstract void phasenTick(DungeonController aktiverDungeonController, HeldController aktiverHeld);
+	protected void fertig()
+	{
+		this.istFertig = true;
+	}
 
 	public boolean istFertig()
 	{
 		return this.istFertig;
 	}
 
-	protected void fertig()
-	{
-		this.istFertig = true;
-	}
+	public abstract void phasenTick(DungeonController aktiverDungeonController, HeldController aktiverHeld);
 
 	public void reset()
 	{

@@ -1,6 +1,6 @@
-package de.pk.control.kartekartenGenerator;
+package de.pk.model.karte.generator;
 
-import de.pk.control.kartekartenGenerator.untergruende.KachelUntergrundWertigkeit;
+import de.pk.model.karte.generator.untergruende.KachelUntergrundWertigkeit;
 import de.pk.model.position.Position;
 
 /**
@@ -58,8 +58,8 @@ public abstract class KartenGeneratorUntergrund
 
 	public KachelUntergrundWertigkeit getInhaltBei(Position pos)
 	{
-		if (!((pos.getY() > -1 && pos.getY() < this.getInhalt().length)
-				&& (pos.getX() > -1 && pos.getX() < this.getInhalt()[0].length)))
+		if (!(((pos.getY() > -1) && (pos.getY() < this.getInhalt().length))
+				&& ((pos.getX() > -1) && (pos.getX() < this.getInhalt()[0].length))))
 		{
 			// TODO: Exception Messages
 			throw new IllegalArgumentException();

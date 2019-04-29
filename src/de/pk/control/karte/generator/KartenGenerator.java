@@ -1,12 +1,15 @@
-package de.pk.control.kartekartenGenerator;
+package de.pk.control.karte.generator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import de.pk.control.kartekartenGenerator.untergruende.Start;
+import de.pk.model.karte.generator.KartenGeneratorUntergrund;
+import de.pk.model.karte.generator.Richtung;
+import de.pk.model.karte.generator.untergruende.Start;
 import de.pk.model.position.Position;
 import de.pk.model.spielbrett.spielbrettTeile.Kachel;
 import de.pk.utils.WahrscheinlichkeitsUtils;
+import de.pk.utils.karte.generator.KartenGeneratorUtils;
 
 public class KartenGenerator
 {
@@ -36,11 +39,6 @@ public class KartenGenerator
 		return new Kachel(untergrund);
 	}
 
-	public Kachel generiereStartKachel()
-	{
-		return new Kachel(new Start());
-	}
-
 	/**
 	 * Generiert einen Untergrund fuer eine Kachel passend zur gegebenen Kachel in
 	 * der bestimmten Richtung. Die Kachelwahrscheinlichkeit ist abhaengig von der
@@ -62,9 +60,8 @@ public class KartenGenerator
 			// TODO: Exception Messages
 			throw new IllegalStateException();
 		}
-		int[] versatz = KartenGeneratorUtils.getVersatzVonRichtung(richtung);
 		KartenGeneratorUntergrund generiert = this.getUntergrundKachelZumGenerieren(anzahlKachelnX, anzahlKachelnY,
-				aktuellePosition.addiere(versatz[0], versatz[1]));
+				aktuellePosition.addiere(KartenGeneratorUtils.getVersatzVonRichtung(richtung)));
 		if (!KartenGeneratorUtils.pruefeVerbindung(aktuelleKachel, generiert, richtung))
 		{
 			generiert = generiert.clone();
@@ -74,6 +71,11 @@ public class KartenGenerator
 			}
 		}
 		return generiert;
+	}
+
+	public Kachel generiereStartKachel()
+	{
+		return new Kachel(new Start());
 	}
 
 	/**

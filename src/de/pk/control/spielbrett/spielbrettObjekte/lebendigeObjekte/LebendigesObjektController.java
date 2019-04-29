@@ -1,12 +1,14 @@
 package de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte;
 
+import java.util.ListIterator;
+import java.util.Set;
+
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjektController;
+import de.pk.model.interaktion.Aktion;
 import de.pk.model.interaktion.Effekt;
 import de.pk.model.position.Vektor;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
 import de.pk.utils.Spielkonstanten;
-
-import java.util.ListIterator;
 
 public abstract class LebendigesObjektController extends SpielbrettObjektController
 {
@@ -16,17 +18,6 @@ public abstract class LebendigesObjektController extends SpielbrettObjektControl
 	protected LebendigesObjektController(LebendigesObjekt modell)
 	{
 		this.modell = modell;
-	}
-
-	public void fuegeEffekteHinzu(Effekt... hinzufuegen)
-	{
-		if (hinzufuegen != null)
-		{
-			for (Effekt effekt : hinzufuegen)
-			{
-				this.modell.fuegeEffektHinzu(effekt);
-			}
-		}
 	}
 
 	public void entferneEffekt(Effekt entfernen)
@@ -44,9 +35,54 @@ public abstract class LebendigesObjektController extends SpielbrettObjektControl
 		}
 	}
 
+	public void fuegeAktionHinzu(String name, Aktion hinzufuegen)
+	{
+		this.modell.fuegeAktionHinzu(name.toLowerCase(), hinzufuegen);
+	}
+
+	public void fuegeEffekteHinzu(Effekt... hinzufuegen)
+	{
+		if (hinzufuegen != null)
+		{
+			for (Effekt effekt : hinzufuegen)
+			{
+				this.modell.fuegeEffektHinzu(effekt);
+			}
+		}
+	}
+
+	public void fuehreAktionAus(String name, LebendigesObjektController ziel)
+	{
+		try
+		{
+			this.modell.getAktionMitNamen(name.toLowerCase()).wendeAn(this, ziel, Spielkonstanten.D20);
+		} catch (NullPointerException nichtVorhanden)
+		{
+			// TODO: Exception Messages
+			throw new IllegalArgumentException();
+		}
+
+	}
+
+	public Set<String> getAktionsNamen()
+	{
+		return this.modell.getAktionen().keySet();
+	}
+
 	protected LebendigesObjekt getModell()
 	{
 		return this.modell;
+	}
+
+	@Override
+	public boolean istLebendig()
+	{
+		return true;
+	}
+
+	public boolean kannSichUmXBewegen(int x)
+	{
+		return x <= this.modell.getBewegungsPunkte();
 	}
 
 	public Vektor update()
@@ -75,26 +111,6 @@ public abstract class LebendigesObjektController extends SpielbrettObjektControl
 			}
 		}
 		return positionsAenderung;
-	}
-
-	public void fuehreAktionAus(int index, LebendigesObjektController ziel)
-	{
-		if ((!(index > 0 && this.modell.getAktionen().length > index)) || ziel != null)
-		{
-			throw new IllegalArgumentException();
-		}
-		this.modell.getAktionen()[index].wendeAn(this, ziel, Spielkonstanten.D20);
-		
-	}
-
-	public boolean istLebendig()
-	{
-		return true;
-	}
-
-	public boolean kannSichUmXBewegen(int x)
-	{
-		return x <= this.modell.getBewegungsPunkte();
 	}
 
 }

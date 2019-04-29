@@ -3,9 +3,9 @@ package de.pk.model.spielbrett.spielbrettTeile;
 import java.util.HashMap;
 import java.util.Observable;
 
-import de.pk.control.kartekartenGenerator.KartenGeneratorUntergrund;
-import de.pk.control.kartekartenGenerator.untergruende.KachelUntergrundWertigkeit;
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjektController;
+import de.pk.model.karte.generator.KartenGeneratorUntergrund;
+import de.pk.model.karte.generator.untergruende.KachelUntergrundWertigkeit;
 import de.pk.model.position.Position;
 
 public class Kachel extends Observable
@@ -22,6 +22,16 @@ public class Kachel extends Observable
 	public Kachel(KartenGeneratorUntergrund untergrund)
 	{
 		this(new HashMap<Position, SpielbrettObjektController>(), untergrund);
+	}
+
+	public void entferneObjekt(SpielbrettObjektController zuEntfernen)
+	{
+		if (!this.kachelObjekte.containsValue(zuEntfernen))
+		{
+			// TODO: Exception Messages
+			throw new IllegalArgumentException();
+		}
+		this.kachelObjekte.remove(this.getPosition(zuEntfernen));
 	}
 
 	public Position getPosition(SpielbrettObjektController spielbrettObjekt)
@@ -41,28 +51,6 @@ public class Kachel extends Observable
 		return null;
 	}
 
-	public boolean istAufKachel(Position pos)
-	{
-		try
-		{
-			this.untergrund.getInhaltBei(pos);
-			return true;
-		} catch (IllegalArgumentException exc)
-		{
-			return false;
-		}
-	}
-
-	public void entferneObjekt(SpielbrettObjektController zuEntfernen)
-	{
-		if (!this.kachelObjekte.containsValue(zuEntfernen))
-		{
-			// TODO: Exception Messages
-			throw new IllegalArgumentException();
-		}
-		this.kachelObjekte.remove(this.getPosition(zuEntfernen));
-	}
-
 	public SpielbrettObjektController getSpielbrettObjektBei(Position pos)
 	{
 		return this.kachelObjekte.get(pos);
@@ -78,10 +66,20 @@ public class Kachel extends Observable
 		return this.untergrund.getInhaltBei(pos);
 	}
 
+	public boolean objektIstAufKachel(SpielbrettObjektController zuUeberpruefen)
+	{
+		return this.kachelObjekte.containsValue(zuUeberpruefen);
+	}
+
 	public void stelleAufKachel(Position pos, SpielbrettObjektController obj)
 	{
 		this.kachelObjekte.put(pos, obj);
 		this.notifyObservers(obj);
+	}
+
+	public boolean ueberpruefePosition(Position pos)
+	{
+		return this.kachelObjekte.containsKey(pos);
 	}
 
 }

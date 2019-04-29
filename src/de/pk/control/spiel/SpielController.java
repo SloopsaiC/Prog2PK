@@ -58,41 +58,39 @@ public class SpielController
 	}
 
 	/**
-     * Stellt ein Untermenue im Spiel dar, bei dem man sich auf der Weltkarte befindet und von welchem man die einzelnen
-     * Dungeons betreten kann.
-     */
-    public void waehleDungeon ()
-    {
-        boolean ausgewaehlt = false;
-        DebugAusgabeKlasse.ausgeben(DE_de.WELTKARTE);
-        while (!ausgewaehlt)
-        {
-            DebugAusgabeKlasse.ausgeben(DE_de.WELTKARTE_DUNGEONWAHL);
-            for (int i = 0; this.spielModell.getWeltkarte().hatDungeon(i); i++)
-            {
-                DebugAusgabeKlasse.ausgeben("\t" + (i + 1) + DE_de.WELTKARTE_DUNGEON + (i + 1) + "\n");
-            }
-            DebugAusgabeKlasse.ausgeben(DE_de.WELTKARTE_ZURUECK);
-            try
-            {
-                int dungeonWahl = Integer.valueOf(DebugEingabeKlasse.leseZeileEin());
-                if (dungeonWahl == 0)
-                {
-                    ausgewaehlt = true;
-                    this.spielModell.aendereAktivenDungeon(null);
-                    return;
-                }
-                else
-                {
-                    ausgewaehlt = true;
-                    this.initDungeon(dungeonWahl - 1);
-                    return;
-                }
-            }
-            catch (InputMismatchException e)
-            {
-                DebugAusgabeKlasse.ausgeben(DE_de.MENUE_INKORREKTE_KONSOLEN_EINGABE);
-            }
-        }
-    }
+	 * Stellt ein Untermenue im Spiel dar, bei dem man sich auf der Weltkarte
+	 * befindet und von welchem man die einzelnen Dungeons betreten kann.
+	 */
+	public void waehleDungeon()
+	{
+		boolean ausgewaehlt = false;
+		DebugAusgabeKlasse.ausgeben(DE_de.WELTKARTE);
+		while (!ausgewaehlt)
+		{
+			DebugAusgabeKlasse.ausgeben(DE_de.WELTKARTE_DUNGEONWAHL);
+			for (int i = 0; this.spielModell.getWeltkarte().hatDungeon(i); i++)
+			{
+				DebugAusgabeKlasse.ausgeben("\t" + (i + 1) + DE_de.WELTKARTE_DUNGEON + (i + 1) + "\n");
+			}
+			DebugAusgabeKlasse.ausgeben(DE_de.WELTKARTE_ZURUECK);
+			try
+			{
+				int dungeonWahl = Integer.valueOf(DebugEingabeKlasse.leseZeileEin());
+				if (dungeonWahl == 0)
+				{
+					ausgewaehlt = true;
+					this.spielModell.aendereAktivenDungeon(null);
+					return;
+				} else
+				{
+					ausgewaehlt = true;
+					this.initDungeon(dungeonWahl - 1);
+					return;
+				}
+			} catch (InputMismatchException e)
+			{
+				DebugAusgabeKlasse.ausgeben(DE_de.MENUE_INKORREKTE_KONSOLEN_EINGABE);
+			}
+		}
+	}
 }

@@ -2,8 +2,8 @@ package de.pk.model.dungeon;
 
 import java.util.ArrayList;
 
-import de.pk.control.kartekartenGenerator.KartenGenerator;
-import de.pk.control.kartekartenGenerator.KartenGeneratorKachelInterface;
+import de.pk.control.karte.generator.KartenGenerator;
+import de.pk.control.karte.generator.KartenGeneratorKachelInterface;
 import de.pk.control.spiel.phasen.Phase;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldController;
 import de.pk.model.spielbrett.Spielbrett;

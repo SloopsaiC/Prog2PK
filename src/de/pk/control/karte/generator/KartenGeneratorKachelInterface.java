@@ -1,11 +1,12 @@
-package de.pk.control.kartekartenGenerator;
+package de.pk.control.karte.generator;
 
-import de.pk.control.kartekartenGenerator.untergruende.Ecke;
-import de.pk.control.kartekartenGenerator.untergruende.Frei;
-import de.pk.control.kartekartenGenerator.untergruende.Kartenrand;
-import de.pk.control.kartekartenGenerator.untergruende.Sackgasse;
-import de.pk.control.kartekartenGenerator.untergruende.Schlucht;
-import de.pk.control.kartekartenGenerator.untergruende.Start;
+import de.pk.model.karte.generator.KartenGeneratorUntergrund;
+import de.pk.model.karte.generator.untergruende.Ecke;
+import de.pk.model.karte.generator.untergruende.Frei;
+import de.pk.model.karte.generator.untergruende.Kartenrand;
+import de.pk.model.karte.generator.untergruende.Sackgasse;
+import de.pk.model.karte.generator.untergruende.Schlucht;
+import de.pk.model.karte.generator.untergruende.Start;
 
 public class KartenGeneratorKachelInterface
 {

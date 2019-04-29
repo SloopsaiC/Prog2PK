@@ -1,4 +1,9 @@
-package de.pk.control.kartekartenGenerator;
+package de.pk.utils.karte.generator;
+
+import de.pk.control.karte.generator.KartenGeneratorKachelInterface;
+import de.pk.model.karte.generator.KartenGeneratorUntergrund;
+import de.pk.model.karte.generator.Richtung;
+import de.pk.model.position.Vektor;
 
 public class KartenGeneratorUtils
 {
@@ -10,7 +15,7 @@ public class KartenGeneratorUtils
 	 * @param wahrscheinlichkeit Alle Wahrscheinlichkeiten die ueberprueft werden
 	 *                           sollen
 	 */
-	static int getKachelDieGeneriertWerdenMuss(float[] wahrscheinlichkeit)
+	public static int getKachelDieGeneriertWerdenMuss(float[] wahrscheinlichkeit)
 	{
 		for (int i = 0; i < wahrscheinlichkeit.length; i++)
 		{
@@ -31,25 +36,20 @@ public class KartenGeneratorUtils
 	 * @return Array mit laenge 2 (2 dimensionen) um die Position in der gegebenen
 	 *         Richtung zu Generieren
 	 */
-	static int[] getVersatzVonRichtung(Richtung richtung)
+	public static Vektor getVersatzVonRichtung(Richtung richtung)
 	{
 		switch (richtung)
 		{
 		case NORDEN:
-			return new int[]
-			{ 0, -1 };
+			return new Vektor(0, -1);
 		case OSTEN:
-			return new int[]
-			{ 1, 0 };
+			return new Vektor(1, 0);
 		case SUEDEN:
-			return new int[]
-			{ 0, 1 };
+			return new Vektor(0, 1);
 		case WESTEN:
-			return new int[]
-			{ -1, 0 };
+			return new Vektor(-1, 0);
 		default:
-			return new int[]
-			{ 0, 0 };
+			return new Vektor(0, 0);
 		}
 	}
 
@@ -112,7 +112,8 @@ public class KartenGeneratorUtils
 	 *
 	 * @return "true" wenn eine Verbindung besteht, anderfalls "false"
 	 */
-	static boolean pruefeVerbindung(KartenGeneratorUntergrund von, KartenGeneratorUntergrund zu, Richtung richtung)
+	public static boolean pruefeVerbindung(KartenGeneratorUntergrund von, KartenGeneratorUntergrund zu,
+			Richtung richtung)
 	{
 
 		switch (richtung)
