@@ -3,7 +3,7 @@ package de.pk.model.spielbrett.spielbrettObjekte.container;
 import de.pk.control.gegenstaende.GegenstandsHaufen;
 import de.pk.utils.Spielkonstanten;
 
-public class Falle extends Container
+public class Falle extends SpielbrettObjektContainer
 {
 	public Falle()
 	{
@@ -12,7 +12,7 @@ public class Falle extends Container
 
 	public GegenstandsHaufen ausloesen()
 	{
-		return super.entferneInhalt(0);
+		return super.getInhalt().entferneInhalt(0);
 	}
 
 	public boolean istAusgeloest()

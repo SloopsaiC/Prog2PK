@@ -1,4 +1,4 @@
-package de.pk.kartenGenerator;
+package de.pk.control.kartekartenGenerator;
 
 public class KartenGeneratorUtils
 {

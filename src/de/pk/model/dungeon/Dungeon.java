@@ -2,11 +2,11 @@ package de.pk.model.dungeon;
 
 import java.util.ArrayList;
 
+import de.pk.control.kartekartenGenerator.KartenGenerator;
+import de.pk.control.kartekartenGenerator.KartenGeneratorKachelInterface;
 import de.pk.control.spiel.phasen.Phase;
-import de.pk.kartenGenerator.KartenGenerator;
-import de.pk.kartenGenerator.KartenGeneratorKachelInterface;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldController;
 import de.pk.model.spielbrett.Spielbrett;
-import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 
 public class Dungeon
 {
@@ -17,7 +17,7 @@ public class Dungeon
 	// Repraesentation der Phasen und der aktuell im Dungeon behandelten Phase
 	private ArrayList<Phase> phasen = null;
 	private int momentanePhaseIndex = 0;
-	private Held[] helden = null;
+	private HeldController[] helden = null;
 	private int aktiverHeldIndex = 0;
 	private KartenGenerator kartenGenerator = null;
 
@@ -26,7 +26,7 @@ public class Dungeon
 		this.spielbrett = new Spielbrett();
 		this.name = name;
 		this.phasen = new ArrayList<>();
-		this.helden = new Held[0];
+		this.helden = new HeldController[0];
 		this.kartenGenerator = new KartenGenerator(KartenGeneratorKachelInterface.ALLEKACHELN);
 	}
 
@@ -35,7 +35,7 @@ public class Dungeon
 		return false;
 	}
 
-	public Held getAktivenHeld()
+	public HeldController getAktivenHeld()
 	{
 		return this.helden[this.aktiverHeldIndex];
 	}
@@ -43,7 +43,7 @@ public class Dungeon
 	/**
 	 * @return the helden
 	 */
-	public Held[] getHelden()
+	public HeldController[] getHelden()
 	{
 		return this.helden;
 	}
@@ -92,7 +92,7 @@ public class Dungeon
 		this.aktiverHeldIndex = ++this.aktiverHeldIndex % this.helden.length;
 	}
 
-	public void setHelden(Held[] helden)
+	public void setHelden(HeldController[] helden)
 	{
 		this.helden = helden;
 	}

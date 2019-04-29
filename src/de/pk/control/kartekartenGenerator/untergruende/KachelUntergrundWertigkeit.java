@@ -1,4 +1,4 @@
-package de.pk.kartenGenerator.untergruende;
+package de.pk.control.kartekartenGenerator.untergruende;
 
 public enum KachelUntergrundWertigkeit
 {

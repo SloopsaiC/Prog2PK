@@ -4,6 +4,7 @@ import de.pk.model.faehigkeiten.Faehigkeit;
 import de.pk.model.gegenstaende.ausruestung.Accessoire;
 import de.pk.model.gegenstaende.ausruestung.Ruestung;
 import de.pk.model.gegenstaende.ausruestung.Waffe;
+import de.pk.model.interaktion.Aktion;
 import de.pk.model.spielbrett.spielbrettObjekte.container.Container;
 import de.pk.utils.DebugAusgabeKlasse;
 
@@ -25,7 +26,7 @@ public class Held extends LebendigesObjekt
 	 * @param lebensPunkte    Anzahl der Lebenspunkte des Helden
 	 * @param bewegungsPunkte Anzahl der Bewegungspunkte des Helden
 	 */
-	public Held(String name, int lebensPunkte, int bewegungsPunkte)
+	public Held(String name, int lebensPunkte, int bewegungsPunkte, Aktion... aktionen)
 	{
 		super(lebensPunkte, bewegungsPunkte);
 		this.name = name;

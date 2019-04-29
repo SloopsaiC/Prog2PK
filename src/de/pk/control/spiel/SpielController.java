@@ -3,8 +3,8 @@ package de.pk.control.spiel;
 import java.util.InputMismatchException;
 
 import de.pk.control.karte.WeltkarteController;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldController;
 import de.pk.model.spiel.Spiel;
-import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
 import de.pk.utils.lokalisierung.DE_de;
@@ -16,12 +16,12 @@ public class SpielController
 	/**
 	 * Erstellt ein Spiel mit default Weltkarte
 	 */
-	public SpielController(Held[] helden)
+	public SpielController(HeldController[] helden)
 	{
 		this(new WeltkarteController(), helden);
 	}
 
-	public SpielController(WeltkarteController weltkarte, Held[] helden)
+	public SpielController(WeltkarteController weltkarte, HeldController[] helden)
 	{
 		this.spielModell = new Spiel(weltkarte, helden);
 	}

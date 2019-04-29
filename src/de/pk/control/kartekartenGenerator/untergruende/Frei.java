@@ -1,6 +1,6 @@
-package de.pk.kartenGenerator.untergruende;
+package de.pk.control.kartekartenGenerator.untergruende;
 
-import de.pk.kartenGenerator.KartenGeneratorUntergrund;
+import de.pk.control.kartekartenGenerator.KartenGeneratorUntergrund;
 import de.pk.model.position.Position;
 import de.pk.utils.WahrscheinlichkeitsUtils;
 

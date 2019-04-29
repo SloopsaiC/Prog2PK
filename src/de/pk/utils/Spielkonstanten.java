@@ -3,8 +3,11 @@ package de.pk.utils;
 import de.pk.control.spiel.phasen.ExplorationsPhase;
 import de.pk.control.spiel.phasen.HeldenPhase;
 import de.pk.control.spiel.phasen.Phase;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldController;
+import de.pk.model.interaktion.Aktion;
+import de.pk.model.interaktion.Effekt;
 import de.pk.model.interaktion.Wuerfel;
-import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
+import de.pk.model.position.Vektor;
 
 public class Spielkonstanten
 {
@@ -15,8 +18,8 @@ public class Spielkonstanten
 
 	public static final Phase[] STANDARD_PHASEN =
 	{ new HeldenPhase(), new ExplorationsPhase() };
-	public static final Held[] STANDARD_HELDEN =
-	{ new Held("Test", 10, 10) };
+	public static final HeldController[] STANDARD_HELDEN =
+	{ new HeldController("Test", 10, 10, new Aktion("Bewegen", new Effekt(1, 0, 0, 1, new Vektor(1, 0)), null, 1f)) };
 
 	public static final int STANDARD_GROESSE_DUNGEON_X = 30;
 	public static final int STANDARD_GROESSE_DUNGEON_Y = 30;

@@ -23,10 +23,11 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 	 * @param lebensPunkte    Anzahl der Lebenspunkte
 	 * @param bewegungsPunkte Anzahl der Bewegungspunkte
 	 */
-	protected LebendigesObjekt(int lebensPunkte, int bewegungsPunkte)
+	protected LebendigesObjekt(int lebensPunkte, int bewegungsPunkte, Aktion... aktionen)
 	{
 		this.lebensPunkte = lebensPunkte;
 		this.bewegungsPunkte = bewegungsPunkte;
+		this.aktionen = aktionen;
 	}
 
 	public void aendereBewegungsPunkte(int aenderung)

@@ -3,9 +3,9 @@ package de.pk.model.spielbrett.spielbrettTeile;
 import java.util.HashMap;
 import java.util.Observable;
 
+import de.pk.control.kartekartenGenerator.KartenGeneratorUntergrund;
+import de.pk.control.kartekartenGenerator.untergruende.KachelUntergrundWertigkeit;
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjektController;
-import de.pk.kartenGenerator.KartenGeneratorUntergrund;
-import de.pk.kartenGenerator.untergruende.KachelUntergrundWertigkeit;
 import de.pk.model.position.Position;
 
 public class Kachel extends Observable
@@ -24,6 +24,35 @@ public class Kachel extends Observable
 		this(new HashMap<Position, SpielbrettObjektController>(), untergrund);
 	}
 
+	public Position getPosition(SpielbrettObjektController spielbrettObjekt)
+	{
+		if (!this.kachelObjekte.containsValue(spielbrettObjekt))
+		{
+			// TODO: Exception Messages
+			throw new IllegalArgumentException();
+		}
+		for (Position pos : this.kachelObjekte.keySet())
+		{
+			if (this.kachelObjekte.get(pos).equals(spielbrettObjekt))
+			{
+				return pos;
+			}
+		}
+		return null;
+	}
+
+	public boolean istAufKachel(Position pos)
+	{
+		try
+		{
+			this.untergrund.getInhaltBei(pos);
+			return true;
+		} catch (IllegalArgumentException exc)
+		{
+			return false;
+		}
+	}
+
 	public void entferneObjekt(SpielbrettObjektController zuEntfernen)
 	{
 		if (!this.kachelObjekte.containsValue(zuEntfernen))
@@ -31,14 +60,7 @@ public class Kachel extends Observable
 			// TODO: Exception Messages
 			throw new IllegalArgumentException();
 		}
-		for (Position pos : this.kachelObjekte.keySet())
-		{
-			if (this.kachelObjekte.get(pos).equals(zuEntfernen))
-			{
-				this.kachelObjekte.remove(pos);
-				return;
-			}
-		}
+		this.kachelObjekte.remove(this.getPosition(zuEntfernen));
 	}
 
 	public SpielbrettObjektController getSpielbrettObjektBei(Position pos)

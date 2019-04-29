@@ -2,7 +2,7 @@ package de.pk.model.spielbrett.spielbrettObjekte.container;
 
 import de.pk.control.gegenstaende.GegenstandsHaufen;
 
-public abstract class Container
+public class Container
 {
 	private GegenstandsHaufen[] inhalt = null; // Der Inhalt dieses Containers
 

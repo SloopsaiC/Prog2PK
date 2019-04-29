@@ -2,7 +2,7 @@ package de.pk.model.spiel;
 
 import de.pk.control.karte.WeltkarteController;
 import de.pk.control.spiel.DungeonController;
-import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldController;
 
 public class Spiel
 {
@@ -10,7 +10,7 @@ public class Spiel
 	private WeltkarteController weltkarte = null;
 	private DungeonController aktiverDungeonController = null; // Der Controller des momentan aktiven Dungeons,
 //null falls sich der Spieler auf der "Weltkarte" befindet
-	private Held[] helden = null;
+	private HeldController[] helden = null;
 	private int goldAnzahl = 0;
 	private int fragmentAnzahl = 0;
 
@@ -19,7 +19,7 @@ public class Spiel
 	 *
 	 * @param weltkarte Die Weltkarte mit Dungeons fuer das neue Spiel.
 	 */
-	public Spiel(WeltkarteController weltkarte, Held[] helden)
+	public Spiel(WeltkarteController weltkarte, HeldController[] helden)
 	{
 		this.weltkarte = weltkarte;
 		this.helden = helden;
@@ -44,7 +44,7 @@ public class Spiel
 		return this.aktiverDungeonController;
 	}
 
-	public Held[] getHelden()
+	public HeldController[] getHelden()
 	{
 		return this.helden;
 	}
@@ -57,7 +57,7 @@ public class Spiel
 		return this.weltkarte;
 	}
 
-	public void setHelden(Held[] helden)
+	public void setHelden(HeldController[] helden)
 	{
 		this.helden = helden;
 	}

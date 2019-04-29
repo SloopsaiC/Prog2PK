@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import de.pk.control.app.Main;
 import de.pk.control.spiel.phasen.Phase;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldController;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektController;
 import de.pk.model.dungeon.Dungeon;
 import de.pk.model.position.Position;
-import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
+import de.pk.model.position.Vektor;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
 import de.pk.utils.Spielkonstanten;
@@ -34,14 +36,6 @@ public class DungeonController
 	}
 
 	/**
-	 * Fuehrt die jeweils naechste Phase des Dungeons aus.
-	 */
-	private void behandlePhase()
-	{
-		this.dungeonModell.getMomentanePhase().fuerePhaseAus(this, this.dungeonModell.getAktivenHeld());
-	}
-
-	/**
 	 * Preuft, ob die als naechstes auszufuehrende Phase eine Eingabe benoetigt.
 	 *
 	 * @return
@@ -51,21 +45,42 @@ public class DungeonController
 		return this.dungeonModell.getMomentanePhase().brauchtEingabe();
 	}
 
+	private void lebendigeObjekteTick()
+	{
+		for (LebendigesObjektController objekt : this.dungeonModell.getSpielbrett().getAlleLebendigenObjekte())
+		{
+			Vektor positionsAenderung = objekt.update();
+			if (positionsAenderung.laenge() > 0f)
+			{
+				this.dungeonModell.getSpielbrett().bewege(objekt, positionsAenderung);
+			}
+		}
+	}
+
 	/**
 	 * Game-Loop des Spiels, es werden die Phasen nacheinander ausgefuehrt, bis das
 	 * Ziel des Dungeons erreicht ist.
 	 */
-	public void dungeonAblaufSchleife(Held[] helden)
+	public void dungeonAblaufSchleife(HeldController[] helden)
 	{
 		this.dungeonModell.setHelden(helden);
 		while (!this.dungeonModell.aufgabeIstErfuellt())
 		{
-			if (this.brauchtEingabeFuerPhase())
+			synchronized (this.dungeonModell)
 			{
-				this.getInput();
+				Phase momentanePhase = this.dungeonModell.getMomentanePhase();
+				while (!momentanePhase.istFertig())
+				{
+					if (this.brauchtEingabeFuerPhase())
+					{
+						this.getInput();
+					}
+					momentanePhase.phasenTick(this, this.dungeonModell.getAktivenHeld());
+					this.lebendigeObjekteTick();
+				}
+				// rendern();
+				momentanePhase.reset();
 			}
-			this.behandlePhase();
-			// rendern();
 			this.dungeonModell.naechstePhaseAktivieren();
 		}
 	}
@@ -73,25 +88,23 @@ public class DungeonController
 	/**
 	 * @return Die Helden dieses Spiels
 	 */
-	public Held[] getHelden()
+	public HeldController[] getHelden()
 	{
 		return this.dungeonModell.getHelden();
 	}
 
-
-    /**
-     * Liest (Konsolen)-Input ein.
-     */
-    private void getInput ()
-    {
-        DebugAusgabeKlasse.ausgeben(DE_de.DUNGEON_ABLAUF_INPUT_AUFFORDERUNG);
-        char eingabe = DebugEingabeKlasse.leseZeileEin().charAt(0);
-        if (eingabe == 'x')
-        {
-            Main.anwendungBeenden();
-        }
-    }
-
+	/**
+	 * Liest (Konsolen)-Input ein.
+	 */
+	private void getInput()
+	{
+		DebugAusgabeKlasse.ausgeben(DE_de.DUNGEON_ABLAUF_INPUT_AUFFORDERUNG);
+		char eingabe = DebugEingabeKlasse.leseZeileEin().charAt(0);
+		if (eingabe == 'x')
+		{
+			Main.anwendungBeenden();
+		}
+	}
 
 	public ArrayList<Phase> getPhasen()
 	{

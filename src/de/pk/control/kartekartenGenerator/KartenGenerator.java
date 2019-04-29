@@ -1,9 +1,9 @@
-package de.pk.kartenGenerator;
+package de.pk.control.kartekartenGenerator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import de.pk.kartenGenerator.untergruende.Start;
+import de.pk.control.kartekartenGenerator.untergruende.Start;
 import de.pk.model.position.Position;
 import de.pk.model.spielbrett.spielbrettTeile.Kachel;
 import de.pk.utils.WahrscheinlichkeitsUtils;

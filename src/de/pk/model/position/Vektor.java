@@ -34,4 +34,9 @@ public class Vektor
 		return this.y;
 	}
 
+	public float laenge()
+	{
+		return (float) Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+	}
+
 }

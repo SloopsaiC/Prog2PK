@@ -2,7 +2,7 @@ package de.pk.model.spielbrett.spielbrettObjekte.container;
 
 import de.pk.utils.Spielkonstanten;
 
-public class Kiste extends Container
+public class Kiste extends SpielbrettObjektContainer
 {
 	public Kiste()
 	{
