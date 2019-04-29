@@ -8,6 +8,9 @@ import de.pk.model.position.KachelPosition;
 public class ExplorationsPhase extends Phase
 {
 
+	/**
+	 * @see de.pk.control.spiel.phasen.Phase#phasenTick(DungeonController, HeldController)
+	 * */
 	@Override
 	public void phasenTick(DungeonController aktiverDungeonController, HeldController aktiverHeld)
 	{
@@ -15,7 +18,7 @@ public class ExplorationsPhase extends Phase
 		Richtung kantenRichtung = aktuellePosition.getKantenRichtungFallsAnKante();
 		if (kantenRichtung != null)
 		{
-			aktiverDungeonController.fuegeNeueKachelZuSpielbrettHinzu(kantenRichtung,
+			aktiverDungeonController.generiereUndfuegeNeueKachelZuSpielbrettHinzu(kantenRichtung,
 					aktiverDungeonController.getSpielbrett().getPositionKachel(aktuellePosition.getKachel()));
 		}
 		super.fertig();

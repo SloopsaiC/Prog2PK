@@ -24,5 +24,8 @@ public class Spielkonstanten
 	public static final int ANZAHL_MAXIMALE_DREHUNGEN_REZEPT = 4;
 	public static final Wuerfel D20 = new Wuerfel(20);
 	public static final int MAX_AKTIONEN_HELDEN_PHASE = 2;
+	// Kacheldimensionen in X und Y koordinaten:
+	public static final int KACHEL_GROESSE_X = 5;
+	public static final int KACHEL_GROESSE_Y = 5;
 
 }

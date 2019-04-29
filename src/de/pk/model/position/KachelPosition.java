@@ -1,15 +1,15 @@
 package de.pk.model.position;
 
-import de.pk.control.karte.generator.KartenGeneratorKachelInterface;
 import de.pk.model.karte.generator.Richtung;
 import de.pk.model.spielbrett.spielbrettTeile.Kachel;
+import de.pk.utils.Spielkonstanten;
 
 public class KachelPosition
 {
 	private static boolean ueberpruefePosition(Position pos)
 	{
-		return ((pos.getX() < KartenGeneratorKachelInterface.KACHEL_GROESSE_X)
-				&& (pos.getY() < KartenGeneratorKachelInterface.KACHEL_GROESSE_Y) && (pos.getX() > 0)
+		return ((pos.getX() < Spielkonstanten.KACHEL_GROESSE_X)
+				&& (pos.getY() < Spielkonstanten.KACHEL_GROESSE_Y) && (pos.getX() > 0)
 				&& (pos.getY() > 0));
 	}
 
@@ -36,13 +36,18 @@ public class KachelPosition
 		return this.kachel;
 	}
 
+	/**
+	 * Gibt die Richtung der Kante wieder, sollte die Position auf der Kachel an einer liegen
+	 * 
+	 * @return Richtung, Die Richtung der Kante
+	 * */
 	public Richtung getKantenRichtungFallsAnKante()
 	{
 		if (this.positionAufDerKachel.getX() == 0)
 		{
 			return Richtung.WESTEN;
 		}
-		if (this.positionAufDerKachel.getX() == (KartenGeneratorKachelInterface.KACHEL_GROESSE_X - 1))
+		if (this.positionAufDerKachel.getX() == (Spielkonstanten.KACHEL_GROESSE_X - 1))
 		{
 			return Richtung.OSTEN;
 		}
@@ -50,7 +55,7 @@ public class KachelPosition
 		{
 			return Richtung.NORDEN;
 		}
-		if (this.positionAufDerKachel.getY() == (KartenGeneratorKachelInterface.KACHEL_GROESSE_Y - 1))
+		if (this.positionAufDerKachel.getY() == (Spielkonstanten.KACHEL_GROESSE_Y - 1))
 		{
 			return Richtung.SUEDEN;
 		}

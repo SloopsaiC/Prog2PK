@@ -77,7 +77,14 @@ public class DungeonController
 		}
 	}
 
-	public void fuegeNeueKachelZuSpielbrettHinzu(Richtung richtung, Position momentanePos)
+	/**
+	 * Generiert mit dem aktuellen KartenGenerator und fuegt eine neue Kachel in
+	 * gegebener Richtung gesehen von gegebener Position zum Spielbrett hinzu
+	 * 
+	 * @param richtung     Die Richtung in welche generiert werden soll
+	 * @param momentanePos Die momentane Position
+	 */
+	public void generiereUndfuegeNeueKachelZuSpielbrettHinzu(Richtung richtung, Position momentanePos)
 	{
 		Kachel neueKachel = this.modell.getKartenGenerator().generiereNeueKachel(
 				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y, momentanePos,
@@ -131,6 +138,10 @@ public class DungeonController
 				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
 	}
 
+	/**
+	 * Ruft die "update" Methode auf allen LebendigesObjekt Instanzen des
+	 * Spielbretts dieses Dungeons auf und bearbeitet deren Positionsaenderungen
+	 */
 	private void lebendigeObjekteTick()
 	{
 		for (LebendigesObjektController objekt : this.modell.getSpielbrett().getAlleLebendigenObjekte())

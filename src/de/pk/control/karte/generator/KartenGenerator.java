@@ -8,6 +8,7 @@ import de.pk.model.karte.generator.Richtung;
 import de.pk.model.karte.generator.untergruende.Start;
 import de.pk.model.position.Position;
 import de.pk.model.spielbrett.spielbrettTeile.Kachel;
+import de.pk.utils.Spielkonstanten;
 import de.pk.utils.WahrscheinlichkeitsUtils;
 import de.pk.utils.karte.generator.KartenGeneratorUtils;
 
@@ -15,22 +16,50 @@ public class KartenGenerator
 {
 	private ArrayList<KartenGeneratorUntergrund> registrierteKacheln = null;
 
-	public KartenGenerator()
+	/**
+	 * Erstellt einen KartenGenerator welcher keine registrierten Untergruende hat
+	 */
+	private KartenGenerator()
 	{
 		this(new ArrayList<>());
 	}
 
+	/**
+	 * Erstellt einen Generator welcher die gegebenen Untergruende verwendet
+	 * 
+	 * @param kacheln Die Untergruende die dieser Generator verwenden wird um neue
+	 *                zu generieren
+	 */
 	public KartenGenerator(ArrayList<KartenGeneratorUntergrund> kacheln)
 	{
 		this.registrierteKacheln = kacheln;
 	}
 
+	/**
+	 * Erstellt einen Generator welcher die gegebenen Untergruende verwendet
+	 * 
+	 * @param kacheln Die Untergruende die dieser Generator verwenden wird um neue
+	 *                zu generieren
+	 */
 	public KartenGenerator(KartenGeneratorUntergrund... generatorKacheln)
 	{
 		this();
 		this.registrierteKacheln.addAll(Arrays.asList(generatorKacheln));
 	}
 
+	/**
+	 * Generiert eine neue Kachel in gegebenener Richtung von gegebener Position aus
+	 * gesehen
+	 * 
+	 * @param anzahlKachelnX   Die maximale Anzahl an Kacheln auf dem Spielbrett in
+	 *                         X-Richtung
+	 * @param anzahlKachelnY   Die maximale Anzahl an Kacheln auf dem Spielbrett in
+	 *                         Y-Richtung
+	 * @param aktuellePosition Die aktuelle Position von der aus die Richtung
+	 *                         gesehen wird
+	 * @param richtung         Die Richtung in welche die Kachel generiert wird
+	 * @param aktuelleKachel   Die Kachel welche zur aktuellen Position gehoert
+	 */
 	public Kachel generiereNeueKachel(int anzahlKachelnX, int anzahlKachelnY, Position aktuellePosition,
 			Richtung richtung, Kachel aktuelleKachel)
 	{
@@ -143,13 +172,13 @@ public class KartenGenerator
 
 	private boolean ueberpruefeFreiesRandFeld(KartenGeneratorUntergrund zuUeberpruefen)
 	{
-		for (int val = 0; val < KartenGeneratorKachelInterface.KACHEL_GROESSE_X; val++)
+		for (int val = 0; val < Spielkonstanten.KACHEL_GROESSE_X; val++)
 		{
 			if (zuUeberpruefen.getInhalt()[val][0].istBetretbar()
-					|| zuUeberpruefen.getInhalt()[KartenGeneratorKachelInterface.KACHEL_GROESSE_Y - 1][val]
+					|| zuUeberpruefen.getInhalt()[Spielkonstanten.KACHEL_GROESSE_Y - 1][val]
 							.istBetretbar()
 					|| zuUeberpruefen.getInhalt()[0][val].istBetretbar()
-					|| zuUeberpruefen.getInhalt()[val][KartenGeneratorKachelInterface.KACHEL_GROESSE_X - 1]
+					|| zuUeberpruefen.getInhalt()[val][Spielkonstanten.KACHEL_GROESSE_X - 1]
 							.istBetretbar())
 			{
 				return true;

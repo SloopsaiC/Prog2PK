@@ -10,10 +10,6 @@ import de.pk.model.karte.generator.untergruende.Start;
 
 public class KartenGeneratorKachelInterface
 {
-	// Kacheldimensionen in X und Y koordinaten:
-	public static final int KACHEL_GROESSE_X = 5;
-	public static final int KACHEL_GROESSE_Y = 5;
-
 	public static final KartenGeneratorUntergrund STARTKACHEL = new Start();
 	public static final KartenGeneratorUntergrund FREI_GROSS = new Frei();
 	public static final KartenGeneratorUntergrund SCHLAUCH_GROSS = new Schlucht();

@@ -1,9 +1,9 @@
 package de.pk.utils.karte.generator;
 
-import de.pk.control.karte.generator.KartenGeneratorKachelInterface;
 import de.pk.model.karte.generator.KartenGeneratorUntergrund;
 import de.pk.model.karte.generator.Richtung;
 import de.pk.model.position.Vektor;
+import de.pk.utils.Spielkonstanten;
 
 public class KartenGeneratorUtils
 {
@@ -60,7 +60,7 @@ public class KartenGeneratorUtils
 		// Wenn die Richtung "WESTEN" ist, wird die linke Seite (0) der "von-Kachel"
 		// mit der OSTEN Seite (maximum Wert) der "zu-Kachel" verglichen
 		int vonX = 0;
-		int zuX = KartenGeneratorKachelInterface.KACHEL_GROESSE_X - 1;
+		int zuX = Spielkonstanten.KACHEL_GROESSE_X - 1;
 		// Tauschen der beiden Werte wenn die Verbindung OSTEN ist
 		if (richtung == Richtung.OSTEN)
 		{
@@ -69,7 +69,7 @@ public class KartenGeneratorUtils
 			zuX = puffer;
 		}
 		// Wiederholen des Vorgangs mit den Y-Werten um alle zu pruefen
-		for (int y = 0; y < KartenGeneratorKachelInterface.KACHEL_GROESSE_Y; y++)
+		for (int y = 0; y < Spielkonstanten.KACHEL_GROESSE_Y; y++)
 		{
 			if (von.getInhalt()[y][vonX].istBetretbar() && zu.getInhalt()[y][zuX].istBetretbar())
 			{
@@ -84,7 +84,7 @@ public class KartenGeneratorUtils
 	{
 		// Gleiches Verfahren wie bei OSTEN/WESTEN, nur jetzt fuer NORDEN/SUEDEN
 		int vonY = 0;
-		int zuY = KartenGeneratorKachelInterface.KACHEL_GROESSE_Y - 1;
+		int zuY = Spielkonstanten.KACHEL_GROESSE_Y - 1;
 		if (richtung == Richtung.SUEDEN)
 		{
 			int puffer = vonY;
@@ -92,7 +92,7 @@ public class KartenGeneratorUtils
 			zuY = puffer;
 		}
 		// Wiederholen des Vorgangs mit den X-Werten um alle zu pruefen
-		for (int x = 0; x < KartenGeneratorKachelInterface.KACHEL_GROESSE_X; x++)
+		for (int x = 0; x < Spielkonstanten.KACHEL_GROESSE_X; x++)
 		{
 			if (von.getInhalt()[vonY][x].istBetretbar() && zu.getInhalt()[zuY][x].istBetretbar())
 			{

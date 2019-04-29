@@ -31,6 +31,9 @@ public class Einstellungen
 	{
 	}
 
+	/**
+	 * Bearbeitet die Einstellungen, nur zu Demonstrationszwecken
+	 * */
 	public void einstellungenBearbeiten()
 	{
 		boolean amLeben = true;

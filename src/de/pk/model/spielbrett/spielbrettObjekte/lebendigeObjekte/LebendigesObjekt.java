@@ -3,10 +3,10 @@ package de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import de.pk.model.gegenstaende.container.Container;
 import de.pk.model.interaktion.Aktion;
 import de.pk.model.interaktion.Effekt;
 import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjekt;
-import de.pk.model.spielbrett.spielbrettObjekte.container.Container;
 
 public abstract class LebendigesObjekt extends SpielbrettObjekt
 {

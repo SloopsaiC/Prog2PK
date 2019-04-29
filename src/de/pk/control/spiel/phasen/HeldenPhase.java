@@ -21,13 +21,19 @@ public class HeldenPhase extends Phase
 		return HeldenPhase.BRAUCHT_EINGABE;
 	}
 
+	/**
+	 * @see de.pk.control.spiel.phasen.Phase#reset()
+	 * */
 	@Override
-	protected void fertig()
+	public void reset()
 	{
+		super.reset();
 		this.anzahlAktionenDieserPhase = 0;
-		super.fertig();
 	}
 
+	/**
+	 * @see de.pk.control.spiel.phasen.Phase#phasenTick(DungeonController, HeldController)
+	 * */
 	@Override
 	public void phasenTick(DungeonController aktiverDungeonController, HeldController aktiverHeld)
 	{
@@ -36,7 +42,7 @@ public class HeldenPhase extends Phase
 		this.anzahlAktionenDieserPhase++;
 		if (this.anzahlAktionenDieserPhase >= Spielkonstanten.MAX_AKTIONEN_HELDEN_PHASE)
 		{
-			this.fertig();
+			super.fertig();
 		}
 	}
 

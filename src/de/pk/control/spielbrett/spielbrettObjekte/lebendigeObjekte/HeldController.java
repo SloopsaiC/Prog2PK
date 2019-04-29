@@ -21,11 +21,11 @@ public class HeldController extends LebendigesObjektController
 	/**
 	 * Ruestet dem Helden das Accessoire aus und legt es in sein Accesoire-Inventar
 	 * an die entsprechende Stelle (slot). War zuvor bereits eine anderes Accessoire
-	 * in diesem Slot ausgerüstet, so gibt die Methode dieses zurueck, die
+	 * in diesem Slot ausgeruestet, so gibt die Methode dieses zurueck, die
 	 * Accessoires werden also getauscht.
 	 *
 	 * @param accessoire Das auszuruestende Accessoire
-	 * @param slot       Position an dem das Accessoire eingefügt werden soll, wobei
+	 * @param slot       Position an dem das Accessoire eingefuegt werden soll, wobei
 	 *                   0 die erste Position ist. slot darf nicht groesser sein als
 	 *                   {@link Held.ANZAHL_MAXIMALE_ACCESSOIRES}-1.
 	 * @return das alte Accessoire, welches zuvor an der Stelle slot ausgeruestet
@@ -50,11 +50,11 @@ public class HeldController extends LebendigesObjektController
 
 	/**
 	 * Ruestet dem Helden eine Ruestung aus. War zuvor bereits eine andere Ruestung
-	 * ausgerüstet, so gibt die Methode diese zurueck, die Ruestungen werden also
+	 * ausgeruestet, so gibt die Methode diese zurueck, die Ruestungen werden also
 	 * getauscht.
 	 *
 	 * @param ruestung Die auszuruestende Ruestung
-	 * @param slot     Position an dem die Ruestung eingefügt werden soll, wobei 0
+	 * @param slot     Position an dem die Ruestung eingefuegt werden soll, wobei 0
 	 *                 die erste Position ist. slot darf nicht groesser sein als
 	 *                 {@link Held.ANZAHL_MAXIMALE_RUESTUNGS_GEGENSTAENDE}-1.
 	 * @return die alte Ruestung, welche zuvor ausgeruestet war oder null, wenn
@@ -77,7 +77,7 @@ public class HeldController extends LebendigesObjektController
 
 	/**
 	 * Ruestet dem Helden eine Waffe aus. War zuvor bereits eine andere Waffe
-	 * ausgerüstet, so gibt die Methode diese zurueck, die Waffen werden also
+	 * ausgeruestet, so gibt die Methode diese zurueck, die Waffen werden also
 	 * getauscht.
 	 *
 	 * @param waffe Die auszuruestende Waffe

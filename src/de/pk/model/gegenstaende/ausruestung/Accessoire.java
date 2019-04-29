@@ -12,7 +12,7 @@ import de.pk.model.interaktion.StatusEffekt;
  */
 public enum Accessoire implements Ausruestbar
 {
-	// TO-DO: sinnvolle Effekte einfuegen
+	// TODO: sinnvolle Effekte einfuegen
 	RING(new StatusEffekt(1, 1, 0, 1), Faehigkeit.STIL), AMULETT(new StatusEffekt(0, 2, 2, 2), Faehigkeit.KEINE);
 
 	/**

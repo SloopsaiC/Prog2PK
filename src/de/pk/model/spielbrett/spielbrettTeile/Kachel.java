@@ -1,7 +1,9 @@
 package de.pk.model.spielbrett.spielbrettTeile;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
+import java.util.stream.Collectors;
 
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjektController;
 import de.pk.model.karte.generator.KartenGeneratorUntergrund;
@@ -34,6 +36,13 @@ public class Kachel extends Observable
 		this.kachelObjekte.remove(this.getPosition(zuEntfernen));
 	}
 
+	/**
+	 * Sucht mit Hilfe der Stream API ein SpielbrettObjekt auf der Kachel
+	 * 
+	 * @param spielbrettObjekt Das zu suchende Objekt
+	 * 
+	 * @return Die Position des Objektes, sollte sich dieses auf der Kachel befinden
+	 */
 	public Position getPosition(SpielbrettObjektController spielbrettObjekt)
 	{
 		if (!this.kachelObjekte.containsValue(spielbrettObjekt))
@@ -41,14 +50,8 @@ public class Kachel extends Observable
 			// TODO: Exception Messages
 			throw new IllegalArgumentException();
 		}
-		for (Position pos : this.kachelObjekte.keySet())
-		{
-			if (this.kachelObjekte.get(pos).equals(spielbrettObjekt))
-			{
-				return pos;
-			}
-		}
-		return null;
+		return this.kachelObjekte.entrySet().stream().collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey))
+				.get(spielbrettObjekt);
 	}
 
 	public SpielbrettObjektController getSpielbrettObjektBei(Position pos)

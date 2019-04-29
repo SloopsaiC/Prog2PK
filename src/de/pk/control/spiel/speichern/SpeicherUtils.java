@@ -14,6 +14,13 @@ import de.pk.control.spiel.einstellungen.Einstellungen;
 
 public class SpeicherUtils
 {
+	/**
+	 * Erstellt eine neue Datei an dem gegebenen Pfad, sollte noch keine existieren
+	 * 
+	 * @param pfad Der Pfad an welchem die Datei erstellt werden soll
+	 * 
+	 * @return File, die Datei die eine Referenz auf die Datei im lokalen System ist
+	 */
 	private static File erstelleDatei(String pfad)
 	{
 		File f = new File(pfad);
@@ -30,6 +37,13 @@ public class SpeicherUtils
 		return f;
 	}
 
+	/**
+	 * Erstellt einen "PrintWriter" fuer die gegebene Datei
+	 * 
+	 * @param datei Die Datei in welche geschrieben werden soll
+	 * 
+	 * @return PrintWriter, ein Writer der in die gegebene Datei schreibt
+	 */
 	private static PrintWriter erstelleWriterInDatei(File datei)
 	{
 		PrintWriter schreiber = null;
@@ -43,6 +57,13 @@ public class SpeicherUtils
 		return schreiber;
 	}
 
+	/**
+	 * Laedt ein Spiel aus dem gegebenen Pfad
+	 * 
+	 * @param pfad Der Pfad aus welchem geladen werden soll
+	 * 
+	 * @return SpielController, Das geladene Spiel
+	 * */
 	public static SpielController ladeSpiel(String pfad)
 	{
 		try
@@ -55,28 +76,17 @@ public class SpeicherUtils
 		}
 	}
 
+	/**
+	 * Speichert ein Spiel, oder die Einstellungen
+	 * 
+	 * @param objekt Das Objekt welches gespeichert werden soll
+	 * @param name Der Name unter welchem gespeichert werden soll
+	 * */
 	public static void speichere(Object objekt, String name)
 	{
 		PrintWriter writer = SpeicherUtils.erstelleWriterInDatei(SpeicherUtils.erstelleDatei(name));
 		new GsonBuilder().create().toJson(objekt, SpielController.class, writer);
 		writer.close();
-	}
-
-	public static void speichereEinstellungen(Einstellungen zuSpeichern, String name)
-	{
-		PrintWriter schreiber = SpeicherUtils.erstelleWriterInDatei(SpeicherUtils.erstelleDatei(name));
-		String gsonRes = new Gson().toJson(zuSpeichern);
-		schreiber.println(gsonRes);
-		schreiber.close();
-	}
-
-	public static void speichereSpiel(SpielController zuSpeichern, String name)
-	{
-		PrintWriter schreiber = SpeicherUtils.erstelleWriterInDatei(SpeicherUtils.erstelleDatei(name));
-		Gson gson = new Gson();
-		String gsonRes = gson.toJson(zuSpeichern);
-		schreiber.println(gsonRes);
-		schreiber.close();
 	}
 
 	// TODO: Einstellungen laden

@@ -22,18 +22,32 @@ public abstract class Phase
 		return Phase.BRAUCHT_EINGABE_DEFAULT_WERT;
 	}
 
+	/**
+	 * Wird aufgerufen, sollte eine Phase sich als "fertig" erachten
+	 */
 	protected void fertig()
 	{
 		this.istFertig = true;
 	}
 
+	/**
+	 * Ist true, falls die Phase als fertig erachtet wird
+	 */
 	public boolean istFertig()
 	{
 		return this.istFertig;
 	}
 
+	/**
+	 * Fuehrt die Phase um einen Tick weiter, dabei werden saemtliche Veraenderungen
+	 * die diese Phase auf den Zustand des Spiels / Dungeons hat registriert um
+	 * spaeter im DungeonController umgesetzt zu werden
+	 */
 	public abstract void phasenTick(DungeonController aktiverDungeonController, HeldController aktiverHeld);
 
+	/**
+	 * Setzt diese Phase zurueck
+	 */
 	public void reset()
 	{
 		this.istFertig = false;
