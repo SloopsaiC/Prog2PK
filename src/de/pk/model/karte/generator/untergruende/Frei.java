@@ -22,52 +22,10 @@ public class Frei extends KartenGeneratorUntergrund
 					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
 			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
 					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI } };
-	private static final float FREIEKACHEL_WAHRSCHEINLICHKEIT = 0.3f;
-
-	private static final KachelUntergrundWertigkeit[][] FREIEKACHEL_BEWACHSEN =
-	{ /*
-		 * 0 1 1 0 0 0 2 1 1 0 1 1 6 6 1 0 1 6 1 0 0 0 1 0 0
-		 */
-			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT,
-					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
-			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.LEICHT,
-					KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.FREI },
-			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.BAUM,
-					KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.LEICHT },
-			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.BAUM,
-					KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.FREI },
-			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.LEICHT,
-					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI } };
-	private static final float FREIEKACHEL_BEWACHSEN_WAHRSCHEINLICHKEIT = 0.3f;
-
-	private static final KachelUntergrundWertigkeit[][] FREIEKACHEL_FREIMACHBAR =
-	{ /*
-		 * 1 3 2 1 0 1 2 3 3 2 1 3 3 2 1 0 1 3 6 2 0 1 2 3 1
-		 */
-			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.HELD_VERAENDERBAR,
-					KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.LEICHT,
-					KachelUntergrundWertigkeit.FREI },
-			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.SCHWER,
-					KachelUntergrundWertigkeit.HELD_VERAENDERBAR, KachelUntergrundWertigkeit.HELD_VERAENDERBAR,
-					KachelUntergrundWertigkeit.SCHWER },
-			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.HELD_VERAENDERBAR,
-					KachelUntergrundWertigkeit.HELD_VERAENDERBAR, KachelUntergrundWertigkeit.SCHWER,
-					KachelUntergrundWertigkeit.LEICHT },
-			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.LEICHT,
-					KachelUntergrundWertigkeit.HELD_VERAENDERBAR, KachelUntergrundWertigkeit.BAUM,
-					KachelUntergrundWertigkeit.SCHWER },
-			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.SCHWER,
-					KachelUntergrundWertigkeit.HELD_VERAENDERBAR, KachelUntergrundWertigkeit.LEICHT } };
-	private static final float FREIEKACHEL_FREIMACHBAR_WAHRSCHEINLICHKEIT = 0.3f;
 
 	public Frei()
 	{
 		super(Frei.FREIEKACHEL);
-		if (WahrscheinlichkeitsUtils.getIndexAusWahrscheinlichkeiten(Frei.FREIEKACHEL_WAHRSCHEINLICHKEIT,
-				Frei.FREIEKACHEL_BEWACHSEN_WAHRSCHEINLICHKEIT) == 1)
-		{
-			super.setInhalt(Frei.FREIEKACHEL_BEWACHSEN);
-		}
 	}
 
 	@Override

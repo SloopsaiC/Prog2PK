@@ -22,57 +22,6 @@ public class Sackgasse extends KartenGeneratorUntergrund
 					KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.FREI },
 			{ KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BAUM,
 					KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BAUM } };
-	private static final float SACKGASSE_GROSS_WAHRSCHEINLICHKEIT = 0.3f;
-
-	private static final KachelUntergrundWertigkeit[][] SACKGASSE_KLEIN =
-	{ /*
-		 * 7 7 7 6 6 7 6 5 5 2 7 6 2 1 1 7 6 5 2 2 7 7 7 6 5
-		 */
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS,
-					KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BAUM },
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BUSCH,
-					KachelUntergrundWertigkeit.BUSCH, KachelUntergrundWertigkeit.SCHWER },
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.SCHWER,
-					KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT },
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BUSCH,
-					KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER },
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS,
-					KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BAUM } };
-	private static final float SACKGASSE_KLEIN_WAHRSCHEINLICHKEIT = 0.3f;
-
-	private static final KachelUntergrundWertigkeit[][] SACKGASSE_HELD_SCHATZTRUHE =
-	{ /*
-		 * - x = TRUHE (muss noch implementiert werden) 7 7 7 7 6 7 6 6 6 5 7 6 X 1 3 7
-		 * 6 6 6 5 7 7 7 7 6
-		 */
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS,
-					KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.BAUM },
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BAUM,
-					KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BUSCH },
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.LEICHT,
-					KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.HELD_VERAENDERBAR },
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BAUM,
-					KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BUSCH },
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS,
-					KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.BAUM } };
-	private static final float SACKGASSE_HELD_SCHATZTRUHE_WAHRSCHEINLICHKEIT = 0.1f;
-
-	private static final KachelUntergrundWertigkeit[][] SACKGASSE_KARTEN_SCHATZTRUHE =
-	{ /*
-		 * - x = TRUHE (muss noch implementiert werden) 7 7 7 7 6 7 6 6 6 5 7 6 X 1 4 7
-		 * 6 6 6 5 7 7 7 7 6
-		 */
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS,
-					KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.BAUM },
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BAUM,
-					KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BUSCH },
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.LEICHT,
-					KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.KARTEN_EFFEKT_VERAENDERBAR },
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BAUM,
-					KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BUSCH },
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS,
-					KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.BAUM } };
-	private static final float SACKGASSE_KARTEN_SCHATZTRUHE_WAHRSCHEINLICHKEIT = 0.1f;
 
 	public Sackgasse()
 	{

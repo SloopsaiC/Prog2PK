@@ -24,43 +24,10 @@ public class Kartenrand extends KartenGeneratorUntergrund
 					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
 			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
 					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI } };
-	private static final float KARTENRAND_GROSS_FREI_WAHRSCHEINLICHKEIT = 0.3f;
-
-	private static final KachelUntergrundWertigkeit[][] KARTENRAND_KLEIN_FREI =
-	{ /*
-		 * 8 8 8 8 8 8 7 7 7 8 6 1 1 1 6 1 1 1 1 1 0 0 0 0 0
-		 */
-			{ KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE,
-					KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE },
-			{ KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS,
-					KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.ENDE },
-			{ KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT,
-					KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.BAUM },
-			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT,
-					KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT },
-			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
-					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI } };
-	private static final float KARTENRAND_KLEIN_FREI_WAHRSCHEINLICHKEIT = 0.1f;
-
-	private static final KachelUntergrundWertigkeit[][] KARTENRAND_BEWACHSEN =
-	{ /*
-		 * 8 8 8 8 8 7 6 6 6 7 5 5 5 5 5 2 2 2 2 2 1 1 1 6 1
-		 */
-			{ KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE,
-					KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE },
-			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.FELS,
-					KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.ENDE },
-			{ KachelUntergrundWertigkeit.BUSCH, KachelUntergrundWertigkeit.BUSCH, KachelUntergrundWertigkeit.BUSCH,
-					KachelUntergrundWertigkeit.BUSCH, KachelUntergrundWertigkeit.BUSCH },
-			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER,
-					KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.ENDE },
-			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT,
-					KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.LEICHT } };
-	private static final float KARTENRAND_BEWACHSEN_WAHRSCHEINLICHKEIT = 0.1f;
 
 	public Kartenrand()
 	{
-		super(Kartenrand.KARTENRAND_KLEIN_FREI);
+		super(Kartenrand.KARTENRAND_GROSS_FREI);
 	}
 
 	@Override
