@@ -1,93 +1,111 @@
 package de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte;
 
+
 import de.pk.model.faehigkeiten.Faehigkeit;
 import de.pk.model.gegenstaende.ausruestung.Accessoire;
 import de.pk.model.gegenstaende.ausruestung.Ruestung;
 import de.pk.model.gegenstaende.ausruestung.Waffe;
-import de.pk.model.interaktion.Aktion;
 import de.pk.model.spielbrett.spielbrettObjekte.container.Container;
 import de.pk.utils.DebugAusgabeKlasse;
+import java.util.*;
+
 
 public class Held extends LebendigesObjekt
 {
 
-	private String name = null;
-	private Container inventar = null; // Das Inventar dieses Helden
-	private Waffe waffe = null; // Die Waffe dieses Helden
-	private Ruestung ruestung = null; // Die Ruestung die dieser Held angelegt hat
-	private Accessoire[] accessoires = null; // Alle Accessiores die dieser Held traegt
-	private Faehigkeit[] faehigkeiten = null;
-	private int sterbeZaehler = 0;
+    private String name = null;
+    private Container inventar = null; // Das Inventar dieses Helden
+    private Waffe waffe = null; // Die Waffe dieses Helden
+    private Map<Integer, Ruestung> ruestung = null;  // Die Ruestungsgegenstaende die dieser Held angelegt hat
+    private Map<Integer, Accessoire> accessoires = null; // Alle Accessiores die dieser Held traegt
+    private List<Faehigkeit> faehigkeiten = null; // Die Faehigkeiten, die der Held hat
+    private int sterbeZaehler = 0;
+    public final int ANZAHL_MAXIMALE_ACCESSOIRES = 5;
+    public final int ANZAHL_MAXIMALE_RUESTUNGS_GEGENSTAENDE = 3;
 
-	/**
-	 * Erstellt einen Helden mit Namen, Lebenspunkte und Bewegungspunkten
-	 *
-	 * @param name            Der Name des Helden
-	 * @param lebensPunkte    Anzahl der Lebenspunkte des Helden
-	 * @param bewegungsPunkte Anzahl der Bewegungspunkte des Helden
-	 */
-	public Held(String name, int lebensPunkte, int bewegungsPunkte, Aktion... aktionen)
-	{
-		super(lebensPunkte, bewegungsPunkte);
-		this.name = name;
-	}
+    /**
+     * Erstellt einen Helden mit Namen, Lebenspunkte und Bewegungspunkten
+     *
+     * @param name            Der Name des Helden
+     * @param lebensPunkte    Anzahl der Lebenspunkte des Helden
+     * @param bewegungsPunkte Anzahl der Bewegungspunkte des Helden
+     */
+    public Held (String name, int lebensPunkte, int bewegungsPunkte)
+    {
+        super(lebensPunkte, bewegungsPunkte);
+        this.ruestung = Collections.synchronizedMap(new HashMap<>(ANZAHL_MAXIMALE_RUESTUNGS_GEGENSTAENDE));
+        this.accessoires = Collections.synchronizedMap(new HashMap<>(ANZAHL_MAXIMALE_ACCESSOIRES));
+        this.faehigkeiten = Collections.synchronizedList(new ArrayList<>(0));
+        this.name = name;
+    }
 
-	public Accessoire[] getAccessoires()
-	{
-		return this.accessoires;
-	}
 
-	public Faehigkeit[] getFaehigkeiten()
-	{
-		return this.faehigkeiten;
-	}
+    public Container getInventar ()
+    {
+        return this.inventar;
+    }
 
-	public Container getInventar()
-	{
-		return this.inventar;
-	}
 
-	public String getName()
-	{
-		return this.name;
-	}
+    public String getName ()
+    {
+        return this.name;
+    }
 
-	public Ruestung getRuestung()
-	{
-		return this.ruestung;
-	}
 
-	public int getSterbeZaehler()
-	{
-		return this.sterbeZaehler;
-	}
+    public Map<Integer, Ruestung> getRuestung ()
+    {
+        return ruestung;
+    }
 
-	public Waffe getWaffe()
-	{
-		return this.waffe;
-	}
 
-	public void setRuestung(Ruestung ruestung)
-	{
-		this.ruestung = ruestung;
-	}
+    public int getSterbeZaehler ()
+    {
+        return this.sterbeZaehler;
+    }
 
-	public void setWaffe(Waffe waffe)
-	{
-		this.waffe = waffe;
-	}
 
-	/**
-	 * Definiert das Sterben des Helden.
-	 *
-	 * @return das Inventar des toten Helden als Container
-	 */
-	@Override
-	public Container sterben()
-	{
-		DebugAusgabeKlasse.ausgeben(this.getName() + " ist zum " + (this.getSterbeZaehler() + 1) + " mal gestorben");
-		this.sterbeZaehler++;
-		return this.inventar;
-	}
+    public Waffe getWaffe ()
+    {
+        return this.waffe;
+    }
+
+
+    public void setWaffe (Waffe waffe)
+    {
+        this.waffe = waffe;
+    }
+
+
+    /**
+     * Definiert das Sterben des Helden.
+     *
+     * @return das Inventar des toten Helden als Container
+     */
+    @Override
+    public Container sterben ()
+    {
+        DebugAusgabeKlasse.ausgeben(this.getName() + " ist zum " + (this.getSterbeZaehler() + 1) + " mal gestorben");
+        this.sterbeZaehler++;
+        return this.inventar;
+    }
+
+
+    public List<Faehigkeit> getFaehigkeiten ()
+    {
+        return Collections.unmodifiableList(faehigkeiten);
+    }
+
+
+    public void fuegeFaehigkeitenHinzu (Faehigkeit... faehigkeiten)
+    {
+        this.faehigkeiten.addAll(Arrays.asList(faehigkeiten));
+    }
+
+
+    public Map<Integer, Accessoire> getAccessoires ()
+    {
+        return accessoires;
+    }
+
 
 }

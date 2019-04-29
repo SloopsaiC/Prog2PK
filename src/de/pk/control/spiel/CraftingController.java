@@ -1,8 +1,8 @@
 package de.pk.control.spiel;
 
 import de.pk.model.gegenstaende.CraftingRezept;
-import de.pk.model.gegenstaende.Gegenstand;
 import de.pk.model.gegenstaende.Material;
+import de.pk.model.gegenstaende.spezifikationen.Stapelbar;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
 import de.pk.utils.Spielkonstanten;
@@ -28,7 +28,7 @@ public class CraftingController
      * @return aus den eingegebenen Materialien gecrafteter Gegenstand.
      * @throws InputMismatchException Falls die eingegebenen Materialien auf keinen craftbaren Gegenstand zutreffen.
      */
-    private Gegenstand crafteGegenstandAusEingegebenenMaterialien (Material[][] materialien)
+    private Stapelbar crafteGegenstandAusEingegebenenMaterialien (Material[][] materialien)
             throws InputMismatchException
     {
         for (CraftingRezept craftGegenstandRezept : CraftingRezept.values())
@@ -57,7 +57,7 @@ public class CraftingController
 
         try
         {
-            Gegenstand gecrafteterGegenstand = this
+            Stapelbar gecrafteterGegenstand = this
                     .crafteGegenstandAusEingegebenenMaterialien(this.materialienEingabeEinlesen());
             // Eingabe und Craftingversuch
             DebugAusgabeKlasse
