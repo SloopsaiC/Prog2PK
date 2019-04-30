@@ -10,7 +10,7 @@ public class ExplorationsPhase extends Phase
 
 	/**
 	 * @see de.pk.control.spiel.phasen.Phase#phasenTick(Dungeon, Held)
-	 * */
+	 */
 	@Override
 	public void phasenTick(Dungeon aktiverDungeonController, Held aktiverHeld)
 	{

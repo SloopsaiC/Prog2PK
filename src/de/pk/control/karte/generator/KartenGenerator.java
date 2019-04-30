@@ -26,7 +26,7 @@ public class KartenGenerator
 
 	/**
 	 * Erstellt einen Generator welcher die gegebenen Untergruende verwendet
-	 * 
+	 *
 	 * @param kacheln Die Untergruende die dieser Generator verwenden wird um neue
 	 *                zu generieren
 	 */
@@ -37,7 +37,7 @@ public class KartenGenerator
 
 	/**
 	 * Erstellt einen Generator welcher die gegebenen Untergruende verwendet
-	 * 
+	 *
 	 * @param kacheln Die Untergruende die dieser Generator verwenden wird um neue
 	 *                zu generieren
 	 */
@@ -50,7 +50,7 @@ public class KartenGenerator
 	/**
 	 * Generiert eine neue Kachel in gegebenener Richtung von gegebener Position aus
 	 * gesehen
-	 * 
+	 *
 	 * @param anzahlKachelnX   Die maximale Anzahl an Kacheln auf dem Spielbrett in
 	 *                         X-Richtung
 	 * @param anzahlKachelnY   Die maximale Anzahl an Kacheln auf dem Spielbrett in
@@ -175,11 +175,9 @@ public class KartenGenerator
 		for (int val = 0; val < Spielkonstanten.KACHEL_GROESSE_X; val++)
 		{
 			if (zuUeberpruefen.getInhalt()[val][0].istBetretbar()
-					|| zuUeberpruefen.getInhalt()[Spielkonstanten.KACHEL_GROESSE_Y - 1][val]
-							.istBetretbar()
+					|| zuUeberpruefen.getInhalt()[Spielkonstanten.KACHEL_GROESSE_Y - 1][val].istBetretbar()
 					|| zuUeberpruefen.getInhalt()[0][val].istBetretbar()
-					|| zuUeberpruefen.getInhalt()[val][Spielkonstanten.KACHEL_GROESSE_X - 1]
-							.istBetretbar())
+					|| zuUeberpruefen.getInhalt()[val][Spielkonstanten.KACHEL_GROESSE_X - 1].istBetretbar())
 			{
 				return true;
 			}

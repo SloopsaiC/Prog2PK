@@ -84,8 +84,7 @@ public class Anwendung
 	 */
 	private void neuesSpiel()
 	{
-		WeltkarteController weltkarte = new WeltkarteController(
-				new Dungeon(DE_de.TESTAUSGABE_DUNGEON_NAME[0]),
+		WeltkarteController weltkarte = new WeltkarteController(new Dungeon(DE_de.TESTAUSGABE_DUNGEON_NAME[0]),
 				new Dungeon(DE_de.TESTAUSGABE_DUNGEON_NAME[1]));
 		this.aktivesSpiel = new Spiel(weltkarte, Spielkonstanten.STANDARD_HELDEN);
 		this.aktivesSpiel.starteSpiel();

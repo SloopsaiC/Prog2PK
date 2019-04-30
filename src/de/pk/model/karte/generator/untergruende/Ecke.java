@@ -2,7 +2,6 @@ package de.pk.model.karte.generator.untergruende;
 
 import de.pk.model.karte.generator.KartenGeneratorUntergrund;
 import de.pk.model.position.Position;
-import de.pk.utils.WahrscheinlichkeitsUtils;
 
 public class Ecke extends KartenGeneratorUntergrund
 {
@@ -22,10 +21,11 @@ public class Ecke extends KartenGeneratorUntergrund
 					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
 			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.FREI,
 					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI } };
+
 	public Ecke()
 	{
 		super(Ecke.ECKE_GROSS_NORMAL);
-		
+
 	}
 
 	@Override

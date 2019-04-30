@@ -40,9 +40,9 @@ public class GegenstandsHaufen
 	/**
 	 * Entnimmt eine bestimmte Menge aus diesem GegenstandsHaufen und gibt einen
 	 * neuen mit der spezifizierten Anzahl zurueck.
-	 * 
+	 *
 	 * @param anzahl Die Anzahl des Gegenstands im neuen Haufen
-	 * 
+	 *
 	 * @return Ein GegenstandsHaufen mit der spezifizierten Anzahl, sollte dieser
 	 *         Haufen genug Gegenstaende enthalten
 	 */
@@ -60,7 +60,7 @@ public class GegenstandsHaufen
 
 	/**
 	 * Gibt den Inhalt dieses Haufens wieder
-	 * 
+	 *
 	 * @return Stapelbar Der Inhalt dieses Haufens
 	 */
 	public Stapelbar getInhalt()
@@ -70,7 +70,7 @@ public class GegenstandsHaufen
 
 	/**
 	 * Gibt die Menge die in diesem Haufen gehalten wird wieder
-	 * 
+	 *
 	 * @return Die Menge in diesem Haufen
 	 */
 	public int getMenge()
@@ -83,9 +83,9 @@ public class GegenstandsHaufen
 	 * Sollte dieser Haufen nicht die benoetigte maximal Groesse haben um alles
 	 * aufzunehmen, wird der Rest zurueck an den Aufrufer gegeben Dem Parameter wird
 	 * die hinzugetaende Menge entnommen
-	 * 
+	 *
 	 * @param zusatzInhalt Der Inhalt der diesem Haufen hinzugefuegt wird
-	 * 
+	 *
 	 * @return Das was ueberbleibt, sollte dieser Haufen voll sein
 	 */
 	public GegenstandsHaufen hinzutuen(GegenstandsHaufen zusatzInhalt) throws IllegalArgumentException
@@ -109,9 +109,9 @@ public class GegenstandsHaufen
 	/**
 	 * Sollte beim hinzutuen von Gegenstaenden dieser Haufen ueberfuellt werden,
 	 * wird das hier behandelt
-	 * 
+	 *
 	 * @param Der Haufen der diesen Haufen ueberfuellt
-	 * 
+	 *
 	 * @return Der Haufen mit der Menge die ueberbleibt, wenn dieser Haufen auf
 	 *         Maximalgroesse aufgefuellt wird
 	 */

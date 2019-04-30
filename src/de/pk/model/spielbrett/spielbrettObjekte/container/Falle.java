@@ -13,7 +13,7 @@ public class Falle extends SpielbrettObjektContainer
 	/**
 	 * Loest diese Falle aus, und gibt den GegenstandsHaufen wieder welcher ihren
 	 * Effekt enthaelt
-	 * 
+	 *
 	 * @return GegenstandsHaufen, Haufen mit dem Gegenstand der durch diese Falle
 	 *         auf alle nahen Objekte wirkt
 	 */
@@ -24,7 +24,7 @@ public class Falle extends SpielbrettObjektContainer
 
 	/**
 	 * Ist wahr, sollte diese Falle ausgeloest sein
-	 * 
+	 *
 	 * @return True, diese Falle ist ausgeloest, false, diese Falle ist noch geladen
 	 */
 	public boolean istAusgeloest()

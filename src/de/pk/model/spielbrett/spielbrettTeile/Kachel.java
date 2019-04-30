@@ -40,9 +40,9 @@ public class Kachel extends Observable
 
 	/**
 	 * Sucht mit Hilfe der Stream API ein SpielbrettObjekt auf der Kachel
-	 * 
+	 *
 	 * @param spielbrettObjekt Das zu suchende Objekt
-	 * 
+	 *
 	 * @return Die Position des Objektes, sollte sich dieses auf der Kachel befinden
 	 */
 	public Position getPosition(SpielbrettObjekt spielbrettObjekt)

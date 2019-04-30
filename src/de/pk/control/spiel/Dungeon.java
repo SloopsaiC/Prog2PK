@@ -50,19 +50,6 @@ public class Dungeon
 		return this.modell.getMomentanePhase().brauchtEingabe();
 	}
 
-	private void platziereHeldenAufSpielbrett()
-	{
-		int xAufKachel = 0;
-		int yAufKachel = 2;
-		for (Held held : this.getHelden())
-		{
-			this.getSpielbrett()
-					.getKachelBei(new Position(Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2,
-							Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2))
-					.stelleAufKachel(new Position(xAufKachel++, yAufKachel), held);
-		}
-	}
-
 	/**
 	 * Game-Loop des Spiels, es werden die Phasen nacheinander ausgefuehrt, bis das
 	 * Ziel des Dungeons erreicht ist.
@@ -100,7 +87,7 @@ public class Dungeon
 	/**
 	 * Generiert mit dem aktuellen KartenGenerator und fuegt eine neue Kachel in
 	 * gegebener Richtung gesehen von gegebener Position zum Spielbrett hinzu
-	 * 
+	 *
 	 * @param richtung     Die Richtung in welche generiert werden soll
 	 * @param momentanePos Die momentane Position
 	 */
@@ -180,6 +167,19 @@ public class Dungeon
 					// Bewegung war nicht moeglich, also nicht bewegen
 				}
 			}
+		}
+	}
+
+	private void platziereHeldenAufSpielbrett()
+	{
+		int xAufKachel = 0;
+		int yAufKachel = 2;
+		for (Held held : this.getHelden())
+		{
+			this.getSpielbrett()
+					.getKachelBei(new Position(Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2,
+							Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2))
+					.stelleAufKachel(new Position(xAufKachel++, yAufKachel), held);
 		}
 	}
 

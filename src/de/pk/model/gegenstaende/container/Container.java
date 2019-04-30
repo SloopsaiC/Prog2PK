@@ -8,7 +8,7 @@ public class Container
 
 	/**
 	 * Erstellt einen Container mit gegebener Groesse
-	 * 
+	 *
 	 * @param maximaleGroesse Die maximale Groesse dieses Containers
 	 */
 	public Container(int maximaleGroesse)
@@ -18,9 +18,9 @@ public class Container
 
 	/**
 	 * Entfernt den Inhalt bei gegebenem Index und gibt diesen wieder
-	 * 
+	 *
 	 * @param bei Der Index des zu entfernenden Inhalts
-	 * 
+	 *
 	 * @return GegestandsHaufen, der vorherige Inhalt
 	 */
 	public GegenstandsHaufen entferneInhalt(int bei)
@@ -33,9 +33,9 @@ public class Container
 
 	/**
 	 * Gibt den Inhalt bei gegebenem Index wieder
-	 * 
+	 *
 	 * @param bei Der Index
-	 * 
+	 *
 	 * @return Der Inhalt bei gegebenem Index
 	 */
 	public GegenstandsHaufen getInhalt(int bei)
@@ -47,7 +47,7 @@ public class Container
 
 	/**
 	 * Fuegt den gegebenen GegenstandsHaufen bei gegebenem Index hinzu
-	 * 
+	 *
 	 * @param haufen Der hinzuzufuegende Haufen
 	 * @param bei    Der Index
 	 */
@@ -60,11 +60,11 @@ public class Container
 	/**
 	 * Ueberprueft ob ein Index fuer diesen Container gueltig ist und wirft eine
 	 * Ausnahme, falls gewuenscht und sollte der Index nicht war sein
-	 * 
+	 *
 	 * @param index         Der zu ueberpruefende Index
 	 * @param werfeAusnahme True, sollte eine Ausnahme geworfen werden, wenn der
 	 *                      Index ungueltig ist
-	 * 
+	 *
 	 * @return True, falls der Index gueltig ist, sonst false (Wenn nicht durch
 	 *         Ausnahme abgebrochen)
 	 */

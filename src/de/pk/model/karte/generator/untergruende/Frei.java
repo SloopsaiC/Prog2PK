@@ -2,7 +2,6 @@ package de.pk.model.karte.generator.untergruende;
 
 import de.pk.model.karte.generator.KartenGeneratorUntergrund;
 import de.pk.model.position.Position;
-import de.pk.utils.WahrscheinlichkeitsUtils;
 
 public class Frei extends KartenGeneratorUntergrund
 {

@@ -25,9 +25,9 @@ public class Held extends LebendigesObjekt
 	 * Accessoires werden also getauscht.
 	 *
 	 * @param accessoire Das auszuruestende Accessoire
-	 * @param slot       Position an dem das Accessoire eingefuegt werden soll, wobei
-	 *                   0 die erste Position ist. slot darf nicht groesser sein als
-	 *                   {@link HeldModell.ANZAHL_MAXIMALE_ACCESSOIRES}-1.
+	 * @param slot       Position an dem das Accessoire eingefuegt werden soll,
+	 *                   wobei 0 die erste Position ist. slot darf nicht groesser
+	 *                   sein als {@link HeldModell.ANZAHL_MAXIMALE_ACCESSOIRES}-1.
 	 * @return das alte Accessoire, welches zuvor an der Stelle slot ausgeruestet
 	 *         war oder null, wenn zuvor kein Accessoire in diesem Slot ausgeruestet
 	 *         war.

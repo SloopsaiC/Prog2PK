@@ -8,9 +8,8 @@ public class KachelPosition
 {
 	private static boolean ueberpruefePosition(Position pos)
 	{
-		return ((pos.getX() < Spielkonstanten.KACHEL_GROESSE_X)
-				&& (pos.getY() < Spielkonstanten.KACHEL_GROESSE_Y) && (pos.getX() >= 0)
-				&& (pos.getY() >= 0));
+		return ((pos.getX() < Spielkonstanten.KACHEL_GROESSE_X) && (pos.getY() < Spielkonstanten.KACHEL_GROESSE_Y)
+				&& (pos.getX() >= 0) && (pos.getY() >= 0));
 	}
 
 	private Kachel kachel = null;
@@ -37,10 +36,11 @@ public class KachelPosition
 	}
 
 	/**
-	 * Gibt die Richtung der Kante wieder, sollte die Position auf der Kachel an einer liegen
-	 * 
+	 * Gibt die Richtung der Kante wieder, sollte die Position auf der Kachel an
+	 * einer liegen
+	 *
 	 * @return Richtung, Die Richtung der Kante
-	 * */
+	 */
 	public Richtung getKantenRichtungFallsAnKante()
 	{
 		if (this.positionAufDerKachel.getX() == 0)

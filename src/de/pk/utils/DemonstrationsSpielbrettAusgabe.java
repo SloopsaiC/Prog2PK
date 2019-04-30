@@ -12,11 +12,11 @@ public class DemonstrationsSpielbrettAusgabe
 	{
 		Set<Position> alleKacheln = ausgeben.getAlleKachelPositionen();
 
-		for (int yK = 0; yK < Spielkonstanten.KACHEL_GROESSE_Y * Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y; yK++)
+		for (int yK = 0; yK < (Spielkonstanten.KACHEL_GROESSE_Y * Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y); yK++)
 		{
-			for (int x = 0; x < Spielkonstanten.KACHEL_GROESSE_X * Spielkonstanten.STANDARD_GROESSE_DUNGEON_X; x++)
+			for (int x = 0; x < (Spielkonstanten.KACHEL_GROESSE_X * Spielkonstanten.STANDARD_GROESSE_DUNGEON_X); x++)
 			{
-				if (yK == (Spielkonstanten.KACHEL_GROESSE_Y * Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y) / 2)
+				if (yK == ((Spielkonstanten.KACHEL_GROESSE_Y * Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y) / 2))
 				{
 					System.out.println();
 				}

@@ -22,18 +22,8 @@ public class HeldenPhase extends Phase
 	}
 
 	/**
-	 * @see de.pk.control.spiel.phasen.Phase#reset()
-	 * */
-	@Override
-	public void reset()
-	{
-		super.reset();
-		this.anzahlAktionenDieserPhase = 0;
-	}
-
-	/**
 	 * @see de.pk.control.spiel.phasen.Phase#phasenTick(Dungeon, Held)
-	 * */
+	 */
 	@Override
 	public void phasenTick(Dungeon aktiverDungeonController, Held aktiverHeld)
 	{
@@ -44,6 +34,16 @@ public class HeldenPhase extends Phase
 		{
 			super.fertig();
 		}
+	}
+
+	/**
+	 * @see de.pk.control.spiel.phasen.Phase#reset()
+	 */
+	@Override
+	public void reset()
+	{
+		super.reset();
+		this.anzahlAktionenDieserPhase = 0;
 	}
 
 }
