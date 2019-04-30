@@ -3,19 +3,19 @@ package de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte;
 import java.util.ListIterator;
 import java.util.Set;
 
-import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjektController;
+import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
 import de.pk.model.interaktion.Aktion;
 import de.pk.model.interaktion.Effekt;
 import de.pk.model.position.Vektor;
-import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
+import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektModell;
 import de.pk.utils.Spielkonstanten;
 
-public abstract class LebendigesObjektController extends SpielbrettObjektController
+public abstract class LebendigesObjekt extends SpielbrettObjekt
 {
 
-	private final LebendigesObjekt modell;
+	private final LebendigesObjektModell modell;
 
-	protected LebendigesObjektController(LebendigesObjekt modell)
+	protected LebendigesObjekt(LebendigesObjektModell modell)
 	{
 		this.modell = modell;
 	}
@@ -51,7 +51,7 @@ public abstract class LebendigesObjektController extends SpielbrettObjektControl
 		}
 	}
 
-	public void fuehreAktionAus(String name, LebendigesObjektController ziel)
+	public void fuehreAktionAus(String name, LebendigesObjekt ziel)
 	{
 		try
 		{
@@ -69,7 +69,7 @@ public abstract class LebendigesObjektController extends SpielbrettObjektControl
 		return this.modell.getAktionen().keySet();
 	}
 
-	protected LebendigesObjekt getModell()
+	protected LebendigesObjektModell getModell()
 	{
 		return this.modell;
 	}

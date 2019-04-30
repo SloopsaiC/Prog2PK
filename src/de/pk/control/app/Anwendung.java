@@ -2,8 +2,8 @@ package de.pk.control.app;
 
 import de.pk.control.karte.WeltkarteController;
 import de.pk.control.spiel.CraftingController;
-import de.pk.control.spiel.DungeonController;
-import de.pk.control.spiel.SpielController;
+import de.pk.control.spiel.Dungeon;
+import de.pk.control.spiel.Spiel;
 import de.pk.control.spiel.einstellungen.Einstellungen;
 import de.pk.model.interaktion.Aktion;
 import de.pk.model.interaktion.Effekt;
@@ -25,7 +25,7 @@ public class Anwendung
 	/**
 	 * Der Spiel-Controller dieser Anwendung.
 	 */
-	private SpielController aktivesSpiel = null;
+	private Spiel aktivesSpiel = null;
 	/**
 	 * Die Einstellungen dieser Anwendung.
 	 */
@@ -85,9 +85,9 @@ public class Anwendung
 	private void neuesSpiel()
 	{
 		WeltkarteController weltkarte = new WeltkarteController(
-				new DungeonController(DE_de.TESTAUSGABE_DUNGEON_NAME[0]),
-				new DungeonController(DE_de.TESTAUSGABE_DUNGEON_NAME[1]));
-		this.aktivesSpiel = new SpielController(weltkarte, Spielkonstanten.STANDARD_HELDEN);
+				new Dungeon(DE_de.TESTAUSGABE_DUNGEON_NAME[0]),
+				new Dungeon(DE_de.TESTAUSGABE_DUNGEON_NAME[1]));
+		this.aktivesSpiel = new Spiel(weltkarte, Spielkonstanten.STANDARD_HELDEN);
 		this.aktivesSpiel.starteSpiel();
 	}
 

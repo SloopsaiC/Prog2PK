@@ -1,20 +1,20 @@
 package de.pk.control.karte;
 
-import de.pk.control.spiel.DungeonController;
-import de.pk.model.karte.Weltkarte;
+import de.pk.control.spiel.Dungeon;
+import de.pk.model.karte.WeltkarteModell;
 
 public class WeltkarteController
 {
-	private Weltkarte weltkarteModell = null;
+	private WeltkarteModell weltkarteModell = null;
 
 	/**
 	 * Erstellt eine Weltkarte mit den gegebenen Dungeons
 	 * 
 	 * @param Die Dungeons aus der diese Weltkarte besteht
 	 * */
-	public WeltkarteController(DungeonController... dungeons)
+	public WeltkarteController(Dungeon... dungeons)
 	{
-		this.weltkarteModell = new Weltkarte(dungeons);
+		this.weltkarteModell = new WeltkarteModell(dungeons);
 	}
 
 	/**
@@ -22,7 +22,7 @@ public class WeltkarteController
 	 * 
 	 * @param hinzufuegen Der Dungeon der hinzugefuegt wird
 	 * */
-	public void fuegeDungeonHinzu(DungeonController hinzufuegen)
+	public void fuegeDungeonHinzu(Dungeon hinzufuegen)
 	{
 		this.weltkarteModell.fuegeDungeonHinzu(hinzufuegen);
 	}
@@ -34,7 +34,7 @@ public class WeltkarteController
 	 * 
 	 * @return Der Dungeon mit gegebenem Index
 	 * */
-	public DungeonController getDungeonBei(int index)
+	public Dungeon getDungeonBei(int index)
 	{
 		if (!this.hatDungeon(index))
 		{
@@ -47,7 +47,7 @@ public class WeltkarteController
 	/**
 	 * Wrapper-Methode fuer den internen Gebrauch des Modells
 	 * */
-	private DungeonController[] getDungeons()
+	private Dungeon[] getDungeons()
 	{
 		return this.weltkarteModell.getDungeons();
 	}

@@ -8,8 +8,8 @@ import java.util.Observer;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjektController;
-import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektController;
+import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
 import de.pk.model.position.KachelPosition;
 import de.pk.model.position.Position;
 import de.pk.model.position.Vektor;
@@ -19,7 +19,7 @@ import de.pk.utils.Spielkonstanten;
 public class Spielbrett implements Observer
 {
 	private HashMap<Position, Kachel> spielbrettTeile = null;
-	private ArrayList<LebendigesObjektController> alleLebendigenObjekte = new ArrayList<>();
+	private ArrayList<LebendigesObjekt> alleLebendigenObjekte = new ArrayList<>();
 
 	public Spielbrett()
 	{
@@ -101,7 +101,7 @@ public class Spielbrett implements Observer
 	 * @param neuePosition Die neue Position
 	 * 
 	 */
-	public void bewege(SpielbrettObjektController zuBewegen, KachelPosition neuePosition)
+	public void bewege(SpielbrettObjekt zuBewegen, KachelPosition neuePosition)
 	{
 		if (neuePosition.getKachel() == null
 				|| !neuePosition.getKachel().getUntergrundBei(neuePosition.getPositionAufDerKachel()).istBetretbar())
@@ -115,18 +115,18 @@ public class Spielbrett implements Observer
 
 	/**
 	 * Ueberladungs zu
-	 * {@link de.pk.model.spielbrett.Spielbrett#bewege(SpielbrettObjektController, KachelPosition)}
+	 * {@link de.pk.model.spielbrett.Spielbrett#bewege(SpielbrettObjekt, KachelPosition)}
 	 */
-	public void bewege(SpielbrettObjektController zuBewegen, Position positionDerKachek, Position neuePositionAufKachel)
+	public void bewege(SpielbrettObjekt zuBewegen, Position positionDerKachek, Position neuePositionAufKachel)
 	{
 		this.bewege(zuBewegen, new KachelPosition(this.getKachelBei(positionDerKachek), neuePositionAufKachel));
 	}
 
 	/**
 	 * Ueberladungs zu
-	 * {@link de.pk.model.spielbrett.Spielbrett#bewege(SpielbrettObjektController, KachelPosition)}
+	 * {@link de.pk.model.spielbrett.Spielbrett#bewege(SpielbrettObjekt, KachelPosition)}
 	 */
-	public void bewege(SpielbrettObjektController zuBewegen, Vektor positionsAenderung)
+	public void bewege(SpielbrettObjekt zuBewegen, Vektor positionsAenderung)
 	{
 		this.bewege(zuBewegen,
 				this.bekommeKachelPositionMitVektor(this.findeSpielbrettObjekt(zuBewegen), positionsAenderung));
@@ -137,7 +137,7 @@ public class Spielbrett implements Observer
 	 * 
 	 * @param zuEntfernen Das zu entfernende Objekt
 	 */
-	private void entferneAusAlterPosition(SpielbrettObjektController zuEntfernen)
+	private void entferneAusAlterPosition(SpielbrettObjekt zuEntfernen)
 	{
 		try
 		{
@@ -157,7 +157,7 @@ public class Spielbrett implements Observer
 	 * @return KachelPosition, Die KachelPosition auf welcher sich das Objekt
 	 *         befindet, oder null falls es nicht auf dem Spielbrett ist
 	 */
-	public KachelPosition findeSpielbrettObjekt(SpielbrettObjektController zuFinden)
+	public KachelPosition findeSpielbrettObjekt(SpielbrettObjekt zuFinden)
 	{
 		for (Kachel kachel : this.spielbrettTeile.values())
 		{
@@ -169,7 +169,7 @@ public class Spielbrett implements Observer
 		return null;
 	}
 
-	public ArrayList<LebendigesObjektController> getAlleLebendigenObjekte()
+	public ArrayList<LebendigesObjekt> getAlleLebendigenObjekte()
 	{
 		return this.alleLebendigenObjekte;
 	}
@@ -230,13 +230,13 @@ public class Spielbrett implements Observer
 	public void update(Observable kachel, Object geaendertesObjekt)
 	{
 		Kachel geaenderteKachel = (Kachel) kachel;
-		SpielbrettObjektController geandertesObjektCast = (SpielbrettObjektController) geaendertesObjekt;
+		SpielbrettObjekt geandertesObjektCast = (SpielbrettObjekt) geaendertesObjekt;
 		if (geandertesObjektCast.istLebendig())
 		{
 			// Ueberpruefen ob das Objekt hinzugefuegt, oder entfernt wurde
 			if (geaenderteKachel.objektIstAufKachel(geandertesObjektCast))
 			{
-				this.alleLebendigenObjekte.add((LebendigesObjektController) geandertesObjektCast);
+				this.alleLebendigenObjekte.add((LebendigesObjekt) geandertesObjektCast);
 			} else
 			{
 				this.alleLebendigenObjekte.remove(geandertesObjektCast);

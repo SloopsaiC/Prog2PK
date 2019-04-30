@@ -14,7 +14,7 @@ import de.pk.model.gegenstaende.ausruestung.Waffe;
 import de.pk.model.gegenstaende.container.Container;
 import de.pk.utils.DebugAusgabeKlasse;
 
-public class Held extends LebendigesObjekt
+public class HeldModell extends LebendigesObjektModell
 {
 
 	public static final int ANZAHL_MAXIMALE_ACCESSOIRES = 5;
@@ -34,11 +34,11 @@ public class Held extends LebendigesObjekt
 	 * @param lebensPunkte    Anzahl der Lebenspunkte des Helden
 	 * @param bewegungsPunkte Anzahl der Bewegungspunkte des Helden
 	 */
-	public Held(String name, int lebensPunkte, int bewegungsPunkte)
+	public HeldModell(String name, int lebensPunkte, int bewegungsPunkte)
 	{
 		super(lebensPunkte, bewegungsPunkte);
-		this.ruestung = Collections.synchronizedMap(new HashMap<>(Held.ANZAHL_MAXIMALE_RUESTUNGS_GEGENSTAENDE));
-		this.accessoires = Collections.synchronizedMap(new HashMap<>(Held.ANZAHL_MAXIMALE_ACCESSOIRES));
+		this.ruestung = Collections.synchronizedMap(new HashMap<>(HeldModell.ANZAHL_MAXIMALE_RUESTUNGS_GEGENSTAENDE));
+		this.accessoires = Collections.synchronizedMap(new HashMap<>(HeldModell.ANZAHL_MAXIMALE_ACCESSOIRES));
 		this.faehigkeiten = Collections.synchronizedList(new ArrayList<>(0));
 		this.name = name;
 	}

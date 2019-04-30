@@ -1,6 +1,6 @@
 package de.pk.model.spielbrett.spielbrettObjekte;
 
-public abstract class SpielbrettObjekt
+public abstract class SpielbrettObjektModell
 {
 	public boolean istLebendig()
 	{

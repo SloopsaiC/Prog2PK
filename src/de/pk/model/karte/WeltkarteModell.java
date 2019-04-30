@@ -4,33 +4,33 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import de.pk.control.spiel.DungeonController;
+import de.pk.control.spiel.Dungeon;
 
 /**
  * Modell der Weltkarte des Spiels
  */
-public class Weltkarte
+public class WeltkarteModell
 {
 
-	private List<DungeonController> dungeons = null;
+	private List<Dungeon> dungeons = null;
 
-	public Weltkarte(DungeonController[] dungeons)
+	public WeltkarteModell(Dungeon[] dungeons)
 	{
 		// Liste von Arrays hat eine fixe Groesse (Groesse des Arrays) und muss deshalb
 		// so "kopiert" werden.
-		List<DungeonController> liste = Arrays.asList(dungeons);
+		List<Dungeon> liste = Arrays.asList(dungeons);
 		this.dungeons = new ArrayList<>();
 		this.dungeons.addAll(liste);
 	}
 
-	public void fuegeDungeonHinzu(DungeonController hinzufuegen)
+	public void fuegeDungeonHinzu(Dungeon hinzufuegen)
 	{
 		this.dungeons.add(hinzufuegen);
 	}
 
-	public DungeonController[] getDungeons()
+	public Dungeon[] getDungeons()
 	{
-		return this.dungeons.toArray(new DungeonController[]
+		return this.dungeons.toArray(new Dungeon[]
 		{});
 	}
 

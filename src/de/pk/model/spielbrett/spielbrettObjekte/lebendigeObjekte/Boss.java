@@ -1,6 +1,6 @@
 package de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte;
 
-public abstract class Boss extends Gegner
+public abstract class Boss extends GegnerModell
 {
 
 	private String name = null;

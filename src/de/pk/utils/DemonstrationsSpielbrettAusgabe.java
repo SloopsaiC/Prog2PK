@@ -2,7 +2,7 @@ package de.pk.utils;
 
 import java.util.Set;
 
-import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjektController;
+import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
 import de.pk.model.position.Position;
 import de.pk.model.spielbrett.Spielbrett;
 
@@ -26,7 +26,7 @@ public class DemonstrationsSpielbrettAusgabe
 				{
 					Position posAufKachel = new Position(x % Spielkonstanten.KACHEL_GROESSE_X,
 							yK % Spielkonstanten.KACHEL_GROESSE_Y);
-					SpielbrettObjektController momentanesObjekt = ausgeben.getKachelBei(kachelPosition)
+					SpielbrettObjekt momentanesObjekt = ausgeben.getKachelBei(kachelPosition)
 							.getSpielbrettObjektBei(posAufKachel);
 					if (momentanesObjekt == null)
 					{

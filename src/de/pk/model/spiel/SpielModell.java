@@ -1,16 +1,16 @@
 package de.pk.model.spiel;
 
 import de.pk.control.karte.WeltkarteController;
-import de.pk.control.spiel.DungeonController;
-import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldController;
+import de.pk.control.spiel.Dungeon;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 
-public class Spiel
+public class SpielModell
 {
 
 	private WeltkarteController weltkarte = null;
-	private DungeonController aktiverDungeonController = null; // Der Controller des momentan aktiven Dungeons,
+	private Dungeon aktiverDungeonController = null; // Der Controller des momentan aktiven Dungeons,
 //null falls sich der Spieler auf der "Weltkarte" befindet
-	private HeldController[] helden = null;
+	private Held[] helden = null;
 	private int goldAnzahl = 0;
 	private int fragmentAnzahl = 0;
 
@@ -19,7 +19,7 @@ public class Spiel
 	 *
 	 * @param weltkarte Die Weltkarte mit Dungeons fuer das neue Spiel.
 	 */
-	public Spiel(WeltkarteController weltkarte, HeldController[] helden)
+	public SpielModell(WeltkarteController weltkarte, Held[] helden)
 	{
 		this.weltkarte = weltkarte;
 		this.helden = helden;
@@ -31,7 +31,7 @@ public class Spiel
 	 * @param dungeonController Der Dungeon der von nun an der im Spiel aktive
 	 *                          Dungeon ist.
 	 */
-	public void aendereAktivenDungeon(DungeonController dungeonController)
+	public void aendereAktivenDungeon(Dungeon dungeonController)
 	{
 		this.aktiverDungeonController = dungeonController;
 	}
@@ -39,12 +39,12 @@ public class Spiel
 	/**
 	 * @return Der in diesem Spiel momentan aktive Dungeon
 	 */
-	public DungeonController getAktivenDungeonController()
+	public Dungeon getAktivenDungeonController()
 	{
 		return this.aktiverDungeonController;
 	}
 
-	public HeldController[] getHelden()
+	public Held[] getHelden()
 	{
 		return this.helden;
 	}
@@ -57,7 +57,7 @@ public class Spiel
 		return this.weltkarte;
 	}
 
-	public void setHelden(HeldController[] helden)
+	public void setHelden(Held[] helden)
 	{
 		this.helden = helden;
 	}

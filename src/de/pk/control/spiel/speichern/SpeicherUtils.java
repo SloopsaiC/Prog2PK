@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import de.pk.control.spiel.SpielController;
+import de.pk.control.spiel.Spiel;
 import de.pk.control.spiel.einstellungen.Einstellungen;
 
 public class SpeicherUtils
@@ -64,12 +64,12 @@ public class SpeicherUtils
 	 * 
 	 * @return SpielController, Das geladene Spiel
 	 * */
-	public static SpielController ladeSpiel(String pfad)
+	public static Spiel ladeSpiel(String pfad)
 	{
 		try
 		{
 			FileReader leser = new FileReader(new File(pfad));
-			return new GsonBuilder().create().fromJson(leser, SpielController.class);
+			return new GsonBuilder().create().fromJson(leser, Spiel.class);
 		} catch (FileNotFoundException e)
 		{
 			return null;
@@ -85,7 +85,7 @@ public class SpeicherUtils
 	public static void speichere(Object objekt, String name)
 	{
 		PrintWriter writer = SpeicherUtils.erstelleWriterInDatei(SpeicherUtils.erstelleDatei(name));
-		new GsonBuilder().create().toJson(objekt, SpielController.class, writer);
+		new GsonBuilder().create().toJson(objekt, Spiel.class, writer);
 		writer.close();
 	}
 

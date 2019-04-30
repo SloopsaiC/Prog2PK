@@ -3,30 +3,30 @@ package de.pk.control.spiel;
 import java.util.InputMismatchException;
 
 import de.pk.control.karte.WeltkarteController;
-import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldController;
-import de.pk.model.spiel.Spiel;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
+import de.pk.model.spiel.SpielModell;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
 import de.pk.utils.lokalisierung.DE_de;
 
-public class SpielController
+public class Spiel
 {
-	private Spiel spielModell = null;
+	private SpielModell spielModell = null;
 
 	/**
 	 * Erstellt ein Spiel mit default Weltkarte
 	 */
-	public SpielController(HeldController[] helden)
+	public Spiel(Held[] helden)
 	{
 		this(new WeltkarteController(), helden);
 	}
 
-	public SpielController(WeltkarteController weltkarte, HeldController[] helden)
+	public Spiel(WeltkarteController weltkarte, Held[] helden)
 	{
-		this.spielModell = new Spiel(weltkarte, helden);
+		this.spielModell = new SpielModell(weltkarte, helden);
 	}
 
-	public DungeonController getAktiverDungeonController()
+	public Dungeon getAktiverDungeonController()
 	{
 		return this.spielModell.getAktivenDungeonController();
 	}

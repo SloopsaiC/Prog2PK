@@ -1,6 +1,6 @@
 package de.pk.model.interaktion;
 
-import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektController;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
 
 /**
  * Aktionen haben selbst- und ziel-Effekte, die beim Ausfuehren der Aktion auf
@@ -59,7 +59,7 @@ public class Aktion
 	 * @return Ein Float zwischen 0 und 1 der die Wahrscheinlichkeit angibt mit der
 	 *         diese Aktion erfolgreich ist
 	 */
-	private float berechneErfolgsWahrscheinlichkeit(LebendigesObjektController wirker, LebendigesObjektController ziel)
+	private float berechneErfolgsWahrscheinlichkeit(LebendigesObjekt wirker, LebendigesObjekt ziel)
 	{
 		return this.grundErfolgsWahrscheinlichkeit;
 	}
@@ -72,7 +72,7 @@ public class Aktion
 	 * @return True, falls es fuer den Wirker moeglich ist diese Aktion
 	 *         auszufuehren, sonst false
 	 */
-	private boolean ueberpruefeAktion(LebendigesObjektController wirker)
+	private boolean ueberpruefeAktion(LebendigesObjekt wirker)
 	{
 
 		return wirker.kannSichUmXBewegen(this.selbstEffekt.getBewegungsPunkteAenderung() * (-1));
@@ -88,7 +88,7 @@ public class Aktion
 	 *
 	 * @return true, falls die Aktion erfolgreich ausgefuehrt wurde, sonst false.
 	 */
-	public boolean wendeAn(LebendigesObjektController wirker, LebendigesObjektController ziel, Wuerfel wuerfel)
+	public boolean wendeAn(LebendigesObjekt wirker, LebendigesObjekt ziel, Wuerfel wuerfel)
 	{
 		if (this.ueberpruefeAktion(wirker)
 				&& this.wuerfelWurfErfolgreich(wuerfel, this.berechneErfolgsWahrscheinlichkeit(wirker, ziel)))

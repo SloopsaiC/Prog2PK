@@ -6,9 +6,9 @@ import java.util.HashMap;
 import de.pk.model.gegenstaende.container.Container;
 import de.pk.model.interaktion.Aktion;
 import de.pk.model.interaktion.Effekt;
-import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjekt;
+import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjektModell;
 
-public abstract class LebendigesObjekt extends SpielbrettObjekt
+public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 {
 
 	private int lebensPunkte = 0;
@@ -27,7 +27,7 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 	 * @param lebensPunkte    Anzahl der Lebenspunkte
 	 * @param bewegungsPunkte Anzahl der Bewegungspunkte
 	 */
-	protected LebendigesObjekt(int lebensPunkte, int bewegungsPunkte)
+	protected LebendigesObjektModell(int lebensPunkte, int bewegungsPunkte)
 	{
 		this.lebensPunkte = lebensPunkte;
 		this.bewegungsPunkte = bewegungsPunkte;

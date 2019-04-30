@@ -5,17 +5,17 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.stream.Collectors;
 
-import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjektController;
+import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
 import de.pk.model.karte.generator.KartenGeneratorUntergrund;
 import de.pk.model.karte.generator.untergruende.KachelUntergrundWertigkeit;
 import de.pk.model.position.Position;
 
 public class Kachel extends Observable
 {
-	private HashMap<Position, SpielbrettObjektController> kachelObjekte = null;
+	private HashMap<Position, SpielbrettObjekt> kachelObjekte = null;
 	private KartenGeneratorUntergrund untergrund = null;
 
-	public Kachel(HashMap<Position, SpielbrettObjektController> objekte, KartenGeneratorUntergrund untergrund)
+	public Kachel(HashMap<Position, SpielbrettObjekt> objekte, KartenGeneratorUntergrund untergrund)
 	{
 		this.kachelObjekte = objekte;
 		this.untergrund = untergrund;
@@ -23,10 +23,10 @@ public class Kachel extends Observable
 
 	public Kachel(KartenGeneratorUntergrund untergrund)
 	{
-		this(new HashMap<Position, SpielbrettObjektController>(), untergrund);
+		this(new HashMap<Position, SpielbrettObjekt>(), untergrund);
 	}
 
-	public void entferneObjekt(SpielbrettObjektController zuEntfernen)
+	public void entferneObjekt(SpielbrettObjekt zuEntfernen)
 	{
 		if (!this.kachelObjekte.containsValue(zuEntfernen))
 		{
@@ -45,7 +45,7 @@ public class Kachel extends Observable
 	 * 
 	 * @return Die Position des Objektes, sollte sich dieses auf der Kachel befinden
 	 */
-	public Position getPosition(SpielbrettObjektController spielbrettObjekt)
+	public Position getPosition(SpielbrettObjekt spielbrettObjekt)
 	{
 		if (!this.kachelObjekte.containsValue(spielbrettObjekt))
 		{
@@ -56,7 +56,7 @@ public class Kachel extends Observable
 				.get(spielbrettObjekt);
 	}
 
-	public SpielbrettObjektController getSpielbrettObjektBei(Position pos)
+	public SpielbrettObjekt getSpielbrettObjektBei(Position pos)
 	{
 		return this.kachelObjekte.get(pos);
 	}
@@ -71,12 +71,12 @@ public class Kachel extends Observable
 		return this.untergrund.getInhaltBei(pos);
 	}
 
-	public boolean objektIstAufKachel(SpielbrettObjektController zuUeberpruefen)
+	public boolean objektIstAufKachel(SpielbrettObjekt zuUeberpruefen)
 	{
 		return this.kachelObjekte.containsValue(zuUeberpruefen);
 	}
 
-	public void stelleAufKachel(Position pos, SpielbrettObjektController obj)
+	public void stelleAufKachel(Position pos, SpielbrettObjekt obj)
 	{
 		this.kachelObjekte.put(pos, obj);
 		this.setChanged();

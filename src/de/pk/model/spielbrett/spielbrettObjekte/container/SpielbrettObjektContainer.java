@@ -2,9 +2,9 @@ package de.pk.model.spielbrett.spielbrettObjekte.container;
 
 import de.pk.control.gegenstaende.GegenstandsHaufen;
 import de.pk.model.gegenstaende.container.Container;
-import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjekt;
+import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjektModell;
 
-public abstract class SpielbrettObjektContainer extends SpielbrettObjekt
+public abstract class SpielbrettObjektContainer extends SpielbrettObjektModell
 {
 	private Container inhalt = null;
 

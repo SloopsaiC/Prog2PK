@@ -1,7 +1,7 @@
 package de.pk.control.spiel.phasen;
 
-import de.pk.control.spiel.DungeonController;
-import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldController;
+import de.pk.control.spiel.Dungeon;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 
 public abstract class Phase
 {
@@ -43,7 +43,7 @@ public abstract class Phase
 	 * die diese Phase auf den Zustand des Spiels / Dungeons hat registriert um
 	 * spaeter im DungeonController umgesetzt zu werden
 	 */
-	public abstract void phasenTick(DungeonController aktiverDungeonController, HeldController aktiverHeld);
+	public abstract void phasenTick(Dungeon aktiverDungeonController, Held aktiverHeld);
 
 	/**
 	 * Setzt diese Phase zurueck

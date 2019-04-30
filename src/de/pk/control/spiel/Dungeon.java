@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import de.pk.control.app.Main;
 import de.pk.control.spiel.phasen.Phase;
-import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldController;
-import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektController;
-import de.pk.model.dungeon.Dungeon;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
 import de.pk.model.karte.generator.Richtung;
 import de.pk.model.position.Position;
 import de.pk.model.position.Vektor;
+import de.pk.model.spiel.dungeon.DungeonModell;
 import de.pk.model.spielbrett.Spielbrett;
 import de.pk.model.spielbrett.spielbrettTeile.Kachel;
 import de.pk.utils.DebugAusgabeKlasse;
@@ -24,18 +24,18 @@ import de.pk.utils.lokalisierung.DE_de;
  *
  * @author Dylan
  */
-public class DungeonController
+public class Dungeon
 {
-	private Dungeon modell = null;
+	private DungeonModell modell = null;
 
-	public DungeonController(String dungeonName)
+	public Dungeon(String dungeonName)
 	{
 		this(dungeonName, Spielkonstanten.STANDARD_PHASEN);
 	}
 
-	public DungeonController(String dungeonName, Phase[] phasen)
+	public Dungeon(String dungeonName, Phase[] phasen)
 	{
-		this.modell = new Dungeon(dungeonName);
+		this.modell = new DungeonModell(dungeonName);
 		this.initModell(phasen);
 		this.initSpielbrett();
 	}
@@ -54,7 +54,7 @@ public class DungeonController
 	{
 		int xAufKachel = 0;
 		int yAufKachel = 2;
-		for (HeldController held : this.getHelden())
+		for (Held held : this.getHelden())
 		{
 			this.getSpielbrett()
 					.getKachelBei(new Position(Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2,
@@ -67,7 +67,7 @@ public class DungeonController
 	 * Game-Loop des Spiels, es werden die Phasen nacheinander ausgefuehrt, bis das
 	 * Ziel des Dungeons erreicht ist.
 	 */
-	public void dungeonAblaufSchleife(HeldController[] helden)
+	public void dungeonAblaufSchleife(Held[] helden)
 	{
 		this.modell.setHelden(helden);
 		this.platziereHeldenAufSpielbrett();
@@ -116,7 +116,7 @@ public class DungeonController
 	/**
 	 * @return Die Helden dieses Spiels
 	 */
-	public HeldController[] getHelden()
+	public Held[] getHelden()
 	{
 		return this.modell.getHelden();
 	}
@@ -167,7 +167,7 @@ public class DungeonController
 	 */
 	private void lebendigeObjekteTick()
 	{
-		for (LebendigesObjektController objekt : this.modell.getSpielbrett().getAlleLebendigenObjekte())
+		for (LebendigesObjekt objekt : this.modell.getSpielbrett().getAlleLebendigenObjekte())
 		{
 			Vektor positionsAenderung = objekt.update();
 			if (positionsAenderung.laenge() > 0f)

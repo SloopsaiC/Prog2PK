@@ -6,16 +6,16 @@ import de.pk.model.gegenstaende.ausruestung.Accessoire;
 import de.pk.model.gegenstaende.ausruestung.Ruestung;
 import de.pk.model.gegenstaende.ausruestung.Waffe;
 import de.pk.model.gegenstaende.spezifikationen.Ausruestbar;
-import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
+import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldModell;
 
-public class HeldController extends LebendigesObjektController
+public class Held extends LebendigesObjekt
 {
 
-	private Held modell = (Held) super.getModell();
+	private HeldModell modell = (HeldModell) super.getModell();
 
-	public HeldController(String name, int lebensPunkte, int bewegungsPunkte)
+	public Held(String name, int lebensPunkte, int bewegungsPunkte)
 	{
-		super(new Held(name, lebensPunkte, bewegungsPunkte));
+		super(new HeldModell(name, lebensPunkte, bewegungsPunkte));
 	}
 
 	/**
@@ -27,7 +27,7 @@ public class HeldController extends LebendigesObjektController
 	 * @param accessoire Das auszuruestende Accessoire
 	 * @param slot       Position an dem das Accessoire eingefuegt werden soll, wobei
 	 *                   0 die erste Position ist. slot darf nicht groesser sein als
-	 *                   {@link Held.ANZAHL_MAXIMALE_ACCESSOIRES}-1.
+	 *                   {@link HeldModell.ANZAHL_MAXIMALE_ACCESSOIRES}-1.
 	 * @return das alte Accessoire, welches zuvor an der Stelle slot ausgeruestet
 	 *         war oder null, wenn zuvor kein Accessoire in diesem Slot ausgeruestet
 	 *         war.
@@ -35,12 +35,12 @@ public class HeldController extends LebendigesObjektController
 	 *                                   Faehigkeiten, um dieses Accessoire zu
 	 *                                   tragen nicht erfuellt.
 	 * @throws IndexOutOfBoundsException falls slot groesser ist als
-	 *                                   {@link Held.ANZAHL_MAXIMALE_ACCESSOIRES}-1.
+	 *                                   {@link HeldModell.ANZAHL_MAXIMALE_ACCESSOIRES}-1.
 	 */
 	public Accessoire ausruesten(Accessoire accessoire, int slot)
 			throws IllegalStateException, IndexOutOfBoundsException
 	{
-		if (slot > (Held.ANZAHL_MAXIMALE_ACCESSOIRES - 1))
+		if (slot > (HeldModell.ANZAHL_MAXIMALE_ACCESSOIRES - 1))
 		{
 			throw new IndexOutOfBoundsException();
 		}
@@ -56,18 +56,18 @@ public class HeldController extends LebendigesObjektController
 	 * @param ruestung Die auszuruestende Ruestung
 	 * @param slot     Position an dem die Ruestung eingefuegt werden soll, wobei 0
 	 *                 die erste Position ist. slot darf nicht groesser sein als
-	 *                 {@link Held.ANZAHL_MAXIMALE_RUESTUNGS_GEGENSTAENDE}-1.
+	 *                 {@link HeldModell.ANZAHL_MAXIMALE_RUESTUNGS_GEGENSTAENDE}-1.
 	 * @return die alte Ruestung, welche zuvor ausgeruestet war oder null, wenn
 	 *         zuvor keine Ruestung ausgeruestet war.
 	 * @throws IllegalStateException     falls der Held die vorausgesetzten
 	 *                                   Faehigkeiten, um diese Ruestung zu tragen
 	 *                                   nicht erfuellt.
 	 * @throws IndexOutOfBoundsException falls slot groesser ist als
-	 *                                   {@link Held.ANZAHL_MAXIMALE_RUESTUNGS_GEGENSTAENDE}-1.
+	 *                                   {@link HeldModell.ANZAHL_MAXIMALE_RUESTUNGS_GEGENSTAENDE}-1.
 	 */
 	public Ruestung ausruesten(Ruestung ruestung, int slot) throws IllegalStateException, IndexOutOfBoundsException
 	{
-		if (slot > (Held.ANZAHL_MAXIMALE_RUESTUNGS_GEGENSTAENDE - 1))
+		if (slot > (HeldModell.ANZAHL_MAXIMALE_RUESTUNGS_GEGENSTAENDE - 1))
 		{
 			throw new IndexOutOfBoundsException();
 		}

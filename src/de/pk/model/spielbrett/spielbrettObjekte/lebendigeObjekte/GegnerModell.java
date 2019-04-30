@@ -3,7 +3,7 @@ package de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte;
 import de.pk.model.gegenstaende.container.Container;
 import de.pk.utils.DebugAusgabeKlasse;
 
-public class Gegner extends LebendigesObjekt
+public class GegnerModell extends LebendigesObjektModell
 {
 
 	private float hauDraufModifkator = 0f; // Die Staerke dieses Gegners
@@ -15,7 +15,7 @@ public class Gegner extends LebendigesObjekt
 	 * @param bewegungsPunkte     Anzahl der Bewegungspunkte des Gegners
 	 * @param hauDraufModifikator Definiert die Staerke des Gegners
 	 */
-	public Gegner(int lebensPunkte, int bewegungsPunkte, int hauDraufModifikator)
+	public GegnerModell(int lebensPunkte, int bewegungsPunkte, int hauDraufModifikator)
 	{
 		super(lebensPunkte, bewegungsPunkte);
 		this.hauDraufModifkator = hauDraufModifikator;

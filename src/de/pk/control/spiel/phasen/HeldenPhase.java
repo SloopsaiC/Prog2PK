@@ -1,7 +1,7 @@
 package de.pk.control.spiel.phasen;
 
-import de.pk.control.spiel.DungeonController;
-import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldController;
+import de.pk.control.spiel.Dungeon;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.Spielkonstanten;
 
@@ -32,10 +32,10 @@ public class HeldenPhase extends Phase
 	}
 
 	/**
-	 * @see de.pk.control.spiel.phasen.Phase#phasenTick(DungeonController, HeldController)
+	 * @see de.pk.control.spiel.phasen.Phase#phasenTick(Dungeon, Held)
 	 * */
 	@Override
-	public void phasenTick(DungeonController aktiverDungeonController, HeldController aktiverHeld)
+	public void phasenTick(Dungeon aktiverDungeonController, Held aktiverHeld)
 	{
 		aktiverHeld.fuehreAktionAus("Bewegen", null);
 		DebugAusgabeKlasse.ausgeben("Heldenphase:");
