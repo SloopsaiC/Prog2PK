@@ -9,8 +9,8 @@ public class KachelPosition
 	private static boolean ueberpruefePosition(Position pos)
 	{
 		return ((pos.getX() < Spielkonstanten.KACHEL_GROESSE_X)
-				&& (pos.getY() < Spielkonstanten.KACHEL_GROESSE_Y) && (pos.getX() > 0)
-				&& (pos.getY() > 0));
+				&& (pos.getY() < Spielkonstanten.KACHEL_GROESSE_Y) && (pos.getX() >= 0)
+				&& (pos.getY() >= 0));
 	}
 
 	private Kachel kachel = null;

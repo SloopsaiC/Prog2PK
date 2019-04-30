@@ -14,6 +14,7 @@ import de.pk.model.spielbrett.Spielbrett;
 import de.pk.model.spielbrett.spielbrettTeile.Kachel;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
+import de.pk.utils.DemonstrationsSpielbrettAusgabe;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.karte.generator.KartenGeneratorUtils;
 import de.pk.utils.lokalisierung.DE_de;
@@ -49,6 +50,19 @@ public class DungeonController
 		return this.modell.getMomentanePhase().brauchtEingabe();
 	}
 
+	private void platziereHeldenAufSpielbrett()
+	{
+		int xAufKachel = 0;
+		int yAufKachel = 2;
+		for (HeldController held : this.getHelden())
+		{
+			this.getSpielbrett()
+					.getKachelBei(new Position(Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2,
+							Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2))
+					.stelleAufKachel(new Position(xAufKachel++, yAufKachel), held);
+		}
+	}
+
 	/**
 	 * Game-Loop des Spiels, es werden die Phasen nacheinander ausgefuehrt, bis das
 	 * Ziel des Dungeons erreicht ist.
@@ -56,6 +70,8 @@ public class DungeonController
 	public void dungeonAblaufSchleife(HeldController[] helden)
 	{
 		this.modell.setHelden(helden);
+		this.platziereHeldenAufSpielbrett();
+		DemonstrationsSpielbrettAusgabe.spielbrettAusgeben(this.modell.getSpielbrett());
 		while (!this.modell.aufgabeIstErfuellt())
 		{
 			synchronized (this.modell)
@@ -69,11 +85,15 @@ public class DungeonController
 					}
 					momentanePhase.phasenTick(this, this.modell.getAktivenHeld());
 					this.lebendigeObjekteTick();
+					DemonstrationsSpielbrettAusgabe.spielbrettAusgeben(this.modell.getSpielbrett());
 				}
-				// rendern();
 				momentanePhase.reset();
 			}
 			this.modell.naechstePhaseAktivieren();
+			if (this.modell.getMomentanePhaseIndex() == 0)
+			{
+				this.modell.naechsterHeld();
+			}
 		}
 	}
 
@@ -130,6 +150,9 @@ public class DungeonController
 		{
 			this.registrierePhase(phase);
 		}
+		// Setze eine Kachel in die Mitte
+		this.modell.getSpielbrett().setzeKachel(this.modell.getKartenGenerator().generiereStartKachel(), new Position(
+				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
 	}
 
 	private void initSpielbrett()
@@ -149,7 +172,13 @@ public class DungeonController
 			Vektor positionsAenderung = objekt.update();
 			if (positionsAenderung.laenge() > 0f)
 			{
-				this.modell.getSpielbrett().bewege(objekt, positionsAenderung);
+				try
+				{
+					this.modell.getSpielbrett().bewege(objekt, positionsAenderung);
+				} catch (IllegalArgumentException nichtMoeglich)
+				{
+					// Bewegung war nicht moeglich, also nicht bewegen
+				}
 			}
 		}
 	}

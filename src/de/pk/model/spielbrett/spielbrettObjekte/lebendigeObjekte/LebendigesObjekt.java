@@ -31,6 +31,8 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 	{
 		this.lebensPunkte = lebensPunkte;
 		this.bewegungsPunkte = bewegungsPunkte;
+		this.aktionen = new HashMap<>();
+		this.effekte = new ArrayList<>();
 	}
 
 	public void aendereAngriffsPunkte(int aenderung)

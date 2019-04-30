@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjektController;
@@ -22,12 +23,45 @@ public class Spielbrett implements Observer
 
 	public Spielbrett()
 	{
-		this(new HashMap<Position, Kachel>());
+		this(new HashMap<>());
 	}
 
 	public Spielbrett(HashMap<Position, Kachel> spielbrettTeile)
 	{
 		this.spielbrettTeile = spielbrettTeile;
+	}
+
+	/**
+	 * Berechnet den Offset der Kachel auf die sich das Objekt bewegen wuerde, aus
+	 * der berechneten "absoluten Position".
+	 * 
+	 * @param absolutePos Die absolute Position
+	 * 
+	 * @return Der Offset der Kachel als Vektor
+	 */
+	private Vektor getKachelAenderungVonAbsoluterPos(Position absolutePos)
+	{
+		return new Vektor(Math.floorDiv(absolutePos.getX(), Spielkonstanten.KACHEL_GROESSE_X),
+				Math.floorDiv(absolutePos.getY(), Spielkonstanten.KACHEL_GROESSE_Y));
+	}
+
+	/**
+	 * Berechnet die Position auf der (neuen) Kachel aus der absoluten Position
+	 * 
+	 * @param absolutePos Die absolute Position
+	 * 
+	 * @return Die Position auf der (neuen) Kachel
+	 */
+	private Position getPositionAufKachelAusAbsoluterPosition(Position absolutePos)
+	{
+
+		// Rumgerechne mit doppeltem Modulo, damit z.B. eine -1 Die KachelGroesse -1
+		// wird, also 3 == 3 und -3 == KachelGroesse - 3
+		return new Position(
+				((absolutePos.getX() % Spielkonstanten.KACHEL_GROESSE_X) + Spielkonstanten.KACHEL_GROESSE_X)
+						% Spielkonstanten.KACHEL_GROESSE_X,
+				((absolutePos.getY() % Spielkonstanten.KACHEL_GROESSE_Y) + Spielkonstanten.KACHEL_GROESSE_Y)
+						% Spielkonstanten.KACHEL_GROESSE_Y);
 	}
 
 	/**
@@ -49,20 +83,13 @@ public class Spielbrett implements Observer
 		{
 			// Wir sind auf einer anderen Kachel
 		}
-		// Berechne die "absolute Position", welche ueber diese Kachel hinaussreicht
+		// Berechne die "absolute Position", welche ueber diese Kachel hinaus reicht
 		Position absolutePos = altePos.getPositionAufDerKachel().addiere(vek);
 		// Berechne die Position der Kachel auf welcher die absolute Position sich
 		// befindet
-		Position positionNeueKachel = this.getPositionKachel(altePos.getKachel()).addiere(
-				absolutePos.getX() / Spielkonstanten.KACHEL_GROESSE_X,
-				absolutePos.getY() / Spielkonstanten.KACHEL_GROESSE_Y);
-		// Rumgerechne mit doppeltem Modulo, damit z.B. eine -1 Die KachelGroesse -1
-		// wird, also 3 == 3 und -3 == KachelGroesse - 3
-		Position posAufDerNeuenKachel = new Position(
-				((absolutePos.getX() % Spielkonstanten.KACHEL_GROESSE_X) + Spielkonstanten.KACHEL_GROESSE_X)
-						% Spielkonstanten.KACHEL_GROESSE_X,
-				((absolutePos.getY() % Spielkonstanten.KACHEL_GROESSE_Y) + Spielkonstanten.KACHEL_GROESSE_Y)
-						% Spielkonstanten.KACHEL_GROESSE_Y);
+		Position positionNeueKachel = this.getPositionKachel(altePos.getKachel())
+				.addiere(this.getKachelAenderungVonAbsoluterPos(absolutePos));
+		Position posAufDerNeuenKachel = getPositionAufKachelAusAbsoluterPosition(absolutePos);
 		return new KachelPosition(this.getKachelBei(positionNeueKachel), posAufDerNeuenKachel);
 	}
 
@@ -76,7 +103,8 @@ public class Spielbrett implements Observer
 	 */
 	public void bewege(SpielbrettObjektController zuBewegen, KachelPosition neuePosition)
 	{
-		if (!neuePosition.getKachel().getUntergrundBei(neuePosition.getPositionAufDerKachel()).istBetretbar())
+		if (neuePosition.getKachel() == null
+				|| !neuePosition.getKachel().getUntergrundBei(neuePosition.getPositionAufDerKachel()).istBetretbar())
 		{
 			// TODO: Exception Messages
 			throw new IllegalArgumentException();
@@ -157,6 +185,11 @@ public class Spielbrett implements Observer
 		return this.spielbrettTeile.get(pos);
 	}
 
+	public Set<Position> getAlleKachelPositionen()
+	{
+		return this.spielbrettTeile.keySet();
+	}
+
 	/**
 	 * Sucht eine Kachel auf dem Spielbrett
 	 * 
@@ -187,19 +220,29 @@ public class Spielbrett implements Observer
 	}
 
 	/**
-	 * Wird aufgerufen, falls einer Kachel ein neues Objekt hinzugefuegt wird, wird
-	 * die Liste mit allen lebendigen Objekten geupdatet
+	 * Wird aufgerufen, falls einer Kachel auf diesem Spielbrett ein neues Objekt
+	 * hinzugefuegt oder entfernt wird wird. Es wird die Liste mit allen lebendigen
+	 * Objekten geupdatet
 	 * 
 	 * @see Observer#update(Observable, Object)
 	 */
 	@Override
-	public void update(Observable arg0, Object arg1)
+	public void update(Observable kachel, Object geaendertesObjekt)
 	{
-		SpielbrettObjektController hinzugefuegtesObjekt = (SpielbrettObjektController) arg1;
-		if (hinzugefuegtesObjekt.istLebendig())
+		Kachel geaenderteKachel = (Kachel) kachel;
+		SpielbrettObjektController geandertesObjektCast = (SpielbrettObjektController) geaendertesObjekt;
+		if (geandertesObjektCast.istLebendig())
 		{
-			this.alleLebendigenObjekte.add((LebendigesObjektController) hinzugefuegtesObjekt);
+			// Ueberpruefen ob das Objekt hinzugefuegt, oder entfernt wurde
+			if (geaenderteKachel.objektIstAufKachel(geandertesObjektCast))
+			{
+				this.alleLebendigenObjekte.add((LebendigesObjektController) geandertesObjektCast);
+			} else
+			{
+				this.alleLebendigenObjekte.remove(geandertesObjektCast);
+			}
 		}
+
 	}
 
 }

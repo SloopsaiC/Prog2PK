@@ -34,6 +34,8 @@ public class Kachel extends Observable
 			throw new IllegalArgumentException();
 		}
 		this.kachelObjekte.remove(this.getPosition(zuEntfernen));
+		this.setChanged();
+		this.notifyObservers(zuEntfernen);
 	}
 
 	/**
@@ -77,6 +79,7 @@ public class Kachel extends Observable
 	public void stelleAufKachel(Position pos, SpielbrettObjektController obj)
 	{
 		this.kachelObjekte.put(pos, obj);
+		this.setChanged();
 		this.notifyObservers(obj);
 	}
 

@@ -75,7 +75,7 @@ public class Anwendung
 		this.anwendungsEinstellungen = Einstellungen.getEinstellungen();
 		// Init den Dummy Helden mit "Bewegen" Aktion, nur zu Testzwecken
 		Spielkonstanten.STANDARD_HELDEN[0].fuegeAktionHinzu("Bewegen",
-				new Aktion(new Effekt(1, 0, 0, 0, 1, new Vektor(1, 0)), null, 1f));
+				new Aktion(new Effekt(1, 0, 0, 0, 1, new Vektor(-1, 0)), null, 1f));
 	}
 
 	/**

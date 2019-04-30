@@ -58,6 +58,11 @@ public class Dungeon
 		return this.phasen.get(this.momentanePhaseIndex);
 	}
 
+	public int getMomentanePhaseIndex()
+	{
+		return this.momentanePhaseIndex;
+	}
+
 	/**
 	 * @return the name
 	 */
