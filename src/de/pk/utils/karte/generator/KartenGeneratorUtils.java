@@ -36,8 +36,7 @@ public class KartenGeneratorUtils
 	 *
 	 * @param richtung Die Richtung
 	 *
-	 * @return Array mit laenge 2 (2 dimensionen) um die Position in der gegebenen
-	 *         Richtung zu Generieren
+	 * @return 2D Vektor
 	 */
 	public static Vektor getVersatzVonRichtung(Richtung richtung)
 	{
@@ -96,8 +95,7 @@ public class KartenGeneratorUtils
 	}
 
 	/**
-	 * Prueft ob zwei bestimmte Kacheln eine Verbindung haben und gibt die Richtung
-	 * an
+	 * Prueft ob zwei bestimmte Kacheln eine Verbindung haben.
 	 *
 	 * @param von      Die Kachel "von der" aus geguckt wird
 	 * @param zu       die Kachel "zu der" geguckt wird
