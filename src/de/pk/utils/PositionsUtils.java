@@ -14,7 +14,7 @@ public class PositionsUtils
 	 */
 	public static Position getPositionAufKachelAusAbsoluterPosition(Position absolutePos)
 	{
-	
+
 		// Rumgerechne mit doppeltem Modulo, damit z.B. eine -1 Die KachelGroesse -1
 		// wird, also 3 == 3 und -3 == KachelGroesse - 3
 		return new Position(

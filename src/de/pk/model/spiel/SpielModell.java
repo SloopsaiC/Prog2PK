@@ -28,8 +28,7 @@ public class SpielModell
 	/**
 	 * Aendert den aktiven dungeon auf das Argument.
 	 *
-	 * @param dungeon Der Dungeon der von nun an der im Spiel aktive
-	 *                          Dungeon ist.
+	 * @param dungeon Der Dungeon der von nun an der im Spiel aktive Dungeon ist.
 	 */
 	public void aendereAktivenDungeon(Dungeon dungeon)
 	{

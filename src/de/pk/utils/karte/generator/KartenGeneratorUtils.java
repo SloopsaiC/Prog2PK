@@ -57,6 +57,45 @@ public class KartenGeneratorUtils
 	}
 
 	/**
+	 * Iteriert solange die Position mit dem verschiebeVektor eine illegale Position
+	 * erstellt wird. Es wird geprueft ob die danach aktuellePosition und ihr
+	 * Gegenstueck, dass auf der Position ist, welche nach Verschiebung um den
+	 * checkVektor entsteht, betretbar ist. Prueft somit die Verbindung zwischen
+	 * zwei KartenGeneratorUntergruenden.
+	 *
+	 * @param verschiebeVektor Der Vektor um den die aktuelle Position pro Iteration
+	 *                         verschoben wird
+	 * @param checkVektor      Der Vektor um den die aktuelle Position verschoben
+	 *                         wird welche den "Nachbarn" der Position definiert
+	 * @param aktuellePos      Die Anfangsposition des Ueberpruefens
+	 * @param von              Die Kachel von der aus geschaut wird
+	 * @param zu               Die Kachel zu der geschaut wird
+	 */
+	private static boolean iteriereUndPruefeVerbindung(Vektor verschiebeVektor, Vektor checkVektor,
+			Position aktuellePos, KartenGeneratorUntergrund von, KartenGeneratorUntergrund zu)
+	{
+		try
+		{
+			while (aktuellePos != null)
+			{
+				KachelUntergrundWertigkeit aktuellerUntergrund = von.getInhaltBei(aktuellePos);
+				if (aktuellerUntergrund.istBetretbar() || zu
+						.getInhaltBei(PositionsUtils
+								.getPositionAufKachelAusAbsoluterPosition(aktuellePos.addiere(checkVektor)))
+						.istBetretbar())
+				{
+					return true;
+				}
+				aktuellePos.addiere(verschiebeVektor);
+			}
+		} catch (IllegalArgumentException fertig)
+		{
+			// Wir sind fertig, denn die momentane Position ist nicht laenger gueltig
+		}
+		return false;
+	}
+
+	/**
 	 * Prueft ob zwei bestimmte Kacheln eine Verbindung haben und gibt die Richtung
 	 * an
 	 *
@@ -97,43 +136,6 @@ public class KartenGeneratorUtils
 		default:
 			return false;
 		}
-		return iteriereUndPruefeVerbindung(verschiebeVektor, checkVektor, aktuellePos, von, zu);
-	}
-
-	/**
-	 * Iteriert solange die Position mit dem verschiebeVektor eine illegale Position
-	 * erstellt wird. Es wird geprueft ob die danach aktuellePosition und ihr
-	 * Gegenstueck, dass auf der Position ist, welche nach Verschiebung um den
-	 * checkVektor entsteht, betretbar ist.
-	 * Prueft somit die Verbindung zwischen zwei KartenGeneratorUntergruenden.
-	 * 
-	 * @param verschiebeVektor Der Vektor um den die aktuelle Position pro Iteration verschoben wird
-	 * @param checkVektor Der Vektor um den die aktuelle Position verschoben wird welche den "Nachbarn" der Position definiert
-	 * @param aktuellePos Die Anfangsposition des Ueberpruefens
-	 * @param von Die Kachel von der aus geschaut wird
-	 * @param zu Die Kachel zu der geschaut wird
-	 */
-	private static boolean iteriereUndPruefeVerbindung(Vektor verschiebeVektor, Vektor checkVektor,
-			Position aktuellePos, KartenGeneratorUntergrund von, KartenGeneratorUntergrund zu)
-	{
-		try
-		{
-			while (aktuellePos != null)
-			{
-				KachelUntergrundWertigkeit aktuellerUntergrund = von.getInhaltBei(aktuellePos);
-				if (aktuellerUntergrund.istBetretbar() || zu
-						.getInhaltBei(PositionsUtils
-								.getPositionAufKachelAusAbsoluterPosition(aktuellePos.addiere(checkVektor)))
-						.istBetretbar())
-				{
-					return true;
-				}
-				aktuellePos.addiere(verschiebeVektor);
-			}
-		} catch (IllegalArgumentException fertig)
-		{
-			// Wir sind fertig, denn die momentane Position ist nicht laenger gueltig
-		}
-		return false;
+		return KartenGeneratorUtils.iteriereUndPruefeVerbindung(verschiebeVektor, checkVektor, aktuellePos, von, zu);
 	}
 }
