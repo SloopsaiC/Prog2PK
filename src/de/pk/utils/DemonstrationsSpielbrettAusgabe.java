@@ -11,19 +11,16 @@ public class DemonstrationsSpielbrettAusgabe
 	public static void spielbrettAusgeben(Spielbrett ausgeben)
 	{
 		Set<Position> alleKacheln = ausgeben.getAlleKachelPositionen();
-
+		int gedrucktePositionen = 0;
 		for (int yK = 0; yK < (Spielkonstanten.KACHEL_GROESSE_Y * Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y); yK++)
 		{
 			for (int x = 0; x < (Spielkonstanten.KACHEL_GROESSE_X * Spielkonstanten.STANDARD_GROESSE_DUNGEON_X); x++)
 			{
-				if (yK == ((Spielkonstanten.KACHEL_GROESSE_Y * Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y) / 2))
-				{
-					System.out.println();
-				}
 				Position kachelPosition = new Position(x / Spielkonstanten.KACHEL_GROESSE_X,
 						yK / Spielkonstanten.KACHEL_GROESSE_Y);
 				if (alleKacheln.contains(kachelPosition))
 				{
+					gedrucktePositionen++;
 					Position posAufKachel = new Position(x % Spielkonstanten.KACHEL_GROESSE_X,
 							yK % Spielkonstanten.KACHEL_GROESSE_Y);
 					SpielbrettObjekt momentanesObjekt = ausgeben.getKachelBei(kachelPosition)
@@ -38,6 +35,11 @@ public class DemonstrationsSpielbrettAusgabe
 				}
 			}
 			System.out.println();
+			if (gedrucktePositionen == (ausgeben.getAlleKachelPositionen().size()
+					* (Spielkonstanten.KACHEL_GROESSE_X * Spielkonstanten.KACHEL_GROESSE_Y)))
+			{
+				break;
+			}
 		}
 	}
 }
