@@ -14,6 +14,7 @@ import de.pk.model.position.KachelPosition;
 import de.pk.model.position.Position;
 import de.pk.model.position.Vektor;
 import de.pk.model.spielbrett.spielbrettTeile.Kachel;
+import de.pk.utils.PositionsUtils;
 import de.pk.utils.Spielkonstanten;
 
 public class Spielbrett implements Observer
@@ -56,7 +57,7 @@ public class Spielbrett implements Observer
 		// befindet
 		Position positionNeueKachel = this.getPositionKachel(altePos.getKachel())
 				.addiere(this.getKachelAenderungVonAbsoluterPos(absolutePos));
-		Position posAufDerNeuenKachel = this.getPositionAufKachelAusAbsoluterPosition(absolutePos);
+		Position posAufDerNeuenKachel = PositionsUtils.getPositionAufKachelAusAbsoluterPosition(absolutePos);
 		return new KachelPosition(this.getKachelBei(positionNeueKachel), posAufDerNeuenKachel);
 	}
 
@@ -169,25 +170,6 @@ public class Spielbrett implements Observer
 	public Kachel getKachelBei(Position pos)
 	{
 		return this.spielbrettTeile.get(pos);
-	}
-
-	/**
-	 * Berechnet die Position auf der (neuen) Kachel aus der absoluten Position
-	 *
-	 * @param absolutePos Die absolute Position
-	 *
-	 * @return Die Position auf der (neuen) Kachel
-	 */
-	private Position getPositionAufKachelAusAbsoluterPosition(Position absolutePos)
-	{
-
-		// Rumgerechne mit doppeltem Modulo, damit z.B. eine -1 Die KachelGroesse -1
-		// wird, also 3 == 3 und -3 == KachelGroesse - 3
-		return new Position(
-				((absolutePos.getX() % Spielkonstanten.KACHEL_GROESSE_X) + Spielkonstanten.KACHEL_GROESSE_X)
-						% Spielkonstanten.KACHEL_GROESSE_X,
-				((absolutePos.getY() % Spielkonstanten.KACHEL_GROESSE_Y) + Spielkonstanten.KACHEL_GROESSE_Y)
-						% Spielkonstanten.KACHEL_GROESSE_Y);
 	}
 
 	/**
