@@ -3,7 +3,7 @@ package de.pk.control.karte;
 import de.pk.control.spiel.Dungeon;
 import de.pk.model.karte.WeltkarteModell;
 
-public class WeltkarteController
+public class Weltkarte
 {
 	private WeltkarteModell weltkarteModell = null;
 
@@ -12,7 +12,7 @@ public class WeltkarteController
 	 *
 	 * @param Die Dungeons aus der diese Weltkarte besteht
 	 */
-	public WeltkarteController(Dungeon... dungeons)
+	public Weltkarte(Dungeon... dungeons)
 	{
 		this.weltkarteModell = new WeltkarteModell(dungeons);
 	}

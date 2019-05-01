@@ -1,14 +1,14 @@
 package de.pk.model.spiel;
 
-import de.pk.control.karte.WeltkarteController;
+import de.pk.control.karte.Weltkarte;
 import de.pk.control.spiel.Dungeon;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 
 public class SpielModell
 {
 
-	private WeltkarteController weltkarte = null;
-	private Dungeon aktiverDungeonController = null; // Der Controller des momentan aktiven Dungeons,
+	private Weltkarte weltkarte = null;
+	private Dungeon aktiverDungeon = null; // Der Controller des momentan aktiven Dungeons,
 //null falls sich der Spieler auf der "Weltkarte" befindet
 	private Held[] helden = null;
 	private int goldAnzahl = 0;
@@ -19,7 +19,7 @@ public class SpielModell
 	 *
 	 * @param weltkarte Die Weltkarte mit Dungeons fuer das neue Spiel.
 	 */
-	public SpielModell(WeltkarteController weltkarte, Held[] helden)
+	public SpielModell(Weltkarte weltkarte, Held[] helden)
 	{
 		this.weltkarte = weltkarte;
 		this.helden = helden;
@@ -28,20 +28,20 @@ public class SpielModell
 	/**
 	 * Aendert den aktiven dungeon auf das Argument.
 	 *
-	 * @param dungeonController Der Dungeon der von nun an der im Spiel aktive
+	 * @param dungeon Der Dungeon der von nun an der im Spiel aktive
 	 *                          Dungeon ist.
 	 */
-	public void aendereAktivenDungeon(Dungeon dungeonController)
+	public void aendereAktivenDungeon(Dungeon dungeon)
 	{
-		this.aktiverDungeonController = dungeonController;
+		this.aktiverDungeon = dungeon;
 	}
 
 	/**
 	 * @return Der in diesem Spiel momentan aktive Dungeon
 	 */
-	public Dungeon getAktivenDungeonController()
+	public Dungeon getAktivenDungeon()
 	{
-		return this.aktiverDungeonController;
+		return this.aktiverDungeon;
 	}
 
 	public Held[] getHelden()
@@ -52,7 +52,7 @@ public class SpielModell
 	/**
 	 * @return Die Weltkarte dieses Spiels
 	 */
-	public WeltkarteController getWeltkarte()
+	public Weltkarte getWeltkarte()
 	{
 		return this.weltkarte;
 	}

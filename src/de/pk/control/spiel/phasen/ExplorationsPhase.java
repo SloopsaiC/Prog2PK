@@ -12,14 +12,14 @@ public class ExplorationsPhase extends Phase
 	 * @see de.pk.control.spiel.phasen.Phase#phasenTick(Dungeon, Held)
 	 */
 	@Override
-	public void phasenTick(Dungeon aktiverDungeonController, Held aktiverHeld)
+	public void phasenTick(Dungeon aktiverDungeon, Held aktiverHeld)
 	{
-		KachelPosition aktuellePosition = aktiverDungeonController.getSpielbrett().findeSpielbrettObjekt(aktiverHeld);
+		KachelPosition aktuellePosition = aktiverDungeon.getSpielbrett().findeSpielbrettObjekt(aktiverHeld);
 		Richtung kantenRichtung = aktuellePosition.getKantenRichtungFallsAnKante();
 		if (kantenRichtung != null)
 		{
-			aktiverDungeonController.generiereUndfuegeNeueKachelZuSpielbrettHinzu(kantenRichtung,
-					aktiverDungeonController.getSpielbrett().getPositionKachel(aktuellePosition.getKachel()));
+			aktiverDungeon.generiereUndfuegeNeueKachelZuSpielbrettHinzu(kantenRichtung,
+					aktiverDungeon.getSpielbrett().getPositionKachel(aktuellePosition.getKachel()));
 		}
 		super.fertig();
 	}

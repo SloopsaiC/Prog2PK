@@ -41,9 +41,9 @@ public abstract class Phase
 	/**
 	 * Fuehrt die Phase um einen Tick weiter, dabei werden saemtliche Veraenderungen
 	 * die diese Phase auf den Zustand des Spiels / Dungeons hat registriert um
-	 * spaeter im DungeonController umgesetzt zu werden
+	 * spaeter im Dungeon umgesetzt zu werden
 	 */
-	public abstract void phasenTick(Dungeon aktiverDungeonController, Held aktiverHeld);
+	public abstract void phasenTick(Dungeon aktiverDungeon, Held aktiverHeld);
 
 	/**
 	 * Setzt diese Phase zurueck

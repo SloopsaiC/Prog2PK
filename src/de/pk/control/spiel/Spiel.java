@@ -2,7 +2,7 @@ package de.pk.control.spiel;
 
 import java.util.InputMismatchException;
 
-import de.pk.control.karte.WeltkarteController;
+import de.pk.control.karte.Weltkarte;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 import de.pk.model.spiel.SpielModell;
 import de.pk.utils.DebugAusgabeKlasse;
@@ -18,20 +18,20 @@ public class Spiel
 	 */
 	public Spiel(Held[] helden)
 	{
-		this(new WeltkarteController(), helden);
+		this(new Weltkarte(), helden);
 	}
 
-	public Spiel(WeltkarteController weltkarte, Held[] helden)
+	public Spiel(Weltkarte weltkarte, Held[] helden)
 	{
 		this.spielModell = new SpielModell(weltkarte, helden);
 	}
 
-	public Dungeon getAktiverDungeonController()
+	public Dungeon getAktiverDungeon()
 	{
-		return this.spielModell.getAktivenDungeonController();
+		return this.spielModell.getAktivenDungeon();
 	}
 
-	public WeltkarteController getWeltkarte()
+	public Weltkarte getWeltkarte()
 	{
 		return this.spielModell.getWeltkarte();
 	}
@@ -51,9 +51,9 @@ public class Spiel
 	public void starteSpiel()
 	{
 		this.waehleDungeon();
-		if (this.getAktiverDungeonController() != null)
+		if (this.getAktiverDungeon() != null)
 		{
-			this.getAktiverDungeonController().dungeonAblaufSchleife(this.spielModell.getHelden());
+			this.getAktiverDungeon().dungeonAblaufSchleife(this.spielModell.getHelden());
 		}
 	}
 
