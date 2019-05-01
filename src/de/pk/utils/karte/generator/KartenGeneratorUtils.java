@@ -57,7 +57,7 @@ public class KartenGeneratorUtils
 	}
 
 	/**
-	 * Iteriert solange die Position mit dem verschiebeVektor eine illegale Position
+	 * Iteriert solange die Position mit dem verschiebeVektor bis eine illegale Position
 	 * erstellt wird. Es wird geprueft ob die danach aktuellePosition und ihr
 	 * Gegenstueck, dass auf der Position ist, welche nach Verschiebung um den
 	 * checkVektor entsteht, betretbar ist. Prueft somit die Verbindung zwischen
