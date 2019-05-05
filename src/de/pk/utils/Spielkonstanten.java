@@ -1,10 +1,10 @@
 package de.pk.utils;
 
+import de.pk.control.interaktion.Wuerfel;
 import de.pk.control.spiel.phasen.ExplorationsPhase;
 import de.pk.control.spiel.phasen.HeldenPhase;
 import de.pk.control.spiel.phasen.Phase;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
-import de.pk.model.interaktion.Wuerfel;
 
 public class Spielkonstanten
 {
@@ -22,7 +22,7 @@ public class Spielkonstanten
 	public static final int STANDARD_GROESSE_DUNGEON_X = 30;
 	public static final int STANDARD_GROESSE_DUNGEON_Y = 30;
 	public static final int ANZAHL_MAXIMALE_DREHUNGEN_REZEPT = 4;
-	public static final Wuerfel D20 = new Wuerfel(20);
+	public static final Wuerfel WUERFEL = new Wuerfel();
 	public static final int MAX_AKTIONEN_HELDEN_PHASE = 2;
 	// Kacheldimensionen in X und Y koordinaten:
 	public static final int KACHEL_GROESSE_X = 5;

@@ -28,7 +28,6 @@ public class HeldenPhase extends Phase
 	public void phasenTick(Dungeon aktiverDungeonController, Held aktiverHeld)
 	{
 		aktiverHeld.fuehreAktionAus("Bewegen", null);
-		DebugAusgabeKlasse.ausgeben("Heldenphase:");
 		this.anzahlAktionenDieserPhase++;
 		if (this.anzahlAktionenDieserPhase >= Spielkonstanten.MAX_AKTIONEN_HELDEN_PHASE)
 		{

@@ -1,7 +1,7 @@
 package de.pk.model.gegenstaende;
 
 import de.pk.model.gegenstaende.spezifikationen.Konsumierbar;
-import de.pk.model.interaktion.Effekt;
+import de.pk.model.interaktion.effekt.Effekt;
 
 /**
  * Ein Trank ist ein konsumierbarer Gegenstand, der beim konsumieren einen

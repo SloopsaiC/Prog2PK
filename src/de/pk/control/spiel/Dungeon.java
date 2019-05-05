@@ -113,12 +113,6 @@ public class Dungeon
 	 */
 	private void getInput()
 	{
-		DebugAusgabeKlasse.ausgeben(DE_de.DUNGEON_ABLAUF_INPUT_AUFFORDERUNG);
-		char eingabe = DebugEingabeKlasse.leseZeileEin().charAt(0);
-		if (eingabe == 'x')
-		{
-			Main.anwendungBeenden();
-		}
 	}
 
 	public ArrayList<Phase> getPhasen()

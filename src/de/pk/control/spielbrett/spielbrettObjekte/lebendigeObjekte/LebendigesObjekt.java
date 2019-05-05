@@ -5,7 +5,7 @@ import java.util.Set;
 
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
 import de.pk.model.interaktion.Aktion;
-import de.pk.model.interaktion.Effekt;
+import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.position.Vektor;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektModell;
 import de.pk.utils.Spielkonstanten;
@@ -55,7 +55,7 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 	{
 		try
 		{
-			this.modell.getAktionMitNamen(name.toLowerCase()).wendeAn(this, ziel, Spielkonstanten.D20);
+			this.modell.getAktionMitNamen(name.toLowerCase()).wendeAn(this, ziel, Spielkonstanten.WUERFEL);
 		} catch (NullPointerException nichtVorhanden)
 		{
 			// TODO: Exception Messages

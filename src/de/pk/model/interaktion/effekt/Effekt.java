@@ -1,4 +1,4 @@
-package de.pk.model.interaktion;
+package de.pk.model.interaktion.effekt;
 
 import de.pk.model.position.Vektor;
 

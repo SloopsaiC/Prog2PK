@@ -1,6 +1,8 @@
 package de.pk.model.interaktion;
 
+import de.pk.control.interaktion.Wuerfel;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
+import de.pk.model.interaktion.effekt.Effekt;
 
 /**
  * Aktionen haben selbst- und ziel-Effekte, die beim Ausfuehren der Aktion auf
@@ -12,7 +14,6 @@ import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObj
 public class Aktion
 {
 
-	// TODO: Sollte noch getrennt werden
 	/**
 	 * Die Effekte, welche auf das ausfuehrende Objekt angewendet werden.
 	 */
@@ -91,7 +92,7 @@ public class Aktion
 	public boolean wendeAn(LebendigesObjekt wirker, LebendigesObjekt ziel, Wuerfel wuerfel)
 	{
 		if (this.ueberpruefeAktion(wirker)
-				&& this.wuerfelWurfErfolgreich(wuerfel, this.berechneErfolgsWahrscheinlichkeit(wirker, ziel)))
+				&& wuerfel.werfeWuerfel(this.berechneErfolgsWahrscheinlichkeit(wirker, ziel)).warErfolgreich())
 		{
 			wirker.fuegeEffekteHinzu(this.selbstEffekt);
 			if (ziel != null)
@@ -101,27 +102,6 @@ public class Aktion
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * Gibt an, ob ein WuerfelWurf erfolgreich war. Dies ist der Fall, wenn eine
-	 * niedrigere relative Augenzahl gewuerfelt wurde, als die angegebene
-	 * erfolgsWahrscheinlichkeit.
-	 *
-	 * @param wuerfel                   Der Wuerfel, mit dem gewuerfelt werden soll.
-	 * @param erfolgsWahrscheinlichkeit Dieses Verhaeltnis darf der Wuerfel nicht
-	 *                                  ueberschreiten, sonst wurde nicht
-	 *                                  erfolgreich gewuerfelt.
-	 * @return true, wenn ine niedrigere relative Augenzahl gewuerfelt wurde, als
-	 *         die angegebene erfolgsWahrscheinlichkeit.
-	 */
-	private boolean wuerfelWurfErfolgreich(Wuerfel wuerfel, float erfolgsWahrscheinlichkeit)
-	{
-		synchronized (wuerfel)
-		{
-			wuerfel.wuerfeln();
-			return wuerfel.letzteAugenZahlAlsFloat() < erfolgsWahrscheinlichkeit;
-		}
 	}
 
 }

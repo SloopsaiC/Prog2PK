@@ -30,7 +30,7 @@ public class CraftingController
 	 * @throws InputMismatchException Falls die eingegebenen Materialien auf keinen
 	 *                                craftbaren Gegenstand zutreffen.
 	 */
-	private Stapelbar crafteGegenstandAusEingegebenenMaterialien(Material[][] materialien) throws InputMismatchException
+	public Stapelbar crafteGegenstandAusEingegebenenMaterialien(Material[][] materialien) throws InputMismatchException
 	{
 		for (CraftingRezept craftGegenstandRezept : CraftingRezept.values())
 		{
@@ -40,107 +40,6 @@ public class CraftingController
 			}
 		}
 		throw new InputMismatchException();
-	}
-
-	/**
-	 * Listet alle zur Verfuegung stehenden Materialien erst auf und verwaltet dann
-	 * das eigentliche Crafting als Abgleich der Anwendereingabe und den
-	 * vordefinierten Mustern zum Craften von neuen Gegenstaenden.
-	 */
-	private void craften()
-	{
-		String ausgabe = DE_de.CRAFTEN_EINGABEAUFFORDERUNG;
-		for (Material m : Material.values())
-		{
-			ausgabe += m.toString() + DE_de.STANDARD_SPLITTER;
-		}
-		DebugAusgabeKlasse.ausgeben(ausgabe); // Auflistung aller Materialien
-
-		try
-		{
-			Stapelbar gecrafteterGegenstand = this
-					.crafteGegenstandAusEingegebenenMaterialien(this.materialienEingabeEinlesen());
-			// Eingabe und Craftingversuch
-			DebugAusgabeKlasse.ausgeben(DE_de.CRAFTEN_ERFOLG + gecrafteterGegenstand.toString());
-			// Bei erfolgreichem Crafting
-
-			// TO-DO: gecrafteten Gegenstand ins Inventar des Helden legen.
-		} catch (InputMismatchException e) // Bei Misserfolg des Craftings (Exception wurde geworfen)
-		{
-			DebugAusgabeKlasse.ausgeben(DE_de.CRAFTEN_KEIN_GEGENSTAND);
-		} catch (NullPointerException e) // Bei Abbruch waehrend des Craftings
-		{
-		}
-	}
-
-	/**
-	 * Repraesentiert das Menue des Craftings, wird in Dauerschleife durchlaufen,
-	 * bis abbgebrochen wird.
-	 */
-	public void craftingMenue()
-	{
-		boolean amLeben = true;
-		while (amLeben)
-		{
-			DebugAusgabeKlasse.ausgeben(DE_de.CRAFTINGMENUE);
-			DebugAusgabeKlasse.ausgeben(DE_de.MENUE_WAS_TUN);
-			DebugAusgabeKlasse.ausgeben(DE_de.CRAFTINGMENUE_AKTIONSAUSWAHL);
-			switch (DebugEingabeKlasse.leseZeileEin().charAt(0))
-			{
-			case DE_de.EINGABESYMBOL_CRAFTINGMENUE_NEU_CRAFTEN: // Neuen Gegenstand craften
-				this.craften();
-				break;
-			case DE_de.EINGABESYMBOL_MENUE_BEENDEN_ODER_ZURUECK: // Abbruch
-				amLeben = false;
-				break;
-			default:
-				DebugAusgabeKlasse.ausgeben(DE_de.MENUE_INKORREKTE_KONSOLEN_EINGABE);
-			}
-		}
-	}
-
-	/**
-	 * Liest die Materialien-Eingabe aus der Konsole ein. Bei Abbruch wird null
-	 * zurueckgegeben!
-	 *
-	 * @return eingegebene Materialien als zweidimensionalses Array oder null, wenn
-	 *         das Crafting mittendrin abbgebrochen wird.
-	 */
-	private Material[][] materialienEingabeEinlesen()
-	{
-		Material[][] eingabe = new Material[CraftingRezept.MATERIAL_MUSTER_DIMENSION][CraftingRezept.MATERIAL_MUSTER_DIMENSION];
-		boolean amLeben = true;
-		while (amLeben)
-		{
-			try
-			{
-				DebugAusgabeKlasse.ausgeben(DE_de.CRAFTEN_INFO);
-				for (int y = 0; y < eingabe[0].length; y++)
-				{
-					String zeile = DebugEingabeKlasse.leseZeileEin();
-					if (zeile.charAt(0) == DE_de.EINGABESYMBOL_MENUE_BEENDEN_ODER_ZURUECK) // Abbruch
-					{
-						return null;
-					}
-					String[] gerateneMaterialien = zeile.toUpperCase().split(DE_de.STANDARD_SPLITTER);
-					for (int x = 0; x < eingabe.length; x++)
-					{
-						eingabe[y][x] = Material.valueOf(gerateneMaterialien[x]);
-					}
-				}
-				amLeben = false;
-			} catch (ArrayIndexOutOfBoundsException e) // Falls weniger als drei Materialien in einer Zeile eingegeben
-			// wurden.
-			{
-				DebugAusgabeKlasse.ausgeben(DE_de.CRAFTEN_ZU_KURZE_EINGABE);
-			} catch (IllegalArgumentException e) // Falls Woerter falsch geschrieben, Leerzeichen oder Kommata vergessen
-			// wurden.
-			{
-				DebugAusgabeKlasse.ausgeben(DE_de.CRAFTEN_SONSTIGER_SYNTAXFEHLER);
-			}
-		}
-		DebugAusgabeKlasse.ausgeben(DE_de.CRAFTEN_MATERIALAUSGABE, eingabe); // Ausgabe der Eingabe zur Pruefung.
-		return eingabe;
 	}
 
 	/**

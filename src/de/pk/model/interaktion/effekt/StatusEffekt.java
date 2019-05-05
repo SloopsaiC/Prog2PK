@@ -1,4 +1,4 @@
-package de.pk.model.interaktion;
+package de.pk.model.interaktion.effekt;
 
 /**
  * Ein Status Effekt kann die Attribute von LebendigenObjekten dauerhaft

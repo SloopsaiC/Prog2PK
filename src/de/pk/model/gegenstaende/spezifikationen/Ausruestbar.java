@@ -1,7 +1,7 @@
 package de.pk.model.gegenstaende.spezifikationen;
 
 import de.pk.model.faehigkeiten.Faehigkeit;
-import de.pk.model.interaktion.StatusEffekt;
+import de.pk.model.interaktion.effekt.StatusEffekt;
 
 /**
  * Gruppiert ausruestbare Gegenstaende und legt Verhalten fuer diese fest.

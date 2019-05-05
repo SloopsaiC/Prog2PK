@@ -35,7 +35,7 @@ public class DemonstrationsSpielbrettAusgabe
 				}
 			}
 			System.out.println();
-			if (gedrucktePositionen == (ausgeben.getAlleKachelPositionen().size()
+			if (gedrucktePositionen >= (ausgeben.getAlleKachelPositionen().size()
 					* (Spielkonstanten.KACHEL_GROESSE_X * Spielkonstanten.KACHEL_GROESSE_Y)))
 			{
 				break;

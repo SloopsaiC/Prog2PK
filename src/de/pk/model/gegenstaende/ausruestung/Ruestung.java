@@ -2,7 +2,7 @@ package de.pk.model.gegenstaende.ausruestung;
 
 import de.pk.model.faehigkeiten.Faehigkeit;
 import de.pk.model.gegenstaende.spezifikationen.Ausruestbar;
-import de.pk.model.interaktion.StatusEffekt;
+import de.pk.model.interaktion.effekt.StatusEffekt;
 
 /**
  * Ruestungen sind Gegenstaende und koennen ausgeruestet werden. Sie werden

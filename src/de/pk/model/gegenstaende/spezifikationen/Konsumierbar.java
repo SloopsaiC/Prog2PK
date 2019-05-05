@@ -1,6 +1,6 @@
 package de.pk.model.gegenstaende.spezifikationen;
 
-import de.pk.model.interaktion.Effekt;
+import de.pk.model.interaktion.effekt.Effekt;
 
 /**
  * Gruppiert konsumierbare Gegenstaende und legt Verhalten fuer diese fest.

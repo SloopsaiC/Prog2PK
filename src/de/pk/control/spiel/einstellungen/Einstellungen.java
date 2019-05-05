@@ -36,31 +36,7 @@ public class Einstellungen
 	 */
 	public void einstellungenBearbeiten()
 	{
-		boolean amLeben = true;
-		while (amLeben)
-		{
-			DebugAusgabeKlasse.ausgeben(DE_de.OPTIONSMENUE);
-			DebugAusgabeKlasse.ausgeben(DE_de.MENUE_WAS_TUN);
-			DebugAusgabeKlasse.ausgeben(DE_de.OPTIONSMENUE_AKTIONSAUSWAHL);
 
-			switch (Integer.valueOf(DebugEingabeKlasse.leseZeileEin()))
-			{
-			case 1:
-				DebugAusgabeKlasse.ausgeben(DE_de.TESTAUSGABE_OPTIONSMENUE_SCHWIERIGKEIT); // sinnlose Testausgabe
-				break;
-			case 2:
-				DebugAusgabeKlasse.ausgeben(DE_de.TESTAUSGABE_OPTIONSMENUE_SOUND); // sinnlose Testausgabe
-				break;
-			case 3:
-				DebugAusgabeKlasse.ausgeben(DE_de.TESTAUSGABE_OPTIONSMENUE_SPRACHE); // sinnlose Testausgabe
-				break;
-			case 4:
-				amLeben = false;
-				break;
-			default:
-				DebugAusgabeKlasse.ausgeben(DE_de.MENUE_INKORREKTE_KONSOLEN_EINGABE);
-			}
-		}
 	}
 
 }

@@ -44,7 +44,6 @@ public class GegnerModell extends LebendigesObjektModell
 	@Override
 	public Container sterben()
 	{
-		DebugAusgabeKlasse.ausgeben("Der Gegner ist gestorben.");
 		return this.generiereAuswurf();
 	}
 

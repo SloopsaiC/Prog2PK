@@ -96,7 +96,6 @@ public class HeldModell extends LebendigesObjektModell
 	@Override
 	public Container sterben()
 	{
-		DebugAusgabeKlasse.ausgeben(this.getName() + " ist zum " + (this.getSterbeZaehler() + 1) + " mal gestorben");
 		this.sterbeZaehler++;
 		return this.inventar;
 	}
