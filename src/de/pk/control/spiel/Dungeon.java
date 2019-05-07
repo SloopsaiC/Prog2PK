@@ -70,7 +70,7 @@ public class Dungeon
 					{
 						this.getInput();
 					}
-					momentanePhase.phasenTick(this, this.modell.getAktivenHeld());
+					momentanePhase.phasenSchritt(this, this.modell.getAktivenHeld());
 					this.lebendigeObjekteTick();
 					DemonstrationsSpielbrettAusgabe.spielbrettAusgeben(this.modell.getSpielbrett());
 				}

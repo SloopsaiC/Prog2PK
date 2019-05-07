@@ -3,6 +3,7 @@ package de.pk.model.interaktion;
 import de.pk.control.interaktion.Wuerfel;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
 import de.pk.model.interaktion.effekt.Effekt;
+import de.pk.model.interaktion.effekt.EffektBeschreibungsIndex;
 
 /**
  * Aktionen haben selbst- und ziel-Effekte, die beim Ausfuehren der Aktion auf
@@ -75,8 +76,8 @@ public class Aktion
 	 */
 	private boolean ueberpruefeAktion(LebendigesObjekt wirker)
 	{
-
-		return wirker.kannSichUmXBewegen(this.selbstEffekt.getBewegungsPunkteAenderung() * (-1));
+		return wirker.kannSichUmXBewegen(
+				this.selbstEffekt.getWertAusBeschreibung(EffektBeschreibungsIndex.BEWEGUNGSPUNKTE) * (-1));
 	}
 
 	/**

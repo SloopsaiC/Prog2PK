@@ -22,10 +22,10 @@ public class HeldenPhase extends Phase
 	}
 
 	/**
-	 * @see de.pk.control.spiel.phasen.Phase#phasenTick(Dungeon, Held)
+	 * @see de.pk.control.spiel.phasen.Phase#phasenSchritt(Dungeon, Held)
 	 */
 	@Override
-	public void phasenTick(Dungeon aktiverDungeonController, Held aktiverHeld)
+	public void phasenSchritt(Dungeon aktiverDungeonController, Held aktiverHeld)
 	{
 		aktiverHeld.fuehreAktionAus("Bewegen", null);
 		this.anzahlAktionenDieserPhase++;

@@ -30,11 +30,9 @@ public class StatusEffekt extends Effekt
 	 * @param lebensPunkteAenderung    Die Aenderung der LebensPunkte auf das Ziel
 	 *                                 dieses StatusEffekts.
 	 */
-	public StatusEffekt(int bewegungsPunkteAenderung, int angriffsPunkteAenderung, int ruestungsPunkteAenderung,
-			int lebensPunkteAenderung)
+	public StatusEffekt(EffektTeil... effektTeile)
 	{
-		super(bewegungsPunkteAenderung, angriffsPunkteAenderung, ruestungsPunkteAenderung, lebensPunkteAenderung,
-				Integer.MAX_VALUE);
+		super(effektTeile);
 		this.tickt = Boolean.TRUE;
 	}
 

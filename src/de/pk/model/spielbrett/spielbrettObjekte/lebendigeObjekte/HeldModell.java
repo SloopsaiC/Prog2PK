@@ -39,7 +39,7 @@ public class HeldModell extends LebendigesObjektModell
 		super(lebensPunkte, bewegungsPunkte);
 		this.ruestung = Collections.synchronizedMap(new HashMap<>(HeldModell.ANZAHL_MAXIMALE_RUESTUNGS_GEGENSTAENDE));
 		this.accessoires = Collections.synchronizedMap(new HashMap<>(HeldModell.ANZAHL_MAXIMALE_ACCESSOIRES));
-		this.faehigkeiten = Collections.synchronizedList(new ArrayList<>(0));
+		this.faehigkeiten = Collections.synchronizedList(new ArrayList<>());
 		this.name = name;
 	}
 

@@ -2,6 +2,8 @@ package de.pk.model.gegenstaende;
 
 import de.pk.model.gegenstaende.spezifikationen.Konsumierbar;
 import de.pk.model.interaktion.effekt.Effekt;
+import de.pk.model.interaktion.effekt.EffektBeschreibungsIndex;
+import de.pk.model.interaktion.effekt.EffektTeil;
 
 /**
  * Ein Trank ist ein konsumierbarer Gegenstand, der beim konsumieren einen
@@ -26,7 +28,8 @@ public enum Trank implements Konsumierbar
 	 * MEDIZIN ist der Retter in der Not. Wem es an Energie mangelt, kann hiermit
 	 * seinen Vorrat wieder auffuellen.
 	 */
-	MEDIZIN(new Effekt(0, 0, 0, 10, 1));
+	MEDIZIN(new Effekt(new EffektTeil(EffektBeschreibungsIndex.ANZAHL_WIRK_TICKS, 1),
+			new EffektTeil(EffektBeschreibungsIndex.LEBENS_PUNKTE, 10)));
 
 	/**
 	 * Effekt, der beim Konsumieren ausgeloest wird.

@@ -43,7 +43,7 @@ public abstract class Phase
 	 * die diese Phase auf den Zustand des Spiels / Dungeons hat registriert um
 	 * spaeter im Dungeon umgesetzt zu werden
 	 */
-	public abstract void phasenTick(Dungeon aktiverDungeon, Held aktiverHeld);
+	public abstract void phasenSchritt(Dungeon aktiverDungeon, Held aktiverHeld);
 
 	/**
 	 * Setzt diese Phase zurueck

@@ -9,10 +9,10 @@ public class ExplorationsPhase extends Phase
 {
 
 	/**
-	 * @see de.pk.control.spiel.phasen.Phase#phasenTick(Dungeon, Held)
+	 * @see de.pk.control.spiel.phasen.Phase#phasenSchritt(Dungeon, Held)
 	 */
 	@Override
-	public void phasenTick(Dungeon aktiverDungeon, Held aktiverHeld)
+	public void phasenSchritt(Dungeon aktiverDungeon, Held aktiverHeld)
 	{
 		KachelPosition aktuellePosition = aktiverDungeon.getSpielbrett().findeSpielbrettObjekt(aktiverHeld);
 		Richtung kantenRichtung = aktuellePosition.getKantenRichtungFallsAnKante();

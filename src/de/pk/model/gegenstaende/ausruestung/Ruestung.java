@@ -12,9 +12,10 @@ import de.pk.model.interaktion.effekt.StatusEffekt;
  */
 public enum Ruestung implements Ausruestbar
 {
-	// TO-DO: sinnvolle Effekte einfuegen
-	BRUSTPANZER(new StatusEffekt(-1, 0, 5, 0), Faehigkeit.AUSDAUER, Faehigkeit.STIL),
-	SCHILD(new StatusEffekt(0, 0, 3, 0), Faehigkeit.AUSDAUER);
+	// TODO: sinnvolle Effekte einfuegen
+		// Funktioniert so noch nicht (Effekt mit EffektTeilen erstellen)
+	BRUSTPANZER(null, Faehigkeit.AUSDAUER, Faehigkeit.STIL),
+	SCHILD(null, Faehigkeit.AUSDAUER);
 
 	/**
 	 * Alle Effekte die diese Ruestung auf den Traeger hervorruft.

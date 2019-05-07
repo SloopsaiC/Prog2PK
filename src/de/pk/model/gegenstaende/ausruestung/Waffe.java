@@ -13,9 +13,9 @@ import de.pk.model.interaktion.effekt.StatusEffekt;
 public enum Waffe implements Ausruestbar
 {
 
-	// TO-DO: sinnvolle Effekte einfuegen
-	SCHWERT(new StatusEffekt(0, 5, 0, 0), Faehigkeit.HAUEN),
-	BOGEN(new StatusEffekt(0, 0, -1, 0), Faehigkeit.STIL, Faehigkeit.AUSDAUER);
+	// TODO: sinnvolle Effekte einfuegen
+	// Funktioniert so noch nicht (Effekt mit EffektTeilen erstellen)
+	SCHWERT(null, Faehigkeit.HAUEN), BOGEN(null, Faehigkeit.STIL, Faehigkeit.AUSDAUER);
 
 	/**
 	 * Alle Effekte die diese Waffe auf den Traeger hervorruft.

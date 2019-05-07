@@ -6,6 +6,7 @@ import de.pk.control.spiel.Dungeon;
 import de.pk.control.spiel.Spiel;
 import de.pk.control.spiel.einstellungen.Einstellungen;
 import de.pk.model.interaktion.Aktion;
+import de.pk.model.interaktion.bewegung.BewegungsAktion;
 import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.position.Vektor;
 import de.pk.utils.DebugAusgabeKlasse;
@@ -51,9 +52,6 @@ public class Anwendung
 	private void initAnwendung()
 	{
 		this.anwendungsEinstellungen = Einstellungen.getEinstellungen();
-		// Init den Dummy Helden mit "Bewegen" Aktion, nur zu Testzwecken
-		Spielkonstanten.STANDARD_HELDEN[0].fuegeAktionHinzu("Bewegen",
-				new Aktion(new Effekt(1, 0, 0, 0, 1, new Vektor(-1, 0)), null, 1f));
 	}
 
 	/**

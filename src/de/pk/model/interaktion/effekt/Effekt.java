@@ -1,6 +1,6 @@
 package de.pk.model.interaktion.effekt;
 
-import de.pk.model.position.Vektor;
+import java.util.HashMap;
 
 /**
  * Ein Effekt kann die Attribute von LebendigenObjekten beeinflussen. Er hat
@@ -11,139 +11,40 @@ public class Effekt
 {
 
 	/**
-	 * Die Aenderung der BewegungsPunkte auf das Ziel dieses Effekts.
+	 * Spezifiziert die Aenderungen die dieser Effekt auf ein lebendiges Objekt hat,
+	 * wenn er darauf angewandt wird. Indizies sind in
+	 * {@link}EffektBeschreibungsIndex definiert
 	 */
-	private int bewegungsPunkteAenderung = 0;
-	/**
-	 * Die Aenderung der AngriffsPunkte auf das Ziel dieses Effekts.
-	 */
-	private int angriffsPunkteAenderung = 0;
-	/**
-	 * Die Aenderung der RuestungsPunkte auf das Ziel dieses Effekts.
-	 */
-	private int ruestungsPunkteAenderung = 0;
-	/**
-	 * Die Aenderung der LebensPunkte auf das Ziel dieses Effekts.
-	 */
-	private int lebensPunkteAenderung = 0;
-	/**
-	 * Die Haeufigkeit (Runden), die dieser Effekt wirkt, bevor er abklingt.
-	 */
-	private int anzahlWirkTicks = 0;
-	/**
-	 * Die Aenderung der Position auf das Ziel dieses Effekts.
-	 */
-	private Vektor positionsAenderung = null;
+	private HashMap<EffektBeschreibungsIndex, Integer> effektBeschreibung = null;
 
 	/**
 	 * Erstellt einen Effekt, der keine Auswirkungen hat.
 	 */
 	public Effekt()
 	{
+		this(new EffektTeil[0]);
 	}
 
 	/**
-	 * Erstellt einen neuen Effekt mit den folgenden Moeglichkeiten zur Aenderung /
-	 * Beeinflussung auf sein Ziel, sowie der Anzahl an Runden, die der Effekt
-	 * wirkt, bevor er abklingt.
-	 *
-	 * @param bewegungsPunkteAenderung Die Aenderung der BewegungsPunkte auf das
-	 *                                 Ziel dieses Effekts.
-	 * @param angriffsPunkteAenderung  Die Aenderung der AngriffsPunkte auf das Ziel
-	 *                                 dieses Effekts.
-	 * @param ruestungsPunkteAenderung Die Aenderung der RuestungsPunkte auf das
-	 *                                 Ziel dieses Effekts.
-	 * @param lebensPunkteAenderung    Die Aenderung der LebensPunkte auf das Ziel
-	 *                                 dieses Effekts.
-	 * @param anzahlWirkTicks          Die Haeufigkeit (Runden), die dieser Effekt
-	 *                                 wirkt, bevor er abklingt.
+	 * Erstellt einen neuen Effekt mit den gegebenen Aenderungen. Welcher Index
+	 * welche Aenderung beschreibt wird durch {@link}EffektIndex beschrieben.
+	 * 
+	 * @param effektBeschreibung Die Aenderungen die dieser Effekt auf ein
+	 *                           LebendigesObjekt hat, falls er auf dieses
+	 *                           angewendet wird.
 	 */
-	public Effekt(int bewegungsPunkteAenderung, int angriffsPunkteAenderung, int ruestungsPunkteAenderung,
-			int lebensPunkteAenderung, int anzahlWirkTicks)
+	public Effekt(EffektTeil... effektTeile)
 	{
-		this(bewegungsPunkteAenderung, angriffsPunkteAenderung, ruestungsPunkteAenderung, lebensPunkteAenderung,
-				anzahlWirkTicks, null);
+		this.effektBeschreibung = new HashMap<>();
+		for (EffektTeil teil : effektTeile)
+		{
+			this.effektBeschreibung.put(teil.getIndex(), teil.getWert());
+		}
 	}
 
-	/**
-	 * Erstellt einen neuen Effekt mit den folgenden Moeglichkeiten zur Aenderung /
-	 * Beeinflussung auf sein Ziel, sowie der Anzahl an Runden, die der Effekt
-	 * wirkt, bevor er abklingt.
-	 *
-	 * @param bewegungsPunkteAenderung Die Aenderung der BewegungsPunkte auf das
-	 *                                 Ziel dieses Effekts.
-	 * @param angriffsPunkteAenderung  Die Aenderung der AngriffsPunkte auf das Ziel
-	 *                                 dieses Effekts.
-	 * @param ruestungsPunkteAenderung Die Aenderung der RuestungsPunkte auf das
-	 *                                 Ziel dieses Effekts.
-	 * @param lebensPunkteAenderung    Die Aenderung der LebensPunkte auf das Ziel
-	 *                                 dieses Effekts.
-	 * @param anzahlWirkTicks          Die Haeufigkeit (Runden), die dieser Effekt
-	 *                                 wirkt, bevor er abklingt.
-	 * @param positionsAenderung       Die Aenderung der Position auf das Ziel
-	 *                                 dieses Effekts.
-	 */
-	public Effekt(int bewegungsPunkteAenderung, int angriffsPunkteAenderung, int ruestungsPunkteAenderung,
-			int lebensPunkteAenderung, int anzahlWirkTicks, Vektor positionsAenderung)
+	public int getWertAusBeschreibung(EffektBeschreibungsIndex index)
 	{
-		this.bewegungsPunkteAenderung = bewegungsPunkteAenderung;
-		this.angriffsPunkteAenderung = angriffsPunkteAenderung;
-		this.ruestungsPunkteAenderung = ruestungsPunkteAenderung;
-		this.lebensPunkteAenderung = lebensPunkteAenderung;
-		this.anzahlWirkTicks = anzahlWirkTicks;
-		this.positionsAenderung = positionsAenderung;
-	}
-
-	/**
-	 * Gibt die angriffsPunkteAenderung, die dieser Effekt hervorrufen kann zurueck.
-	 *
-	 * @return die angriffsPunkteAenderung
-	 */
-	public int getAngriffsPunkteAenderung()
-	{
-		return this.angriffsPunkteAenderung;
-	}
-
-	/**
-	 * Gibt die bewegungsPunkteAenderung, die dieser Effekt hervorrufen kann
-	 * zurueck.
-	 *
-	 * @return die bewegungsPunkteAenderung
-	 */
-	public int getBewegungsPunkteAenderung()
-	{
-		return this.bewegungsPunkteAenderung;
-	}
-
-	/**
-	 * Gibt die lebensPunkteAenderung, die dieser Effekt hervorrufen kann zurueck.
-	 *
-	 * @return die lebensPunkteAenderung
-	 */
-	public int getLebensPunkteAenderung()
-	{
-		return this.lebensPunkteAenderung;
-	}
-
-	/**
-	 * Gibt die positionsAenderung, die dieser Effekt hervorrufen kann zurueck.
-	 *
-	 * @return die positionsAenderung
-	 */
-	public Vektor getPositionsAenderung()
-	{
-		return this.positionsAenderung;
-	}
-
-	/**
-	 * Gibt die ruestungsPunkteAenderung, die dieser Effekt hervorrufen kann
-	 * zurueck.
-	 *
-	 * @return die ruestungsPunkteAenderung
-	 */
-	public int getRuestungsPunkteAenderung()
-	{
-		return this.ruestungsPunkteAenderung;
+		return this.effektBeschreibung.get(index);
 	}
 
 	/**
@@ -154,7 +55,7 @@ public class Effekt
 	 */
 	public boolean istAbgeklungen()
 	{
-		return this.anzahlWirkTicks < 1;
+		return this.effektBeschreibung.get(EffektBeschreibungsIndex.ANZAHL_WIRK_TICKS) < 1;
 	}
 
 	/**
@@ -177,10 +78,9 @@ public class Effekt
 	 */
 	public void wurdeGewirkt()
 	{
-		if (this.anzahlWirkTicks < Integer.MAX_VALUE)
-		{
-			this.anzahlWirkTicks--;
-		}
+		// Die Anzahl der Wirkticks um einen vermindern
+		this.effektBeschreibung.replace(EffektBeschreibungsIndex.ANZAHL_WIRK_TICKS,
+				this.effektBeschreibung.get(EffektBeschreibungsIndex.ANZAHL_WIRK_TICKS) - 1);
 	}
 
 }

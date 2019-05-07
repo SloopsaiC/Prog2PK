@@ -6,15 +6,16 @@ import java.util.HashMap;
 import de.pk.model.gegenstaende.container.Container;
 import de.pk.model.interaktion.Aktion;
 import de.pk.model.interaktion.effekt.Effekt;
+import de.pk.model.interaktion.effekt.EffektBeschreibungsIndex;
 import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjektModell;
+import de.pk.utils.Spielkonstanten;
 
 public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 {
 
-	private int lebensPunkte = 0;
-	private int bewegungsPunkte = 0;
-	private int ruestungsPunkte = 0;
-	private int angriffsPunkte = 0;
+	private HashMap<LebendigesObjektPunkteIndex, Integer> punkte = null; // Alle Punkte die ein LebendigesObjekt haben
+																			// kann, beschrieben in
+	// "LebendigesObjektPunkteIndex"
 
 	private HashMap<String, Aktion> aktionen = null; // Alle Aktionen die diese Objekt ausfuehren kann, welche durch den
 														// Namen abgebildet werden
@@ -29,30 +30,26 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 	 */
 	protected LebendigesObjektModell(int lebensPunkte, int bewegungsPunkte)
 	{
-		this.lebensPunkte = lebensPunkte;
-		this.bewegungsPunkte = bewegungsPunkte;
+		this.punkte = new HashMap<>();
+		this.punkte.put(LebendigesObjektPunkteIndex.LEBENS_PUNKTE, lebensPunkte);
+		this.punkte.put(LebendigesObjektPunkteIndex.BEWEGUNGS_PUNKTE, bewegungsPunkte);
 		this.aktionen = new HashMap<>();
 		this.effekte = new ArrayList<>();
 	}
 
-	public void aendereAngriffsPunkte(int aenderung)
+	public int getAnzahlPunkteVon(LebendigesObjektPunkteIndex index)
 	{
-		this.setAngriffsPunkte(this.getRuestungsPunkte() + aenderung);
+		return this.punkte.get(index);
 	}
 
-	public void aendereBewegungsPunkte(int aenderung)
+	public void setAnzahlPunkteVon(LebendigesObjektPunkteIndex index, int neuerWert)
 	{
-		this.setBewegungsPunkte(this.getBewegungsPunkte() + aenderung);
+		this.punkte.replace(index, neuerWert);
 	}
 
-	public void aendereLebensPunkte(int aenderung)
+	public void aenderePunkteVon(LebendigesObjektPunkteIndex index, int aenderung)
 	{
-		this.setLebensPunkte(this.getLebensPunkte() + aenderung);
-	}
-
-	public void aendereRuestungsPunkte(int aenderung)
-	{
-		this.setRuestungsPunkte(this.getRuestungsPunkte() + aenderung);
+		this.setAnzahlPunkteVon(index, this.getAnzahlPunkteVon(index) + aenderung);
 	}
 
 	/**
@@ -90,20 +87,6 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 		return this.aktionen.get(name);
 	}
 
-	public int getAngriffsPunkte()
-	{
-		return this.angriffsPunkte;
-	}
-
-	/**
-	 *
-	 * @return Bewegungspunkte des Lebendigen Objekts
-	 */
-	public int getBewegungsPunkte()
-	{
-		return this.bewegungsPunkte;
-	}
-
 	/**
 	 *
 	 * @return Array mit allen Statuseffekten des Lebendigen Objekts
@@ -113,61 +96,10 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 		return this.effekte;
 	}
 
-	/**
-	 * Anzahl der Lebenspunkte des Lebendigen Objekts
-	 *
-	 * @return
-	 */
-	public int getLebensPunkte()
-	{
-		return this.lebensPunkte;
-	}
-
-	/**
-	 *
-	 * @return Anzahl der Ruestungspunkte des Lebendigen Objekts
-	 */
-	public int getRuestungsPunkte()
-	{
-		return this.ruestungsPunkte;
-	}
-
 	@Override
 	public boolean istLebendig()
 	{
 		return true;
-	}
-
-	public void setAngriffsPunkte(int angriffsPunkte)
-	{
-		this.angriffsPunkte = angriffsPunkte;
-	}
-
-	/**
-	 *
-	 * @param bewegungsPunkte Neue Anzahl Bewegungspunkte
-	 */
-	public void setBewegungsPunkte(int bewegungsPunkte)
-	{
-		this.bewegungsPunkte = bewegungsPunkte;
-	}
-
-	/**
-	 *
-	 * @param lebensPunkte Neue Anzahl Lebenspunkte
-	 */
-	public void setLebensPunkte(int lebensPunkte)
-	{
-		this.lebensPunkte = lebensPunkte;
-	}
-
-	/**
-	 *
-	 * @param ruestungsPunkte Neue Anzahl Ruestungspunkte
-	 */
-	public void setRuestungsPunkte(int ruestungsPunkte)
-	{
-		this.ruestungsPunkte = ruestungsPunkte;
 	}
 
 	/**
