@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="libaries/gson-2.8.5.jar"/>
 	<classpathentry kind="lib" path="libaries/javafx-sdk-12.0.1/lib/javafx-swt.jar" sourcepath="libaries/javafx-sdk-12.0.1/lib/src.zip">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Prog2PK/libaries/javafx-sdk-12.0.1/bin"/>
@@ -40,6 +39,11 @@
 	<classpathentry kind="lib" path="libaries/javafx-sdk-12.0.1/lib/javafx.web.jar" sourcepath="libaries/javafx-sdk-12.0.1/lib/src.zip">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Prog2PK/libaries/javafx-sdk-12.0.1/bin"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="libaries/gson-2.8.5/gson-2.8.5.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/D:/Studium/Prog2/Prog2PK/libaries/gson-2.8.5/gson-2.8.5-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk-12.0.1">
