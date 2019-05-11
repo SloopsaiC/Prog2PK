@@ -1,6 +1,5 @@
 package de.pk.model.karte.generator.untergruende;
 
-import de.pk.model.karte.generator.KartenGeneratorUntergrund;
 import de.pk.model.position.Position;
 
 public class Ecke extends KartenGeneratorUntergrund
@@ -25,7 +24,6 @@ public class Ecke extends KartenGeneratorUntergrund
 	public Ecke()
 	{
 		super(Ecke.ECKE_GROSS_NORMAL);
-
 	}
 
 	@Override
@@ -70,5 +68,6 @@ public class Ecke extends KartenGeneratorUntergrund
 				&& ((rechteckPosition.getY() - groesseY) < zuUeberpruefen.getY())
 				&& ((rechteckPosition.getY() + groesseY) > zuUeberpruefen.getY());
 	}
+
 
 }

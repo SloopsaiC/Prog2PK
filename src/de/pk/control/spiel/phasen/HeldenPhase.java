@@ -29,20 +29,15 @@ public class HeldenPhase extends Phase
 	{
 		aktiverHeld.fuehreAktionAus("Bewegen", null);
 		this.anzahlAktionenDieserPhase++;
-		if (this.anzahlAktionenDieserPhase >= Spielkonstanten.MAX_AKTIONEN_HELDEN_PHASE)
-		{
-			super.fertig();
-		}
 	}
 
 	/**
-	 * @see de.pk.control.spiel.phasen.Phase#reset()
+	 * Gibt true zurueck, falls die Phase als fertig erachtet wird
 	 */
 	@Override
-	public void reset()
+	public boolean istFertig()
 	{
-		super.reset();
-		this.anzahlAktionenDieserPhase = 0;
+		return this.anzahlAktionenDieserPhase >= Spielkonstanten.MAX_AKTIONEN_HELDEN_PHASE;
 	}
 
 }

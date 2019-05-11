@@ -10,8 +10,8 @@ import de.pk.model.karte.generator.Richtung;
 import de.pk.model.position.Position;
 import de.pk.model.position.Vektor;
 import de.pk.model.spiel.dungeon.DungeonModell;
+import de.pk.model.spielbrett.Kachel;
 import de.pk.model.spielbrett.Spielbrett;
-import de.pk.model.spielbrett.spielbrettTeile.Kachel;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
 import de.pk.utils.DemonstrationsSpielbrettAusgabe;
@@ -74,7 +74,6 @@ public class Dungeon
 					this.lebendigeObjekteTick();
 					DemonstrationsSpielbrettAusgabe.spielbrettAusgeben(this.modell.getSpielbrett());
 				}
-				momentanePhase.reset();
 			}
 			this.modell.naechstePhaseAktivieren();
 			if (this.modell.getMomentanePhaseIndex() == 0)

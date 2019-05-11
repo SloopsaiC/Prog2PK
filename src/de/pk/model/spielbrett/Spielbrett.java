@@ -13,11 +13,10 @@ import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObj
 import de.pk.model.position.KachelPosition;
 import de.pk.model.position.Position;
 import de.pk.model.position.Vektor;
-import de.pk.model.spielbrett.spielbrettTeile.Kachel;
 import de.pk.utils.PositionsUtils;
 import de.pk.utils.Spielkonstanten;
 
-public class Spielbrett implements Observer
+public class Spielbrett
 {
 	private HashMap<Position, Kachel> spielbrettTeile = null;
 	private ArrayList<LebendigesObjekt> alleLebendigenObjekte = new ArrayList<>();
@@ -77,7 +76,8 @@ public class Spielbrett implements Observer
 			// TODO: Exception Messages
 			throw new IllegalArgumentException();
 		}
-		this.entferneAusAlterPosition(zuBewegen);
+		KachelPosition altePos = this.findeSpielbrettObjekt(zuBewegen);
+		altePos.getKachel().entferneBeiPosition(altePos.getPositionAufDerKachel());
 		neuePosition.getKachel().stelleAufKachel(neuePosition.getPositionAufDerKachel(), zuBewegen);
 	}
 
@@ -98,23 +98,6 @@ public class Spielbrett implements Observer
 	{
 		this.bewege(zuBewegen,
 				this.bekommeKachelPositionMitVektor(this.findeSpielbrettObjekt(zuBewegen), positionsAenderung));
-	}
-
-	/**
-	 * Entfernt ein Objekt aus einer Position
-	 *
-	 * @param zuEntfernen Das zu entfernende Objekt
-	 */
-	private void entferneAusAlterPosition(SpielbrettObjekt zuEntfernen)
-	{
-		try
-		{
-			this.findeSpielbrettObjekt(zuEntfernen).getKachel().entferneObjekt(zuEntfernen);
-		} catch (NullPointerException nichtAufSpielbrett)
-		{
-			// TODO: Exception messages
-			throw new IllegalArgumentException();
-		}
 	}
 
 	/**
@@ -197,34 +180,26 @@ public class Spielbrett implements Observer
 	 */
 	public void setzeKachel(Kachel kachel, Position pos)
 	{
-		kachel.addObserver(this);
 		this.spielbrettTeile.put(pos, kachel);
 	}
 
-	/**
-	 * Wird aufgerufen, falls einer Kachel auf diesem Spielbrett ein neues Objekt
-	 * hinzugefuegt oder entfernt wird wird. Es wird die Liste mit allen lebendigen
-	 * Objekten geupdatet
-	 *
-	 * @see Observer#update(Observable, Object)
-	 */
-	@Override
-	public void update(Observable kachel, Object geaendertesObjekt)
+	public void setzeSpielbrettObjekt(KachelPosition position, SpielbrettObjekt zuSetzen)
 	{
-		Kachel geaenderteKachel = (Kachel) kachel;
-		SpielbrettObjekt geandertesObjektCast = (SpielbrettObjekt) geaendertesObjekt;
-		if (geandertesObjektCast.istLebendig())
+		position.getKachel().stelleAufKachel(position.getPositionAufDerKachel(), zuSetzen);
+		if (zuSetzen.istLebendig())
 		{
-			// Ueberpruefen ob das Objekt hinzugefuegt, oder entfernt wurde
-			if (geaenderteKachel.objektIstAufKachel(geandertesObjektCast))
-			{
-				this.alleLebendigenObjekte.add((LebendigesObjekt) geandertesObjektCast);
-			} else
-			{
-				this.alleLebendigenObjekte.remove(geandertesObjektCast);
-			}
+			this.alleLebendigenObjekte.add((LebendigesObjekt) zuSetzen);
 		}
+	}
 
+	public void entferneSpielbrettObjektBei(KachelPosition position)
+	{
+		SpielbrettObjekt zuEntfernen = position.getKachel().getSpielbrettObjektBei(position.getPositionAufDerKachel());
+		if (zuEntfernen.istLebendig())
+		{
+			this.alleLebendigenObjekte.remove((LebendigesObjekt) zuEntfernen);
+		}
+		position.getKachel().entferneBeiPosition(position.getPositionAufDerKachel());
 	}
 
 }

@@ -13,6 +13,8 @@ import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.lokalisierung.DE_de;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  * Die Anwendung verwaltet die Auswahl eines Spielstandes, die Bearbeitung von
@@ -20,7 +22,7 @@ import de.pk.utils.lokalisierung.DE_de;
  *
  * @author Dylan
  */
-public class Anwendung
+public class Anwendung extends Application
 {
 
 	/**
@@ -83,5 +85,13 @@ public class Anwendung
 		this.initAnwendung();
 		this.anwendungsSchleife();
 	}
+
+	@Override
+	public void start(Stage arg0) throws Exception
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

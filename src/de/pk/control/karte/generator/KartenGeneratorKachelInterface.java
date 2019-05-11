@@ -1,8 +1,8 @@
 package de.pk.control.karte.generator;
 
-import de.pk.model.karte.generator.KartenGeneratorUntergrund;
 import de.pk.model.karte.generator.untergruende.Ecke;
 import de.pk.model.karte.generator.untergruende.Frei;
+import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrund;
 import de.pk.model.karte.generator.untergruende.Kartenrand;
 import de.pk.model.karte.generator.untergruende.Sackgasse;
 import de.pk.model.karte.generator.untergruende.Schlucht;

@@ -11,13 +11,16 @@ import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldModell;
 public class Held extends LebendigesObjekt
 {
 
-	private HeldModell modell = (HeldModell) super.getModell();
-
 	public Held(String name, int lebensPunkte, int bewegungsPunkte)
 	{
 		super(new HeldModell(name, lebensPunkte, bewegungsPunkte));
 	}
 
+	private HeldModell getModellAlsHeld()
+	{
+		return (HeldModell) super.getModell();
+	}
+	
 	/**
 	 * Ruestet dem Helden das Accessoire aus und legt es in sein Accesoire-Inventar
 	 * an die entsprechende Stelle (slot). War zuvor bereits eine anderes Accessoire
@@ -45,8 +48,10 @@ public class Held extends LebendigesObjekt
 			throw new IndexOutOfBoundsException();
 		}
 		this.pruefeAusruestungAufFaehigkeitsVoraussetzungen(accessoire);
-		return this.modell.getAccessoires().put(slot, accessoire);
+		return this.getModellAlsHeld().getAccessoires().put(slot, accessoire);
 	}
+
+	
 
 	/**
 	 * Ruestet dem Helden eine Ruestung aus. War zuvor bereits eine andere Ruestung
@@ -72,7 +77,7 @@ public class Held extends LebendigesObjekt
 			throw new IndexOutOfBoundsException();
 		}
 		this.pruefeAusruestungAufFaehigkeitsVoraussetzungen(ruestung);
-		return this.modell.getRuestung().put(slot, ruestung);
+		return this.getModellAlsHeld().getRuestung().put(slot, ruestung);
 	}
 
 	/**
@@ -92,16 +97,16 @@ public class Held extends LebendigesObjekt
 		this.pruefeAusruestungAufFaehigkeitsVoraussetzungen(waffe);
 		try
 		{
-			return this.modell.getWaffe();
+			return this.getModellAlsHeld().getWaffe();
 		} finally
 		{
-			this.modell.setWaffe(waffe);
+			this.getModellAlsHeld().setWaffe(waffe);
 		}
 	}
 
 	public Waffe getWaffe()
 	{
-		return this.modell.getWaffe();
+		return this.getModellAlsHeld().getWaffe();
 	}
 
 	/**
@@ -116,7 +121,7 @@ public class Held extends LebendigesObjekt
 	 */
 	private void pruefeAusruestungAufFaehigkeitsVoraussetzungen(Ausruestbar ausruestung) throws IllegalStateException
 	{
-		if (!this.modell.getFaehigkeiten().containsAll(Arrays.asList(ausruestung.getVoraussetzungen())))
+		if (!this.getModellAlsHeld().getFaehigkeiten().containsAll(Arrays.asList(ausruestung.getVoraussetzungen())))
 		{
 			throw new IllegalStateException();
 		}

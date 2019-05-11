@@ -1,6 +1,5 @@
 package de.pk.model.karte.generator.untergruende;
 
-import de.pk.model.karte.generator.KartenGeneratorUntergrund;
 import de.pk.model.position.Position;
 
 public class Sackgasse extends KartenGeneratorUntergrund

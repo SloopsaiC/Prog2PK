@@ -7,7 +7,6 @@ public abstract class Phase
 {
 
 	private final static boolean BRAUCHT_EINGABE_DEFAULT_WERT = false;
-	private boolean istFertig = false;
 
 	/**
 	 * Gibt an ob die Phase eine Eingabe vom Spieler braucht um sinnvoll umgesetzt
@@ -23,20 +22,9 @@ public abstract class Phase
 	}
 
 	/**
-	 * Wird aufgerufen, sollte eine Phase sich als "fertig" erachten
+	 * Gibt true zurueck, falls die Phase als fertig erachtet wird
 	 */
-	protected void fertig()
-	{
-		this.istFertig = true;
-	}
-
-	/**
-	 * Ist true, falls die Phase als fertig erachtet wird
-	 */
-	public boolean istFertig()
-	{
-		return this.istFertig;
-	}
+	public abstract boolean istFertig();
 
 	/**
 	 * Fuehrt die Phase um einen Tick weiter, dabei werden saemtliche Veraenderungen
@@ -45,12 +33,16 @@ public abstract class Phase
 	 */
 	public abstract void phasenSchritt(Dungeon aktiverDungeon, Held aktiverHeld);
 
-	/**
-	 * Setzt diese Phase zurueck
-	 */
-	public void reset()
+	public Phase clone()
 	{
-		this.istFertig = false;
+		try
+		{
+			return (Phase) super.clone();
+		} catch (CloneNotSupportedException e)
+		{
+			return null;
+		}
+		
 	}
 
 }

@@ -7,6 +7,7 @@ import de.pk.model.position.KachelPosition;
 
 public class ExplorationsPhase extends Phase
 {
+	private boolean istFertig = false;
 
 	/**
 	 * @see de.pk.control.spiel.phasen.Phase#phasenSchritt(Dungeon, Held)
@@ -21,6 +22,15 @@ public class ExplorationsPhase extends Phase
 			aktiverDungeon.generiereUndfuegeNeueKachelZuSpielbrettHinzu(kantenRichtung,
 					aktiverDungeon.getSpielbrett().getPositionKachel(aktuellePosition.getKachel()));
 		}
-		super.fertig();
+		this.istFertig = true;
+	}
+
+	/**
+	 * Gibt true zurueck, falls die Phase als fertig erachtet wird
+	 */
+	@Override
+	public boolean istFertig()
+	{
+		return this.istFertig;
 	}
 }

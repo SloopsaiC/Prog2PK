@@ -1,9 +1,17 @@
 package de.pk.control.app;
 
+import de.pk.control.spiel.Dungeon;
+import de.pk.control.spiel.Spiel;
 import de.pk.control.spiel.einstellungen.Einstellungen;
+import de.pk.control.spiel.speichern.SpeicherUtils;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
+import de.pk.model.karte.generator.untergruende.Ecke;
+import de.pk.model.karte.generator.untergruende.Frei;
+import de.pk.model.position.Position;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
 import de.pk.utils.lokalisierung.DE_de;
+import javafx.application.Application;
 
 /**
  * Die Main Klasse startet die Anwendung.
@@ -28,7 +36,7 @@ public class Main
 	private static void anwendungStarten()
 	{
 		Anwendung spielAnwendung = new Anwendung();
-		spielAnwendung.starteAnwendung();
+		Application.launch();
 	}
 
 	/**
@@ -54,6 +62,12 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{
+		SpeicherUtils.speichere(new Position(1, 1), "posTest.txt");
+		Spiel spiel = new Spiel(new Held[0]);
+		spiel.getWeltkarte().fuegeDungeonHinzu(new Dungeon("TollerDungeon"));
+		SpeicherUtils.speichere(spiel, "spielTest.txt");
+		Spiel test = SpeicherUtils.ladeSpiel("spielTest.txt");
+		Application.launch("Test");
 		Main.initialisieren();
 		Main.begruessen();
 		Main.anwendungStarten();

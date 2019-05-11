@@ -1,7 +1,7 @@
 package de.pk.model.position;
 
 import de.pk.model.karte.generator.Richtung;
-import de.pk.model.spielbrett.spielbrettTeile.Kachel;
+import de.pk.model.spielbrett.Kachel;
 import de.pk.utils.Spielkonstanten;
 
 public class KachelPosition

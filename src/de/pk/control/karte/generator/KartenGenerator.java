@@ -3,11 +3,11 @@ package de.pk.control.karte.generator;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import de.pk.model.karte.generator.KartenGeneratorUntergrund;
 import de.pk.model.karte.generator.Richtung;
+import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrund;
 import de.pk.model.karte.generator.untergruende.Start;
 import de.pk.model.position.Position;
-import de.pk.model.spielbrett.spielbrettTeile.Kachel;
+import de.pk.model.spielbrett.Kachel;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.WahrscheinlichkeitsUtils;
 import de.pk.utils.karte.generator.KartenGeneratorUtils;
@@ -15,6 +15,7 @@ import de.pk.utils.karte.generator.KartenGeneratorUtils;
 public class KartenGenerator
 {
 	private ArrayList<KartenGeneratorUntergrund> registrierteKacheln = null;
+	public static Richtung STANDARD_DREH_RICHTUNG = Richtung.OSTEN;
 
 	/**
 	 * Erstellt einen KartenGenerator welcher keine registrierten Untergruende hat
@@ -96,7 +97,7 @@ public class KartenGenerator
 			generiert = generiert.clone();
 			while (!KartenGeneratorUtils.pruefeVerbindung(aktuelleKachel, generiert, richtung))
 			{
-				generiert.drehe(Richtung.OSTEN);
+				generiert.drehe(STANDARD_DREH_RICHTUNG);
 			}
 		}
 		return generiert;

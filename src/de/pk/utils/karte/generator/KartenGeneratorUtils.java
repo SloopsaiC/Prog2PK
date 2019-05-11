@@ -1,8 +1,8 @@
 package de.pk.utils.karte.generator;
 
-import de.pk.model.karte.generator.KartenGeneratorUntergrund;
 import de.pk.model.karte.generator.Richtung;
 import de.pk.model.karte.generator.untergruende.KachelUntergrundWertigkeit;
+import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrund;
 import de.pk.model.position.Position;
 import de.pk.model.position.Vektor;
 import de.pk.utils.PositionsUtils;

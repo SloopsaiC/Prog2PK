@@ -5,10 +5,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import de.pk.control.spiel.Spiel;
+import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrund;
+import de.pk.model.position.Position;
+import de.pk.model.spielbrett.Kachel;
 
 public class SpeicherUtils
 {
@@ -64,13 +70,27 @@ public class SpeicherUtils
 	 */
 	public static Spiel ladeSpiel(String pfad)
 	{
+		FileReader leser = null;
 		try
 		{
-			FileReader leser = new FileReader(new File(pfad));
-			return new GsonBuilder().create().fromJson(leser, Spiel.class);
+			leser = new FileReader(new File(pfad));
+			return new GsonBuilder()
+					.registerTypeAdapter(KartenGeneratorUntergrund.class, new KartenGeneratorUntergrundDeserializer())
+					.registerTypeAdapter(HashMap.class, new HashMapSerializer()).create().fromJson(leser, Spiel.class);
 		} catch (FileNotFoundException e)
 		{
 			return null;
+		} finally
+		{
+			try
+			{
+				if (leser != null)
+				{
+					leser.close();
+				}
+			} catch (IOException e)
+			{
+			}
 		}
 	}
 
@@ -83,7 +103,9 @@ public class SpeicherUtils
 	public static void speichere(Object objekt, String name)
 	{
 		PrintWriter writer = SpeicherUtils.erstelleWriterInDatei(SpeicherUtils.erstelleDatei(name));
-		new GsonBuilder().create().toJson(objekt, Spiel.class, writer);
+		new GsonBuilder()
+				.registerTypeAdapter(KartenGeneratorUntergrund.class, new KartenGeneratorUntergrundSerializer())
+				.create().toJson(objekt, writer);
 		writer.close();
 	}
 
