@@ -1,19 +1,17 @@
 package de.pk.control.app;
 
 import de.pk.control.karte.Weltkarte;
-import de.pk.control.spiel.CraftingController;
 import de.pk.control.spiel.Dungeon;
 import de.pk.control.spiel.Spiel;
 import de.pk.control.spiel.einstellungen.Einstellungen;
-import de.pk.model.interaktion.Aktion;
-import de.pk.model.interaktion.bewegung.BewegungsAktion;
-import de.pk.model.interaktion.effekt.Effekt;
-import de.pk.model.position.Vektor;
-import de.pk.utils.DebugAusgabeKlasse;
-import de.pk.utils.DebugEingabeKlasse;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.lokalisierung.DE_de;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -80,18 +78,29 @@ public class Anwendung extends Application
 	 * Initialisiert zunaechst die Anwendung und startet dann die
 	 * Anwendungsschleife.
 	 */
-	public void starteAnwendung()
+	public void starteAnwendung(String[] args)
 	{
 		this.initAnwendung();
-		this.anwendungsSchleife();
+		launch(args);
 	}
 
 	@Override
-	public void start(Stage arg0) throws Exception
+	public void start(Stage primaryStage)
 	{
-		// TODO Auto-generated method stub
-		
+		primaryStage.setTitle("Hello World!");
+		Button btn = new Button();
+		btn.setText("Say 'Hello World'");
+		btn.setOnAction(new EventHandler<ActionEvent>()
+		{
+			@Override
+			public void handle(ActionEvent event)
+			{
+				System.out.println("Hello World!");
+			}
+		});
+		StackPane root = new StackPane();
+		root.getChildren().add(btn);
+		primaryStage.setScene(new Scene(root, 300, 250));
+		primaryStage.show();
 	}
-
-
 }

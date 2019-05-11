@@ -11,7 +11,6 @@ import de.pk.model.position.Position;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
 import de.pk.utils.lokalisierung.DE_de;
-import javafx.application.Application;
 
 /**
  * Die Main Klasse startet die Anwendung.
@@ -33,10 +32,10 @@ public class Main
 	/**
 	 * Startet die Anwendung (Das Spiel insgesamt).
 	 */
-	private static void anwendungStarten()
+	private static void anwendungStarten(String[] args)
 	{
 		Anwendung spielAnwendung = new Anwendung();
-		Application.launch();
+		spielAnwendung.starteAnwendung(args);
 	}
 
 	/**
@@ -62,15 +61,14 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{
-		SpeicherUtils.speichere(new Position(1, 1), "posTest.txt");
+		/*SpeicherUtils.speichere(new Position(1, 1), "posTest.txt");
 		Spiel spiel = new Spiel(new Held[0]);
 		spiel.getWeltkarte().fuegeDungeonHinzu(new Dungeon("TollerDungeon"));
 		SpeicherUtils.speichere(spiel, "spielTest.txt");
-		Spiel test = SpeicherUtils.ladeSpiel("spielTest.txt");
-		Application.launch("Test");
+		Spiel test = SpeicherUtils.ladeSpiel("spielTest.txt");*/
 		Main.initialisieren();
 		Main.begruessen();
-		Main.anwendungStarten();
+		Main.anwendungStarten(args);
 	}
 
 }
