@@ -74,9 +74,7 @@ public class SpeicherUtils
 		try
 		{
 			leser = new FileReader(new File(pfad));
-			return new GsonBuilder()
-					.registerTypeAdapter(KartenGeneratorUntergrund.class, new KartenGeneratorUntergrundDeserializer())
-					.registerTypeAdapter(HashMap.class, new HashMapSerializer()).create().fromJson(leser, Spiel.class);
+			return new GsonBuilder().enableComplexMapKeySerialization().create().fromJson(leser, Spiel.class);
 		} catch (FileNotFoundException e)
 		{
 			return null;
@@ -103,9 +101,7 @@ public class SpeicherUtils
 	public static void speichere(Object objekt, String name)
 	{
 		PrintWriter writer = SpeicherUtils.erstelleWriterInDatei(SpeicherUtils.erstelleDatei(name));
-		new GsonBuilder()
-				.registerTypeAdapter(KartenGeneratorUntergrund.class, new KartenGeneratorUntergrundSerializer())
-				.create().toJson(objekt, writer);
+		new GsonBuilder().enableComplexMapKeySerialization().create().toJson(objekt, writer);
 		writer.close();
 	}
 

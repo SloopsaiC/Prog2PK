@@ -5,8 +5,6 @@ import de.pk.control.spiel.Spiel;
 import de.pk.control.spiel.einstellungen.Einstellungen;
 import de.pk.control.spiel.speichern.SpeicherUtils;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
-import de.pk.model.karte.generator.untergruende.Ecke;
-import de.pk.model.karte.generator.untergruende.Frei;
 import de.pk.model.position.Position;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
@@ -61,11 +59,11 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{
-		/*SpeicherUtils.speichere(new Position(1, 1), "posTest.txt");
+		SpeicherUtils.speichere(new Position(1, 1), "posTest.txt");
 		Spiel spiel = new Spiel(new Held[0]);
 		spiel.getWeltkarte().fuegeDungeonHinzu(new Dungeon("TollerDungeon"));
 		SpeicherUtils.speichere(spiel, "spielTest.txt");
-		Spiel test = SpeicherUtils.ladeSpiel("spielTest.txt");*/
+		Spiel test = SpeicherUtils.ladeSpiel("spielTest.txt");
 		Main.initialisieren();
 		Main.begruessen();
 		Main.anwendungStarten(args);

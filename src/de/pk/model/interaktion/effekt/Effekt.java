@@ -1,6 +1,8 @@
 package de.pk.model.interaktion.effekt;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Ein Effekt kann die Attribute von LebendigenObjekten beeinflussen. Er hat
@@ -40,6 +42,11 @@ public class Effekt
 		{
 			this.effektBeschreibung.put(teil.getIndex(), teil.getWert());
 		}
+	}
+
+	public Map<EffektBeschreibungsIndex, Integer> getEffektBeschreibung()
+	{
+		return Collections.unmodifiableMap(this.effektBeschreibung);
 	}
 
 	public int getWertAusBeschreibung(EffektBeschreibungsIndex index)

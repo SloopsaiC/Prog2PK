@@ -9,7 +9,7 @@ import de.pk.model.position.Position;
 public abstract class KartenGeneratorUntergrund
 {
 	private transient KachelUntergrundWertigkeit[][] inhalt = null;
-	private transient int anzahlDrehungenRechts = 0;
+	private int anzahlDrehungenRechts = 0;
 
 	/**
 	 * Der Inhalt wird in der Unterklasse beschlossen und von dort in den
@@ -31,29 +31,7 @@ public abstract class KartenGeneratorUntergrund
 	 *
 	 * @param richtung The direction to drehe in
 	 */
-	public void drehe(Richtung richtung)
-	{
-		// Generiert den neuen Inhalt
-		KachelUntergrundWertigkeit[][] neuerInhalt = new KachelUntergrundWertigkeit[this.inhalt.length][this.inhalt[0].length];
-		for (int x = 0; x < this.inhalt[0].length; x++)
-		{
-			for (int y = 0; y < this.inhalt.length; y++)
-			{
-				if (richtung == Richtung.OSTEN)
-				{
-					// Tauscht X und Y abhaengig davon, ob links oder rechts
-					// geaendert wird. Eins bis Maximum, minus die Werte bevor gedreht wird.
-					neuerInhalt[x][this.inhalt.length - 1 - y] = this.inhalt[y][x];
-					this.anzahlDrehungenRechts++;
-				} else if (richtung == Richtung.WESTEN)
-				{
-					neuerInhalt[this.inhalt[0].length - 1 - x][y] = this.inhalt[y][x];
-					this.anzahlDrehungenRechts--;
-				}
-			}
-		}
-		this.inhalt = neuerInhalt;
-	}
+	
 
 	public KachelUntergrundWertigkeit[][] getInhalt()
 	{
