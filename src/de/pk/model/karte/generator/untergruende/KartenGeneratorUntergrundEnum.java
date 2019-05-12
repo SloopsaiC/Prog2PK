@@ -6,7 +6,6 @@ import de.pk.model.karte.generator.Richtung;
 import de.pk.model.position.Position;
 import de.pk.utils.karte.generator.KachelUntergrundUtils;
 import de.pk.utils.karte.generator.KartenGeneratorUntergrundKonstanten;
-import de.pk.utils.karte.generator.Kondition;
 
 public enum KartenGeneratorUntergrundEnum
 {
@@ -30,8 +29,8 @@ public enum KartenGeneratorUntergrundEnum
 		{
 			// Erhoeht die Wahrscheinlichkeit wenn die Kachel naeher in einer Ecke ist
 			return berechneVorkommensWahrscheinlichkeitAusKonditionUndAenderungen(
-					(a, b, c) -> KachelUntergrundUtils.istInEcke(a, b, c), aktuellePosition, maximaleGroesseX,
-					maximaleGroesseY, KartenGeneratorUntergrundKonstanten.ECKE_STANDARD_WAHRSCHEINLICHKEIT,
+					KachelUntergrundUtils.istInEcke(aktuellePosition, maximaleGroesseX, maximaleGroesseY),
+					KartenGeneratorUntergrundKonstanten.ECKE_STANDARD_WAHRSCHEINLICHKEIT,
 					KartenGeneratorUntergrundKonstanten.ECKE_WAHRSCHEINLICHKEITS_ERHOEHUNG_FALLS_KONDITIONEN_ERFUELLT_SIND);
 		}
 
@@ -54,8 +53,8 @@ public enum KartenGeneratorUntergrundEnum
 				int maximaleGroesseY)
 		{
 			return berechneVorkommensWahrscheinlichkeitAusKonditionUndAenderungen(
-					(a, b, c) -> KachelUntergrundUtils.istInDerMitteMitte(a, b, c), aktuellePosition, maximaleGroesseX,
-					maximaleGroesseY, KartenGeneratorUntergrundKonstanten.FREI_STANDART_WAHRSCHEINLICHKEIT,
+					KachelUntergrundUtils.istInDerMitteMitte(aktuellePosition, maximaleGroesseX, maximaleGroesseY),
+					KartenGeneratorUntergrundKonstanten.FREI_STANDART_WAHRSCHEINLICHKEIT,
 					KartenGeneratorUntergrundKonstanten.FREI_WAHRSCHEINLICHKEITS_REDUZIERUNG_FALLS_NICHT_IN_MITTE);
 		}
 	};
@@ -106,11 +105,10 @@ public enum KartenGeneratorUntergrundEnum
 	public abstract float getVorkommensWahrscheinlichkeit(Position aktuellePosition, int maximaleGroesseX,
 			int maximaleGroesseY);
 
-	protected static float berechneVorkommensWahrscheinlichkeitAusKonditionUndAenderungen(Kondition kondition,
-			Position aktuellePosition, int maximaleGroesseX, int maximaleGroesseY, float standardWahrscheinlichkeit,
-			float additionFallsKonditionErfuellt)
+	protected static float berechneVorkommensWahrscheinlichkeitAusKonditionUndAenderungen(boolean konditionIstErfuellt,
+			float standardWahrscheinlichkeit, float additionFallsKonditionErfuellt)
 	{
-		if (kondition.istErfuellt(aktuellePosition, maximaleGroesseX, maximaleGroesseY))
+		if (konditionIstErfuellt)
 		{
 			return standardWahrscheinlichkeit + additionFallsKonditionErfuellt;
 		}
