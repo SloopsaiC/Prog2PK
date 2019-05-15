@@ -2,7 +2,6 @@ package de.pk.control.spiel.phasen;
 
 import de.pk.control.spiel.Dungeon;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
-import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.Spielkonstanten;
 
 public class HeldenPhase extends Phase
@@ -11,6 +10,11 @@ public class HeldenPhase extends Phase
 	private final static boolean BRAUCHT_EINGABE = true;
 	private int anzahlAktionenDieserPhase = 0;
 
+	public HeldenPhase()
+	{
+		super();
+	}
+	
 	/**
 	 * @return true
 	 * @see de.pk.control.spiel.phasen.Phase#brauchtEingabe()

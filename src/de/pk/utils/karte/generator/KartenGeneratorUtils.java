@@ -2,7 +2,7 @@ package de.pk.utils.karte.generator;
 
 import de.pk.model.karte.generator.Richtung;
 import de.pk.model.karte.generator.untergruende.KachelUntergrundWertigkeit;
-import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrund;
+import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrundMitRichtung;
 import de.pk.model.position.Position;
 import de.pk.model.position.Vektor;
 import de.pk.utils.PositionsUtils;
@@ -56,9 +56,9 @@ public class KartenGeneratorUtils
 	}
 
 	/**
-	 * Iteriert solange die Position mit dem verschiebeVektor bis eine illegale Position
-	 * erstellt wird. Es wird geprueft ob die danach aktuellePosition und ihr
-	 * Gegenstueck, dass auf der Position ist, welche nach Verschiebung um den
+	 * Iteriert solange die Position mit dem verschiebeVektor bis eine illegale
+	 * Position erstellt wird. Es wird geprueft ob die danach aktuellePosition und
+	 * ihr Gegenstueck, dass auf der Position ist, welche nach Verschiebung um den
 	 * checkVektor entsteht, betretbar ist. Prueft somit die Verbindung zwischen
 	 * zwei KartenGeneratorUntergruenden.
 	 *
@@ -71,7 +71,7 @@ public class KartenGeneratorUtils
 	 * @param zu               Die Kachel zu der geschaut wird
 	 */
 	private static boolean iteriereUndPruefeVerbindung(Vektor verschiebeVektor, Vektor checkVektor,
-			Position aktuellePos, KartenGeneratorUntergrund von, KartenGeneratorUntergrund zu)
+			Position aktuellePos, KartenGeneratorUntergrundMitRichtung von, KartenGeneratorUntergrundMitRichtung zu)
 	{
 		try
 		{
@@ -103,8 +103,8 @@ public class KartenGeneratorUtils
 	 *
 	 * @return "true" wenn eine Verbindung besteht, anderfalls "false"
 	 */
-	public static boolean pruefeVerbindung(KartenGeneratorUntergrund von, KartenGeneratorUntergrund zu,
-			Richtung richtung)
+	public static boolean pruefeVerbindung(KartenGeneratorUntergrundMitRichtung von,
+			KartenGeneratorUntergrundMitRichtung zu, Richtung richtung)
 	{
 		Vektor verschiebeVektor = null;
 		Vektor checkVektor = null;

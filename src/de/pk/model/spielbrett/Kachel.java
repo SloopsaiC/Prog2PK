@@ -2,26 +2,25 @@ package de.pk.model.spielbrett;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
 import java.util.stream.Collectors;
 
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
 import de.pk.model.karte.generator.untergruende.KachelUntergrundWertigkeit;
-import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrund;
+import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrundMitRichtung;
 import de.pk.model.position.Position;
 
 public class Kachel
 {
 	private HashMap<Position, SpielbrettObjekt> kachelObjekte = null;
-	private KartenGeneratorUntergrund untergrund = null;
+	private KartenGeneratorUntergrundMitRichtung untergrund = null;
 
-	public Kachel(HashMap<Position, SpielbrettObjekt> objekte, KartenGeneratorUntergrund untergrund)
+	public Kachel(HashMap<Position, SpielbrettObjekt> objekte, KartenGeneratorUntergrundMitRichtung untergrund)
 	{
 		this.kachelObjekte = objekte;
 		this.untergrund = untergrund;
 	}
 
-	public Kachel(KartenGeneratorUntergrund untergrund)
+	public Kachel(KartenGeneratorUntergrundMitRichtung untergrund)
 	{
 		this(new HashMap<Position, SpielbrettObjekt>(), untergrund);
 	}
@@ -49,7 +48,7 @@ public class Kachel
 		return this.kachelObjekte.get(pos);
 	}
 
-	public KartenGeneratorUntergrund getUntergrund()
+	public KartenGeneratorUntergrundMitRichtung getUntergrund()
 	{
 		return this.untergrund;
 	}

@@ -48,4 +48,10 @@ public class KachelUntergrundUtils
 				&& distanzZurMitte < (maximalGroesseY
 						/ KartenGeneratorUntergrundKonstanten.XTEL_AB_WELCHEM_ETWAS_IN_DER_MITTE_IST);
 	}
+
+	public static boolean istAmRand(Position zuUeberpruefen, int maximaleGroesseX, int maximaleGroesseY)
+	{
+		return ((maximaleGroesseX - 1) == zuUeberpruefen.getX()) || ((maximaleGroesseY - 1) == zuUeberpruefen.getY())
+				|| (zuUeberpruefen.getX() == 0) || (zuUeberpruefen.getY() == 0);
+	}
 }

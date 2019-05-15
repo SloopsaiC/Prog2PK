@@ -8,6 +8,10 @@ public abstract class Phase
 
 	private final static boolean BRAUCHT_EINGABE_DEFAULT_WERT = false;
 
+	public Phase()
+	{
+	}
+
 	/**
 	 * Gibt an ob die Phase eine Eingabe vom Spieler braucht um sinnvoll umgesetzt
 	 * zu werden. Der Standardwert ist in de.pk.control.spiel.phasen.Phase
@@ -42,7 +46,7 @@ public abstract class Phase
 		{
 			return null;
 		}
-		
+
 	}
 
 }

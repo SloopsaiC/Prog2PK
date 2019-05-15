@@ -9,6 +9,11 @@ public class ExplorationsPhase extends Phase
 {
 	private boolean istFertig = false;
 
+	public ExplorationsPhase()
+	{
+		super();
+	}
+
 	/**
 	 * @see de.pk.control.spiel.phasen.Phase#phasenSchritt(Dungeon, Held)
 	 */

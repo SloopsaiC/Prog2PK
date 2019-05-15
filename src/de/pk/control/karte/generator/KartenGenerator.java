@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import de.pk.model.karte.generator.Richtung;
+import de.pk.model.karte.generator.untergruende.KachelUntergrundWertigkeit;
 import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrund;
-import de.pk.model.karte.generator.untergruende.Start;
+import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrundMitRichtung;
 import de.pk.model.position.Position;
 import de.pk.model.spielbrett.Kachel;
 import de.pk.utils.Spielkonstanten;
@@ -64,8 +65,8 @@ public class KartenGenerator
 	public Kachel generiereNeueKachel(int anzahlKachelnX, int anzahlKachelnY, Position aktuellePosition,
 			Richtung richtung, Kachel aktuelleKachel)
 	{
-		KartenGeneratorUntergrund untergrund = this.generiereNeueUntergrundKachel(anzahlKachelnX, anzahlKachelnY,
-				aktuellePosition, richtung, aktuelleKachel.getUntergrund());
+		KartenGeneratorUntergrundMitRichtung untergrund = this.generiereNeueUntergrundKachel(anzahlKachelnX,
+				anzahlKachelnY, aktuellePosition, richtung, aktuelleKachel.getUntergrund());
 		return new Kachel(untergrund);
 	}
 
@@ -82,19 +83,18 @@ public class KartenGenerator
 	 *
 	 * @return KartenGeneratorKachel: Die Kachel die generiert wurde
 	 */
-	public KartenGeneratorUntergrund generiereNeueUntergrundKachel(int anzahlKachelnX, int anzahlKachelnY,
-			Position aktuellePosition, Richtung richtung, KartenGeneratorUntergrund aktuelleKachel)
+	public KartenGeneratorUntergrundMitRichtung generiereNeueUntergrundKachel(int anzahlKachelnX, int anzahlKachelnY,
+			Position aktuellePosition, Richtung richtung, KartenGeneratorUntergrundMitRichtung aktuelleKachel)
 	{
 		if (this.registrierteKacheln.size() < 1)
 		{
 			// TODO: Exception Messages
 			throw new IllegalStateException();
 		}
-		KartenGeneratorUntergrund generiert = this.getUntergrundKachelZumGenerieren(anzahlKachelnX, anzahlKachelnY,
-				aktuellePosition.addiere(KartenGeneratorUtils.getVersatzVonRichtung(richtung)));
+		KartenGeneratorUntergrundMitRichtung generiert = this.getUntergrundKachelZumGenerieren(anzahlKachelnX,
+				anzahlKachelnY, aktuellePosition.addiere(KartenGeneratorUtils.getVersatzVonRichtung(richtung)));
 		if (!KartenGeneratorUtils.pruefeVerbindung(aktuelleKachel, generiert, richtung))
 		{
-			generiert = generiert.clone();
 			while (!KartenGeneratorUtils.pruefeVerbindung(aktuelleKachel, generiert, richtung))
 			{
 				generiert.drehe(STANDARD_DREH_RICHTUNG);
@@ -105,7 +105,7 @@ public class KartenGenerator
 
 	public Kachel generiereStartKachel()
 	{
-		return new Kachel(new Start());
+		return new Kachel(new KartenGeneratorUntergrundMitRichtung(KartenGeneratorUntergrund.START, Richtung.NORDEN));
 	}
 
 	/**
@@ -121,19 +121,23 @@ public class KartenGenerator
 	 *
 	 * @return KartenGeneratorKachel A tile fitting the current Position
 	 */
-	private KartenGeneratorUntergrund getUntergrundKachelZumGenerieren(int anzahlKachelnX, int anzahlKachelnY,
-			Position generierePosition)
+	private KartenGeneratorUntergrundMitRichtung getUntergrundKachelZumGenerieren(int anzahlKachelnX,
+			int anzahlKachelnY, Position generierePosition)
 	{
 		// Holt alle Wahrscheinlichkeiten von den Kacheln
 		float[] wahrscheinlichkeiten = this.getWahrscheinlichkeitVonKacheln(anzahlKachelnX, anzahlKachelnY,
 				generierePosition);
 		if (KartenGeneratorUtils.getKachelDieGeneriertWerdenMuss(wahrscheinlichkeiten) >= 0)
 		{
-			return this.registrierteKacheln
-					.get(KartenGeneratorUtils.getKachelDieGeneriertWerdenMuss(wahrscheinlichkeiten));
+			return new KartenGeneratorUntergrundMitRichtung(
+					this.registrierteKacheln
+							.get(KartenGeneratorUtils.getKachelDieGeneriertWerdenMuss(wahrscheinlichkeiten)),
+					Richtung.NORDEN);
 		}
-		return this.registrierteKacheln
-				.get(WahrscheinlichkeitsUtils.getIndexAusWahrscheinlichkeiten(wahrscheinlichkeiten));
+		return new KartenGeneratorUntergrundMitRichtung(
+				this.registrierteKacheln
+						.get(WahrscheinlichkeitsUtils.getIndexAusWahrscheinlichkeiten(wahrscheinlichkeiten)),
+				Richtung.NORDEN);
 	}
 
 	/**
@@ -149,8 +153,8 @@ public class KartenGenerator
 		float[] wahrscheinlichkeit = new float[this.registrierteKacheln.size()];
 		for (int i = 0; i < wahrscheinlichkeit.length; i++)
 		{
-			wahrscheinlichkeit[i] = this.registrierteKacheln.get(i).getVorkommensWahrscheinlichkeit(anzahlKachelnX,
-					anzahlKachelnY, pos);
+			wahrscheinlichkeit[i] = this.registrierteKacheln.get(i).getVorkommensWahrscheinlichkeit(pos, anzahlKachelnX,
+					anzahlKachelnY);
 		}
 		return wahrscheinlichkeit;
 	}
@@ -175,10 +179,10 @@ public class KartenGenerator
 	{
 		for (int val = 0; val < Spielkonstanten.KACHEL_GROESSE_X; val++)
 		{
-			if (zuUeberpruefen.getInhalt()[val][0].istBetretbar()
-					|| zuUeberpruefen.getInhalt()[Spielkonstanten.KACHEL_GROESSE_Y - 1][val].istBetretbar()
-					|| zuUeberpruefen.getInhalt()[0][val].istBetretbar()
-					|| zuUeberpruefen.getInhalt()[val][Spielkonstanten.KACHEL_GROESSE_X - 1].istBetretbar())
+			KachelUntergrundWertigkeit[][] inhalt = zuUeberpruefen.getInhaltVonRichtung(Richtung.NORDEN);
+			if (inhalt[val][0].istBetretbar() || inhalt[Spielkonstanten.KACHEL_GROESSE_Y - 1][val].istBetretbar()
+					|| inhalt[0][val].istBetretbar()
+					|| inhalt[val][Spielkonstanten.KACHEL_GROESSE_X - 1].istBetretbar())
 			{
 				return true;
 			}

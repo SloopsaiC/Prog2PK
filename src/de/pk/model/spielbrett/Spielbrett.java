@@ -3,8 +3,6 @@ package de.pk.model.spielbrett;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -190,6 +188,30 @@ public class Spielbrett
 		{
 			this.alleLebendigenObjekte.add((LebendigesObjekt) zuSetzen);
 		}
+	}
+
+	/**
+	 * @return the spielbrettTeile
+	 */
+	public HashMap<Position, Kachel> getSpielbrettTeile()
+	{
+		return this.spielbrettTeile;
+	}
+
+	/**
+	 * @param spielbrettTeile the spielbrettTeile to set
+	 */
+	public void setSpielbrettTeile(HashMap<Position, Kachel> spielbrettTeile)
+	{
+		this.spielbrettTeile = spielbrettTeile;
+	}
+
+	/**
+	 * @param alleLebendigenObjekte the alleLebendigenObjekte to set
+	 */
+	public void setAlleLebendigenObjekte(ArrayList<LebendigesObjekt> alleLebendigenObjekte)
+	{
+		this.alleLebendigenObjekte = alleLebendigenObjekte;
 	}
 
 	public void entferneSpielbrettObjektBei(KachelPosition position)
