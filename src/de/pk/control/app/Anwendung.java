@@ -6,13 +6,7 @@ import de.pk.control.spiel.Spiel;
 import de.pk.control.spiel.einstellungen.Einstellungen;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.lokalisierung.DE_de;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import de.pk.view.visuell.fxmlSzenenLayouts.AnwendungFX;
 
 /**
  * Die Anwendung verwaltet die Auswahl eines Spielstandes, die Bearbeitung von
@@ -20,7 +14,7 @@ import javafx.stage.Stage;
  *
  * @author Dylan
  */
-public class Anwendung extends Application
+public class Anwendung
 {
 
 	/**
@@ -32,11 +26,12 @@ public class Anwendung extends Application
 	 */
 	private Einstellungen anwendungsEinstellungen = null;
 
+
 	/**
 	 * Die Anwendungsschleife fuehrt den Nutzer in das Hauptmenue und ruft je nach
 	 * Eingabe die entsprechenden Optionen auf.
 	 */
-	private void anwendungsSchleife()
+	private void anwendungsSchleife ()
 	{
 		boolean amLeben = true;
 		while (amLeben)
@@ -45,62 +40,47 @@ public class Anwendung extends Application
 		}
 	}
 
+
 	/**
 	 * Die Anwendung (Dieses aktuelle Objekt) wird initialisiert, Einstellungen
 	 * werden uebernommen.
 	 */
-	private void initAnwendung()
+	private void initAnwendung ()
 	{
 		this.anwendungsEinstellungen = Einstellungen.getEinstellungen();
 	}
+
 
 	/**
 	 * Wird im Hauptmenue der Punkt "Neues Spiel" gewaehlt, wird hier ein neues
 	 * Spiel initialisiert.
 	 */
-	private void neuesSpiel()
+	private void neuesSpiel ()
 	{
 		Weltkarte weltkarte = new Weltkarte(new Dungeon(DE_de.TESTAUSGABE_DUNGEON_NAME[0]),
 				new Dungeon(DE_de.TESTAUSGABE_DUNGEON_NAME[1]));
 		this.aktivesSpiel = new Spiel(weltkarte, Spielkonstanten.STANDARD_HELDEN);
 	}
 
+
 	/**
 	 * Wird im Hauptmenue die Option "Spiel Laden" gewaehlt, wird dies hier
 	 * behandelt.
 	 */
-	private void spielLaden()
+	private void spielLaden ()
 	{
 		this.aktivesSpiel = null;
 	}
+
 
 	/**
 	 * Initialisiert zunaechst die Anwendung und startet dann die
 	 * Anwendungsschleife.
 	 */
-	public void starteAnwendung(String[] args)
+	public void starteAnwendung (String[] args)
 	{
 		this.initAnwendung();
-		launch(args);
+		AnwendungFX.starteAnwendung(args);
 	}
 
-	@Override
-	public void start(Stage primaryStage)
-	{
-		primaryStage.setTitle("Hello World!");
-		Button btn = new Button();
-		btn.setText("Say 'Hello World'");
-		btn.setOnAction(new EventHandler<ActionEvent>()
-		{
-			@Override
-			public void handle(ActionEvent event)
-			{
-				System.out.println("Hello World!");
-			}
-		});
-		StackPane root = new StackPane();
-		root.getChildren().add(btn);
-		primaryStage.setScene(new Scene(root, 300, 250));
-		primaryStage.show();
-	}
 }

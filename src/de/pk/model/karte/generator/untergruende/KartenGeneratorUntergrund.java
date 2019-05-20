@@ -9,8 +9,7 @@ import de.pk.utils.karte.generator.KartenGeneratorUntergrundKonstanten;
 
 public enum KartenGeneratorUntergrund
 {
-	ECKE(new KachelUntergrundWertigkeit[][]
-	{
+	ECKE(new KachelUntergrundWertigkeit[][] {
 			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER,
 					KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER },
 			{ KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT,
@@ -24,8 +23,7 @@ public enum KartenGeneratorUntergrund
 			(a, b, c) -> KachelUntergrundUtils.istInEcke(a, b, c),
 			KartenGeneratorUntergrundKonstanten.ECKE_STANDARD_WAHRSCHEINLICHKEIT,
 			KartenGeneratorUntergrundKonstanten.ECKE_WAHRSCHEINLICHKEITS_ERHOEHUNG_FALLS_KONDITIONEN_ERFUELLT_SIND),
-	FREI(new KachelUntergrundWertigkeit[][]
-	{
+	FREI(new KachelUntergrundWertigkeit[][] {
 			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
 					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
 			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
@@ -39,8 +37,7 @@ public enum KartenGeneratorUntergrund
 			(a, b, c) -> KachelUntergrundUtils.istInDerMitteMitte(a, b, c),
 			KartenGeneratorUntergrundKonstanten.FREI_STANDART_WAHRSCHEINLICHKEIT,
 			KartenGeneratorUntergrundKonstanten.FREI_WAHRSCHEINLICHKEITS_REDUZIERUNG_FALLS_NICHT_IN_MITTE),
-	START(new KachelUntergrundWertigkeit[][]
-	{
+	START(new KachelUntergrundWertigkeit[][] {
 			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
 					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
 			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
@@ -52,8 +49,7 @@ public enum KartenGeneratorUntergrund
 			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
 					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI } },
 			KartenGeneratorUntergrundKonstanten.START_WAHRSCHEINLICHKEIT),
-	SCHLUCHT(new KachelUntergrundWertigkeit[][]
-	{
+	SCHLUCHT(new KachelUntergrundWertigkeit[][] {
 			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS,
 					KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS },
 			{ KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.LEICHT,
@@ -65,8 +61,7 @@ public enum KartenGeneratorUntergrund
 			{ KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS,
 					KachelUntergrundWertigkeit.FELS, KachelUntergrundWertigkeit.FELS } },
 			KartenGeneratorUntergrundKonstanten.SCHLUCHT_STANDARD_WAHRSCHEINLICHKEIT),
-	SACKGASSE(new KachelUntergrundWertigkeit[][]
-	{
+	SACKGASSE(new KachelUntergrundWertigkeit[][] {
 			{ KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BAUM,
 					KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BAUM },
 			{ KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BUSCH, KachelUntergrundWertigkeit.SCHWER,
@@ -80,8 +75,7 @@ public enum KartenGeneratorUntergrund
 			(a, b, c) -> !KachelUntergrundUtils.istInDerMitteMitte(a, b, c),
 			KartenGeneratorUntergrundKonstanten.SACKGASSE_STANDARD_WAHRSCHEINLICHKEIT,
 			KartenGeneratorUntergrundKonstanten.SACKGASSE_WAHRSCHEINLICHKEITS_AENDERUNG_FALLS_BEDINGUNG),
-	KARTENRAND(new KachelUntergrundWertigkeit[][]
-	{
+	KARTENRAND(new KachelUntergrundWertigkeit[][] {
 			{ KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE,
 					KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.ENDE },
 			{ KachelUntergrundWertigkeit.ENDE, KachelUntergrundWertigkeit.SCHWER, KachelUntergrundWertigkeit.SCHWER,
@@ -105,7 +99,8 @@ public enum KartenGeneratorUntergrund
 	private float standardWahrscheinlichkeit = 0;
 	private float wahrscheinlichkeitsAenderungFallsBedingungErfuellt = 0;
 
-	private KartenGeneratorUntergrund(KachelUntergrundWertigkeit[][] inhalt,
+
+	private KartenGeneratorUntergrund (KachelUntergrundWertigkeit[][] inhalt,
 			UntergrundWahrscheinlichkeitsBedingung bedingungWahrscheinlichkeitsAenderung,
 			float standardWahrscheinlichkeit, float wahrscheinlichkeitsAenderungFallsBedingungErfuellt)
 	{
@@ -116,18 +111,20 @@ public enum KartenGeneratorUntergrund
 		this.fuelleInhalt(inhalt);
 	}
 
-	private KartenGeneratorUntergrund(KachelUntergrundWertigkeit[][] inhalt, float standardWahrscheinlichkeit)
+
+	private KartenGeneratorUntergrund (KachelUntergrundWertigkeit[][] inhalt, float standardWahrscheinlichkeit)
 	{
 		this(inhalt, null, standardWahrscheinlichkeit, 0.0f);
 	}
 
-	private void fuelleInhalt(KachelUntergrundWertigkeit[][] nordenInhalt)
+
+	private void fuelleInhalt (KachelUntergrundWertigkeit[][] nordenInhalt)
 	{
 		// Startet indem der gegebene Inhalt als Inhalt gespeichert wird, sollte die
 		// Kachel nach "Norden" gedreht, also im Ausgangszustand sein.
-		// Anschließend wird der Inhalt immer um einen weiter gedreht, da die Richtungen
+		// Anschlieï¿½end wird der Inhalt immer um einen weiter gedreht, da die Richtungen
 		// in "Richtung" in der selben Reihenfolge angegeben sind
-		// Dies wird für alle fortgesetzt
+		// Dies wird fï¿½r alle fortgesetzt
 		this.inhalt.put(Richtung.NORDEN, nordenInhalt);
 		for (int i = 1; i < Richtung.values().length; i++)
 		{
@@ -136,17 +133,20 @@ public enum KartenGeneratorUntergrund
 		}
 	}
 
-	public KachelUntergrundWertigkeit[][] getInhaltVonRichtung(Richtung zuBekommen)
+
+	public KachelUntergrundWertigkeit[][] getInhaltVonRichtung (Richtung zuBekommen)
 	{
 		return this.inhalt.get(zuBekommen);
 	}
 
-	public KachelUntergrundWertigkeit getInhaltVonRichtungBei(Richtung richtung, Position bei)
+
+	public KachelUntergrundWertigkeit getInhaltVonRichtungBei (Richtung richtung, Position bei)
 	{
 		return this.getInhaltVonRichtung(richtung)[bei.getY()][bei.getX()];
 	}
 
-	private static KachelUntergrundWertigkeit[][] dreheNachRechts(KachelUntergrundWertigkeit[][] zuDrehen)
+
+	private static KachelUntergrundWertigkeit[][] dreheNachRechts (KachelUntergrundWertigkeit[][] zuDrehen)
 	{
 		// Generiert den neuen Inhalt
 		KachelUntergrundWertigkeit[][] neuerInhalt = new KachelUntergrundWertigkeit[zuDrehen.length][zuDrehen[0].length];
@@ -163,7 +163,8 @@ public enum KartenGeneratorUntergrund
 		return neuerInhalt;
 	}
 
-	public float getVorkommensWahrscheinlichkeit(Position position, int maximaleGroesseX, int maximaleGroesseY)
+
+	public float getVorkommensWahrscheinlichkeit (Position position, int maximaleGroesseX, int maximaleGroesseY)
 	{
 		if (this.bedingungWahrscheinlichkeitsAenderung != null
 				&& this.bedingungWahrscheinlichkeitsAenderung.istErfuellt(position, maximaleGroesseX, maximaleGroesseY))
