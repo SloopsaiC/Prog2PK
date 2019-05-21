@@ -1,0 +1,33 @@
+AnchorPane {
+	-fx-background-color: rgb(80,80,80);
+}
+
+#OptionenAnchorPane {
+	-fx-background-color: none;
+}
+
+
+Label {
+	-fx-text-fill: white;
+}
+
+#ueberschriftenLabel{
+	-fx-font-weight: bold;
+}
+
+
+.button, .toggle-button  {
+	-fx-color: rgba(0,0,0,0.4);
+}
+
+.button:hover , .toggle-button:hover {
+	-fx-color: rgba(0,0,0,0.6);
+}
+
+.button:pressed, .toggle-button:selected  {
+	-fx-color: rgba(50,0,0,0.6);
+}
+
+
+
+

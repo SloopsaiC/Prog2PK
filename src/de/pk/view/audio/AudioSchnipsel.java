@@ -1,0 +1,174 @@
+/**
+ *
+ */
+package de.pk.view.audio;
+
+import java.io.Closeable;
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import de.pk.utils.MatheUtils;
+
+/**
+ * @author Dylan
+ */
+public class AudioSchnipsel implements Closeable
+{
+
+	public static final int MAXIMALE_PROZENTUALE_LAUTSTAERKE = 100;
+	public static final int MINIMALE_PROZENTUALE_LAUTSTAERKE = 0;
+	public static final int START_FRAME = 0;
+	private static final int LAUTSTAERKE_DEZIBEL_UMRECHNUNGS_FAKTOR = 40;
+
+	private Clip audioClip = null;
+	private FloatControl lautstaerkeControl = null;
+	private int prozentualeLautstaerke = 0;
+
+
+	public AudioSchnipsel (String dateipfad, int lautstaerke)
+	{
+		try
+		{
+			this.audioClip = AudioSystem.getClip();
+			this.audioClip.open(AudioSystem.getAudioInputStream(new File(dateipfad)));
+			this.lautstaerkeControl = (FloatControl) this.audioClip.getControl(FloatControl.Type.MASTER_GAIN);
+			this.prozentualeLautstaerke = lautstaerke;
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex)
+		{
+			//
+		}
+	}
+
+
+	public void abspielen (boolean einblenden)
+	{
+		if (this.istBeendet())
+		{
+			this.stoppen(false);
+		}
+		this.audioClip.start();
+		if (einblenden && !this.istAktivAbspielend())
+		{
+			this.passeLautstaerkeKontinuierlichAn(this.prozentualeLautstaerke, MINIMALE_PROZENTUALE_LAUTSTAERKE);
+		}
+	}
+
+
+	public int pausieren (boolean ausblenden)
+	{
+		if (ausblenden && this.istAktivAbspielend())
+		{
+			this.passeLautstaerkeKontinuierlichAn(MINIMALE_PROZENTUALE_LAUTSTAERKE, this.prozentualeLautstaerke);
+		}
+		this.audioClip.stop();
+		return this.getFramePosition();
+	}
+
+
+	public void stoppen (boolean ausblenden)
+	{
+		if (ausblenden && this.istAktivAbspielend())
+		{
+			this.passeLautstaerkeKontinuierlichAn(MINIMALE_PROZENTUALE_LAUTSTAERKE, this.prozentualeLautstaerke);
+		}
+		this.audioClip.stop();
+		this.audioClip.flush();
+		this.setFramePosition(START_FRAME);
+	}
+
+
+	public int getProzentualeLautstaerke ()
+	{
+		return this.prozentualeLautstaerke;
+	}
+
+
+	public synchronized void setProzentualeLautstaerke (int prozentWert, boolean kontinuierlich)
+	{
+		int alteLautstaerke = this.prozentualeLautstaerke;
+		this.prozentualeLautstaerke = MatheUtils.begrenzeWertAufMinMax(prozentWert, MINIMALE_PROZENTUALE_LAUTSTAERKE,
+				MAXIMALE_PROZENTUALE_LAUTSTAERKE);
+		if (kontinuierlich)
+		{
+			this.passeLautstaerkeKontinuierlichAn(this.prozentualeLautstaerke, alteLautstaerke);
+		} else
+		{
+			setzeDezibelLautstaerkeAusProzentualerAngabe(this.prozentualeLautstaerke);
+		}
+
+	}
+
+
+	private void passeLautstaerkeKontinuierlichAn (int neueProzentualeLautstaerke, int alteProzentualeLautstaerke)
+	{
+		try
+		{
+			synchronized (AudioSchnipsel.this.audioClip)
+			{
+				for (int aktuelleLautstaerke = alteProzentualeLautstaerke; aktuelleLautstaerke < neueProzentualeLautstaerke; aktuelleLautstaerke++)
+				{ // lauter
+					setzeDezibelLautstaerkeAusProzentualerAngabe(aktuelleLautstaerke);
+					Thread.sleep(75);
+				} // leiser
+				for (int aktuelleLautstaerke = alteProzentualeLautstaerke; aktuelleLautstaerke > neueProzentualeLautstaerke; aktuelleLautstaerke--)
+				{
+					setzeDezibelLautstaerkeAusProzentualerAngabe(aktuelleLautstaerke);
+					Thread.sleep(75);
+				}
+			}
+		} catch (InterruptedException e)
+		{
+			//
+		}
+	}
+
+
+	private void setzeDezibelLautstaerkeAusProzentualerAngabe (int prozentualeLautstaerke)
+	{
+		this.lautstaerkeControl.setValue((float) (LAUTSTAERKE_DEZIBEL_UMRECHNUNGS_FAKTOR
+				* Math.log10(MatheUtils.begrenzeWertAufMinMax(prozentualeLautstaerke, MINIMALE_PROZENTUALE_LAUTSTAERKE,
+						MAXIMALE_PROZENTUALE_LAUTSTAERKE) / (float) MAXIMALE_PROZENTUALE_LAUTSTAERKE)));
+		System.out.println(this.lautstaerkeControl.getValue());
+	}
+
+
+	public int getFramePosition ()
+	{
+		return this.audioClip.getFramePosition();
+	}
+
+
+	public void setFramePosition (int framePosition)
+	{
+		this.audioClip.setFramePosition(framePosition);
+	}
+
+
+	public boolean istBeendet ()
+	{
+		return (this.audioClip.getFramePosition() == this.audioClip.getFrameLength());
+	}
+
+
+	public boolean istAktivAbspielend ()
+	{
+		return this.audioClip.isActive() && this.audioClip.isRunning();
+	}
+
+
+	/**
+	 * Schliesst den aktuellen AudioSchnipsel.
+	 */
+	@Override
+	public void close ()
+	{
+		this.audioClip.close();
+	}
+
+}

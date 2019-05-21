@@ -1,0 +1,18 @@
+#SzenenPane {
+	-fx-pref-width: 533;
+	-fx-pref-height: 400;
+}
+
+Label {
+	-fx-font-size: 12;
+}
+
+#ueberschriftenLabel{
+	-fx-font-size: 20;
+}
+
+
+.button, .toggle-button  {
+	-fx-font-size: 12;
+}
+

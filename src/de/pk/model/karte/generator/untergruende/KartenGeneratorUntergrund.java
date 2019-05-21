@@ -161,6 +161,7 @@ public enum KartenGeneratorUntergrund
 	 *                                                           angewendet wird
 	 *                                                           falls die Bedingung
 	 *                                                           erfuellt ist
+	 *
 	 */
 	private KartenGeneratorUntergrund(KachelUntergrundWertigkeit[][] inhalt,
 			UntergrundWahrscheinlichkeitsBedingung bedingungWahrscheinlichkeitsAenderung,
@@ -173,20 +174,14 @@ public enum KartenGeneratorUntergrund
 		this.fuelleInhalt(inhalt);
 	}
 
-	/**
-	 * Dreht den Inhalt welcher nach Norden gedreht ist, in die anderen Richtungen
-	 * welche in {@link}Richtung definiert sind und speichert diese in der inhalt
-	 * HashMap des momentanen Objektes ab
-	 * 
-	 * @param nordenInhalt Die Anordnungen der KachelUntergrundWertigkeiten sollte
-	 *                     dieser Untergrund nach Norden gedreht sein
-	 */
 	private void fuelleInhalt(KachelUntergrundWertigkeit[][] nordenInhalt)
 	{
 		// Startet indem der gegebene Inhalt als Inhalt gespeichert wird, sollte die
 		// Kachel nach "Norden" gedreht, also im Ausgangszustand sein.
-		// Anschließend wird der Inhalt immer um einen weiter gedreht, da die Richtungen
+		// Anschlieï¿½end wird der Inhalt immer um einen weiter gedreht, da die
+		// Richtungen
 		// in "Richtung" in der selben Reihenfolge angegeben sind
+
 		// Dies wird fuer alle fortgesetzt
 		this.inhalt.put(Richtung.NORDEN, nordenInhalt);
 		for (int i = 1; i < Richtung.values().length; i++)
@@ -209,9 +204,11 @@ public enum KartenGeneratorUntergrund
 	}
 
 	/**
-	 * Erlaubt Zugriff auf eine einzelne Stelle des Untergrundes, welcher in gegebener Richtung gedreht ist.
+	 * Erlaubt Zugriff auf eine einzelne Stelle des Untergrundes, welcher in
+	 * gegebener Richtung gedreht ist.
+	 * 
 	 * @param richtung
-	 * */
+	 */
 	public KachelUntergrundWertigkeit getInhaltVonRichtungBei(Richtung richtung, Position bei)
 	{
 		return this.getInhaltVonRichtung(richtung)[bei.getY()][bei.getX()];
