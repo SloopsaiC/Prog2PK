@@ -30,7 +30,7 @@ public class Effekt
 	/**
 	 * Erstellt einen neuen Effekt mit den gegebenen Aenderungen. Welcher Index
 	 * welche Aenderung beschreibt wird durch {@link}EffektIndex beschrieben.
-	 * 
+	 *
 	 * @param effektBeschreibung Die Aenderungen die dieser Effekt auf ein
 	 *                           LebendigesObjekt hat, falls er auf dieses
 	 *                           angewendet wird.

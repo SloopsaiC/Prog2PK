@@ -6,9 +6,7 @@ import java.util.HashMap;
 import de.pk.model.gegenstaende.container.Container;
 import de.pk.model.interaktion.Aktion;
 import de.pk.model.interaktion.effekt.Effekt;
-import de.pk.model.interaktion.effekt.EffektBeschreibungsIndex;
 import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjektModell;
-import de.pk.utils.Spielkonstanten;
 
 public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 {
@@ -35,16 +33,6 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 		this.punkte.put(LebendigesObjektPunkteIndex.BEWEGUNGS_PUNKTE, bewegungsPunkte);
 		this.aktionen = new HashMap<>();
 		this.effekte = new ArrayList<>();
-	}
-
-	public int getAnzahlPunkteVon(LebendigesObjektPunkteIndex index)
-	{
-		return this.punkte.get(index);
-	}
-
-	public void setAnzahlPunkteVon(LebendigesObjektPunkteIndex index, int neuerWert)
-	{
-		this.punkte.replace(index, neuerWert);
 	}
 
 	public void aenderePunkteVon(LebendigesObjektPunkteIndex index, int aenderung)
@@ -87,6 +75,11 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 		return this.aktionen.get(name);
 	}
 
+	public int getAnzahlPunkteVon(LebendigesObjektPunkteIndex index)
+	{
+		return this.punkte.get(index);
+	}
+
 	/**
 	 *
 	 * @return Array mit allen Statuseffekten des Lebendigen Objekts
@@ -100,6 +93,11 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 	public boolean istLebendig()
 	{
 		return true;
+	}
+
+	public void setAnzahlPunkteVon(LebendigesObjektPunkteIndex index, int neuerWert)
+	{
+		this.punkte.replace(index, neuerWert);
 	}
 
 	/**

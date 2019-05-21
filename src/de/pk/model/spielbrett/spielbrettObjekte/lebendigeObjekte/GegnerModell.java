@@ -1,7 +1,6 @@
 package de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte;
 
 import de.pk.model.gegenstaende.container.Container;
-import de.pk.utils.DebugAusgabeKlasse;
 
 public class GegnerModell extends LebendigesObjektModell
 {

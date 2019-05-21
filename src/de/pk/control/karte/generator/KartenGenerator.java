@@ -15,8 +15,8 @@ import de.pk.utils.karte.generator.KartenGeneratorUtils;
 
 public class KartenGenerator
 {
-	private ArrayList<KartenGeneratorUntergrund> registrierteKacheln = null;
 	public static Richtung STANDARD_DREH_RICHTUNG = Richtung.OSTEN;
+	private ArrayList<KartenGeneratorUntergrund> registrierteKacheln = null;
 
 	/**
 	 * Erstellt einen KartenGenerator welcher keine registrierten Untergruende hat
@@ -97,7 +97,7 @@ public class KartenGenerator
 		{
 			while (!KartenGeneratorUtils.pruefeVerbindung(aktuelleKachel, generiert, richtung))
 			{
-				generiert.drehe(STANDARD_DREH_RICHTUNG);
+				generiert.drehe(KartenGenerator.STANDARD_DREH_RICHTUNG);
 			}
 		}
 		return generiert;

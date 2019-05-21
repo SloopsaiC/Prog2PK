@@ -15,6 +15,15 @@ public class ExplorationsPhase extends Phase
 	}
 
 	/**
+	 * Gibt true zurueck, falls die Phase als fertig erachtet wird
+	 */
+	@Override
+	public boolean istFertig()
+	{
+		return this.istFertig;
+	}
+
+	/**
 	 * @see de.pk.control.spiel.phasen.Phase#phasenSchritt(Dungeon, Held)
 	 */
 	@Override
@@ -28,14 +37,5 @@ public class ExplorationsPhase extends Phase
 					aktiverDungeon.getSpielbrett().getPositionKachel(aktuellePosition.getKachel()));
 		}
 		this.istFertig = true;
-	}
-
-	/**
-	 * Gibt true zurueck, falls die Phase als fertig erachtet wird
-	 */
-	@Override
-	public boolean istFertig()
-	{
-		return this.istFertig;
 	}
 }

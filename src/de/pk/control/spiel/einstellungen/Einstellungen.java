@@ -1,9 +1,5 @@
 package de.pk.control.spiel.einstellungen;
 
-import de.pk.utils.DebugAusgabeKlasse;
-import de.pk.utils.DebugEingabeKlasse;
-import de.pk.utils.lokalisierung.DE_de;
-
 /**
  *
  *

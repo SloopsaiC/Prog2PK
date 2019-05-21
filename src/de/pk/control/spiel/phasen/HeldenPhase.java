@@ -14,7 +14,7 @@ public class HeldenPhase extends Phase
 	{
 		super();
 	}
-	
+
 	/**
 	 * @return true
 	 * @see de.pk.control.spiel.phasen.Phase#brauchtEingabe()
@@ -26,6 +26,15 @@ public class HeldenPhase extends Phase
 	}
 
 	/**
+	 * Gibt true zurueck, falls die Phase als fertig erachtet wird
+	 */
+	@Override
+	public boolean istFertig()
+	{
+		return this.anzahlAktionenDieserPhase >= Spielkonstanten.MAX_AKTIONEN_HELDEN_PHASE;
+	}
+
+	/**
 	 * @see de.pk.control.spiel.phasen.Phase#phasenSchritt(Dungeon, Held)
 	 */
 	@Override
@@ -33,15 +42,6 @@ public class HeldenPhase extends Phase
 	{
 		aktiverHeld.fuehreAktionAus("Bewegen", null);
 		this.anzahlAktionenDieserPhase++;
-	}
-
-	/**
-	 * Gibt true zurueck, falls die Phase als fertig erachtet wird
-	 */
-	@Override
-	public boolean istFertig()
-	{
-		return this.anzahlAktionenDieserPhase >= Spielkonstanten.MAX_AKTIONEN_HELDEN_PHASE;
 	}
 
 }

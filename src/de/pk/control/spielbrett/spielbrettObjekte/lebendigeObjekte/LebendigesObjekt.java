@@ -1,7 +1,6 @@
 package de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte;
 
 import java.util.ArrayList;
-import java.util.ListIterator;
 import java.util.Set;
 
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
@@ -77,6 +76,26 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 
 	}
 
+	private Vektor generiereAenderungsVektorAusEffekt(Effekt enthaltenerEffekt)
+	{
+		return new Vektor(enthaltenerEffekt.getWertAusBeschreibung(EffektBeschreibungsIndex.BEWEGUNG_X),
+				enthaltenerEffekt.getWertAusBeschreibung(EffektBeschreibungsIndex.BEWEGUNG_Y));
+	}
+
+	/**
+	 * Filtert aus einer Liste mit Effekten alle tickenden Effekte heraus.
+	 *
+	 * @param ausgangsListe Die Liste aus der gefiltert werden soll
+	 *
+	 * @return Eine Liste mit allen tickenden Effekten aus der Ausgangsliste
+	 */
+	private ArrayList<Effekt> generiereListeVonTickendenEffektenAus(ArrayList<Effekt> ausgangsListe)
+	{
+		ArrayList<Effekt> tickendeEffekte = new ArrayList<>(ausgangsListe);
+		tickendeEffekte.removeIf(e -> !e.istTickend());
+		return tickendeEffekte;
+	}
+
 	public Set<String> getAktionsNamen()
 	{
 		return this.modell.getAktionen().keySet();
@@ -98,24 +117,32 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 		return !(x > this.modell.getAnzahlPunkteVon(LebendigesObjektPunkteIndex.BEWEGUNGS_PUNKTE));
 	}
 
-	private Vektor generiereAenderungsVektorAusEffekt(Effekt enthaltenerEffekt)
-	{
-		return new Vektor(enthaltenerEffekt.getWertAusBeschreibung(EffektBeschreibungsIndex.BEWEGUNG_X),
-				enthaltenerEffekt.getWertAusBeschreibung(EffektBeschreibungsIndex.BEWEGUNG_Y));
-	}
-
 	/**
-	 * Filtert aus einer Liste mit Effekten alle tickenden Effekte heraus.
-	 * 
-	 * @param ausgangsListe Die Liste aus der gefiltert werden soll
-	 * 
-	 * @return Eine Liste mit allen tickenden Effekten aus der Ausgangsliste
+	 * Wendet alle auf dieses lebendige Objekt registrierten Effekte auf dieses an.
+	 * Die Positionsaenderung die durch diese verursacht werden wuerde wird an den
+	 * Aufrufer zurueckgegeben.
+	 *
+	 * @return Die Positionsaenderung die durch die Effekte verursacht werden wuerde
 	 */
-	private ArrayList<Effekt> generiereListeVonTickendenEffektenAus(ArrayList<Effekt> ausgangsListe)
+	public Vektor update()
 	{
-		ArrayList<Effekt> tickendeEffekte = new ArrayList<>(ausgangsListe);
-		tickendeEffekte.removeIf(e -> !e.istTickend());
-		return tickendeEffekte;
+		Vektor positionsAenderung = new Vektor(0, 0);
+		// While und List Iterator da hier ein Element waehrend des Iterierens aus der
+		// Liste entfernt werden kann (Abgeklungene Effekte)
+		for (Effekt momentanerEffekt : this.generiereListeVonTickendenEffektenAus(this.modell.getEffekte()))
+		{
+			this.wendeEffektAufModellAn(momentanerEffekt);
+			// Update die Positionsaenderung die von allen Effekten
+			// in Summe "gefordert" wird
+			positionsAenderung = positionsAenderung.addiere(this.generiereAenderungsVektorAusEffekt(momentanerEffekt));
+			momentanerEffekt.wurdeGewirkt();
+			if (momentanerEffekt.istAbgeklungen())
+			{
+				this.modell.getEffekte().remove(momentanerEffekt); // wenn der Effekt abgeklungen ist, wird er
+																	// entfernt.
+			}
+		}
+		return positionsAenderung;
 	}
 
 	private void wendeEffektAufModellAn(Effekt zuAnwenden)
@@ -125,33 +152,5 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 			this.modell.aenderePunkteVon(index, zuAnwenden
 					.getWertAusBeschreibung(EffektBeschreibungsIndex.uebersetzeAusLebendigesObjektPunkteIndex(index)));
 		}
-	}
-
-	/**
-	 * Wendet alle auf dieses lebendige Objekt registrierten Effekte auf dieses an.
-	 * Die Positionsaenderung die durch diese verursacht werden wuerde wird an den
-	 * Aufrufer zurueckgegeben.
-	 * 
-	 * @return Die Positionsaenderung die durch die Effekte verursacht werden wuerde
-	 */
-	public Vektor update()
-	{
-		Vektor positionsAenderung = new Vektor(0, 0);
-		// While und List Iterator da hier ein Element waehrend des Iterierens aus der
-		// Liste entfernt werden kann (Abgeklungene Effekte)
-		for (Effekt momentanerEffekt : generiereListeVonTickendenEffektenAus(this.modell.getEffekte()))
-		{
-			wendeEffektAufModellAn(momentanerEffekt);
-			// Update die Positionsaenderung die von allen Effekten
-			// in Summe "gefordert" wird
-			positionsAenderung = positionsAenderung.addiere(generiereAenderungsVektorAusEffekt(momentanerEffekt));
-			momentanerEffekt.wurdeGewirkt();
-			if (momentanerEffekt.istAbgeklungen())
-			{
-				this.modell.getEffekte().remove(momentanerEffekt); // wenn der Effekt abgeklungen ist, wird er
-																	// entfernt.
-			}
-		}
-		return positionsAenderung;
 	}
 }

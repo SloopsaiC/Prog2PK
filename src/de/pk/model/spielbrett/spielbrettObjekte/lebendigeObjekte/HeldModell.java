@@ -12,7 +12,6 @@ import de.pk.model.gegenstaende.ausruestung.Accessoire;
 import de.pk.model.gegenstaende.ausruestung.Ruestung;
 import de.pk.model.gegenstaende.ausruestung.Waffe;
 import de.pk.model.gegenstaende.container.Container;
-import de.pk.utils.DebugAusgabeKlasse;
 
 public class HeldModell extends LebendigesObjektModell
 {

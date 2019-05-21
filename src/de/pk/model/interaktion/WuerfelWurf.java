@@ -2,7 +2,7 @@ package de.pk.model.interaktion;
 
 /**
  * Datenhaltungsklasse welche einen expliziten Wurf eines Wuerfels beschreibt.
- * 
+ *
  * @author Mattheo
  */
 public class WuerfelWurf
@@ -36,7 +36,7 @@ public class WuerfelWurf
 	 * Bestimmt ob dieser Wurf erfolgreich war indem ueberprueft wird ob das
 	 * Ergebnis (ein Float zwischen 0 und 1) kleiner als die
 	 * Erfolgswahrscheinlichkeit ist.
-	 * 
+	 *
 	 * @return True, falls der Wurf erfolgreich war, sonst false.
 	 */
 	public boolean warErfolgreich()

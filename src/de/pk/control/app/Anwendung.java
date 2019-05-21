@@ -33,19 +33,6 @@ public class Anwendung extends Application
 	private Einstellungen anwendungsEinstellungen = null;
 
 	/**
-	 * Die Anwendungsschleife fuehrt den Nutzer in das Hauptmenue und ruft je nach
-	 * Eingabe die entsprechenden Optionen auf.
-	 */
-	private void anwendungsSchleife()
-	{
-		boolean amLeben = true;
-		while (amLeben)
-		{
-			// An sich braucht man so eine Schleife mit JavaFX denke ich nicht mehr
-		}
-	}
-
-	/**
 	 * Die Anwendung (Dieses aktuelle Objekt) wird initialisiert, Einstellungen
 	 * werden uebernommen.
 	 */
@@ -74,16 +61,6 @@ public class Anwendung extends Application
 		this.aktivesSpiel = null;
 	}
 
-	/**
-	 * Initialisiert zunaechst die Anwendung und startet dann die
-	 * Anwendungsschleife.
-	 */
-	public void starteAnwendung(String[] args)
-	{
-		this.initAnwendung();
-		launch(args);
-	}
-
 	@Override
 	public void start(Stage primaryStage)
 	{
@@ -102,5 +79,15 @@ public class Anwendung extends Application
 		root.getChildren().add(btn);
 		primaryStage.setScene(new Scene(root, 300, 250));
 		primaryStage.show();
+	}
+
+	/**
+	 * Initialisiert zunaechst die Anwendung und startet dann die
+	 * Anwendungsschleife.
+	 */
+	public void starteAnwendung(String[] args)
+	{
+		this.initAnwendung();
+		Application.launch(args);
 	}
 }

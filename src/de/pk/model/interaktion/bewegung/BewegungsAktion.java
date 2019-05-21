@@ -14,16 +14,16 @@ import de.pk.model.position.Vektor;
  */
 public class BewegungsAktion extends Aktion
 {
-	public BewegungsAktion(Vektor bewegung)
-	{
-		super(generiereEffektAusBewegung(bewegung), null, 1f);
-	}
-
 	private static Effekt generiereEffektAusBewegung(Vektor bewegung)
 	{
 		return new Effekt(new EffektTeil(EffektBeschreibungsIndex.ANZAHL_WIRK_TICKS, 1),
 				new EffektTeil(EffektBeschreibungsIndex.BEWEGUNGSPUNKTE, bewegung.getX() + bewegung.getY()),
 				new EffektTeil(EffektBeschreibungsIndex.BEWEGUNG_X, bewegung.getX()),
 				new EffektTeil(EffektBeschreibungsIndex.BEWEGUNG_Y, bewegung.getY()));
+	}
+
+	public BewegungsAktion(Vektor bewegung)
+	{
+		super(BewegungsAktion.generiereEffektAusBewegung(bewegung), null, 1f);
 	}
 }

@@ -16,11 +16,6 @@ public class Held extends LebendigesObjekt
 		super(new HeldModell(name, lebensPunkte, bewegungsPunkte));
 	}
 
-	private HeldModell getModellAlsHeld()
-	{
-		return (HeldModell) super.getModell();
-	}
-	
 	/**
 	 * Ruestet dem Helden das Accessoire aus und legt es in sein Accesoire-Inventar
 	 * an die entsprechende Stelle (slot). War zuvor bereits eine anderes Accessoire
@@ -50,8 +45,6 @@ public class Held extends LebendigesObjekt
 		this.pruefeAusruestungAufFaehigkeitsVoraussetzungen(accessoire);
 		return this.getModellAlsHeld().getAccessoires().put(slot, accessoire);
 	}
-
-	
 
 	/**
 	 * Ruestet dem Helden eine Ruestung aus. War zuvor bereits eine andere Ruestung
@@ -102,6 +95,11 @@ public class Held extends LebendigesObjekt
 		{
 			this.getModellAlsHeld().setWaffe(waffe);
 		}
+	}
+
+	private HeldModell getModellAlsHeld()
+	{
+		return (HeldModell) super.getModell();
 	}
 
 	public Waffe getWaffe()

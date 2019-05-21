@@ -5,11 +5,8 @@ import java.util.InputMismatchException;
 import de.pk.model.gegenstaende.CraftingRezept;
 import de.pk.model.gegenstaende.Material;
 import de.pk.model.gegenstaende.spezifikationen.Stapelbar;
-import de.pk.utils.DebugAusgabeKlasse;
-import de.pk.utils.DebugEingabeKlasse;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.ZweidimensionaleArrayOperationen;
-import de.pk.utils.lokalisierung.DE_de;
 
 /**
  * Regelt den Ablauf beim Craften. Beinhaltet Methoden in Zusammenhang mit dem

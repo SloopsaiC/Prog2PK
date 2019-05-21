@@ -25,18 +25,7 @@ public abstract class Phase
 		return Phase.BRAUCHT_EINGABE_DEFAULT_WERT;
 	}
 
-	/**
-	 * Gibt true zurueck, falls die Phase als fertig erachtet wird
-	 */
-	public abstract boolean istFertig();
-
-	/**
-	 * Fuehrt die Phase um einen Tick weiter, dabei werden saemtliche Veraenderungen
-	 * die diese Phase auf den Zustand des Spiels / Dungeons hat registriert um
-	 * spaeter im Dungeon umgesetzt zu werden
-	 */
-	public abstract void phasenSchritt(Dungeon aktiverDungeon, Held aktiverHeld);
-
+	@Override
 	public Phase clone()
 	{
 		try
@@ -48,5 +37,17 @@ public abstract class Phase
 		}
 
 	}
+
+	/**
+	 * Gibt true zurueck, falls die Phase als fertig erachtet wird
+	 */
+	public abstract boolean istFertig();
+
+	/**
+	 * Fuehrt die Phase um einen Tick weiter, dabei werden saemtliche Veraenderungen
+	 * die diese Phase auf den Zustand des Spiels / Dungeons hat registriert um
+	 * spaeter im Dungeon umgesetzt zu werden
+	 */
+	public abstract void phasenSchritt(Dungeon aktiverDungeon, Held aktiverHeld);
 
 }

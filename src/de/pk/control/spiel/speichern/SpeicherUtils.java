@@ -5,16 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import de.pk.control.spiel.Spiel;
-import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrund;
-import de.pk.model.position.Position;
-import de.pk.model.spielbrett.Kachel;
 
 public class SpeicherUtils
 {

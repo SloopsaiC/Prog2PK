@@ -4,9 +4,18 @@ import java.util.HashMap;
 
 import de.pk.model.karte.generator.Richtung;
 import de.pk.model.position.Position;
+import de.pk.utils.ZweidimensionaleArrayOperationen;
 import de.pk.utils.karte.generator.KachelUntergrundUtils;
 import de.pk.utils.karte.generator.KartenGeneratorUntergrundKonstanten;
 
+/**
+ * Definiert alle Formen von Untergruenden die ein KartenGenerator fuer eine
+ * Kachel generieren kann. Jede einzelne Form definiert ausserdem die
+ * Wahrscheinlichkeit mit welcher sie an welcher Stelle auf dem Spielbrett
+ * generiert werden sollte.
+ * 
+ * @author Mattheo
+ */
 public enum KartenGeneratorUntergrund
 {
 	ECKE(new KachelUntergrundWertigkeit[][]
@@ -36,7 +45,7 @@ public enum KartenGeneratorUntergrund
 					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI },
 			{ KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI,
 					KachelUntergrundWertigkeit.FREI, KachelUntergrundWertigkeit.FREI } },
-			(a, b, c) -> KachelUntergrundUtils.istInDerMitteMitte(a, b, c),
+			(a, b, c) -> KachelUntergrundUtils.istInDerMitte(a, b, c),
 			KartenGeneratorUntergrundKonstanten.FREI_STANDART_WAHRSCHEINLICHKEIT,
 			KartenGeneratorUntergrundKonstanten.FREI_WAHRSCHEINLICHKEITS_REDUZIERUNG_FALLS_NICHT_IN_MITTE),
 	START(new KachelUntergrundWertigkeit[][]
@@ -77,7 +86,7 @@ public enum KartenGeneratorUntergrund
 					KachelUntergrundWertigkeit.LEICHT, KachelUntergrundWertigkeit.FREI },
 			{ KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BAUM,
 					KachelUntergrundWertigkeit.BAUM, KachelUntergrundWertigkeit.BAUM } },
-			(a, b, c) -> !KachelUntergrundUtils.istInDerMitteMitte(a, b, c),
+			(a, b, c) -> !KachelUntergrundUtils.istInDerMitte(a, b, c),
 			KartenGeneratorUntergrundKonstanten.SACKGASSE_STANDARD_WAHRSCHEINLICHKEIT,
 			KartenGeneratorUntergrundKonstanten.SACKGASSE_WAHRSCHEINLICHKEITS_AENDERUNG_FALLS_BEDINGUNG),
 	KARTENRAND(new KachelUntergrundWertigkeit[][]
@@ -100,11 +109,59 @@ public enum KartenGeneratorUntergrund
 	/*
 	 * ENDE DER DEKLARATION DER ENUM KONSTANTEN, ANFANG DER BESCHREIBUNG DES ENUMS
 	 */
+
 	private HashMap<Richtung, KachelUntergrundWertigkeit[][]> inhalt = null;
 	private UntergrundWahrscheinlichkeitsBedingung bedingungWahrscheinlichkeitsAenderung = null;
 	private float standardWahrscheinlichkeit = 0;
 	private float wahrscheinlichkeitsAenderungFallsBedingungErfuellt = 0;
 
+	/**
+	 * Erstellt einen Untergrund welcher an jeder Position auf dem Spielbrett die
+	 * gleiche Wahrscheinlichkeit haben soll.
+	 * 
+	 * @param inhalt                     Der Inhalt welcher dieser Untergrund haben
+	 *                                   soll, so gedreht wie er dargestellt werden
+	 *                                   soll, wenn er nach "Norden" gedreht ist
+	 * @param standardWahrscheinlichkeit Die Wahrscheinlichkeit mit der dieser
+	 *                                   Untergrund generiert werden soll
+	 */
+	private KartenGeneratorUntergrund(KachelUntergrundWertigkeit[][] inhalt, float standardWahrscheinlichkeit)
+	{
+		this(inhalt, null, standardWahrscheinlichkeit, 0.0f);
+	}
+
+	/**
+	 * Erstellt einen Untergrund welcher falls eine bestimmte Bedingung erfuellt
+	 * ist. Die Form dieser Bedingung wird durch
+	 * {@link}UntergrundWahrscheinlichkeitsBedingung beschrieben.
+	 * 
+	 * @param inhalt                                             Der Inhalt welcher
+	 *                                                           dieser Untergrund
+	 *                                                           haben soll, so
+	 *                                                           gedreht wie er
+	 *                                                           dargestellt werden
+	 *                                                           soll, wenn er nach
+	 *                                                           "Norden" gedreht
+	 *                                                           ist
+	 * @param bedingungWahrscheinlichkeitsAenderung              Die Bedingung nach
+	 *                                                           welcher der
+	 *                                                           Untergrund seine
+	 *                                                           Generierungswahrscheinlichkeit
+	 *                                                           aendern soll
+	 * @param standardWahrscheinlichkeit                         Die
+	 *                                                           Wahrscheinlichkeit
+	 *                                                           die dieser
+	 *                                                           Untergrund haben
+	 *                                                           soll, sollte die
+	 *                                                           Bedingung nicht
+	 *                                                           erfuellt sein
+	 * @param wahrscheinlichkeitsAenderungFallsBedingungErfuellt Die Aenderung die
+	 *                                                           auf der
+	 *                                                           Standardwahrscheinlichkeit
+	 *                                                           angewendet wird
+	 *                                                           falls die Bedingung
+	 *                                                           erfuellt ist
+	 */
 	private KartenGeneratorUntergrund(KachelUntergrundWertigkeit[][] inhalt,
 			UntergrundWahrscheinlichkeitsBedingung bedingungWahrscheinlichkeitsAenderung,
 			float standardWahrscheinlichkeit, float wahrscheinlichkeitsAenderungFallsBedingungErfuellt)
@@ -116,56 +173,53 @@ public enum KartenGeneratorUntergrund
 		this.fuelleInhalt(inhalt);
 	}
 
-	private KartenGeneratorUntergrund(KachelUntergrundWertigkeit[][] inhalt, float standardWahrscheinlichkeit)
-	{
-		this(inhalt, null, standardWahrscheinlichkeit, 0.0f);
-	}
-
+	/**
+	 * Dreht den Inhalt welcher nach Norden gedreht ist, in die anderen Richtungen
+	 * welche in {@link}Richtung definiert sind und speichert diese in der inhalt
+	 * HashMap des momentanen Objektes ab
+	 * 
+	 * @param nordenInhalt Die Anordnungen der KachelUntergrundWertigkeiten sollte
+	 *                     dieser Untergrund nach Norden gedreht sein
+	 */
 	private void fuelleInhalt(KachelUntergrundWertigkeit[][] nordenInhalt)
 	{
 		// Startet indem der gegebene Inhalt als Inhalt gespeichert wird, sollte die
 		// Kachel nach "Norden" gedreht, also im Ausgangszustand sein.
 		// Anschließend wird der Inhalt immer um einen weiter gedreht, da die Richtungen
 		// in "Richtung" in der selben Reihenfolge angegeben sind
-		// Dies wird für alle fortgesetzt
+		// Dies wird fuer alle fortgesetzt
 		this.inhalt.put(Richtung.NORDEN, nordenInhalt);
 		for (int i = 1; i < Richtung.values().length; i++)
 		{
-			this.inhalt.put(Richtung.values()[i],
-					KartenGeneratorUntergrund.dreheNachRechts(this.getInhaltVonRichtung(Richtung.values()[i - 1])));
+			this.inhalt.put(Richtung.values()[i], ZweidimensionaleArrayOperationen
+					.dreheQuadratisches2DArrayUm90Grad(this.getInhaltVonRichtung(Richtung.values()[i - 1]), 1));
 		}
 	}
 
+	/**
+	 * Erlaubt Zugriff auf die einzelnen Richtungen dieses Untergrunds.
+	 * 
+	 * @param zuBekommen Die Richtung in welche der Untergrund gedreht sein soll
+	 * @return KachelUntergrundWertigkeiten in der Anordnung in der sie den
+	 *         Untergrund in der gegebenen Richtung beschreiben
+	 */
 	public KachelUntergrundWertigkeit[][] getInhaltVonRichtung(Richtung zuBekommen)
 	{
 		return this.inhalt.get(zuBekommen);
 	}
 
+	/**
+	 * Erlaubt Zugriff auf eine einzelne Stelle des Untergrundes, welcher in gegebener Richtung gedreht ist.
+	 * @param richtung
+	 * */
 	public KachelUntergrundWertigkeit getInhaltVonRichtungBei(Richtung richtung, Position bei)
 	{
 		return this.getInhaltVonRichtung(richtung)[bei.getY()][bei.getX()];
 	}
 
-	private static KachelUntergrundWertigkeit[][] dreheNachRechts(KachelUntergrundWertigkeit[][] zuDrehen)
-	{
-		// Generiert den neuen Inhalt
-		KachelUntergrundWertigkeit[][] neuerInhalt = new KachelUntergrundWertigkeit[zuDrehen.length][zuDrehen[0].length];
-		for (int x = 0; x < zuDrehen[0].length; x++)
-		{
-			for (int y = 0; y < zuDrehen.length; y++)
-			{
-
-				// Tauscht X und Y abhaengig davon, ob links oder rechts
-				// geaendert wird. Eins bis Maximum, minus die Werte bevor gedreht wird.
-				neuerInhalt[x][zuDrehen.length - 1 - y] = zuDrehen[y][x];
-			}
-		}
-		return neuerInhalt;
-	}
-
 	public float getVorkommensWahrscheinlichkeit(Position position, int maximaleGroesseX, int maximaleGroesseY)
 	{
-		if (this.bedingungWahrscheinlichkeitsAenderung != null
+		if ((this.bedingungWahrscheinlichkeitsAenderung != null)
 				&& this.bedingungWahrscheinlichkeitsAenderung.istErfuellt(position, maximaleGroesseX, maximaleGroesseY))
 		{
 			return this.standardWahrscheinlichkeit + this.wahrscheinlichkeitsAenderungFallsBedingungErfuellt;

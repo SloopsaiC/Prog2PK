@@ -4,8 +4,20 @@ import de.pk.model.position.Position;
 
 public class KachelUntergrundUtils
 {
-	private KachelUntergrundUtils()
+	public static boolean istAmRand(Position zuUeberpruefen, int maximaleGroesseX, int maximaleGroesseY)
 	{
+		return ((maximaleGroesseX - 1) == zuUeberpruefen.getX()) || ((maximaleGroesseY - 1) == zuUeberpruefen.getY())
+				|| (zuUeberpruefen.getX() == 0) || (zuUeberpruefen.getY() == 0);
+	}
+
+	public static boolean istInDerMitte(Position zuUeberpruefen, int maximalGroesseX, int maximalGroesseY)
+	{
+		float distanzZurMitte = Position.getEntfernung(new Position(maximalGroesseX / 2, maximalGroesseY / 2),
+				zuUeberpruefen);
+		return (distanzZurMitte < (maximalGroesseX
+				/ KartenGeneratorUntergrundKonstanten.XTEL_AB_WELCHEM_ETWAS_IN_DER_MITTE_IST))
+				&& (distanzZurMitte < (maximalGroesseY
+						/ KartenGeneratorUntergrundKonstanten.XTEL_AB_WELCHEM_ETWAS_IN_DER_MITTE_IST));
 	}
 
 	/**
@@ -39,19 +51,7 @@ public class KachelUntergrundUtils
 				&& ((rechteckPosition.getY() + groesseY) > zuUeberpruefen.getY());
 	}
 
-	public static boolean istInDerMitteMitte(Position zuUeberpruefen, int maximalGroesseX, int maximalGroesseY)
+	private KachelUntergrundUtils()
 	{
-		float distanzZurMitte = Position.getEntfernung(new Position(maximalGroesseX / 2, maximalGroesseY / 2),
-				zuUeberpruefen);
-		return distanzZurMitte < (maximalGroesseX
-				/ KartenGeneratorUntergrundKonstanten.XTEL_AB_WELCHEM_ETWAS_IN_DER_MITTE_IST)
-				&& distanzZurMitte < (maximalGroesseY
-						/ KartenGeneratorUntergrundKonstanten.XTEL_AB_WELCHEM_ETWAS_IN_DER_MITTE_IST);
-	}
-
-	public static boolean istAmRand(Position zuUeberpruefen, int maximaleGroesseX, int maximaleGroesseY)
-	{
-		return ((maximaleGroesseX - 1) == zuUeberpruefen.getX()) || ((maximaleGroesseY - 1) == zuUeberpruefen.getY())
-				|| (zuUeberpruefen.getX() == 0) || (zuUeberpruefen.getY() == 0);
 	}
 }

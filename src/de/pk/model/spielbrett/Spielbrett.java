@@ -98,6 +98,16 @@ public class Spielbrett
 				this.bekommeKachelPositionMitVektor(this.findeSpielbrettObjekt(zuBewegen), positionsAenderung));
 	}
 
+	public void entferneSpielbrettObjektBei(KachelPosition position)
+	{
+		SpielbrettObjekt zuEntfernen = position.getKachel().getSpielbrettObjektBei(position.getPositionAufDerKachel());
+		if (zuEntfernen.istLebendig())
+		{
+			this.alleLebendigenObjekte.remove(zuEntfernen);
+		}
+		position.getKachel().entferneBeiPosition(position.getPositionAufDerKachel());
+	}
+
 	/**
 	 * Findet ein Objekt auf dem Spielbrett
 	 *
@@ -171,6 +181,30 @@ public class Spielbrett
 	}
 
 	/**
+	 * @return the spielbrettTeile
+	 */
+	public HashMap<Position, Kachel> getSpielbrettTeile()
+	{
+		return this.spielbrettTeile;
+	}
+
+	/**
+	 * @param alleLebendigenObjekte the alleLebendigenObjekte to set
+	 */
+	public void setAlleLebendigenObjekte(ArrayList<LebendigesObjekt> alleLebendigenObjekte)
+	{
+		this.alleLebendigenObjekte = alleLebendigenObjekte;
+	}
+
+	/**
+	 * @param spielbrettTeile the spielbrettTeile to set
+	 */
+	public void setSpielbrettTeile(HashMap<Position, Kachel> spielbrettTeile)
+	{
+		this.spielbrettTeile = spielbrettTeile;
+	}
+
+	/**
 	 * Setzt eine Kachel an die bestimmte Position
 	 *
 	 * @param kachel Die zu setztende Kachel
@@ -188,40 +222,6 @@ public class Spielbrett
 		{
 			this.alleLebendigenObjekte.add((LebendigesObjekt) zuSetzen);
 		}
-	}
-
-	/**
-	 * @return the spielbrettTeile
-	 */
-	public HashMap<Position, Kachel> getSpielbrettTeile()
-	{
-		return this.spielbrettTeile;
-	}
-
-	/**
-	 * @param spielbrettTeile the spielbrettTeile to set
-	 */
-	public void setSpielbrettTeile(HashMap<Position, Kachel> spielbrettTeile)
-	{
-		this.spielbrettTeile = spielbrettTeile;
-	}
-
-	/**
-	 * @param alleLebendigenObjekte the alleLebendigenObjekte to set
-	 */
-	public void setAlleLebendigenObjekte(ArrayList<LebendigesObjekt> alleLebendigenObjekte)
-	{
-		this.alleLebendigenObjekte = alleLebendigenObjekte;
-	}
-
-	public void entferneSpielbrettObjektBei(KachelPosition position)
-	{
-		SpielbrettObjekt zuEntfernen = position.getKachel().getSpielbrettObjektBei(position.getPositionAufDerKachel());
-		if (zuEntfernen.istLebendig())
-		{
-			this.alleLebendigenObjekte.remove((LebendigesObjekt) zuEntfernen);
-		}
-		position.getKachel().entferneBeiPosition(position.getPositionAufDerKachel());
 	}
 
 }

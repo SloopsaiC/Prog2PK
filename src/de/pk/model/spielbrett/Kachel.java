@@ -25,6 +25,11 @@ public class Kachel
 		this(new HashMap<Position, SpielbrettObjekt>(), untergrund);
 	}
 
+	void entferneBeiPosition(Position zuEntfernen)
+	{
+		this.kachelObjekte.remove(zuEntfernen);
+	}
+
 	/**
 	 * Sucht mit Hilfe der Stream API ein SpielbrettObjekt auf der Kachel
 	 *
@@ -48,14 +53,14 @@ public class Kachel
 		return this.kachelObjekte.get(pos);
 	}
 
-	public KartenGeneratorUntergrundMitRichtung getUntergrund()
-	{
-		return this.untergrund;
-	}
-
 	public HashMap<Position, SpielbrettObjekt> getSpielbrettObjekteMitPos()
 	{
 		return this.kachelObjekte;
+	}
+
+	public KartenGeneratorUntergrundMitRichtung getUntergrund()
+	{
+		return this.untergrund;
 	}
 
 	public KachelUntergrundWertigkeit getUntergrundBei(Position pos)
@@ -71,11 +76,6 @@ public class Kachel
 	public void stelleAufKachel(Position pos, SpielbrettObjekt obj)
 	{
 		this.kachelObjekte.put(pos, obj);
-	}
-	
-	void entferneBeiPosition(Position zuEntfernen)
-	{
-		this.kachelObjekte.remove(zuEntfernen);
 	}
 
 	boolean ueberpruefePosition(Position pos)
