@@ -44,6 +44,16 @@ public class AnwendungFX extends Application
 	}
 
 	private static void fuegeStyleSheetAllenSzenenHinzu(String pfadZurCSSDatei)
+
+	public static void aktualisiereFenserAufloesung ()
+	{
+		AnwendungFX.aktualisiereAufloesungsStyleSheets();
+		AnwendungFX.anwendungsStage.sizeToScene();
+	}
+
+
+	@Override
+	public void start (Stage stage) throws Exception
 	{
 		for (Scene szene : AnwendungFX.SZENEN_MAP.values())
 		{
@@ -73,6 +83,7 @@ public class AnwendungFX extends Application
 	}
 
 	public static void starteAnwendung(String[] args)
+	private static void aktualisiereAufloesungsStyleSheets ()
 	{
 		Application.launch(args);
 	}

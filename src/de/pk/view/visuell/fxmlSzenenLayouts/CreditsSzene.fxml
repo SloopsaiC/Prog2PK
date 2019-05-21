@@ -16,15 +16,15 @@
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="de.pk.view.visuell.fxmlSzenenController.CreditsSzeneController">
 	<stylesheets>
-		<URL value="@menueSzenenStyle.css" />
+		<URL value ="@menueSzenenStyle.css" />
 	</stylesheets>
 	<children>
-		<ImageView fitHeight="600.0" fitWidth="900.0" opacity="0.8"
+		<ImageView id="HintergrundBild" fitHeight="600.0" fitWidth="900.0" opacity="0.8"
 			pickOnBounds="true" AnchorPane.bottomAnchor="0.0"
 			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
 			AnchorPane.topAnchor="0.0">
 			<image>
-				<Image url="@../../../ressourcen/bildDateien/testImg.jpg" />
+				<Image url="de/pk/ressourcen/bildDateien/testImg.jpg" />
 			</image>
 		</ImageView>
 		<BorderPane prefHeight="200.0" prefWidth="200.0"
@@ -48,7 +48,7 @@
 					BorderPane.alignment="CENTER">
 					<image>
 						<Image
-							url="@../../../ressourcen/bildDateien/spadesKingDices.jpg" />
+							url="de/pk/ressourcen/bildDateien/spadesKingDices.jpg" />
 					</image>
 				</ImageView>
 			</center>

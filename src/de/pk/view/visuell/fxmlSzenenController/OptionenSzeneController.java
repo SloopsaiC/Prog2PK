@@ -89,6 +89,26 @@ public class OptionenSzeneController implements Initializable
 		});
 	}
 
+
+
+	private void choiceBoxInit ()
+	{
+		this.aufloesungChoiceBox.setItems(FXCollections.observableArrayList(Aufloesung.values()));
+		this.aufloesungChoiceBox.setTooltip(new Tooltip("Waehle eine Aufloesung"));
+		this.aufloesungChoiceBox.setValue(Einstellungen.getEinstellungen().getAnwendungsAufloesung());
+		this.aufloesungChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Aufloesung>()
+		{
+
+			@Override
+			public void changed (ObservableValue<? extends Aufloesung> observable, Aufloesung oldValue,
+					Aufloesung newValue)
+			{
+				Einstellungen.getEinstellungen().setAnwendungsAufloesung(newValue);
+			}
+		});
+	}
+
+
 	@FXML
 	private void mausScrollMusikSliderEvent(ScrollEvent event)
 	{

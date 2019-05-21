@@ -17,22 +17,39 @@ public class Einstellungen
 	 * Konstante zum Einschalten des Debug-Modus (Konsolenausgaben).
 	 */
 	public final static boolean DEBUG_MODUS_AN = true;
+	/**
+	 * Standard Aufloesung bei erstem Start des Spiels.
+	 */
+	public static final Aufloesung STANDARD_AUFLOESUNG = Aufloesung.FULL_HD;
 
-	public static Einstellungen getEinstellungen()
+
+	/**
+	 * Gibt die Instanz der Einstellungs-Klasse zurueck.
+	 *
+	 * @return die Instanz dieser Klasse
+	 */
+	public static Einstellungen getEinstellungen ()
 	{
 		return EinstellungsBehaelter.EINSTELLUNGEN;
 	}
 
-	private Einstellungen()
+
+	private Einstellungen ()
 	{
 	}
 
-	/**
-	 * Bearbeitet die Einstellungen, nur zu Demonstrationszwecken
-	 */
-	public void einstellungenBearbeiten()
-	{
+	private Aufloesung anwendungsAufloesung = STANDARD_AUFLOESUNG;
 
+
+	public Aufloesung getAnwendungsAufloesung ()
+	{
+		return this.anwendungsAufloesung;
+	}
+
+
+	public void setAnwendungsAufloesung (Aufloesung anwendungsAufloesung)
+	{
+		this.anwendungsAufloesung = anwendungsAufloesung;
 	}
 
 }
