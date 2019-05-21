@@ -167,8 +167,7 @@ public class DE_de extends Lokalisierung
 	/**
 	 * sinnfreie Testausgabe anstelle der Dungeon Namen.
 	 */
-	public static final String[] TESTAUSGABE_DUNGEON_NAME =
-	{ "TestDungeonEins", "TestDungeonZwei" };
+	public static final String[] TESTAUSGABE_DUNGEON_NAME = { "TestDungeonEins", "TestDungeonZwei" };
 
 	/**
 	 * Eingabsymbol zum Beenden oder Zurueckkehren in das vorherige / uebergeordnete
@@ -200,4 +199,7 @@ public class DE_de extends Lokalisierung
 	 * Eingabsymbol zum Oeffnen des Crafting-Menues.
 	 */
 	public static final char EINGABESYMBOL_CRAFTINGMENUE_NEU_CRAFTEN = 'n';
+
+	public static final String ANWENDUNG_FENSTER_TITEL = "KI-Katastrophe auf Iava";
+
 }
