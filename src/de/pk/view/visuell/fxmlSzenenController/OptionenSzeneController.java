@@ -107,5 +107,11 @@ public class OptionenSzeneController implements Initializable
 	{
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
 	}
+	
+	@FXML
+	private void aufloesungAnwendenButtonAction(ActionEvent event)
+	{
+		// Aufloesung und so
+	}
 
 }
