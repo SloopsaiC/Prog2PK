@@ -27,7 +27,7 @@ public class AnwendungFX extends Application
 
 	private static Stage anwendungsStage = null;
 
-	public static void aktualisiereAufloesungsStyleSheets()
+	private static void aktualisiereAufloesungsStyleSheets()
 	{
 		AnwendungFX.entferneStyleSheetsVonAllenScenes();
 		String eingestellteAufloesung = Einstellungen.getEinstellungen().getAnwendungsAufloesung().toString();
@@ -44,21 +44,17 @@ public class AnwendungFX extends Application
 	}
 
 	private static void fuegeStyleSheetAllenSzenenHinzu(String pfadZurCSSDatei)
-
-	public static void aktualisiereFenserAufloesung ()
-	{
-		AnwendungFX.aktualisiereAufloesungsStyleSheets();
-		AnwendungFX.anwendungsStage.sizeToScene();
-	}
-
-
-	@Override
-	public void start (Stage stage) throws Exception
 	{
 		for (Scene szene : AnwendungFX.SZENEN_MAP.values())
 		{
 			szene.getStylesheets().add(AnwendungFX.class.getResource(pfadZurCSSDatei).toExternalForm());
 		}
+	}
+
+	public static void aktualisiereFenserAufloesung()
+	{
+		AnwendungFX.aktualisiereAufloesungsStyleSheets();
+		AnwendungFX.anwendungsStage.sizeToScene();
 	}
 
 	private static void fuegeSzeneHinzu(String pfadZurFXMLDatei)
@@ -83,7 +79,6 @@ public class AnwendungFX extends Application
 	}
 
 	public static void starteAnwendung(String[] args)
-	private static void aktualisiereAufloesungsStyleSheets ()
 	{
 		Application.launch(args);
 	}
