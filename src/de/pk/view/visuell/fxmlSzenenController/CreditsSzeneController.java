@@ -21,19 +21,17 @@ public class CreditsSzeneController implements Initializable
 	@FXML
 	private Button zurueckZumHauptmenue;
 
-
 	/**
 	 * Initializes the controller class.
 	 */
 	@Override
-	public void initialize (URL url, ResourceBundle rb)
+	public void initialize(URL url, ResourceBundle rb)
 	{
 		// TODO
 	}
 
-
 	@FXML
-	private void zumHauptmenueButtonAction (ActionEvent event)
+	private void zumHauptmenueButtonAction(ActionEvent event)
 	{
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
 	}

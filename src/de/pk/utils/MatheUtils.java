@@ -16,7 +16,7 @@ public class MatheUtils
 	 * @return der angepasste Wert, er liegt in den Grenzen untereGrenze und
 	 *         obereGrenze, sodass gilt untereGrenze >= wert >= obereGrenze.
 	 */
-	public static int begrenzeWertAufMinMax (int wert, int untereGrenze, int obereGrenze)
+	public static int begrenzeWertAufMinMax(int wert, int untereGrenze, int obereGrenze)
 	{
 		if (wert < untereGrenze)
 		{

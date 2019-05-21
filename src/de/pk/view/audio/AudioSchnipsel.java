@@ -30,8 +30,7 @@ public class AudioSchnipsel implements Closeable
 	private FloatControl lautstaerkeControl = null;
 	private int prozentualeLautstaerke = 0;
 
-
-	public AudioSchnipsel (String dateipfad, int lautstaerke)
+	public AudioSchnipsel(String dateipfad, int lautstaerke)
 	{
 		try
 		{
@@ -45,8 +44,7 @@ public class AudioSchnipsel implements Closeable
 		}
 	}
 
-
-	public void abspielen (boolean einblenden)
+	public void abspielen(boolean einblenden)
 	{
 		if (this.istBeendet())
 		{
@@ -55,57 +53,41 @@ public class AudioSchnipsel implements Closeable
 		this.audioClip.start();
 		if (einblenden && !this.istAktivAbspielend())
 		{
-			this.passeLautstaerkeKontinuierlichAn(this.prozentualeLautstaerke, MINIMALE_PROZENTUALE_LAUTSTAERKE);
+			this.passeLautstaerkeKontinuierlichAn(this.prozentualeLautstaerke,
+					AudioSchnipsel.MINIMALE_PROZENTUALE_LAUTSTAERKE);
 		}
 	}
 
-
-	public int pausieren (boolean ausblenden)
+	/**
+	 * Schliesst den aktuellen AudioSchnipsel.
+	 */
+	@Override
+	public void close()
 	{
-		if (ausblenden && this.istAktivAbspielend())
-		{
-			this.passeLautstaerkeKontinuierlichAn(MINIMALE_PROZENTUALE_LAUTSTAERKE, this.prozentualeLautstaerke);
-		}
-		this.audioClip.stop();
-		return this.getFramePosition();
+		this.audioClip.close();
 	}
 
-
-	public void stoppen (boolean ausblenden)
+	public int getFramePosition()
 	{
-		if (ausblenden && this.istAktivAbspielend())
-		{
-			this.passeLautstaerkeKontinuierlichAn(MINIMALE_PROZENTUALE_LAUTSTAERKE, this.prozentualeLautstaerke);
-		}
-		this.audioClip.stop();
-		this.audioClip.flush();
-		this.setFramePosition(START_FRAME);
+		return this.audioClip.getFramePosition();
 	}
 
-
-	public int getProzentualeLautstaerke ()
+	public int getProzentualeLautstaerke()
 	{
 		return this.prozentualeLautstaerke;
 	}
 
-
-	public synchronized void setProzentualeLautstaerke (int prozentWert, boolean kontinuierlich)
+	public boolean istAktivAbspielend()
 	{
-		int alteLautstaerke = this.prozentualeLautstaerke;
-		this.prozentualeLautstaerke = MatheUtils.begrenzeWertAufMinMax(prozentWert, MINIMALE_PROZENTUALE_LAUTSTAERKE,
-				MAXIMALE_PROZENTUALE_LAUTSTAERKE);
-		if (kontinuierlich)
-		{
-			this.passeLautstaerkeKontinuierlichAn(this.prozentualeLautstaerke, alteLautstaerke);
-		} else
-		{
-			setzeDezibelLautstaerkeAusProzentualerAngabe(this.prozentualeLautstaerke);
-		}
-
+		return this.audioClip.isActive() && this.audioClip.isRunning();
 	}
 
+	public boolean istBeendet()
+	{
+		return (this.audioClip.getFramePosition() == this.audioClip.getFrameLength());
+	}
 
-	private void passeLautstaerkeKontinuierlichAn (int neueProzentualeLautstaerke, int alteProzentualeLautstaerke)
+	private void passeLautstaerkeKontinuierlichAn(int neueProzentualeLautstaerke, int alteProzentualeLautstaerke)
 	{
 		try
 		{
@@ -113,12 +95,12 @@ public class AudioSchnipsel implements Closeable
 			{
 				for (int aktuelleLautstaerke = alteProzentualeLautstaerke; aktuelleLautstaerke < neueProzentualeLautstaerke; aktuelleLautstaerke++)
 				{ // lauter
-					setzeDezibelLautstaerkeAusProzentualerAngabe(aktuelleLautstaerke);
+					this.setzeDezibelLautstaerkeAusProzentualerAngabe(aktuelleLautstaerke);
 					Thread.sleep(75);
 				} // leiser
 				for (int aktuelleLautstaerke = alteProzentualeLautstaerke; aktuelleLautstaerke > neueProzentualeLautstaerke; aktuelleLautstaerke--)
 				{
-					setzeDezibelLautstaerkeAusProzentualerAngabe(aktuelleLautstaerke);
+					this.setzeDezibelLautstaerkeAusProzentualerAngabe(aktuelleLautstaerke);
 					Thread.sleep(75);
 				}
 			}
@@ -128,47 +110,57 @@ public class AudioSchnipsel implements Closeable
 		}
 	}
 
-
-	private void setzeDezibelLautstaerkeAusProzentualerAngabe (int prozentualeLautstaerke)
+	public int pausieren(boolean ausblenden)
 	{
-		this.lautstaerkeControl.setValue((float) (LAUTSTAERKE_DEZIBEL_UMRECHNUNGS_FAKTOR
-				* Math.log10(MatheUtils.begrenzeWertAufMinMax(prozentualeLautstaerke, MINIMALE_PROZENTUALE_LAUTSTAERKE,
-						MAXIMALE_PROZENTUALE_LAUTSTAERKE) / (float) MAXIMALE_PROZENTUALE_LAUTSTAERKE)));
-		System.out.println(this.lautstaerkeControl.getValue());
+		if (ausblenden && this.istAktivAbspielend())
+		{
+			this.passeLautstaerkeKontinuierlichAn(AudioSchnipsel.MINIMALE_PROZENTUALE_LAUTSTAERKE,
+					this.prozentualeLautstaerke);
+		}
+		this.audioClip.stop();
+		return this.getFramePosition();
 	}
 
-
-	public int getFramePosition ()
-	{
-		return this.audioClip.getFramePosition();
-	}
-
-
-	public void setFramePosition (int framePosition)
+	public void setFramePosition(int framePosition)
 	{
 		this.audioClip.setFramePosition(framePosition);
 	}
 
-
-	public boolean istBeendet ()
+	public synchronized void setProzentualeLautstaerke(int prozentWert, boolean kontinuierlich)
 	{
-		return (this.audioClip.getFramePosition() == this.audioClip.getFrameLength());
+		int alteLautstaerke = this.prozentualeLautstaerke;
+		this.prozentualeLautstaerke = MatheUtils.begrenzeWertAufMinMax(prozentWert,
+				AudioSchnipsel.MINIMALE_PROZENTUALE_LAUTSTAERKE, AudioSchnipsel.MAXIMALE_PROZENTUALE_LAUTSTAERKE);
+		if (kontinuierlich)
+		{
+			this.passeLautstaerkeKontinuierlichAn(this.prozentualeLautstaerke, alteLautstaerke);
+		} else
+		{
+			this.setzeDezibelLautstaerkeAusProzentualerAngabe(this.prozentualeLautstaerke);
+		}
+
 	}
 
-
-	public boolean istAktivAbspielend ()
+	private void setzeDezibelLautstaerkeAusProzentualerAngabe(int prozentualeLautstaerke)
 	{
-		return this.audioClip.isActive() && this.audioClip.isRunning();
+		this.lautstaerkeControl.setValue((float) (AudioSchnipsel.LAUTSTAERKE_DEZIBEL_UMRECHNUNGS_FAKTOR
+				* Math.log10(MatheUtils.begrenzeWertAufMinMax(prozentualeLautstaerke,
+						AudioSchnipsel.MINIMALE_PROZENTUALE_LAUTSTAERKE,
+						AudioSchnipsel.MAXIMALE_PROZENTUALE_LAUTSTAERKE)
+						/ (float) AudioSchnipsel.MAXIMALE_PROZENTUALE_LAUTSTAERKE)));
+		System.out.println(this.lautstaerkeControl.getValue());
 	}
 
-
-	/**
-	 * Schliesst den aktuellen AudioSchnipsel.
-	 */
-	@Override
-	public void close ()
+	public void stoppen(boolean ausblenden)
 	{
-		this.audioClip.close();
+		if (ausblenden && this.istAktivAbspielend())
+		{
+			this.passeLautstaerkeKontinuierlichAn(AudioSchnipsel.MINIMALE_PROZENTUALE_LAUTSTAERKE,
+					this.prozentualeLautstaerke);
+		}
+		this.audioClip.stop();
+		this.audioClip.flush();
+		this.setFramePosition(AudioSchnipsel.START_FRAME);
 	}
 
 }

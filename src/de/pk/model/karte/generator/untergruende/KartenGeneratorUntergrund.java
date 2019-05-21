@@ -13,7 +13,7 @@ import de.pk.utils.karte.generator.KartenGeneratorUntergrundKonstanten;
  * Kachel generieren kann. Jede einzelne Form definiert ausserdem die
  * Wahrscheinlichkeit mit welcher sie an welcher Stelle auf dem Spielbrett
  * generiert werden sollte.
- * 
+ *
  * @author Mattheo
  */
 public enum KartenGeneratorUntergrund
@@ -118,7 +118,7 @@ public enum KartenGeneratorUntergrund
 	/**
 	 * Erstellt einen Untergrund welcher an jeder Position auf dem Spielbrett die
 	 * gleiche Wahrscheinlichkeit haben soll.
-	 * 
+	 *
 	 * @param inhalt                     Der Inhalt welcher dieser Untergrund haben
 	 *                                   soll, so gedreht wie er dargestellt werden
 	 *                                   soll, wenn er nach "Norden" gedreht ist
@@ -134,7 +134,7 @@ public enum KartenGeneratorUntergrund
 	 * Erstellt einen Untergrund welcher falls eine bestimmte Bedingung erfuellt
 	 * ist. Die Form dieser Bedingung wird durch
 	 * {@link}UntergrundWahrscheinlichkeitsBedingung beschrieben.
-	 * 
+	 *
 	 * @param inhalt                                             Der Inhalt welcher
 	 *                                                           dieser Untergrund
 	 *                                                           haben soll, so
@@ -178,7 +178,7 @@ public enum KartenGeneratorUntergrund
 	{
 		// Startet indem der gegebene Inhalt als Inhalt gespeichert wird, sollte die
 		// Kachel nach "Norden" gedreht, also im Ausgangszustand sein.
-		// Anschlie�end wird der Inhalt immer um einen weiter gedreht, da die
+		// Anschliessend wird der Inhalt immer um einen weiter gedreht, da die
 		// Richtungen
 		// in "Richtung" in der selben Reihenfolge angegeben sind
 
@@ -193,7 +193,7 @@ public enum KartenGeneratorUntergrund
 
 	/**
 	 * Erlaubt Zugriff auf die einzelnen Richtungen dieses Untergrunds.
-	 * 
+	 *
 	 * @param zuBekommen Die Richtung in welche der Untergrund gedreht sein soll
 	 * @return KachelUntergrundWertigkeiten in der Anordnung in der sie den
 	 *         Untergrund in der gegebenen Richtung beschreiben
@@ -206,7 +206,7 @@ public enum KartenGeneratorUntergrund
 	/**
 	 * Erlaubt Zugriff auf eine einzelne Stelle des Untergrundes, welcher in
 	 * gegebener Richtung gedreht ist.
-	 * 
+	 *
 	 * @param richtung
 	 */
 	public KachelUntergrundWertigkeit getInhaltVonRichtungBei(Richtung richtung, Position bei)

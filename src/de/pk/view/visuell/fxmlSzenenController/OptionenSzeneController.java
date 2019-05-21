@@ -36,23 +36,40 @@ public class OptionenSzeneController implements Initializable
 	@FXML
 	private ChoiceBox<Aufloesung> aufloesungChoiceBox;
 
-
-	@Override
-	public void initialize (URL url, ResourceBundle rb)
+	private void choiceBoxInit()
 	{
-		lautstaerkeSliderInit();
-		choiceBoxInit();
+		this.aufloesungChoiceBox.setItems(FXCollections.observableArrayList(Aufloesung.values()));
+		this.aufloesungChoiceBox.setTooltip(new Tooltip("Waehle eine Aufloesung"));
+		this.aufloesungChoiceBox.setValue(Einstellungen.getEinstellungen().getAnwendungsAufloesung());
+		this.aufloesungChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Aufloesung>()
+		{
+
+			@Override
+			public void changed(ObservableValue<? extends Aufloesung> observable, Aufloesung oldValue,
+					Aufloesung newValue)
+			{
+				Einstellungen.getEinstellungen().setAnwendungsAufloesung(newValue);
+				AnwendungFX.aktualisiereAufloesungsStyleSheets();
+				// TODO: Aktuelle Szene aktualisieren
+			}
+		});
 	}
 
+	@Override
+	public void initialize(URL url, ResourceBundle rb)
+	{
+		this.lautstaerkeSliderInit();
+		this.choiceBoxInit();
+	}
 
-	private void lautstaerkeSliderInit ()
+	private void lautstaerkeSliderInit()
 	{
 		this.musikVolumeSlider.setValue(HauptmenueSzeneController.getAudio().getProzentualeLautstaerke());
 		this.musikVolumeSlider.valueProperty().addListener(new ChangeListener<Number>()
 		{
 
 			@Override
-			public void changed (ObservableValue<? extends Number> ov, Number old_val, Number new_val)
+			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val)
 			{
 				HauptmenueSzeneController.getAudio().setProzentualeLautstaerke(new_val.intValue(), false);
 			}
@@ -63,7 +80,7 @@ public class OptionenSzeneController implements Initializable
 		{
 
 			@Override
-			public void changed (ObservableValue<? extends Number> ov, Number old_val, Number new_val)
+			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val)
 			{
 				// HauptmenueSzeneController.getAudio().setProzentualeLautstaerke(new_val.intValue(),
 				// false);
@@ -72,45 +89,22 @@ public class OptionenSzeneController implements Initializable
 		});
 	}
 
-
-	private void choiceBoxInit ()
+	@FXML
+	private void mausScrollMusikSliderEvent(ScrollEvent event)
 	{
-		this.aufloesungChoiceBox.setItems(FXCollections.observableArrayList(Aufloesung.values()));
-		this.aufloesungChoiceBox.setTooltip(new Tooltip("Waehle eine Aufloesung"));
-		this.aufloesungChoiceBox.setValue(Einstellungen.getEinstellungen().getAnwendungsAufloesung());
-		this.aufloesungChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Aufloesung>()
-		{
-
-			@Override
-			public void changed (ObservableValue<? extends Aufloesung> observable, Aufloesung oldValue,
-					Aufloesung newValue)
-			{
-				Einstellungen.getEinstellungen().setAnwendungsAufloesung(newValue);
-				AnwendungFX.aktualisiereAufloesungsStyleSheets();
-				// TODO: Aktuelle Szene aktualisieren
-			}
-		});
+		this.musikVolumeSlider.setValue(this.musikVolumeSlider.getValue() + (event.getDeltaY() / 10));
 	}
 
+	@FXML
+	private void mausScrollSoundSliderEvent(ScrollEvent event)
+	{
+		this.soundVolumeSlider.setValue(this.musikVolumeSlider.getValue() + (event.getDeltaY() / 10));
+	}
 
 	@FXML
-	private void zumHauptmenueButtonAction (ActionEvent event)
+	private void zumHauptmenueButtonAction(ActionEvent event)
 	{
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
-	}
-
-
-	@FXML
-	private void mausScrollMusikSliderEvent (ScrollEvent event)
-	{
-		this.musikVolumeSlider.setValue(this.musikVolumeSlider.getValue() + event.getDeltaY() / 10);
-	}
-
-
-	@FXML
-	private void mausScrollSoundSliderEvent (ScrollEvent event)
-	{
-		this.soundVolumeSlider.setValue(this.musikVolumeSlider.getValue() + event.getDeltaY() / 10);
 	}
 
 }

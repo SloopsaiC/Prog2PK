@@ -22,15 +22,19 @@ public class HauptmenueSzeneController implements Initializable
 
 	private static AudioSchnipsel audio = null;
 
+	public static AudioSchnipsel getAudio()
+	{
+		return HauptmenueSzeneController.audio;
+	}
+
 	@FXML
 	private ToggleButton musikAnAusToggleButton;
 
-
-	public static AudioSchnipsel getAudio ()
+	@FXML
+	private void credtisButtonAction(ActionEvent event)
 	{
-		return audio;
+		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_CREDIT_SZENE);
 	}
-
 
 	/**
 	 * Initializes the controller class.
@@ -39,66 +43,54 @@ public class HauptmenueSzeneController implements Initializable
 	 * @param rb
 	 */
 	@Override
-	public void initialize (URL url, ResourceBundle rb)
+	public void initialize(URL url, ResourceBundle rb)
 	{
-		audio = new AudioSchnipsel("src\\de\\pk\\ressourcen\\audioDateien\\Overworld.wav", 100);
+		HauptmenueSzeneController.audio = new AudioSchnipsel("src\\de\\pk\\ressourcen\\audioDateien\\Overworld.wav",
+				100);
 	}
 
+	@FXML
+	private void musikAnAusToggleButtonAction(ActionEvent event)
+	{
+		if (this.musikAnAusToggleButton.isSelected())
+		{
+			HauptmenueSzeneController.audio.abspielen(false);
+			this.musikAnAusToggleButton.setText("Musik pausieren");
+		} else
+		{
+			HauptmenueSzeneController.audio.pausieren(false);
+			this.musikAnAusToggleButton.setText("Musik abspielen");
+		}
+	}
 
 	@FXML
-	private void neuesSpielButtonAction (ActionEvent event)
+	private void neuesSpielButtonAction(ActionEvent event)
 	{
 		//
 	}
 
-
 	@FXML
-	private void spielLadenButtonAction (ActionEvent event)
-	{
-		//
-	}
-
-
-	@FXML
-	private void optionenButtonAction (ActionEvent event)
+	private void optionenButtonAction(ActionEvent event)
 	{
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_OPTIOEN_SZENE);
 	}
 
-
 	@FXML
-	private void credtisButtonAction (ActionEvent event)
-	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_CREDIT_SZENE);
-	}
-
-
-	@FXML
-	private void zumTitelbildschirmButtonAction (ActionEvent event)
-	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_TITEL_SZENE);
-	}
-
-
-	@FXML
-	private void spielBeendenButtonAction (ActionEvent event)
+	private void spielBeendenButtonAction(ActionEvent event)
 	{
 		Main.anwendungBeenden();
 	}
 
+	@FXML
+	private void spielLadenButtonAction(ActionEvent event)
+	{
+		//
+	}
 
 	@FXML
-	private void musikAnAusToggleButtonAction (ActionEvent event)
+	private void zumTitelbildschirmButtonAction(ActionEvent event)
 	{
-		if (this.musikAnAusToggleButton.isSelected())
-		{
-			audio.abspielen(false);
-			this.musikAnAusToggleButton.setText("Musik pausieren");
-		} else
-		{
-			audio.pausieren(false);
-			this.musikAnAusToggleButton.setText("Musik abspielen");
-		}
+		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_TITEL_SZENE);
 	}
 
 }

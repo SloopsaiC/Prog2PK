@@ -26,7 +26,6 @@ public class TitelSzeneController implements Initializable
 	@FXML
 	private ImageView animatedImageView;
 
-
 	/**
 	 * Initializes the controller class.
 	 *
@@ -34,15 +33,14 @@ public class TitelSzeneController implements Initializable
 	 * @param rb
 	 */
 	@Override
-	public void initialize (URL url, ResourceBundle rb)
+	public void initialize(URL url, ResourceBundle rb)
 	{
 		// this.animatedImageView.setImage(new Image(
 		// this.getClass().getResource("..\\..\\..\\ressourcen\\bildDateien\\arcadeGif.gif").toExternalForm()));
 	}
 
-
 	@FXML
-	private void startButtonAction (ActionEvent event)
+	private void startButtonAction(ActionEvent event)
 	{
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
 	}

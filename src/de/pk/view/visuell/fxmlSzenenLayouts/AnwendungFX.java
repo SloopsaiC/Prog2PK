@@ -27,21 +27,63 @@ public class AnwendungFX extends Application
 
 	private static Stage anwendungsStage = null;
 
+	public static void aktualisiereAufloesungsStyleSheets()
+	{
+		AnwendungFX.entferneStyleSheetsVonAllenScenes();
+		String eingestellteAufloesung = Einstellungen.getEinstellungen().getAnwendungsAufloesung().toString();
+		AnwendungFX.fuegeStyleSheetAllenSzenenHinzu(
+				eingestellteAufloesung + AnwendungFX.DATEI_TRENNER + AnwendungFX.CSS_DATEI_ENDE);
+	}
 
-	public static void starteAnwendung (String[] args)
+	private static void entferneStyleSheetsVonAllenScenes()
+	{
+		for (Scene szene : AnwendungFX.SZENEN_MAP.values())
+		{
+			szene.getStylesheets().clear();
+		}
+	}
+
+	private static void fuegeStyleSheetAllenSzenenHinzu(String pfadZurCSSDatei)
+	{
+		for (Scene szene : AnwendungFX.SZENEN_MAP.values())
+		{
+			szene.getStylesheets().add(AnwendungFX.class.getResource(pfadZurCSSDatei).toExternalForm());
+		}
+	}
+
+	private static void fuegeSzeneHinzu(String pfadZurFXMLDatei)
+	{
+		try
+		{
+			AnwendungFX.SZENEN_MAP.put(pfadZurFXMLDatei.replaceFirst(AnwendungFX.FXML_DATEI_ENDUNG, new String()),
+					new Scene(FXMLLoader.load(AnwendungFX.class.getResource(pfadZurFXMLDatei))));
+		} catch (IOException e)
+		{
+			e.printStackTrace(); // TODO: entfernen
+			Main.anwendungBeenden();
+		}
+	}
+
+	private static void initSzenen()
+	{
+		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_TITEL_SZENE_PFAD_FXML);
+		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE_PFAD_FXML);
+		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_CREDIT_SZENE_PFAD_FXML);
+		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_OPTIONEN_SZENE_PPFAD_FXML);
+	}
+
+	public static void starteAnwendung(String[] args)
 	{
 		Application.launch(args);
 	}
 
-
-	public static void wechselSzene (String szenenName)
+	public static void wechselSzene(String szenenName)
 	{
 		AnwendungFX.anwendungsStage.setScene(AnwendungFX.SZENEN_MAP.get(szenenName));
 	}
 
-
 	@Override
-	public void start (Stage stage) throws Exception
+	public void start(Stage stage) throws Exception
 	{
 		AnwendungFX.initSzenen();
 		AnwendungFX.aktualisiereAufloesungsStyleSheets();
@@ -51,58 +93,9 @@ public class AnwendungFX extends Application
 		AnwendungFX.anwendungsStage.setTitle(DE_de.ANWENDUNG_FENSTER_TITEL);
 		AnwendungFX.anwendungsStage.setResizable(false);
 		AnwendungFX.anwendungsStage.setOnCloseRequest(windowEvent -> Main.anwendungBeenden());
-		AnwendungFX.anwendungsStage.setScene(SZENEN_MAP.get(Spielkonstanten.ANWENDUNG_TITEL_SZENE));
+		AnwendungFX.anwendungsStage.setScene(AnwendungFX.SZENEN_MAP.get(Spielkonstanten.ANWENDUNG_TITEL_SZENE));
 		AnwendungFX.anwendungsStage.centerOnScreen();
 		AnwendungFX.anwendungsStage.show();
-	}
-
-
-	private static void initSzenen ()
-	{
-		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_TITEL_SZENE_PFAD_FXML);
-		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE_PFAD_FXML);
-		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_CREDIT_SZENE_PFAD_FXML);
-		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_OPTIONEN_SZENE_PPFAD_FXML);
-	}
-
-
-	private static void fuegeSzeneHinzu (String pfadZurFXMLDatei)
-	{
-		try
-		{
-			AnwendungFX.SZENEN_MAP.put(pfadZurFXMLDatei.replaceFirst(FXML_DATEI_ENDUNG, new String()),
-					new Scene(FXMLLoader.load(AnwendungFX.class.getResource(pfadZurFXMLDatei))));
-		} catch (IOException e)
-		{
-			e.printStackTrace(); // TODO: entfernen
-			Main.anwendungBeenden();
-		}
-	}
-
-
-	public static void aktualisiereAufloesungsStyleSheets ()
-	{
-		AnwendungFX.entferneStyleSheetsVonAllenScenes();
-		String eingestellteAufloesung = Einstellungen.getEinstellungen().getAnwendungsAufloesung().toString();
-		AnwendungFX.fuegeStyleSheetAllenSzenenHinzu(eingestellteAufloesung + DATEI_TRENNER + CSS_DATEI_ENDE);
-	}
-
-
-	private static void entferneStyleSheetsVonAllenScenes ()
-	{
-		for (Scene szene : AnwendungFX.SZENEN_MAP.values())
-		{
-			szene.getStylesheets().clear();
-		}
-	}
-
-
-	private static void fuegeStyleSheetAllenSzenenHinzu (String pfadZurCSSDatei)
-	{
-		for (Scene szene : AnwendungFX.SZENEN_MAP.values())
-		{
-			szene.getStylesheets().add(AnwendungFX.class.getResource(pfadZurCSSDatei).toExternalForm());
-		}
 	}
 
 }
