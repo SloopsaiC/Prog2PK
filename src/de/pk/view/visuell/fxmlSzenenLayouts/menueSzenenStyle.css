@@ -1,13 +1,14 @@
 AnchorPane {
-	-fx-background-color: rgb(80,80,80);
+	-fx-background-color: rgb(80.0,80.0,80.0);
 }
+
 
 #OptionenAnchorPane {
 	-fx-background-color: none;
 }
 
 
-Label {
+.label {
 	-fx-text-fill: white;
 }
 
@@ -16,16 +17,25 @@ Label {
 }
 
 
-.button, .toggle-button  {
-	-fx-color: rgba(0,0,0,0.4);
+.choice-box .context-menu {
+	-fx-background-color: rgba(0.0,0.0,0.0,0.8);
 }
 
-.button:hover , .toggle-button:hover {
-	-fx-color: rgba(0,0,0,0.6);
+#choice-box-menu-item:focused  {  
+ 	-fx-background-color: rgba(50.0,0.0,0.0,0.6);
+}  
+
+
+.button, .toggle-button, .choice-box   {
+	-fx-color: rgba(0.0,0.0,0.0,0.4);
 }
 
-.button:pressed, .toggle-button:selected  {
-	-fx-color: rgba(50,0,0,0.6);
+.button:hover , .toggle-button:hover, .choice-box:hover {
+	-fx-color: rgba(0.0,0.0,0.0,0.6);
+}
+
+.button:pressed, .toggle-button:selected, .choice-box:pressed  {
+	-fx-color: rgba(50.0,0.0,0.0,0.6);
 }
 
 

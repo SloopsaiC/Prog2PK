@@ -48,7 +48,7 @@ public class HauptmenueSzeneController implements Initializable
 	@FXML
 	private void neuesSpielButtonAction (ActionEvent event)
 	{
-		//
+		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE);
 	}
 
 

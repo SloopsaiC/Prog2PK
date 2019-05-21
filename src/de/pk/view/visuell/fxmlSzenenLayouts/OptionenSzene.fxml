@@ -23,7 +23,7 @@
 	</stylesheets>
 
 	<children>
-		<ImageView fitHeight="600.0" fitWidth="900.0" opacity="0.3"
+		<ImageView id="HintergrundBild" fitHeight="600.0" fitWidth="900.0" opacity="0.3"
 			pickOnBounds="true" AnchorPane.bottomAnchor="0.0"
 			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
 			AnchorPane.topAnchor="0.0">
@@ -51,9 +51,12 @@
 						<Label layoutX="463.0" layoutY="61.0" text="Lautstaerke" />
 						<Label layoutX="433.0" layoutY="219.0" text="Musik" />
 						<Label layoutX="497.0" layoutY="219.0" text="Sounds" />
-						<ChoiceBox fx:id="aufloesungChoiceBox" layoutX="252.0"
-							layoutY="92.0" prefWidth="150.0" />
-						<Label layoutX="297.0" layoutY="70.0" text="Aufloesung" />
+						<ChoiceBox fx:id="aufloesungChoiceBox" layoutX="193.0"
+							layoutY="68.0" prefWidth="150.0" focusTraversable="false" />
+						<Label layoutX="238.0" layoutY="46.0" text="Aufloesung" />
+						<Button layoutX="232.0" layoutY="118.0"
+							focusTraversable="false" mnemonicParsing="false"
+							onAction="#aufloesungAnwendenButtonAction" text="Anwenden" />
 					</children>
 				</AnchorPane>
 			</center>

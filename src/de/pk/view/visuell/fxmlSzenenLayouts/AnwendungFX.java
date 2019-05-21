@@ -40,6 +40,13 @@ public class AnwendungFX extends Application
 	}
 
 
+	public static void aktualisiereFenserAufloesung ()
+	{
+		AnwendungFX.aktualisiereAufloesungsStyleSheets();
+		AnwendungFX.anwendungsStage.sizeToScene();
+	}
+
+
 	@Override
 	public void start (Stage stage) throws Exception
 	{
@@ -63,6 +70,7 @@ public class AnwendungFX extends Application
 		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE_PFAD_FXML);
 		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_CREDIT_SZENE_PFAD_FXML);
 		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_OPTIONEN_SZENE_PPFAD_FXML);
+		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE_PFAD_FXML);
 	}
 
 
@@ -80,7 +88,7 @@ public class AnwendungFX extends Application
 	}
 
 
-	public static void aktualisiereAufloesungsStyleSheets ()
+	private static void aktualisiereAufloesungsStyleSheets ()
 	{
 		AnwendungFX.entferneStyleSheetsVonAllenScenes();
 		String eingestellteAufloesung = Einstellungen.getEinstellungen().getAnwendungsAufloesung().toString();

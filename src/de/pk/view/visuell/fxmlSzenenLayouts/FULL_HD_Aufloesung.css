@@ -3,9 +3,9 @@
 	-fx-pref-height: 576;
 } 
 
-
-Label {
-	-fx-font-size: 12;
+#HintergrundBild {
+	-fx-fit-width: 1024;
+	-fx-fit-height: 576;
 }
 
 #ueberschriftenLabel{
@@ -13,7 +13,7 @@ Label {
 }
 
 
-.button, .toggle-button  {
+.label, .button, .toggle-button  {
 	-fx-font-size: 12;
 }
 

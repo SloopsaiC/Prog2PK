@@ -86,8 +86,6 @@ public class OptionenSzeneController implements Initializable
 					Aufloesung newValue)
 			{
 				Einstellungen.getEinstellungen().setAnwendungsAufloesung(newValue);
-				AnwendungFX.aktualisiereAufloesungsStyleSheets();
-				// TODO: Aktuelle Szene aktualisieren
 			}
 		});
 	}
@@ -97,6 +95,14 @@ public class OptionenSzeneController implements Initializable
 	private void zumHauptmenueButtonAction (ActionEvent event)
 	{
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
+	}
+
+
+	@FXML
+	public void aufloesungAnwendenButtonAction (ActionEvent event)
+	{
+		AnwendungFX.aktualisiereFenserAufloesung();
+		// TODO: Aktuelle Szene aktualisieren
 	}
 
 
