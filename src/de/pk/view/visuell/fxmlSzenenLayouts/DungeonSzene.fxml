@@ -4,303 +4,389 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 
-<AnchorPane id="SzenenPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pk.view.visuell.fxmlSzenenController.DungeonSzeneController">
+<AnchorPane id="SzenenPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pk.view.visuell.fxmlSzenenController.DungeonSzeneController">
 
 	<stylesheets>
-		<URL value="@menueSzenenStyle.css" />
+		<URL value="@dungeonSzeneStyle.css" />
 	</stylesheets>
 
 	<children>
 		<StackPane prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
-				<ImageView id="HintergrundBild" fitHeight="600.0" fitWidth="900.0" opacity="0.3" pickOnBounds="true">
+				<ImageView id="HintergrundBild" fitHeight="576.0" fitWidth="1024.0" opacity="0.7" pickOnBounds="true">
 					<image>
-						<Image url="@../../../ressourcen/bildDateien/testImg.jpg" />
+						<Image url="@../../../ressourcen/bildDateien/matrix_background.png" />
 					</image>
 				</ImageView>
-            <GridPane alignment="CENTER" gridLinesVisible="true" hgap="5.0" prefHeight="595.0" prefWidth="900.0" vgap="5.0" StackPane.alignment="CENTER">
-               <columnConstraints>
-                  <ColumnConstraints fillWidth="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="280.0" />
-                  <ColumnConstraints fillWidth="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="280.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="280.0" vgrow="ALWAYS" />
-                  <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="280.0" vgrow="ALWAYS" />
-               </rowConstraints>
-               <children>
-      				<GridPane gridLinesVisible="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-      					<columnConstraints>
-      						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      					</columnConstraints>
-      					<rowConstraints>
-      						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      					</rowConstraints>
-                     <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="43.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="223.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="223.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-      				</GridPane>
-                  <GridPane gridLinesVisible="true" layoutX="410.0" layoutY="249.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="43.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="223.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="223.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </GridPane>
-                  <GridPane gridLinesVisible="true" layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="43.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="223.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="223.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </GridPane>
-                  <GridPane gridLinesVisible="true" layoutX="10.0" layoutY="249.0" GridPane.columnIndex="1">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="43.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="223.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="223.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../../../ressourcen/bildDateien/littleTree.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </GridPane>
-               </children>
-            </GridPane>
-				<BorderPane>
-					<top>
-						<Label id="ueberschriftenLabel" alignment="CENTER" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Dungeon" BorderPane.alignment="CENTER" />
-					</top>
-					<bottom>
-						<Button focusTraversable="false" mnemonicParsing="false" onAction="#zumHauptmenueButtonAction" text="Pause" BorderPane.alignment="BOTTOM_RIGHT" />
-					</bottom>
+				<GridPane alignment="CENTER" gridLinesVisible="true" hgap="5.0" opacity="0.64" prefHeight="595.0" prefWidth="900.0" vgap="5.0" StackPane.alignment="CENTER">
+					<columnConstraints>
+						<ColumnConstraints fillWidth="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="280.0" />
+						<ColumnConstraints fillWidth="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="280.0" />
+					</columnConstraints>
+					<rowConstraints>
+						<RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="280.0" vgrow="ALWAYS" />
+						<RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="280.0" vgrow="ALWAYS" />
+					</rowConstraints>
+					<children>
+						<GridPane gridLinesVisible="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+						</GridPane>
+						<GridPane gridLinesVisible="true" layoutX="410.0" layoutY="249.0">
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+						</GridPane>
+						<GridPane gridLinesVisible="true" layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+						</GridPane>
+						<GridPane gridLinesVisible="true" layoutX="10.0" layoutY="249.0" GridPane.columnIndex="1">
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+						</GridPane>
+					</children>
+				</GridPane>
+				<ImageView id="HintergrundBild" fitHeight="576.0" fitWidth="1024.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true">
+					<image>
+						<Image url="@../../../ressourcen/bildDateien/borders.png" />
+					</image>
+					<effect>
+						<DropShadow blurType="TWO_PASS_BOX" height="75.0" radius="37.0" spread="0.25" width="75.0" />
+					</effect>
+				</ImageView>
+				<BorderPane cache="true" StackPane.alignment="TOP_CENTER">
 					<padding>
 						<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 					</padding>
+					<top>
+                  <StackPane BorderPane.alignment="TOP_CENTER">
+                     <children>
+      								<VBox alignment="TOP_CENTER" spacing="5.0">
+      									<children>
+      										<Label id="dungeonNameLabel" alignment="CENTER" contentDisplay="CENTER" text="DUNGEON" textAlignment="CENTER" textFill="WHITE" />
+      										<ProgressBar id="dungeonFortschrittIndikator" prefWidth="200.0" progress="0.34" />
+      									</children>
+      								</VBox>
+                        <VBox alignment="TOP_RIGHT" spacing="10.0">
+                           <children>
+                              <HBox alignment="TOP_RIGHT" spacing="10.0">
+                                 <children>
+                  						<Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#zumHauptmenueButtonAction" prefHeight="25.0" prefWidth="25.0" textAlignment="CENTER">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../ressourcen/bildDateien/Settings_BTN.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#zumHauptmenueButtonAction" prefHeight="25.0" prefWidth="25.0" textAlignment="CENTER">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../ressourcen/bildDateien/Settings_BTN.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#zumHauptmenueButtonAction" prefHeight="25.0" prefWidth="25.0" textAlignment="CENTER">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../ressourcen/bildDateien/Settings_BTN.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <Label focusTraversable="false" text="50">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../ressourcen/bildDateien/gold_beispiel.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label focusTraversable="false" text="50">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../ressourcen/bildDateien/CODEFRAGMENTE.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </StackPane>
+					</top>
+					<effect>
+						<DropShadow blurType="TWO_PASS_BOX" height="21.45" radius="10.82" spread="0.21" width="23.83" />
+					</effect>
+					<bottom>
+						<HBox id="untereDungeonAnzeigenHBox" alignment="BOTTOM_CENTER">
+							<children>
+								<ProgressIndicator id="lebensPunkteIndikator" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="70.0" progress="0.67" />
+								<VBox alignment="BOTTOM_CENTER" prefHeight="100.0">
+									<children>
+                              <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                 <children>
+                                    <Button id="wirkendeEffekteButton" focusTraversable="false" mnemonicParsing="false" styleClass="untereDungeonAnzeigeButtons" text="3" textAlignment="CENTER" />
+                                    <Button id="wirkendeEffekteButton" focusTraversable="false" mnemonicParsing="false" styleClass="untereDungeonAnzeigeButtons" text="3" textAlignment="CENTER" />
+                                    <Button id="wirkendeEffekteButton" focusTraversable="false" mnemonicParsing="false" styleClass="untereDungeonAnzeigeButtons" text="3" textAlignment="CENTER" />
+                                    <Button id="wirkendeEffekteButton" focusTraversable="false" mnemonicParsing="false" styleClass="untereDungeonAnzeigeButtons" text="3" textAlignment="CENTER" />
+                                    <Button id="wirkendeEffekteButton" focusTraversable="false" mnemonicParsing="false" styleClass="untereDungeonAnzeigeButtons" text="3" textAlignment="CENTER" />
+                                    <Button id="wirkendeEffekteButton" focusTraversable="false" mnemonicParsing="false" styleClass="untereDungeonAnzeigeButtons" text="3" textAlignment="CENTER" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+										<SplitPane dividerPositions="0.5" focusTraversable="false">
+											<items>
+												<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="inneres-anchor-pane">
+													<children>
+														<HBox alignment="CENTER" layoutX="-14.0" layoutY="10.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+															<children>																
+																<Button id="aktionenButton" focusTraversable="false" mnemonicParsing="false" styleClass="untereDungeonAnzeigeButtons" text="1" textAlignment="CENTER">													
+																</Button>
+																<Button id="aktionenButton" focusTraversable="false" mnemonicParsing="false" styleClass="untereDungeonAnzeigeButtons" text="1" textAlignment="CENTER" />
+																<Button id="aktionenButton" focusTraversable="false" mnemonicParsing="false" styleClass="untereDungeonAnzeigeButtons" text="1" textAlignment="CENTER" />
+																<Button id="aktionenButton" focusTraversable="false" mnemonicParsing="false" styleClass="untereDungeonAnzeigeButtons" text="1" textAlignment="CENTER" />
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+												<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="inneres-anchor-pane">
+													<children>
+														<HBox alignment="CENTER" layoutX="-37.0" layoutY="12.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+															<children>
+																<Button id="faehigkeitenButton" focusTraversable="false" mnemonicParsing="false" styleClass="untereDungeonAnzeigeButtons" text="2" textAlignment="CENTER" />
+																<Button id="faehigkeitenButton" focusTraversable="false" mnemonicParsing="false" styleClass="untereDungeonAnzeigeButtons" text="2" textAlignment="CENTER" />
+																<Button id="faehigkeitenButton" focusTraversable="false" mnemonicParsing="false" styleClass="untereDungeonAnzeigeButtons" text="2" textAlignment="CENTER" />
+																<Button id="faehigkeitenButton" focusTraversable="false" mnemonicParsing="false" styleClass="untereDungeonAnzeigeButtons" text="2" textAlignment="CENTER" />
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+											</items>
+										</SplitPane>
+                              <StackPane>
+                                 <children>
+      										<ProgressBar focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="300.0" progress="0.77" />
+                                    <Label id="levelLabel" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" text="Lv. 100" textAlignment="CENTER" />
+                                 </children>
+                              </StackPane>
+									</children>
+								</VBox>
+								<ProgressIndicator id="spezielleFaehigkeitIndikator" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="70.0" progress="0.62" />
+							</children>
+							<BorderPane.margin>
+								<Insets />
+							</BorderPane.margin>
+						</HBox>
+					</bottom>
+               <left>
+                  <VBox spacing="10.0" BorderPane.alignment="CENTER_LEFT">
+                     <children>
+                        <HBox spacing="2.0">
+                           <children>
+                              <StackPane alignment="TOP_CENTER" opacity="0.95">
+                                 <children>
+                                    <Circle fill="#173440da" radius="42.0" stroke="BLACK" strokeType="INSIDE" />
+                                    <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../ressourcen/bildDateien/avatar_beispiel.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </StackPane>
+                              <VBox alignment="BOTTOM_CENTER" spacing="3.0">
+                                 <children>
+                                    <ProgressBar id="lebensPunkteIndikatorKlein" prefWidth="50.0" progress="0.62" />
+                                    <ProgressBar id="spezielleFaehigkeitIndikatorKlein" prefWidth="50.0" progress="0.31" />
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../ressourcen/bildDateien/modus_beispiel.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="BOTTOM_CENTER" spacing="3.0">
+                                 <children>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../ressourcen/bildDateien/phase_beispiel.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../ressourcen/bildDateien/phase_beispiel.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../ressourcen/bildDateien/phase_beispiel.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox spacing="1.0">
+                           <children>
+                              <StackPane alignment="TOP_CENTER" opacity="0.95">
+                                 <children>
+                                    <Circle fill="#173440da" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
+                                    <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../ressourcen/bildDateien/avatar_beispiel.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </StackPane>
+                              <VBox alignment="TOP_CENTER" spacing="3.0">
+                                 <children>
+                                    <ProgressBar id="lebensPunkteIndikatorKlein" prefHeight="15.0" prefWidth="40.0" progress="0.62" />
+                                    <ProgressBar id="spezielleFaehigkeitIndikatorKlein" prefHeight="15.0" prefWidth="40.0" progress="0.31" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../ressourcen/bildDateien/modus_beispiel.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox spacing="1.0">
+                           <children>
+                              <StackPane alignment="TOP_CENTER" opacity="0.95">
+                                 <children>
+                                    <Circle fill="#173440da" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
+                                    <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../ressourcen/bildDateien/avatar_beispiel.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </StackPane>
+                              <VBox alignment="TOP_CENTER" spacing="3.0">
+                                 <children>
+                                    <ProgressBar id="lebensPunkteIndikatorKlein" prefHeight="15.0" prefWidth="40.0" progress="0.62" />
+                                    <ProgressBar id="spezielleFaehigkeitIndikatorKlein" prefHeight="15.0" prefWidth="40.0" progress="0.31" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../ressourcen/bildDateien/modus_beispiel.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox spacing="1.0">
+                           <children>
+                              <StackPane alignment="TOP_CENTER" opacity="0.95">
+                                 <children>
+                                    <Circle fill="#173440da" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
+                                    <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../ressourcen/bildDateien/avatar_beispiel.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </StackPane>
+                              <VBox alignment="TOP_CENTER" spacing="3.0">
+                                 <children>
+                                    <ProgressBar id="lebensPunkteIndikatorKlein" prefHeight="15.0" prefWidth="40.0" progress="0.62" />
+                                    <ProgressBar id="spezielleFaehigkeitIndikatorKlein" prefHeight="15.0" prefWidth="40.0" progress="0.31" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../ressourcen/bildDateien/modus_beispiel.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                  </VBox>
+               </left>
 				</BorderPane>
 			</children>
 		</StackPane>

@@ -12,7 +12,14 @@ AnchorPane {
 	-fx-text-fill: white;
 }
 
-#ueberschriftenLabel{
+#ueberschriftenLabel {
+	-fx-font-weight: bold;
+}
+
+
+#dungeonNameLabel {
+	-fx-font-family: 'fantasy';
+	-fx-text-fill: white;
 	-fx-font-weight: bold;
 }
 
@@ -37,6 +44,8 @@ AnchorPane {
 .button:pressed, .toggle-button:selected, .choice-box:pressed  {
 	-fx-color: rgba(50.0,0.0,0.0,0.6);
 }
+
+
 
 
 
