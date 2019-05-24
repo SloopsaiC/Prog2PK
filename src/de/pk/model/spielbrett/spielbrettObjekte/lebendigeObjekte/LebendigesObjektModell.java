@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.pk.model.gegenstaende.container.Container;
-import de.pk.model.interaktion.Aktion;
+import de.pk.model.interaktion.aktionen.Aktion;
 import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjektModell;
 

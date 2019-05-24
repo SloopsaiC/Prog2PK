@@ -40,7 +40,6 @@ public class HeldenPhase extends Phase
 	@Override
 	public void phasenSchritt(Dungeon aktiverDungeonController, Held aktiverHeld)
 	{
-		aktiverHeld.fuehreAktionAus("Bewegen", null);
 		this.anzahlAktionenDieserPhase++;
 	}
 

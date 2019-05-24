@@ -17,7 +17,7 @@ public class Effekt
 	 * wenn er darauf angewandt wird. Indizies sind in
 	 * {@link}EffektBeschreibungsIndex definiert
 	 */
-	private HashMap<EffektBeschreibungsIndex, Integer> effektBeschreibung = null;
+	private Map<EffektBeschreibungsIndex, EffektTeil> effektBeschreibung = null;
 
 	/**
 	 * Erstellt einen Effekt, der keine Auswirkungen hat.
@@ -37,21 +37,28 @@ public class Effekt
 	 */
 	public Effekt(EffektTeil... effektTeile)
 	{
-		this.effektBeschreibung = new HashMap<>();
-		for (EffektTeil teil : effektTeile)
-		{
-			this.effektBeschreibung.put(teil.getIndex(), teil.getWert());
-		}
+		this.effektBeschreibung = generiereEffektBeschreibung(effektTeile);
+
 	}
 
-	public Map<EffektBeschreibungsIndex, Integer> getEffektBeschreibung()
+	private Map<EffektBeschreibungsIndex, EffektTeil> generiereEffektBeschreibung(EffektTeil[] effektTeile)
 	{
-		return Collections.unmodifiableMap(this.effektBeschreibung);
+		Map<EffektBeschreibungsIndex, EffektTeil> beschreibung = Collections
+				.synchronizedMap(new HashMap<EffektBeschreibungsIndex, EffektTeil>());
+		for (EffektTeil teil : effektTeile)
+		{
+			beschreibung.put(teil.getIndex(), teil);
+		}
+		return beschreibung;
 	}
 
 	public int getWertAusBeschreibung(EffektBeschreibungsIndex index)
 	{
-		return this.effektBeschreibung.get(index);
+		if (this.istAbgeklungen())
+		{
+			return 0;
+		}
+		return this.effektBeschreibung.get(index).getWert();
 	}
 
 	/**
@@ -62,7 +69,7 @@ public class Effekt
 	 */
 	public boolean istAbgeklungen()
 	{
-		return this.effektBeschreibung.get(EffektBeschreibungsIndex.ANZAHL_WIRK_TICKS) < 1;
+		return this.effektBeschreibung.get(EffektBeschreibungsIndex.ANZAHL_WIRK_TICKS).getWert() < 1;
 	}
 
 	/**
@@ -86,8 +93,8 @@ public class Effekt
 	public void wurdeGewirkt()
 	{
 		// Die Anzahl der Wirkticks um einen vermindern
-		this.effektBeschreibung.replace(EffektBeschreibungsIndex.ANZAHL_WIRK_TICKS,
-				this.effektBeschreibung.get(EffektBeschreibungsIndex.ANZAHL_WIRK_TICKS) - 1);
+		EffektTeil wirkTicks = this.effektBeschreibung.get(EffektBeschreibungsIndex.ANZAHL_WIRK_TICKS);
+		wirkTicks.setWert(wirkTicks.getWert() - 1);
 	}
 
 }

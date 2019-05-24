@@ -5,7 +5,7 @@ import de.pk.utils.AusnahmeNachrichten;
 
 public enum LebendigesObjektPunkteIndex
 {
-	ANGRIFF, RUESTUNG, LEBENS_PUNKTE, BEWEGUNGS_PUNKTE;
+	ANGRIFF, RUESTUNG, LEBENS_PUNKTE, BEWEGUNGS_PUNKTE, AKTION_REICHWEITE_AENDERUNG;
 
 	public static LebendigesObjektPunkteIndex uebersetzeAusEffektIndex(EffektBeschreibungsIndex zuUebersetzen)
 	{
@@ -18,4 +18,5 @@ public enum LebendigesObjektPunkteIndex
 					AusnahmeNachrichten.LEBENDIGES_OBJEKT_PUNKTE_INDEX_UEBERSETZUNG_FEHLGESCHLAGEN);
 		}
 	}
+
 }

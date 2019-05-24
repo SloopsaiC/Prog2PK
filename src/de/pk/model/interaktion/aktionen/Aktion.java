@@ -1,9 +1,18 @@
-package de.pk.model.interaktion;
+package de.pk.model.interaktion.aktionen;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import de.pk.control.interaktion.Wuerfel;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
+import de.pk.model.interaktion.Anzielbar;
 import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.interaktion.effekt.EffektBeschreibungsIndex;
+import de.pk.model.position.KachelPosition;
+import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektPunkteIndex;
 
 /**
  * Aktionen haben selbst- und ziel-Effekte, die beim Ausfuehren der Aktion auf
@@ -15,20 +24,14 @@ import de.pk.model.interaktion.effekt.EffektBeschreibungsIndex;
 public class Aktion
 {
 
-	/**
-	 * Die Effekte, welche auf das ausfuehrende Objekt angewendet werden.
-	 */
-	private Effekt selbstEffekt = null;
-	/**
-	 * Die Effekte, welche auf das von dieser Aktion angezielte Objekt angewendet
-	 * werden.
-	 */
-	private Effekt zielEffekt = null;
+	private List<Effekt> effekte = null;
+
 	/**
 	 * Die ErfolgsWahrscheinlichkeit definiert, ab welcher relativen
 	 * Wuerfelaugenzahl die Aktion erst ausgefuehrt wird.
 	 */
 	private float grundErfolgsWahrscheinlichkeit = 0.0f;
+	private int reichweite = 0;
 
 	/**
 	 * Erstellt eine neue Aktion mit Namen, einer erfolgsWahrscheinlichkeit, sowie
@@ -43,11 +46,12 @@ public class Aktion
 	 *                                  Wuerfelaugenzahl die Aktion erst ausgefuehrt
 	 *                                  wird.
 	 */
-	public Aktion(Effekt selbstEffekt, Effekt zielEffekt, float erfolgsWahrscheinlichkeit)
+	public Aktion(float erfolgsWahrscheinlichkeit, int reichweite, Effekt... effekte)
 	{
-		this.selbstEffekt = selbstEffekt;
-		this.zielEffekt = zielEffekt;
+		this.effekte = Collections.synchronizedList(new ArrayList<Effekt>());
+		this.effekte.addAll(Arrays.asList(effekte));
 		this.grundErfolgsWahrscheinlichkeit = erfolgsWahrscheinlichkeit;
+		this.reichweite = reichweite;
 	}
 
 	/**
@@ -74,35 +78,18 @@ public class Aktion
 	 * @return True, falls es fuer den Wirker moeglich ist diese Aktion
 	 *         auszufuehren, sonst false
 	 */
-	private boolean ueberpruefeAktion(LebendigesObjekt wirker)
+	public boolean istLegalesZiel(Anzielbar ziel, int entfernung)
 	{
-		return wirker.kannSichUmXBewegen(
-				this.selbstEffekt.getWertAusBeschreibung(EffektBeschreibungsIndex.BEWEGUNGSPUNKTE) * (-1));
+		return !ziel.istGeschuetzt() && entfernung <= this.reichweite;
 	}
 
-	/**
-	 * Wendet eine Aktion auf ein Ziel und auf den Ausfuehrenden an. Der Erfolg wird
-	 * dabei durch einen Wuerfel bestimmt.
-	 *
-	 * @param wirker  Das ausfuehrende LebendigeObjekt.
-	 * @param ziel    Das Ziel dieser Aktion.
-	 * @param wuerfel Der Wuerfel der fuer diese Aktion genutzt wird.
-	 *
-	 * @return true, falls die Aktion erfolgreich ausgefuehrt wurde, sonst false.
-	 */
-	public boolean wendeAn(LebendigesObjekt wirker, LebendigesObjekt ziel, Wuerfel wuerfel)
+	public void fuehreAus(LebendigesObjekt wirker, Anzielbar... ziele)
 	{
-		if (this.ueberpruefeAktion(wirker)
-				&& wuerfel.werfeWuerfel(this.berechneErfolgsWahrscheinlichkeit(wirker, ziel)).warErfolgreich())
-		{
-			wirker.fuegeEffekteHinzu(this.selbstEffekt);
-			if (ziel != null)
-			{
-				ziel.fuegeEffekteHinzu(this.zielEffekt);
-			}
-			return true;
-		}
-		return false;
+		this.fuehreAus(wirker, Arrays.asList(ziele));
 	}
 
+	public void fuehreAus(LebendigesObjekt wirker, Collection<Anzielbar> ziele)
+	{
+		
+	}
 }

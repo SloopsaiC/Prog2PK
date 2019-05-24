@@ -1,11 +1,12 @@
 package de.pk.model.position;
 
+import de.pk.model.interaktion.Anzielbar;
 import de.pk.model.karte.generator.Richtung;
 import de.pk.model.spielbrett.Kachel;
 import de.pk.utils.Spielkonstanten;
 
-public class KachelPosition
-{
+public class KachelPosition implements Anzielbar
+{ 
 	private static boolean ueberpruefePosition(Position pos)
 	{
 		return ((pos.getX() < Spielkonstanten.KACHEL_GROESSE_X) && (pos.getY() < Spielkonstanten.KACHEL_GROESSE_Y)
@@ -68,6 +69,20 @@ public class KachelPosition
 	public Position getPositionAufDerKachel()
 	{
 		return this.positionAufDerKachel;
+	}
+
+	@Override
+	public boolean istGeschuetzt()
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public float getTrefferWahrscheinlichkeit()
+	{
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

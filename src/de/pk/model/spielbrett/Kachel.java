@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
+import de.pk.model.interaktion.Anzielbar;
+import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.karte.generator.untergruende.KachelUntergrundWertigkeit;
 import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrundMitRichtung;
 import de.pk.model.position.Position;
@@ -13,6 +15,7 @@ public class Kachel
 {
 	private HashMap<Position, SpielbrettObjekt> kachelObjekte = null;
 	private KartenGeneratorUntergrundMitRichtung untergrund = null;
+	
 
 	public Kachel(HashMap<Position, SpielbrettObjekt> objekte, KartenGeneratorUntergrundMitRichtung untergrund)
 	{
@@ -82,5 +85,6 @@ public class Kachel
 	{
 		return this.kachelObjekte.containsKey(pos);
 	}
+
 
 }

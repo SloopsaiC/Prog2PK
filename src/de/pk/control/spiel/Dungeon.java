@@ -163,17 +163,12 @@ public class Dungeon
 	{
 		for (LebendigesObjekt objekt : this.modell.getSpielbrett().getAlleLebendigenObjekte())
 		{
-			Vektor positionsAenderung = objekt.update();
-			if (positionsAenderung.laenge() > 0f)
-			{
-				try
-				{
-					this.modell.getSpielbrett().bewege(objekt, positionsAenderung);
-				} catch (IllegalArgumentException nichtMoeglich)
-				{
-					// Bewegung war nicht moeglich, also nicht bewegen
-				}
-			}
+			/*
+			 * Vektor positionsAenderung = objekt.update(); if (positionsAenderung.laenge()
+			 * > 0f) { try { this.modell.getSpielbrett().bewege(objekt, positionsAenderung);
+			 * } catch (IllegalArgumentException nichtMoeglich) { // Bewegung war nicht
+			 * moeglich, also nicht bewegen } }
+			 */
 		}
 	}
 

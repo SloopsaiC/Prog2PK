@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
-import de.pk.model.interaktion.Aktion;
+import de.pk.model.interaktion.Anzielbar;
+import de.pk.model.interaktion.aktionen.Aktion;
 import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.interaktion.effekt.EffektBeschreibungsIndex;
+import de.pk.model.interaktion.effekt.EffektTeil;
+import de.pk.model.position.KachelPosition;
 import de.pk.model.position.Vektor;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektModell;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektPunkteIndex;
 import de.pk.utils.Spielkonstanten;
 
-public abstract class LebendigesObjekt extends SpielbrettObjekt
+public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzielbar
 {
 
 	private final LebendigesObjektModell modell;
@@ -52,7 +55,7 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 		this.modell.fuegeAktionHinzu(name.toLowerCase(), hinzufuegen);
 	}
 
-	public void fuegeEffekteHinzu(Effekt... hinzufuegen)
+	public boolean fuegeEffekteHinzu(Effekt... hinzufuegen)
 	{
 		if (hinzufuegen != null)
 		{
@@ -60,26 +63,19 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 			{
 				this.modell.fuegeEffektHinzu(effekt);
 			}
+			return true;
 		}
+		return false;
 	}
 
-	public void fuehreAktionAus(String name, LebendigesObjekt ziel)
+	public Aktion getAktionMitNamen(String name)
 	{
-		try
-		{
-			this.modell.getAktionMitNamen(name.toLowerCase()).wendeAn(this, ziel, Spielkonstanten.WUERFEL);
-		} catch (NullPointerException nichtVorhanden)
-		{
-			// TODO: Exception Messages
-			throw new IllegalArgumentException();
-		}
-
+		return this.getModell().getAktionMitNamen(name);
 	}
 
-	private Vektor generiereAenderungsVektorAusEffekt(Effekt enthaltenerEffekt)
+	public int getAnzahlPunkteVon(LebendigesObjektPunkteIndex index)
 	{
-		return new Vektor(enthaltenerEffekt.getWertAusBeschreibung(EffektBeschreibungsIndex.BEWEGUNG_X),
-				enthaltenerEffekt.getWertAusBeschreibung(EffektBeschreibungsIndex.BEWEGUNG_Y));
+		return this.getModell().getAnzahlPunkteVon(index);
 	}
 
 	/**
@@ -112,11 +108,6 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 		return true;
 	}
 
-	public boolean kannSichUmXBewegen(int x)
-	{
-		return !(x > this.modell.getAnzahlPunkteVon(LebendigesObjektPunkteIndex.BEWEGUNGS_PUNKTE));
-	}
-
 	/**
 	 * Wendet alle auf dieses lebendige Objekt registrierten Effekte auf dieses an.
 	 * Die Positionsaenderung die durch diese verursacht werden wuerde wird an den
@@ -124,9 +115,9 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 	 *
 	 * @return Die Positionsaenderung die durch die Effekte verursacht werden wuerde
 	 */
-	public Vektor update()
+	public KachelPosition update()
 	{
-		Vektor positionsAenderung = new Vektor(0, 0);
+		KachelPosition bewegung = null;
 		// While und List Iterator da hier ein Element waehrend des Iterierens aus der
 		// Liste entfernt werden kann (Abgeklungene Effekte)
 		for (Effekt momentanerEffekt : this.generiereListeVonTickendenEffektenAus(this.modell.getEffekte()))
@@ -134,15 +125,15 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 			this.wendeEffektAufModellAn(momentanerEffekt);
 			// Update die Positionsaenderung die von allen Effekten
 			// in Summe "gefordert" wird
-			positionsAenderung = positionsAenderung.addiere(this.generiereAenderungsVektorAusEffekt(momentanerEffekt));
+
 			momentanerEffekt.wurdeGewirkt();
 			if (momentanerEffekt.istAbgeklungen())
 			{
-				this.modell.getEffekte().remove(momentanerEffekt); // wenn der Effekt abgeklungen ist, wird er
+				this.modell.getEffekte().remove(momentanerEffekt); // wenn der Effekt abgeklungen ist, wird er //
 																	// entfernt.
 			}
 		}
-		return positionsAenderung;
+		return null;
 	}
 
 	private void wendeEffektAufModellAn(Effekt zuAnwenden)
@@ -153,4 +144,26 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt
 					.getWertAusBeschreibung(EffektBeschreibungsIndex.uebersetzeAusLebendigesObjektPunkteIndex(index)));
 		}
 	}
+
+	/* (non-Javadoc)
+	 * @see de.pk.model.interaktion.Anzielbar#istGeschuetzt()
+	 */
+	@Override
+	public boolean istGeschuetzt()
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see de.pk.model.interaktion.Anzielbar#getTrefferWahrscheinlichkeit()
+	 */
+	@Override
+	public float getTrefferWahrscheinlichkeit()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
 }

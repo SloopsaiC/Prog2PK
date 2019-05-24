@@ -27,4 +27,11 @@ public class EffektTeil
 		return this.wert;
 	}
 
+	/**
+	 * @param wert the wert to set
+	 */
+	public void setWert(int wert)
+	{
+		this.wert = wert;
+	}
 }
