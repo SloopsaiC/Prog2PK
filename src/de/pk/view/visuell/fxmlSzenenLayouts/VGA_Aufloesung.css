@@ -1,4 +1,4 @@
-#SzenenPane {
+.menue-pane, .dungeon-pane {
 	-fx-pref-width: 426;
 	-fx-pref-height: 320;
 }

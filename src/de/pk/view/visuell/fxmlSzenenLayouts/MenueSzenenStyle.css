@@ -1,10 +1,8 @@
-AnchorPane {
-	-fx-background-color: rgb(80.0,80.0,80.0);
-}
-
-
-#OptionenAnchorPane {
-	-fx-background-color: none;
+.menue-pane {
+	-fx-background-image: url("../../../ressourcen/bildDateien/WeltKarteBackgroundCity.jpg");
+ 	-fx-background-position: left top;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover;
 }
 
 
@@ -12,10 +10,9 @@ AnchorPane {
 	-fx-text-fill: white;
 }
 
-#ueberschriftenLabel{
+.ueberschriftenLabel {
 	-fx-font-weight: bold;
 }
-
 
 .choice-box .context-menu {
 	-fx-background-color: rgba(0.0,0.0,0.0,0.8);
@@ -37,6 +34,8 @@ AnchorPane {
 .button:pressed, .toggle-button:selected, .choice-box:pressed  {
 	-fx-color: rgba(50.0,0.0,0.0,0.6);
 }
+
+
 
 
 

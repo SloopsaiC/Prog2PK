@@ -24,8 +24,6 @@ public class TitelSzeneController implements Initializable
 	@FXML
 	private ImageView titelImageView;
 	@FXML
-	private ImageView animatedImageView;
-	@FXML
 	private ImageView hintergrundImageView;
 
 	/**

@@ -6,31 +6,21 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane id="SzenenPane" maxHeight="-Infinity"
+<AnchorPane id="OptionenPane" maxHeight="-Infinity"
 	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-	prefHeight="600.0" prefWidth="900.0" styleClass="mainFxmlClass"
+	prefHeight="576.0" prefWidth="1024.0" styleClass="menue-pane"
 	xmlns="http://javafx.com/javafx/11.0.1"
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="de.pk.view.visuell.fxmlSzenenController.OptionenSzeneController">
 
 	<stylesheets>
-		<URL value="@menueSzenenStyle.css" />
+		<URL value="@MenueSzenenStyle.css" />
 	</stylesheets>
 
 	<children>
-		<ImageView id="HintergrundBild" fitHeight="600.0" fitWidth="900.0" opacity="0.3"
-			pickOnBounds="true" AnchorPane.bottomAnchor="0.0"
-			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-			AnchorPane.topAnchor="0.0">
-			<image>
-				<Image url="@../../../ressourcen/bildDateien/testImg.jpg" />
-			</image>
-		</ImageView>
 		<BorderPane prefHeight="600.0" prefWidth="900.0"
 			AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
 			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -51,17 +41,18 @@
 						<Label layoutX="463.0" layoutY="61.0" text="Lautstaerke" />
 						<Label layoutX="433.0" layoutY="219.0" text="Musik" />
 						<Label layoutX="497.0" layoutY="219.0" text="Sounds" />
-						<ChoiceBox fx:id="aufloesungChoiceBox" layoutX="193.0"
-							layoutY="68.0" prefWidth="150.0" focusTraversable="false" />
+						<ChoiceBox fx:id="aufloesungChoiceBox"
+							focusTraversable="false" layoutX="193.0" layoutY="68.0"
+							prefWidth="150.0" />
 						<Label layoutX="238.0" layoutY="46.0" text="Aufloesung" />
-						<Button layoutX="232.0" layoutY="118.0"
-							focusTraversable="false" mnemonicParsing="false"
+						<Button focusTraversable="false" layoutX="232.0"
+							layoutY="118.0" mnemonicParsing="false"
 							onAction="#aufloesungAnwendenButtonAction" text="Anwenden" />
 					</children>
 				</AnchorPane>
 			</center>
 			<top>
-				<Label id="ueberschriftenLabel" alignment="CENTER"
+				<Label styleClass="ueberschriftenLabel" alignment="CENTER"
 					focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity"
 					minHeight="-Infinity" minWidth="-Infinity" text="EINSTELLUNGEN"
 					BorderPane.alignment="CENTER" />

@@ -1,7 +1,8 @@
-#SzenenPane {
+.menue-pane, .dungeon-pane {
 	-fx-pref-width: 682;
 	-fx-pref-height: 384;
 }
+
 
 #ueberschriftenLabel{
 	-fx-font-size: 15;

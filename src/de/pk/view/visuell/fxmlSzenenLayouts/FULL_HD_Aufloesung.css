@@ -1,14 +1,14 @@
-#SzenenPane {
+.menue-pane, .dungeon-pane {
 	-fx-pref-width: 1024;
 	-fx-pref-height: 576;
 } 
 
-#HintergrundBild {
-	-fx-fit-width: 1024;
-	-fx-fit-height: 576;
+#ueberschriftenLabel{
+	-fx-font-size: 20;
 }
 
-#ueberschriftenLabel{
+
+#dungeonNameLabel {
 	-fx-font-size: 20;
 }
 

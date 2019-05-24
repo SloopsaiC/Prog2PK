@@ -55,6 +55,15 @@ public class AnwendungFX extends Application
 	{
 		AnwendungFX.aktualisiereAufloesungsStyleSheets();
 		AnwendungFX.anwendungsStage.sizeToScene();
+		AnwendungFX.anwendungsStage = stage;
+		AnwendungFX.anwendungsStage.getIcons()
+				.add(new Image(new File(Spielkonstanten.ANWENDUNG_ANWENDUNGS_ICON).toURI().toURL().toExternalForm()));
+		AnwendungFX.anwendungsStage.setTitle(DE_de.ANWENDUNG_FENSTER_TITEL);
+		AnwendungFX.anwendungsStage.setResizable(false);
+		AnwendungFX.anwendungsStage.centerOnScreen();
+		AnwendungFX.anwendungsStage.setOnCloseRequest(windowEvent -> Main.anwendungBeenden());
+		AnwendungFX.anwendungsStage.setScene(SZENEN_MAP.get(Spielkonstanten.ANWENDUNG_TITEL_SZENE));
+		AnwendungFX.anwendungsStage.show();
 	}
 
 	private static void fuegeSzeneHinzu(String pfadZurFXMLDatei)
