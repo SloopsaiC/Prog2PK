@@ -39,8 +39,8 @@ public class OptionenSzeneController implements Initializable
 	@Override
 	public void initialize(URL url, ResourceBundle rb)
 	{
-		this.lautstaerkeSliderInit();
-		this.choiceBoxInit();
+		lautstaerkeSliderInit();
+		choiceBoxInit();
 	}
 
 	private void lautstaerkeSliderInit()
@@ -70,9 +70,7 @@ public class OptionenSzeneController implements Initializable
 		});
 	}
 
-
-
-	private void choiceBoxInit ()
+	private void choiceBoxInit()
 	{
 		this.aufloesungChoiceBox.setItems(FXCollections.observableArrayList(Aufloesung.values()));
 		this.aufloesungChoiceBox.setTooltip(new Tooltip("Waehle eine Aufloesung"));
@@ -81,7 +79,7 @@ public class OptionenSzeneController implements Initializable
 		{
 
 			@Override
-			public void changed (ObservableValue<? extends Aufloesung> observable, Aufloesung oldValue,
+			public void changed(ObservableValue<? extends Aufloesung> observable, Aufloesung oldValue,
 					Aufloesung newValue)
 			{
 				Einstellungen.getEinstellungen().setAnwendungsAufloesung(newValue);
@@ -89,29 +87,29 @@ public class OptionenSzeneController implements Initializable
 		});
 	}
 
-
-	@FXML
-	private void mausScrollMusikSliderEvent(ScrollEvent event)
-	{
-		this.musikVolumeSlider.setValue(this.musikVolumeSlider.getValue() + (event.getDeltaY() / 10));
-	}
-
-	@FXML
-	private void mausScrollSoundSliderEvent(ScrollEvent event)
-	{
-		this.soundVolumeSlider.setValue(this.musikVolumeSlider.getValue() + (event.getDeltaY() / 10));
-	}
-
 	@FXML
 	private void zumHauptmenueButtonAction(ActionEvent event)
 	{
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
 	}
-	
+
 	@FXML
-	private void aufloesungAnwendenButtonAction(ActionEvent event)
+	public void aufloesungAnwendenButtonAction(ActionEvent event)
 	{
-		// Aufloesung und so
+		AnwendungFX.aktualisiereFensterAufloesung();
+		// TODO: Aktuelle Szene aktualisieren
+	}
+
+	@FXML
+	private void mausScrollMusikSliderEvent(ScrollEvent event)
+	{
+		this.musikVolumeSlider.setValue(this.musikVolumeSlider.getValue() + event.getDeltaY() / 10);
+	}
+
+	@FXML
+	private void mausScrollSoundSliderEvent(ScrollEvent event)
+	{
+		this.soundVolumeSlider.setValue(this.musikVolumeSlider.getValue() + event.getDeltaY() / 10);
 	}
 
 }
