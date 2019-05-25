@@ -30,9 +30,9 @@ public class StatusEffekt extends Effekt
 	 * @param lebensPunkteAenderung    Die Aenderung der LebensPunkte auf das Ziel
 	 *                                 dieses StatusEffekts.
 	 */
-	public StatusEffekt(EffektTeil... effektTeile)
+	public StatusEffekt(EffektTyp typ, EffektTeil... effektTeile)
 	{
-		super(effektTeile);
+		super(typ, effektTeile);
 		this.tickt = Boolean.TRUE;
 	}
 

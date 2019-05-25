@@ -15,7 +15,6 @@ public class Kachel
 {
 	private HashMap<Position, SpielbrettObjekt> kachelObjekte = null;
 	private KartenGeneratorUntergrundMitRichtung untergrund = null;
-	
 
 	public Kachel(HashMap<Position, SpielbrettObjekt> objekte, KartenGeneratorUntergrundMitRichtung untergrund)
 	{
@@ -81,10 +80,9 @@ public class Kachel
 		this.kachelObjekte.put(pos, obj);
 	}
 
-	boolean ueberpruefePosition(Position pos)
+	public boolean ueberpruefePosition(Position pos)
 	{
 		return this.kachelObjekte.containsKey(pos);
 	}
-
 
 }

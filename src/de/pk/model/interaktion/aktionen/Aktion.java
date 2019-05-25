@@ -13,6 +13,7 @@ import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.interaktion.effekt.EffektBeschreibungsIndex;
 import de.pk.model.position.KachelPosition;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektPunkteIndex;
+import de.pk.utils.AusnahmeNachrichten;
 
 /**
  * Aktionen haben selbst- und ziel-Effekte, die beim Ausfuehren der Aktion auf
@@ -75,7 +76,7 @@ public class Aktion
 	 *
 	 * @param Der Wirker dieser Aktion
 	 *
-	 * @return True, falls es fuer den Wirker moeglich ist diese Aktion
+	 * @return True, falls es moeglich ist dieses Ziel mit dieser Aktion anzuzielen
 	 *         auszufuehren, sonst false
 	 */
 	public boolean istLegalesZiel(Anzielbar ziel, int entfernung)
@@ -83,13 +84,26 @@ public class Aktion
 		return !ziel.istGeschuetzt() && entfernung <= this.reichweite;
 	}
 
+	public int getAnzahlZiele()
+	{
+		return this.effekte.size();
+	}
+
 	public void fuehreAus(LebendigesObjekt wirker, Anzielbar... ziele)
 	{
 		this.fuehreAus(wirker, Arrays.asList(ziele));
 	}
 
-	public void fuehreAus(LebendigesObjekt wirker, Collection<Anzielbar> ziele)
+	public void fuehreAus(LebendigesObjekt wirker, List<Anzielbar> ziele)
 	{
-		
+		if (ziele.size() != this.getAnzahlZiele())
+		{
+			throw new IllegalArgumentException(AusnahmeNachrichten.AKTION_FALSCHE_ANZAHL_ZIELE
+					+ AusnahmeNachrichten.OBJEKT_REFERENZ_TRENNER + this.toString());
+		}
+		for (int i = 0; i < this.getAnzahlZiele(); i++)
+		{
+			ziele.get(i).fuegeEffekteHinzu(wirker, this.effekte.get(i));
+		}
 	}
 }

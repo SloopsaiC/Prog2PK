@@ -17,6 +17,13 @@ import de.pk.view.visuell.fxmlSzenenLayouts.AnwendungFX;
 public class Anwendung
 {
 
+	// Einfache Singleton Struktur
+	private static Anwendung INSTANZ = null;
+
+	private Anwendung()
+	{
+	}
+
 	/**
 	 * Das aktuelle Spiel dieser Anwendung.
 	 */
@@ -63,6 +70,23 @@ public class Anwendung
 	{
 		this.initAnwendung();
 		AnwendungFX.starteAnwendung(args);
+	}
+
+	public static Anwendung getInstanz()
+	{
+		if (Anwendung.INSTANZ == null)
+		{
+			Anwendung.INSTANZ = new Anwendung();
+		}
+		return Anwendung.INSTANZ;
+	}
+
+	/**
+	 * @return the aktivesSpiel
+	 */
+	public Spiel getAktivesSpiel()
+	{
+		return this.aktivesSpiel;
 	}
 
 }

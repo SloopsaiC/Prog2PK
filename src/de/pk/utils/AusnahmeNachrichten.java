@@ -11,6 +11,9 @@ public class AusnahmeNachrichten
 
 	public static final String KARTEN_GENERATOR_UNTERGRUND_MIT_RICHTUNG_DREHUNG_NICHT_NACH_RECHTS_ODER_LINKS = "Kann nur nach \"Osten\" oder \"Westen\" drehen";
 
+	public static final String AKTION_FALSCHE_ANZAHL_ZIELE = "Nicht genug, oder zu viele Ziele fuer diese Aktion";
+	
+	public static final String OBJEKT_REFERENZ_TRENNER = ": ";
 	/**
 	 * Versteckter default Konstruktor, da eine Konstantenklasse nicht instanziiert
 	 * werden sollte.

@@ -55,7 +55,7 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		this.modell.fuegeAktionHinzu(name.toLowerCase(), hinzufuegen);
 	}
 
-	public boolean fuegeEffekteHinzu(Effekt... hinzufuegen)
+	public boolean fuegeEffekteHinzu(SpielbrettObjekt verursacher, Effekt... hinzufuegen)
 	{
 		if (hinzufuegen != null)
 		{
@@ -145,7 +145,9 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.pk.model.interaktion.Anzielbar#istGeschuetzt()
 	 */
 	@Override
@@ -155,7 +157,9 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.pk.model.interaktion.Anzielbar#getTrefferWahrscheinlichkeit()
 	 */
 	@Override
@@ -164,6 +168,5 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
+
 }

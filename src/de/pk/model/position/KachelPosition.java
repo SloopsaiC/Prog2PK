@@ -1,12 +1,16 @@
 package de.pk.model.position;
 
+import de.pk.control.app.Anwendung;
+import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
 import de.pk.model.interaktion.Anzielbar;
+import de.pk.model.interaktion.effekt.Effekt;
+import de.pk.model.interaktion.effekt.EffektTyp;
 import de.pk.model.karte.generator.Richtung;
 import de.pk.model.spielbrett.Kachel;
 import de.pk.utils.Spielkonstanten;
 
 public class KachelPosition implements Anzielbar
-{ 
+{
 	private static boolean ueberpruefePosition(Position pos)
 	{
 		return ((pos.getX() < Spielkonstanten.KACHEL_GROESSE_X) && (pos.getY() < Spielkonstanten.KACHEL_GROESSE_Y)
@@ -83,6 +87,19 @@ public class KachelPosition implements Anzielbar
 	{
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public boolean fuegeEffekteHinzu(SpielbrettObjekt verursacher, Effekt... hinzufuegen)
+	{
+		// Eine Kachel kann keinen Effekt haben, sie sorgt dafuer dass der Verursacher
+		// dieses Effektes hier her bewegt wird.
+		if (hinzufuegen[0].getTyp() != EffektTyp.BEWEGUNG)
+		{
+			return false;
+		}
+		Anwendung.getInstanz().getAktivesSpiel().getAktiverDungeon().getSpielbrett().bewege(verursacher, this);
+		return true;
 	}
 
 }

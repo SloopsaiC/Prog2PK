@@ -1,5 +1,8 @@
 package de.pk.model.interaktion;
 
+import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
+import de.pk.model.interaktion.effekt.Effekt;
+
 public interface Anzielbar
 {
 	/**
@@ -17,4 +20,6 @@ public interface Anzielbar
 	 *         Hierbei entspricht 1.0 "100%" und 0.0 "0%".
 	 */
 	public float getTrefferWahrscheinlichkeit();
+	
+	public boolean fuegeEffekteHinzu(SpielbrettObjekt verursacher, Effekt... hinzufuegen);
 }

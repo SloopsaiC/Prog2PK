@@ -18,13 +18,14 @@ public class Effekt
 	 * {@link}EffektBeschreibungsIndex definiert
 	 */
 	private Map<EffektBeschreibungsIndex, EffektTeil> effektBeschreibung = null;
+	private EffektTyp typ = null;
 
 	/**
 	 * Erstellt einen Effekt, der keine Auswirkungen hat.
 	 */
 	public Effekt()
 	{
-		this(new EffektTeil[0]);
+		this(null, new EffektTeil[0]);
 	}
 
 	/**
@@ -35,9 +36,10 @@ public class Effekt
 	 *                           LebendigesObjekt hat, falls er auf dieses
 	 *                           angewendet wird.
 	 */
-	public Effekt(EffektTeil... effektTeile)
+	public Effekt(EffektTyp typ, EffektTeil... effektTeile)
 	{
 		this.effektBeschreibung = generiereEffektBeschreibung(effektTeile);
+		this.typ = typ;
 
 	}
 
@@ -95,6 +97,14 @@ public class Effekt
 		// Die Anzahl der Wirkticks um einen vermindern
 		EffektTeil wirkTicks = this.effektBeschreibung.get(EffektBeschreibungsIndex.ANZAHL_WIRK_TICKS);
 		wirkTicks.setWert(wirkTicks.getWert() - 1);
+	}
+
+	/**
+	 * @return the typ
+	 */
+	public EffektTyp getTyp()
+	{
+		return this.typ;
 	}
 
 }

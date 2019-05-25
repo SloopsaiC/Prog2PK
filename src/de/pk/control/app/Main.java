@@ -29,8 +29,7 @@ public class Main
 	 */
 	private static void anwendungStarten(String[] args)
 	{
-		Anwendung spielAnwendung = new Anwendung();
-		spielAnwendung.starteAnwendung(args);
+		Anwendung.getInstanz().starteAnwendung(args);
 	}
 
 	/**
