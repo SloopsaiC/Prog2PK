@@ -78,15 +78,13 @@ public class KachelPosition implements Anzielbar
 	@Override
 	public boolean istGeschuetzt()
 	{
-		// TODO Auto-generated method stub
-		return false;
+		return this.getKachel().getSpielbrettObjektBei(this.positionAufDerKachel) != null;
 	}
 
 	@Override
 	public float getTrefferWahrscheinlichkeit()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return 1f;
 	}
 
 	@Override
