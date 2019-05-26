@@ -2,17 +2,12 @@ package de.pk.model.interaktion.aktionen;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import de.pk.control.interaktion.Wuerfel;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
 import de.pk.model.interaktion.Anzielbar;
 import de.pk.model.interaktion.effekt.Effekt;
-import de.pk.model.interaktion.effekt.EffektBeschreibungsIndex;
-import de.pk.model.position.KachelPosition;
-import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektPunkteIndex;
 import de.pk.utils.AusnahmeNachrichten;
 
 /**
@@ -71,24 +66,6 @@ public class Aktion
 		return this.grundErfolgsWahrscheinlichkeit;
 	}
 
-	/**
-	 * Ueberprueft ob der Wirker diese Aktion ueberhaupt ausfuehren kann
-	 *
-	 * @param Der Wirker dieser Aktion
-	 *
-	 * @return True, falls es moeglich ist dieses Ziel mit dieser Aktion anzuzielen
-	 *         auszufuehren, sonst false
-	 */
-	public boolean istLegalesZiel(Anzielbar ziel, int entfernung)
-	{
-		return !ziel.istGeschuetzt() && entfernung <= this.reichweite;
-	}
-
-	public int getAnzahlZiele()
-	{
-		return this.effekte.size();
-	}
-
 	public void fuehreAus(LebendigesObjekt wirker, Anzielbar... ziele)
 	{
 		this.fuehreAus(wirker, Arrays.asList(ziele));
@@ -105,5 +82,23 @@ public class Aktion
 		{
 			ziele.get(i).fuegeEffekteHinzu(wirker, this.effekte.get(i));
 		}
+	}
+
+	public int getAnzahlZiele()
+	{
+		return this.effekte.size();
+	}
+
+	/**
+	 * Ueberprueft ob der Wirker diese Aktion ueberhaupt ausfuehren kann
+	 *
+	 * @param Der Wirker dieser Aktion
+	 *
+	 * @return True, falls es moeglich ist dieses Ziel mit dieser Aktion anzuzielen
+	 *         auszufuehren, sonst false
+	 */
+	public boolean istLegalesZiel(Anzielbar ziel, int entfernung)
+	{
+		return !ziel.istGeschuetzt() && (entfernung <= this.reichweite);
 	}
 }

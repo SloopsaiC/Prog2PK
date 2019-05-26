@@ -7,7 +7,6 @@ import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
 import de.pk.model.karte.generator.Richtung;
 import de.pk.model.position.Position;
-import de.pk.model.position.Vektor;
 import de.pk.model.spiel.dungeon.DungeonModell;
 import de.pk.model.spielbrett.Kachel;
 import de.pk.model.spielbrett.Spielbrett;

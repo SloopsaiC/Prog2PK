@@ -36,11 +36,35 @@ public class OptionenSzeneController implements Initializable
 	@FXML
 	private ChoiceBox<Aufloesung> aufloesungChoiceBox;
 
+	@FXML
+	public void aufloesungAnwendenButtonAction(ActionEvent event)
+	{
+		AnwendungFX.aktualisiereFensterAufloesung();
+		// TODO: Aktuelle Szene aktualisieren
+	}
+
+	private void choiceBoxInit()
+	{
+		this.aufloesungChoiceBox.setItems(FXCollections.observableArrayList(Aufloesung.values()));
+		this.aufloesungChoiceBox.setTooltip(new Tooltip("Waehle eine Aufloesung"));
+		this.aufloesungChoiceBox.setValue(Einstellungen.getEinstellungen().getAnwendungsAufloesung());
+		this.aufloesungChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Aufloesung>()
+		{
+
+			@Override
+			public void changed(ObservableValue<? extends Aufloesung> observable, Aufloesung oldValue,
+					Aufloesung newValue)
+			{
+				Einstellungen.getEinstellungen().setAnwendungsAufloesung(newValue);
+			}
+		});
+	}
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb)
 	{
-		lautstaerkeSliderInit();
-		choiceBoxInit();
+		this.lautstaerkeSliderInit();
+		this.choiceBoxInit();
 	}
 
 	private void lautstaerkeSliderInit()
@@ -70,46 +94,22 @@ public class OptionenSzeneController implements Initializable
 		});
 	}
 
-	private void choiceBoxInit()
+	@FXML
+	private void mausScrollMusikSliderEvent(ScrollEvent event)
 	{
-		this.aufloesungChoiceBox.setItems(FXCollections.observableArrayList(Aufloesung.values()));
-		this.aufloesungChoiceBox.setTooltip(new Tooltip("Waehle eine Aufloesung"));
-		this.aufloesungChoiceBox.setValue(Einstellungen.getEinstellungen().getAnwendungsAufloesung());
-		this.aufloesungChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Aufloesung>()
-		{
+		this.musikVolumeSlider.setValue(this.musikVolumeSlider.getValue() + (event.getDeltaY() / 10));
+	}
 
-			@Override
-			public void changed(ObservableValue<? extends Aufloesung> observable, Aufloesung oldValue,
-					Aufloesung newValue)
-			{
-				Einstellungen.getEinstellungen().setAnwendungsAufloesung(newValue);
-			}
-		});
+	@FXML
+	private void mausScrollSoundSliderEvent(ScrollEvent event)
+	{
+		this.soundVolumeSlider.setValue(this.musikVolumeSlider.getValue() + (event.getDeltaY() / 10));
 	}
 
 	@FXML
 	private void zumHauptmenueButtonAction(ActionEvent event)
 	{
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
-	}
-
-	@FXML
-	public void aufloesungAnwendenButtonAction(ActionEvent event)
-	{
-		AnwendungFX.aktualisiereFensterAufloesung();
-		// TODO: Aktuelle Szene aktualisieren
-	}
-
-	@FXML
-	private void mausScrollMusikSliderEvent(ScrollEvent event)
-	{
-		this.musikVolumeSlider.setValue(this.musikVolumeSlider.getValue() + event.getDeltaY() / 10);
-	}
-
-	@FXML
-	private void mausScrollSoundSliderEvent(ScrollEvent event)
-	{
-		this.soundVolumeSlider.setValue(this.musikVolumeSlider.getValue() + event.getDeltaY() / 10);
 	}
 
 }

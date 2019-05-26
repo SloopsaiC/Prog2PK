@@ -22,32 +22,28 @@ public class Einstellungen
 	 */
 	public static final Aufloesung STANDARD_AUFLOESUNG = Aufloesung.FULL_HD;
 
-
 	/**
 	 * Gibt die Instanz der Einstellungs-Klasse zurueck.
 	 *
 	 * @return die Instanz dieser Klasse
 	 */
-	public static Einstellungen getEinstellungen ()
+	public static Einstellungen getEinstellungen()
 	{
 		return EinstellungsBehaelter.EINSTELLUNGEN;
 	}
 
+	private Aufloesung anwendungsAufloesung = Einstellungen.STANDARD_AUFLOESUNG;
 
-	private Einstellungen ()
+	private Einstellungen()
 	{
 	}
 
-	private Aufloesung anwendungsAufloesung = STANDARD_AUFLOESUNG;
-
-
-	public Aufloesung getAnwendungsAufloesung ()
+	public Aufloesung getAnwendungsAufloesung()
 	{
 		return this.anwendungsAufloesung;
 	}
 
-
-	public void setAnwendungsAufloesung (Aufloesung anwendungsAufloesung)
+	public void setAnwendungsAufloesung(Aufloesung anwendungsAufloesung)
 	{
 		this.anwendungsAufloesung = anwendungsAufloesung;
 	}

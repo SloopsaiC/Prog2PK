@@ -167,7 +167,8 @@ public class DE_de extends Lokalisierung
 	/**
 	 * sinnfreie Testausgabe anstelle der Dungeon Namen.
 	 */
-	public static final String[] TESTAUSGABE_DUNGEON_NAME = { "TestDungeonEins", "TestDungeonZwei" };
+	public static final String[] TESTAUSGABE_DUNGEON_NAME =
+	{ "TestDungeonEins", "TestDungeonZwei" };
 
 	/**
 	 * Eingabsymbol zum Beenden oder Zurueckkehren in das vorherige / uebergeordnete

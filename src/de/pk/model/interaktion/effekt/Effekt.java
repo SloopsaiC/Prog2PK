@@ -38,7 +38,7 @@ public class Effekt
 	 */
 	public Effekt(EffektTyp typ, EffektTeil... effektTeile)
 	{
-		this.effektBeschreibung = generiereEffektBeschreibung(effektTeile);
+		this.effektBeschreibung = this.generiereEffektBeschreibung(effektTeile);
 		this.typ = typ;
 
 	}
@@ -52,6 +52,14 @@ public class Effekt
 			beschreibung.put(teil.getIndex(), teil);
 		}
 		return beschreibung;
+	}
+
+	/**
+	 * @return the typ
+	 */
+	public EffektTyp getTyp()
+	{
+		return this.typ;
 	}
 
 	public int getWertAusBeschreibung(EffektBeschreibungsIndex index)
@@ -97,14 +105,6 @@ public class Effekt
 		// Die Anzahl der Wirkticks um einen vermindern
 		EffektTeil wirkTicks = this.effektBeschreibung.get(EffektBeschreibungsIndex.ANZAHL_WIRK_TICKS);
 		wirkTicks.setWert(wirkTicks.getWert() - 1);
-	}
-
-	/**
-	 * @return the typ
-	 */
-	public EffektTyp getTyp()
-	{
-		return this.typ;
 	}
 
 }

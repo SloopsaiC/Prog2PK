@@ -130,16 +130,17 @@ public class DungeonSzeneController implements Initializable
 	@FXML
 	private GridPane kartenGridPane;
 
+	/**
+	 * Beinhaltet die x-Koordinate einer alten Position der Maus zum Vergleich mit
+	 * einer Aktuelleren.
+	 */
+	private double oldX = 0;
 
 	/**
-	 * Wird zu Beginn aufgerufen, um gewisse Komponenten zu initialisieren.
+	 * Beinhaltet die y-Koordinate einer alten Position der Maus zum Vergleich mit
+	 * einer Aktuelleren.
 	 */
-	@Override
-	public void initialize (URL location, ResourceBundle resources)
-	{
-		//
-	}
-
+	private double oldY = 0;
 
 	/**
 	 * Wird aufergurfen, wenn der aktionButton1Pressed aufgerufen wird.
@@ -147,11 +148,10 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void aktionButton1Pressed (ActionEvent event)
+	public void aktionButton1Pressed(ActionEvent event)
 	{
 		//
 	}
-
 
 	/**
 	 * Wird aufergurfen, wenn der aktionButton2Pressed aufgerufen wird.
@@ -159,11 +159,10 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void aktionButton2Pressed (ActionEvent event)
+	public void aktionButton2Pressed(ActionEvent event)
 	{
 		//
 	}
-
 
 	/**
 	 * Wird aufergurfen, wenn der aktionButton3Pressed aufgerufen wird.
@@ -171,11 +170,10 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void aktionButton3Pressed (ActionEvent event)
+	public void aktionButton3Pressed(ActionEvent event)
 	{
 		//
 	}
-
 
 	/**
 	 * Wird aufergurfen, wenn der aktionButton4Pressed aufgerufen wird.
@@ -183,11 +181,10 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void aktionButton4Pressed (ActionEvent event)
+	public void aktionButton4Pressed(ActionEvent event)
 	{
 		//
 	}
-
 
 	/**
 	 * Wird aufergurfen, wenn der dungeonMenueButton1Pressed aufgerufen wird.
@@ -195,11 +192,10 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void dungeonMenueButton1Pressed (ActionEvent event)
+	public void dungeonMenueButton1Pressed(ActionEvent event)
 	{
 		//
 	}
-
 
 	/**
 	 * Wird aufergurfen, wenn der dungeonMenueButton2Pressed aufgerufen wird.
@@ -207,11 +203,10 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void dungeonMenueButton2Pressed (ActionEvent event)
+	public void dungeonMenueButton2Pressed(ActionEvent event)
 	{
 		//
 	}
-
 
 	/**
 	 * Wird aufergurfen, wenn der dungeonMenueButton3Pressed aufgerufen wird.
@@ -219,11 +214,10 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void dungeonMenueButton3Pressed (ActionEvent event)
+	public void dungeonMenueButton3Pressed(ActionEvent event)
 	{
 		this.pauseMenueDialogPane.setVisible(true);
 	}
-
 
 	/**
 	 * Wird aufergurfen, wenn der heldenInventarButton1Pressed aufgerufen wird.
@@ -231,11 +225,10 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void heldenInventarButton1Pressed (ActionEvent event)
+	public void heldenInventarButton1Pressed(ActionEvent event)
 	{
 		//
 	}
-
 
 	/**
 	 * Wird aufergurfen, wenn der heldenInventarButton2Pressed aufgerufen wird.
@@ -243,10 +236,9 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void heldenInventarButton2Pressed (ActionEvent event)
+	public void heldenInventarButton2Pressed(ActionEvent event)
 	{//
 	}
-
 
 	/**
 	 * Wird aufergurfen, wenn der heldenInventarButton3Pressed aufgerufen wird.
@@ -254,11 +246,10 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void heldenInventarButton3Pressed (ActionEvent event)
+	public void heldenInventarButton3Pressed(ActionEvent event)
 	{
 		//
 	}
-
 
 	/**
 	 * Wird aufergurfen, wenn der heldenInventarButton4Pressed aufgerufen wird.
@@ -266,60 +257,46 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void heldenInventarButton4Pressed (ActionEvent event)
+	public void heldenInventarButton4Pressed(ActionEvent event)
 	{
 		//
 	}
 
-
 	/**
-	 * Wird aufergurfen, wenn der pauseMenueZurueckButtonPressed aufgerufen wird.
-	 *
-	 * @param event ActionEvent fuer das Druecken des Buttons
+	 * Wird zu Beginn aufgerufen, um gewisse Komponenten zu initialisieren.
 	 */
-	@FXML
-	public void pauseMenueZurueckButtonPressed (ActionEvent event)
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
 	{
-		this.pauseMenueDialogPane.setVisible(false);
+		//
 	}
 
-
 	/**
-	 * Wird aufergurfen, wenn der pauseMenueBeendenButtonPressed aufgerufen wird.
+	 * Wird aufgerufen, wenn mit der Maus ins Fenster geklickt wurde.
 	 *
-	 * @param event ActionEvent fuer das Druecken des Buttons
+	 * @param event MouseEvent des Mausklicks
 	 */
 	@FXML
-	public void pauseMenueBeendenButtonPressed (ActionEvent event)
+	public void kartenGridPaneMouseClicked(MouseEvent event)
 	{
-		this.pauseMenueDialogPane.setVisible(false);
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
+		this.oldX = event.getX();
+		this.oldY = event.getY();
 	}
-
 
 	/**
-	 * Wird aufgerufen, wenn der questLogButton gedrueckt wurde und entscheidet je
-	 * nachdem, ob der Button ausgewaehlt ist oder nicht, ob das Quest Log angezeigt
-	 * oder wieder versteckt werden soll.
+	 * Wird aufgerufen, wenn eine Maustaste heruntergedrueckt ist und die Maus dabei
+	 * bewegt wird.
 	 *
-	 * @param event ActionEvent fuer das Druecken des Buttons
+	 * @param event MouseEvent des Bewegens der gedrueckten Maus
 	 */
 	@FXML
-	public void questLogButtonPressed (ActionEvent event)
+	public void kartenGridPaneMouseDragged(MouseEvent event)
 	{
-		if (this.questLogButton.isSelected())
-		{
-			this.questLogDialogPane.setVisible(true);
-			this.questLogButton.setStyle("-fx-background-image: url('/de/pk/ressourcen/bildDateien/Forward_BTN.png')");
-			this.questLogButton.setTooltip(new Tooltip("Schliesse das Quest Log"));
-		} else
-		{
-			this.questLogDialogPane.setVisible(false);
-			this.questLogButton.setStyle("-fx-background-image: url('/de/pk/ressourcen/bildDateien/Menu_BTN.png')");
-			this.questLogButton.setTooltip(new Tooltip("Oeffne das Quest Log"));
-		}
+		this.kartenGridPane.setTranslateX(this.kartenGridPane.getTranslateX() + ((event.getX() - this.oldX) / 2));
+		this.oldX = event.getX();
+		this.kartenGridPane.setTranslateY(this.kartenGridPane.getTranslateY() + ((event.getY() - this.oldY) / 2));
+		this.oldY = event.getY();
 	}
-
 
 	/**
 	 * Wird Aufgerufen, wenn mit dem Mausrad im Fenster "gescroolt" wird.
@@ -327,7 +304,7 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ScrollEvent des Mausraddrehens
 	 */
 	@FXML
-	public void kartenGridPaneScroll (ScrollEvent event)
+	public void kartenGridPaneScroll(ScrollEvent event)
 	{
 		// Ein skalierungsFaktor wird je nach Mausrad-Drehrichtung ausgewahlt.
 		double skalierungsFaktor = 1;
@@ -345,43 +322,49 @@ public class DungeonSzeneController implements Initializable
 	}
 
 	/**
-	 * Beinhaltet die x-Koordinate einer alten Position der Maus zum Vergleich mit
-	 * einer Aktuelleren.
-	 */
-	private double oldX = 0;
-	/**
-	 * Beinhaltet die y-Koordinate einer alten Position der Maus zum Vergleich mit
-	 * einer Aktuelleren.
-	 */
-	private double oldY = 0;
-
-
-	/**
-	 * Wird aufgerufen, wenn mit der Maus ins Fenster geklickt wurde.
+	 * Wird aufergurfen, wenn der pauseMenueBeendenButtonPressed aufgerufen wird.
 	 *
-	 * @param event MouseEvent des Mausklicks
+	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void kartenGridPaneMouseClicked (MouseEvent event)
+	public void pauseMenueBeendenButtonPressed(ActionEvent event)
 	{
-		this.oldX = event.getX();
-		this.oldY = event.getY();
+		this.pauseMenueDialogPane.setVisible(false);
+		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
 	}
 
-
 	/**
-	 * Wird aufgerufen, wenn eine Maustaste heruntergedrueckt ist und die Maus dabei
-	 * bewegt wird.
+	 * Wird aufergurfen, wenn der pauseMenueZurueckButtonPressed aufgerufen wird.
 	 *
-	 * @param event MouseEvent des Bewegens der gedrueckten Maus
+	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void kartenGridPaneMouseDragged (MouseEvent event)
+	public void pauseMenueZurueckButtonPressed(ActionEvent event)
 	{
-		this.kartenGridPane.setTranslateX(this.kartenGridPane.getTranslateX() + ((event.getX() - this.oldX) / 2));
-		this.oldX = event.getX();
-		this.kartenGridPane.setTranslateY(this.kartenGridPane.getTranslateY() + ((event.getY() - this.oldY) / 2));
-		this.oldY = event.getY();
+		this.pauseMenueDialogPane.setVisible(false);
+	}
+
+	/**
+	 * Wird aufgerufen, wenn der questLogButton gedrueckt wurde und entscheidet je
+	 * nachdem, ob der Button ausgewaehlt ist oder nicht, ob das Quest Log angezeigt
+	 * oder wieder versteckt werden soll.
+	 *
+	 * @param event ActionEvent fuer das Druecken des Buttons
+	 */
+	@FXML
+	public void questLogButtonPressed(ActionEvent event)
+	{
+		if (this.questLogButton.isSelected())
+		{
+			this.questLogDialogPane.setVisible(true);
+			this.questLogButton.setStyle("-fx-background-image: url('/de/pk/ressourcen/bildDateien/Forward_BTN.png')");
+			this.questLogButton.setTooltip(new Tooltip("Schliesse das Quest Log"));
+		} else
+		{
+			this.questLogDialogPane.setVisible(false);
+			this.questLogButton.setStyle("-fx-background-image: url('/de/pk/ressourcen/bildDateien/Menu_BTN.png')");
+			this.questLogButton.setTooltip(new Tooltip("Oeffne das Quest Log"));
+		}
 	}
 
 }

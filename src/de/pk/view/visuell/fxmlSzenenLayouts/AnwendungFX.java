@@ -28,14 +28,12 @@ public class AnwendungFX extends Application
 
 	private static Stage anwendungsStage = null;
 
-	public static void starteAnwendung(String[] args)
+	private static void aktualisiereAufloesungsStyleSheets()
 	{
-		Application.launch(args);
-	}
-
-	public static void wechselSzene(String szenenName)
-	{
-		AnwendungFX.anwendungsStage.setScene(AnwendungFX.SZENEN_MAP.get(szenenName));
+		AnwendungFX.entferneStyleSheetsVonAllenScenes();
+		String eingestellteAufloesung = Einstellungen.getEinstellungen().getAnwendungsAufloesung().toString();
+		AnwendungFX.fuegeStyleSheetAllenSzenenHinzu(
+				eingestellteAufloesung + AnwendungFX.DATEI_TRENNER + AnwendungFX.CSS_DATEI_ENDE);
 	}
 
 	public static void aktualisiereFensterAufloesung()
@@ -43,51 +41,6 @@ public class AnwendungFX extends Application
 		AnwendungFX.aktualisiereAufloesungsStyleSheets();
 		AnwendungFX.anwendungsStage.sizeToScene();
 		AnwendungFX.anwendungsStage.centerOnScreen();
-	}
-
-	@Override
-	public void start(Stage stage) throws Exception
-	{
-		AnwendungFX.initSzenen();
-		AnwendungFX.aktualisiereAufloesungsStyleSheets();
-		AnwendungFX.anwendungsStage = stage;
-		AnwendungFX.anwendungsStage.getIcons()
-				.add(new Image(new File(Spielkonstanten.ANWENDUNG_ANWENDUNGS_ICON).toURI().toURL().toExternalForm()));
-		AnwendungFX.anwendungsStage.setTitle(DE_de.ANWENDUNG_FENSTER_TITEL);
-		AnwendungFX.anwendungsStage.setResizable(false);
-		AnwendungFX.anwendungsStage.centerOnScreen();
-		AnwendungFX.anwendungsStage.setOnCloseRequest(windowEvent -> Main.anwendungBeenden());
-		AnwendungFX.anwendungsStage.setScene(SZENEN_MAP.get(Spielkonstanten.ANWENDUNG_TITEL_SZENE));
-		AnwendungFX.anwendungsStage.show();
-	}
-
-	private static void initSzenen()
-	{
-		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_TITEL_SZENE_PFAD_FXML);
-		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE_PFAD_FXML);
-		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_CREDIT_SZENE_PFAD_FXML);
-		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_OPTIONEN_SZENE_PPFAD_FXML);
-		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE_PFAD_FXML);
-	}
-
-	private static void fuegeSzeneHinzu(String pfadZurFXMLDatei)
-	{
-		try
-		{
-			AnwendungFX.SZENEN_MAP.put(pfadZurFXMLDatei.replaceFirst(FXML_DATEI_ENDUNG, new String()),
-					new Scene(FXMLLoader.load(AnwendungFX.class.getResource(pfadZurFXMLDatei))));
-		} catch (IOException e)
-		{
-			e.printStackTrace(); // TODO: entfernen
-			Main.anwendungBeenden();
-		}
-	}
-
-	private static void aktualisiereAufloesungsStyleSheets()
-	{
-		AnwendungFX.entferneStyleSheetsVonAllenScenes();
-		String eingestellteAufloesung = Einstellungen.getEinstellungen().getAnwendungsAufloesung().toString();
-		AnwendungFX.fuegeStyleSheetAllenSzenenHinzu(eingestellteAufloesung + DATEI_TRENNER + CSS_DATEI_ENDE);
 	}
 
 	private static void entferneStyleSheetsVonAllenScenes()
@@ -104,6 +57,54 @@ public class AnwendungFX extends Application
 		{
 			szene.getStylesheets().add(AnwendungFX.class.getResource(pfadZurCSSDatei).toExternalForm());
 		}
+	}
+
+	private static void fuegeSzeneHinzu(String pfadZurFXMLDatei)
+	{
+		try
+		{
+			AnwendungFX.SZENEN_MAP.put(pfadZurFXMLDatei.replaceFirst(AnwendungFX.FXML_DATEI_ENDUNG, new String()),
+					new Scene(FXMLLoader.load(AnwendungFX.class.getResource(pfadZurFXMLDatei))));
+		} catch (IOException e)
+		{
+			e.printStackTrace(); // TODO: entfernen
+			Main.anwendungBeenden();
+		}
+	}
+
+	private static void initSzenen()
+	{
+		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_TITEL_SZENE_PFAD_FXML);
+		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE_PFAD_FXML);
+		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_CREDIT_SZENE_PFAD_FXML);
+		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_OPTIONEN_SZENE_PPFAD_FXML);
+		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE_PFAD_FXML);
+	}
+
+	public static void starteAnwendung(String[] args)
+	{
+		Application.launch(args);
+	}
+
+	public static void wechselSzene(String szenenName)
+	{
+		AnwendungFX.anwendungsStage.setScene(AnwendungFX.SZENEN_MAP.get(szenenName));
+	}
+
+	@Override
+	public void start(Stage stage) throws Exception
+	{
+		AnwendungFX.initSzenen();
+		AnwendungFX.aktualisiereAufloesungsStyleSheets();
+		AnwendungFX.anwendungsStage = stage;
+		AnwendungFX.anwendungsStage.getIcons()
+				.add(new Image(new File(Spielkonstanten.ANWENDUNG_ANWENDUNGS_ICON).toURI().toURL().toExternalForm()));
+		AnwendungFX.anwendungsStage.setTitle(DE_de.ANWENDUNG_FENSTER_TITEL);
+		AnwendungFX.anwendungsStage.setResizable(false);
+		AnwendungFX.anwendungsStage.centerOnScreen();
+		AnwendungFX.anwendungsStage.setOnCloseRequest(windowEvent -> Main.anwendungBeenden());
+		AnwendungFX.anwendungsStage.setScene(AnwendungFX.SZENEN_MAP.get(Spielkonstanten.ANWENDUNG_TITEL_SZENE));
+		AnwendungFX.anwendungsStage.show();
 	}
 
 }

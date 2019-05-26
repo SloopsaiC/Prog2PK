@@ -20,8 +20,13 @@ public class Anwendung
 	// Einfache Singleton Struktur
 	private static Anwendung INSTANZ = null;
 
-	private Anwendung()
+	public static Anwendung getInstanz()
 	{
+		if (Anwendung.INSTANZ == null)
+		{
+			Anwendung.INSTANZ = new Anwendung();
+		}
+		return Anwendung.INSTANZ;
 	}
 
 	/**
@@ -32,6 +37,18 @@ public class Anwendung
 	 * Die Einstellungen dieser Anwendung.
 	 */
 	private Einstellungen anwendungsEinstellungen = null;
+
+	private Anwendung()
+	{
+	}
+
+	/**
+	 * @return the aktivesSpiel
+	 */
+	public Spiel getAktivesSpiel()
+	{
+		return this.aktivesSpiel;
+	}
 
 	/**
 	 * Die Anwendung (Dieses aktuelle Objekt) wird initialisiert, Einstellungen
@@ -70,23 +87,6 @@ public class Anwendung
 	{
 		this.initAnwendung();
 		AnwendungFX.starteAnwendung(args);
-	}
-
-	public static Anwendung getInstanz()
-	{
-		if (Anwendung.INSTANZ == null)
-		{
-			Anwendung.INSTANZ = new Anwendung();
-		}
-		return Anwendung.INSTANZ;
-	}
-
-	/**
-	 * @return the aktivesSpiel
-	 */
-	public Spiel getAktivesSpiel()
-	{
-		return this.aktivesSpiel;
 	}
 
 }

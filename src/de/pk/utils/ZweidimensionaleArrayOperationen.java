@@ -16,7 +16,7 @@ public abstract class ZweidimensionaleArrayOperationen
 	 * oft um 90 Grad im Uhrzeigersinn ("rechts herum"). Ist anzahlDrehungen < 1, so
 	 * wird array unveraendert zureckgegeben.
 	 *
-	 * @param                 <T> Der Typ, von dem sowohl array als auch das
+	 * @param <T>             Der Typ, von dem sowohl array als auch das
 	 *                        zurueckgegebene Array sind.
 	 * @param array           Zu drehendes Array vom Typ T.
 	 * @param anzahlDrehungen Die Anzahl, um die array im Uhrzeigersinn gedreht
@@ -56,7 +56,7 @@ public abstract class ZweidimensionaleArrayOperationen
 	 * Spiegelt ein quadratisches, zweidimensionales Array vom Typ T vertikal
 	 * (senkrecht).
 	 *
-	 * @param       <T> Typ des zu spiegelnden Arrays und des gespiegelten Arrays.
+	 * @param <T>   Typ des zu spiegelnden Arrays und des gespiegelten Arrays.
 	 * @param array Ein zu spiegelndes Array vom Typ T.
 	 *
 	 * @return Eine an der vertikalen Spiegelachse gespiegelte Kopie von array.
@@ -79,8 +79,7 @@ public abstract class ZweidimensionaleArrayOperationen
 	 * Vergleicht zwei 2D-Arrays eines Enum-Typen miteinander und liefert wahr, wenn
 	 * beide Arrays den gleichen Inhalt auf genau den gleichen Indizes haben.
 	 *
-	 * @param            <E> Ein Enum-Typ, von dem beide zu vergleichende Arrays
-	 *                   sind.
+	 * @param <E>        Ein Enum-Typ, von dem beide zu vergleichende Arrays sind.
 	 * @param enumArray1 zweidimensionales Array vom Typ E.
 	 * @param enumArray2 zweidimensionales Array vom Typ E zum Vergleich mit
 	 *                   enumArray1.

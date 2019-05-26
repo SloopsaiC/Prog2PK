@@ -32,6 +32,19 @@ public class KachelPosition implements Anzielbar
 		this.positionAufDerKachel = positionAufDerKachel;
 	}
 
+	@Override
+	public boolean fuegeEffekteHinzu(SpielbrettObjekt verursacher, Effekt... hinzufuegen)
+	{
+		// Eine Kachel kann keinen Effekt haben, sie sorgt dafuer dass der Verursacher
+		// dieses Effektes hier her bewegt wird.
+		if (hinzufuegen[0].getTyp() != EffektTyp.BEWEGUNG)
+		{
+			return false;
+		}
+		Anwendung.getInstanz().getAktivesSpiel().getAktiverDungeon().getSpielbrett().bewege(verursacher, this);
+		return true;
+	}
+
 	/**
 	 * @return the kachel
 	 */
@@ -76,28 +89,15 @@ public class KachelPosition implements Anzielbar
 	}
 
 	@Override
-	public boolean istGeschuetzt()
-	{
-		return this.getKachel().getSpielbrettObjektBei(this.positionAufDerKachel) != null;
-	}
-
-	@Override
 	public float getTrefferWahrscheinlichkeit()
 	{
 		return 1f;
 	}
 
 	@Override
-	public boolean fuegeEffekteHinzu(SpielbrettObjekt verursacher, Effekt... hinzufuegen)
+	public boolean istGeschuetzt()
 	{
-		// Eine Kachel kann keinen Effekt haben, sie sorgt dafuer dass der Verursacher
-		// dieses Effektes hier her bewegt wird.
-		if (hinzufuegen[0].getTyp() != EffektTyp.BEWEGUNG)
-		{
-			return false;
-		}
-		Anwendung.getInstanz().getAktivesSpiel().getAktiverDungeon().getSpielbrett().bewege(verursacher, this);
-		return true;
+		return this.getKachel().getSpielbrettObjektBei(this.positionAufDerKachel) != null;
 	}
 
 }

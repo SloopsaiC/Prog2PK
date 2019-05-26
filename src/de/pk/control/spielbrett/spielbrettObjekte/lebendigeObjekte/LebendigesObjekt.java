@@ -8,12 +8,9 @@ import de.pk.model.interaktion.Anzielbar;
 import de.pk.model.interaktion.aktionen.Aktion;
 import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.interaktion.effekt.EffektBeschreibungsIndex;
-import de.pk.model.interaktion.effekt.EffektTeil;
 import de.pk.model.position.KachelPosition;
-import de.pk.model.position.Vektor;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektModell;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektPunkteIndex;
-import de.pk.utils.Spielkonstanten;
 
 public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzielbar
 {
@@ -55,6 +52,7 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		this.modell.fuegeAktionHinzu(name.toLowerCase(), hinzufuegen);
 	}
 
+	@Override
 	public boolean fuegeEffekteHinzu(SpielbrettObjekt verursacher, Effekt... hinzufuegen)
 	{
 		if (hinzufuegen != null)
@@ -66,16 +64,6 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 			return true;
 		}
 		return false;
-	}
-
-	public Aktion getAktionMitNamen(String name)
-	{
-		return this.getModell().getAktionMitNamen(name);
-	}
-
-	public int getAnzahlPunkteVon(LebendigesObjektPunkteIndex index)
-	{
-		return this.getModell().getAnzahlPunkteVon(index);
 	}
 
 	/**
@@ -92,14 +80,48 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		return tickendeEffekte;
 	}
 
+	public Aktion getAktionMitNamen(String name)
+	{
+		return this.getModell().getAktionMitNamen(name);
+	}
+
 	public Set<String> getAktionsNamen()
 	{
 		return this.modell.getAktionen().keySet();
 	}
 
+	public int getAnzahlPunkteVon(LebendigesObjektPunkteIndex index)
+	{
+		return this.getModell().getAnzahlPunkteVon(index);
+	}
+
 	protected LebendigesObjektModell getModell()
 	{
 		return this.modell;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.pk.model.interaktion.Anzielbar#getTrefferWahrscheinlichkeit()
+	 */
+	@Override
+	public float getTrefferWahrscheinlichkeit()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.pk.model.interaktion.Anzielbar#istGeschuetzt()
+	 */
+	@Override
+	public boolean istGeschuetzt()
+	{
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
@@ -148,30 +170,6 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 						EffektBeschreibungsIndex.uebersetzeAusLebendigesObjektPunkteIndex(index)));
 			}
 		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.pk.model.interaktion.Anzielbar#istGeschuetzt()
-	 */
-	@Override
-	public boolean istGeschuetzt()
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.pk.model.interaktion.Anzielbar#getTrefferWahrscheinlichkeit()
-	 */
-	@Override
-	public float getTrefferWahrscheinlichkeit()
-	{
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

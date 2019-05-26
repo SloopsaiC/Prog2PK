@@ -14,8 +14,10 @@ public class Spielkonstanten
 	public static final int MAX_ANZAHL_INHALT_FALLE = 1;
 	public static final String SPEICHER_DATEI_ENDUNG = ".save";
 
-	public static final Phase[] STANDARD_PHASEN = { new HeldenPhase(), new ExplorationsPhase() };
-	public static final Held[] STANDARD_HELDEN = { new Held("Dummy", 10, 10) };
+	public static final Phase[] STANDARD_PHASEN =
+	{ new HeldenPhase(), new ExplorationsPhase() };
+	public static final Held[] STANDARD_HELDEN =
+	{ new Held("Dummy", 10, 10) };
 
 	public static final int STANDARD_GROESSE_DUNGEON_X = 30;
 	public static final int STANDARD_GROESSE_DUNGEON_Y = 30;
