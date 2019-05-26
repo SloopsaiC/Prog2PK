@@ -1,10 +1,43 @@
 .dungeon-pane {
-	-fx-background-image: url("../../../ressourcen/bildDateien/matrix_background.png"), 
-	url("../../../ressourcen/bildDateien/borders.png");
+	-fx-background-image: url("../../../ressourcen/bildDateien/matrix_background.png");
  	-fx-background-position: left top;
 	-fx-background-repeat: no-repeat;
 	-fx-background-size: cover, stretch;
 }
+
+.dungeon-grid-pane {
+	-fx-background-image: url("../../../ressourcen/bildDateien/borders.png");
+ 	-fx-background-position: left top;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: stretch;
+}
+
+
+#pauseMenueDialogPane {
+	-fx-background-color: rgba(0.0,0.0,0.0,0.6);
+}
+
+#questLogDialogPane {
+	-fx-background-color: transparent;
+}
+
+
+
+
+.split-pane, .split-pane > .split-pane-divider {
+   -fx-background-color: transparent;
+}
+
+#questLogSpiltPane .split-pane-divider {
+	-fx-background-color: rgba(100.0,100.0,100.0,0.6);
+}
+
+#questLogSpiltPane {
+	-fx-background-color: rgba(0.0,0.0,0.0,0.6);
+}
+
+
+
 
 .label {
 	-fx-text-fill: white;
@@ -16,8 +49,17 @@
 }
 
 #levelLabel {
-	-fx-text-fill: rgb(80.0%,80.0%,80.0%);
+	-fx-text-fill: rgb(200,200,200);
 }
+
+
+.kachelUntergrundPane {
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover;
+	-fx-background-image: url("../../../ressourcen/bildDateien/2_SCHWER.png"); 
+}
+
 
 
 .button, .toggle-button, .choice-box   {
@@ -31,6 +73,7 @@
 .button:pressed, .toggle-button:selected, .choice-box:pressed  {
 	-fx-color: rgba(50.0,0.0,0.0,0.6);
 }
+
 
 .image-button {
 	-fx-background-color: transparent;
@@ -47,6 +90,7 @@
 	-fx-opacity: 0.25;
 }
 
+
 #dungeonMenueButton1 {	
 	-fx-background-image: url("../../../ressourcen/bildDateien/Info_BTN.png"); 
 }
@@ -60,10 +104,10 @@
 }
 
 
-
-.split-pane, .split-pane > .split-pane-divider {
-   -fx-background-color: transparent;
+#questLogButton {
+	-fx-background-image: url("../../../ressourcen/bildDateien/Menu_BTN.png"); 
 }
+
 
 
 
@@ -78,6 +122,7 @@
 .progress-indicator .tick {
 	-fx-background-color: transparent;
 }
+
 
 #lebensPunkteIndikator .progress, #lebensPunkteIndikatorKlein .bar {
 	-fx-background-color: rgb(100.0,10.0,10.0);
@@ -95,4 +140,6 @@
 .progress-bar .bar {
 	-fx-background-color: rgb(0.0,50.0,120.0);
 }
+
+
 
