@@ -28,7 +28,7 @@ public class Aktion
 	 * Die ErfolgsWahrscheinlichkeit definiert, ab welcher relativen
 	 * Wuerfelaugenzahl die Aktion erst ausgefuehrt wird.
 	 */
-	private float grundErfolgsWahrscheinlichkeit = 0.0f;
+	private float grundErfolgsWahrscheinlichkeit = 1.0f;
 	private int reichweite = 0;
 
 	/**
@@ -52,6 +52,16 @@ public class Aktion
 		this.reichweite = reichweite;
 	}
 
+	private boolean wuerfelWurfErfolgreich(float erfolgsWahrscheinlichkeit)
+	{
+		Wuerfel wuerfel = Anwendung.getInstanz().getAktivesSpiel().getAktiverDungeon().getWuerfel();
+		synchronized (wuerfel)
+		{
+			wuerfel.werfen(erfolgsWahrscheinlichkeit);
+			return wuerfel.getValue().warErfolgreich();
+		}
+	}
+
 	/**
 	 * "Wirft einen Wuerfel" um herrauszufinden ob das Anzielen des Ziels
 	 * erfolgreich ist.
@@ -60,12 +70,7 @@ public class Aktion
 	 */
 	private boolean anzielenErfolgreich(LebendigesObjekt zieler, Anzielbar ziel)
 	{
-		Wuerfel wuerfel = Anwendung.getInstanz().getAktivesSpiel().getAktiverDungeon().getWuerfel();
-		synchronized (wuerfel)
-		{
-			wuerfel.werfen(ziel.getTrefferWahrscheinlichkeit());
-			return wuerfel.getValue().warErfolgreich();
-		}
+		return wuerfelWurfErfolgreich(ziel.getTrefferWahrscheinlichkeit());
 	}
 
 	/**
@@ -77,6 +82,10 @@ public class Aktion
 	 */
 	private boolean ausfuehrenErfolgreich(LebendigesObjekt wirker, List<Anzielbar> ziele)
 	{
+		if (!wuerfelWurfErfolgreich(this.grundErfolgsWahrscheinlichkeit))
+		{
+			return false;
+		}
 		for (Anzielbar ziel : ziele)
 		{
 			if (!ziel.istGeschuetzt() && !this.anzielenErfolgreich(wirker, ziel))

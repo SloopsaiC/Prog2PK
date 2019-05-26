@@ -8,7 +8,6 @@ import de.pk.model.interaktion.Anzielbar;
 import de.pk.model.interaktion.aktionen.Aktion;
 import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.interaktion.effekt.EffektBeschreibungsIndex;
-import de.pk.model.position.KachelPosition;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektModell;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektPunkteIndex;
 
@@ -52,6 +51,15 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		this.modell.fuegeAktionHinzu(name.toLowerCase(), hinzufuegen);
 	}
 
+	private void hatGetoetet(LebendigesObjekt opfer)
+	{
+		this.getModell().aenderePunkteVon(LebendigesObjektPunkteIndex.ERFAHRUNGSPUNKTE,
+				opfer.getAnzahlPunkteVon(LebendigesObjektPunkteIndex.ERFAHRUNGSPUNKTE_WERT));
+		// Hier sollten am besten noch die Drops integriert werden mache ich morgen und
+		// so
+		// TODO
+	}
+
 	@Override
 	public boolean fuegeEffekteHinzu(SpielbrettObjekt verursacher, Effekt... hinzufuegen)
 	{
@@ -61,9 +69,21 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 			{
 				this.modell.fuegeEffektHinzu(effekt);
 			}
+			if (this.istTot())
+			{
+				if (verursacher.istLebendig())
+				{
+					((LebendigesObjekt) verursacher).hatGetoetet(this);
+				}
+			}
 			return true;
 		}
 		return false;
+	}
+
+	public boolean istTot()
+	{
+		return this.getModell().getAnzahlPunkteVon(LebendigesObjektPunkteIndex.LEBENS_PUNKTE) < 1;
 	}
 
 	/**
