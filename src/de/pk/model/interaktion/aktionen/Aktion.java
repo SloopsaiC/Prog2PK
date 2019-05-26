@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import de.pk.control.app.Anwendung;
+import de.pk.control.interaktion.Wuerfel;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
 import de.pk.model.interaktion.Anzielbar;
 import de.pk.model.interaktion.effekt.Effekt;
@@ -51,26 +53,71 @@ public class Aktion
 	}
 
 	/**
-	 * Berechnet die Wahrscheinlichkeit mit der diese Aktion erfolgreich sein wird
-	 * aus der Grundwahrscheinlichkeit und eventuellen Modifikatoren des Wirkers
-	 * oder Ziels
-	 *
-	 * @param wirker Der Wirker dieser Aktion
-	 * @param ziel   Das Ziel dieser Aktion
-	 *
-	 * @return Ein Float zwischen 0 und 1 der die Wahrscheinlichkeit angibt mit der
-	 *         diese Aktion erfolgreich ist
+	 * "Wirft einen Wuerfel" um herrauszufinden ob das Anzielen des Ziels
+	 * erfolgreich ist.
+	 * 
+	 * @return true, falls das anzielen erfolgreich war, sonst false
 	 */
-	private float berechneErfolgsWahrscheinlichkeit(LebendigesObjekt wirker, LebendigesObjekt ziel)
+	private boolean anzielenErfolgreich(LebendigesObjekt zieler, Anzielbar ziel)
 	{
-		return this.grundErfolgsWahrscheinlichkeit;
+		Wuerfel wuerfel = Anwendung.getInstanz().getAktivesSpiel().getAktiverDungeon().getWuerfel();
+		synchronized (wuerfel)
+		{
+			wuerfel.werfen(ziel.getTrefferWahrscheinlichkeit());
+			return wuerfel.getValue().warErfolgreich();
+		}
 	}
 
+	/**
+	 * Prueft ob alle Ziele welche mit dieser Aktion angezielt wurden momentan
+	 * anzielbar sind und dann ob der Spieler Glueck hatte und er auch trifft
+	 * 
+	 * @return true, alle Ziele sind momentan legal und wurden nach dem WuerfelWurf
+	 *         getroffen, sonst false
+	 */
+	private boolean ausfuehrenErfolgreich(LebendigesObjekt wirker, List<Anzielbar> ziele)
+	{
+		for (Anzielbar ziel : ziele)
+		{
+			if (!ziel.istGeschuetzt() && !this.anzielenErfolgreich(wirker, ziel))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Fuegt den Zielen die Effekte zu welche fuer sie in dieser Aktion vorgesehen
+	 * wurden. Das erste Ziel bekommt auch den ersten Effekt, das zweite Ziel den
+	 * zweiten usw.
+	 * 
+	 * @param wirker Der Wirker dieser Aktion
+	 * @param ziele  Die Ziele die diese Aktion anzielt
+	 */
+	private void fuegeEffekteZuZielenHinzu(LebendigesObjekt wirker, List<Anzielbar> ziele)
+	{
+		for (int i = 0; i < this.getAnzahlZiele(); i++)
+		{
+			ziele.get(i).fuegeEffekteHinzu(wirker, this.effekte.get(i));
+		}
+	}
+
+	/**
+	 * {@link de.pk.model.interaktion.aktionen.Aktion#fuehreAus(LebendigesObjekt, List)}
+	 */
 	public void fuehreAus(LebendigesObjekt wirker, Anzielbar... ziele)
 	{
 		this.fuehreAus(wirker, Arrays.asList(ziele));
 	}
 
+	/**
+	 * Fuehrt diese Aktion mit den gegebenen Zielen aus.
+	 * 
+	 * @param wirker Der Verursacher dieser Aktion
+	 * @param ziel   Die Ziele dieser Aktion. Soll auf den Wirker auch ein Effekt
+	 *               gelten, muss er hier auch als Ziel angegeben werden.
+	 */
 	public void fuehreAus(LebendigesObjekt wirker, List<Anzielbar> ziele)
 	{
 		if (ziele.size() != this.getAnzahlZiele())
@@ -78,12 +125,19 @@ public class Aktion
 			throw new IllegalArgumentException(AusnahmeNachrichten.AKTION_FALSCHE_ANZAHL_ZIELE
 					+ AusnahmeNachrichten.OBJEKT_REFERENZ_TRENNER + this.toString());
 		}
-		for (int i = 0; i < this.getAnzahlZiele(); i++)
+		if (this.ausfuehrenErfolgreich(wirker, ziele))
 		{
-			ziele.get(i).fuegeEffekteHinzu(wirker, this.effekte.get(i));
+			this.fuegeEffekteZuZielenHinzu(wirker, ziele);
 		}
 	}
 
+	/**
+	 * Bestimmt die Anzahl der Ziele die diese Aktion haben muss. Hierfuer wird
+	 * geschaut wie viele verschiedene Effekte diese Aktion hat
+	 * 
+	 * @return Die Anzahl der Ziele die diese Aktion braucht um erfolgreich gewirkt
+	 *         werden zu koennen
+	 */
 	public int getAnzahlZiele()
 	{
 		return this.effekte.size();

@@ -150,7 +150,7 @@ public class DungeonSzeneController implements Initializable
 	@FXML
 	public void aktionButton1Pressed(ActionEvent event)
 	{
-		//
+
 	}
 
 	/**

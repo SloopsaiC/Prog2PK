@@ -7,7 +7,8 @@ import java.util.Map;
 /**
  * Ein Effekt kann die Attribute von LebendigenObjekten beeinflussen. Er hat
  * eine bestimmte Dauer (Anzahl an Runden), die er immer wieder aufs Neue wirkt,
- * bevor er schliesslich abklingt.
+ * bevor er schliesslich abklingt. Besteht aus "EffektTeilen", welche jeweils
+ * eine Aenderung eines Wertes des Ziels ausdruecken
  */
 public class Effekt
 {
@@ -17,8 +18,11 @@ public class Effekt
 	 * wenn er darauf angewandt wird. Indizies sind in
 	 * {@link}EffektBeschreibungsIndex definiert
 	 */
-	private Map<EffektBeschreibungsIndex, EffektTeil> effektBeschreibung = null;
-	private EffektTyp typ = null;
+	private Map<EffektBeschreibungsIndex, EffektTeil> effektBeschreibung = null; // Alle EffektTeile welche ueber ihren
+																					// EffektBeschreibungsIndex gesucht
+																					// werden koennen um spaeteres
+																					// Anwenden zu vereinfachen
+	private EffektTyp typ = null; // Der Typ dieses Effektes
 
 	/**
 	 * Erstellt einen Effekt, der keine Auswirkungen hat.

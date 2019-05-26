@@ -15,6 +15,8 @@ public class AusnahmeNachrichten
 
 	public static final String OBJEKT_REFERENZ_TRENNER = ": ";
 
+	public static final String WUERFEL_NICHT_GUELTIGER_LISTENER = "Der Listener ist nicht gueltig";
+
 	/**
 	 * Versteckter default Konstruktor, da eine Konstantenklasse nicht instanziiert
 	 * werden sollte.

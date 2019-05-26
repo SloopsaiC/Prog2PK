@@ -101,26 +101,25 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	}
 
 	/*
-	 * (non-Javadoc)
 	 *
 	 * @see de.pk.model.interaktion.Anzielbar#getTrefferWahrscheinlichkeit()
 	 */
 	@Override
 	public float getTrefferWahrscheinlichkeit()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return 1f;
 	}
 
 	/*
-	 * (non-Javadoc)
-	 *
 	 * @see de.pk.model.interaktion.Anzielbar#istGeschuetzt()
 	 */
 	@Override
 	public boolean istGeschuetzt()
 	{
-		// TODO Auto-generated method stub
+		if (this.getModell().getAnzahlPunkteVon(LebendigesObjektPunkteIndex.IST_GESCHUETZT) > 0)
+		{
+			return true;
+		}
 		return false;
 	}
 
@@ -137,27 +136,24 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	 *
 	 * @return Die Positionsaenderung die durch die Effekte verursacht werden wuerde
 	 */
-	public KachelPosition update()
+	public void update()
 	{
-		KachelPosition bewegung = null;
-		// While und List Iterator da hier ein Element waehrend des Iterierens aus der
-		// Liste entfernt werden kann (Abgeklungene Effekte)
 		for (Effekt momentanerEffekt : this.generiereListeVonTickendenEffektenAus(this.modell.getEffekte()))
 		{
 			this.wendeEffektAufModellAn(momentanerEffekt);
-			// Update die Positionsaenderung die von allen Effekten
-			// in Summe "gefordert" wird
-
-			momentanerEffekt.wurdeGewirkt();
 			if (momentanerEffekt.istAbgeklungen())
 			{
-				this.modell.getEffekte().remove(momentanerEffekt); // wenn der Effekt abgeklungen ist, wird er //
+				this.modell.getEffekte().remove(momentanerEffekt); // wenn der Effekt abgeklungen ist, wird er
 																	// entfernt.
 			}
 		}
-		return null;
 	}
 
+	/**
+	 * Wendet einen Effekt auf das Modell dieses Objektes an.
+	 * 
+	 * @param zuAnwenden Der Effekt welcher auf das Modell angewendet werden soll
+	 */
 	private void wendeEffektAufModellAn(Effekt zuAnwenden)
 	{
 		for (LebendigesObjektPunkteIndex index : LebendigesObjektPunkteIndex.values())
@@ -170,6 +166,7 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 						EffektBeschreibungsIndex.uebersetzeAusLebendigesObjektPunkteIndex(index)));
 			}
 		}
+		zuAnwenden.wurdeGewirkt();
 	}
 
 }

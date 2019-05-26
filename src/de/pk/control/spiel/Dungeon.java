@@ -2,6 +2,7 @@ package de.pk.control.spiel;
 
 import java.util.ArrayList;
 
+import de.pk.control.interaktion.Wuerfel;
 import de.pk.control.spiel.phasen.Phase;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
@@ -21,6 +22,7 @@ import de.pk.utils.karte.generator.KartenGeneratorUtils;
 public class Dungeon
 {
 	private DungeonModell modell = null;
+	private Wuerfel wuerfel = null;
 
 	public Dungeon(String dungeonName)
 	{
@@ -32,6 +34,7 @@ public class Dungeon
 		this.modell = new DungeonModell(dungeonName);
 		this.initModell(phasen);
 		this.initSpielbrett();
+		this.wuerfel = new Wuerfel();
 	}
 
 	/**
@@ -58,6 +61,11 @@ public class Dungeon
 				richtung, this.getSpielbrett().getKachelBei(momentanePos));
 		this.modell.getSpielbrett().setzeKachel(neueKachel,
 				momentanePos.addiere(KartenGeneratorUtils.getVersatzVonRichtung(richtung)));
+	}
+
+	public Wuerfel getWuerfel()
+	{
+		return this.wuerfel;
 	}
 
 	/**
@@ -162,12 +170,7 @@ public class Dungeon
 	{
 		for (LebendigesObjekt objekt : this.modell.getSpielbrett().getAlleLebendigenObjekte())
 		{
-			/*
-			 * Vektor positionsAenderung = objekt.update(); if (positionsAenderung.laenge()
-			 * > 0f) { try { this.modell.getSpielbrett().bewege(objekt, positionsAenderung);
-			 * } catch (IllegalArgumentException nichtMoeglich) { // Bewegung war nicht
-			 * moeglich, also nicht bewegen } }
-			 */
+			objekt.update();
 		}
 	}
 
