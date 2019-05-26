@@ -140,8 +140,13 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	{
 		for (LebendigesObjektPunkteIndex index : LebendigesObjektPunkteIndex.values())
 		{
-			this.modell.aenderePunkteVon(index, zuAnwenden
-					.getWertAusBeschreibung(EffektBeschreibungsIndex.uebersetzeAusLebendigesObjektPunkteIndex(index)));
+			EffektBeschreibungsIndex effektBeschreibung = EffektBeschreibungsIndex
+					.uebersetzeAusLebendigesObjektPunkteIndex(index);
+			if (effektBeschreibung != null)
+			{
+				this.modell.aenderePunkteVon(index, zuAnwenden.getWertAusBeschreibung(
+						EffektBeschreibungsIndex.uebersetzeAusLebendigesObjektPunkteIndex(index)));
+			}
 		}
 	}
 
