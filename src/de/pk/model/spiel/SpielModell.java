@@ -61,4 +61,30 @@ public class SpielModell
 		this.helden = helden;
 	}
 
+	/**
+	 * @return the goldAnzahl
+	 */
+	public int getGoldAnzahl()
+	{
+		return this.goldAnzahl;
+	}
+
+	public void aendereGoldAnzahl(int aenederung)
+	{
+		this.goldAnzahl += aenederung;
+	}
+
+	/**
+	 * @return the fragmentAnzahl
+	 */
+	public int getFragmentAnzahl()
+	{
+		return this.fragmentAnzahl;
+	}
+
+	public void aendereFragmentAnzahl(int aenderung)
+	{
+		this.fragmentAnzahl += aenderung;
+	}
+
 }

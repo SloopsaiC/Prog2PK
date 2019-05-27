@@ -87,9 +87,11 @@ public class Effekt
 	}
 
 	/**
-	 * Gibt an, dass dieser Effekt ein tickender Effekt ist, also dass er nach einer
-	 * bestimmten Zeit bzw. Anzahl an Runden verstreicht und abklingt. Nur tickende
-	 * Effekte werden beim Wirken beruecksichtigt.
+	 * Gibt an, dass dieser Effekt ein tickender Effekt ist, also ob seine
+	 * Auswirkungen beim naechsten anwenden angwendet werden sollen, oder er nur ein
+	 * Mal eine Wirkung hat. Nur tickende Effekte werden beim Wirken
+	 * beruecksichtigt. Die Auswirkungen von nicht tickenden Effekten werden beim
+	 * Entfernen ausserdem rueckgaenig gemacht
 	 *
 	 * @return immer true, da hier nur kurzlebige Effekte modelliert werden. Fuer
 	 *         dauerhafte Effekte siehe {@link StatusEffekt}.

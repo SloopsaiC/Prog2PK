@@ -1,6 +1,18 @@
 package de.pk.control.spielbrett.spielbrettObjekte;
 
+/**
+ * Repraesentiert ein Objekt auf dem Spielbrett.
+ * 
+ * @author Mattheo
+ */
 public abstract class SpielbrettObjekt
 {
+	/**
+	 * Stellt fest ob dieses SpielbrettObjekt lebendig ist. Objekte welche nicht
+	 * lebendig sein koennen geben hier immer false zurueck, LebendigeObjekte
+	 * ueberpruefen ihren Status selber
+	 * 
+	 * @return true, dieses Objekt ist lebendig, sonst false
+	 */
 	public abstract boolean istLebendig();
 }
