@@ -48,7 +48,7 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 
 	/**
 	 * Entfernt einen Effekt aus den registrierten Effekten dieses Objektes
-	 * 
+	 *
 	 * @param zuEntfernen Der Objekt der entfernt werden soll
 	 */
 	public void entferneEffekt(Effekt zuEntfernen)

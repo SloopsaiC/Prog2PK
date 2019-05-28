@@ -13,15 +13,26 @@ import java.util.Map;
 public class Effekt
 {
 
+	private static Map<EffektBeschreibungsIndex, EffektTeil> generiereEffektBeschreibung(EffektTeil[] effektTeile)
+	{
+		Map<EffektBeschreibungsIndex, EffektTeil> beschreibung = new HashMap<>();
+		for (EffektTeil teil : effektTeile)
+		{
+			beschreibung.put(teil.getIndex(), teil);
+		}
+		return beschreibung;
+	}
+
 	/**
 	 * Spezifiziert die Aenderungen die dieser Effekt auf ein lebendiges Objekt hat,
 	 * wenn er darauf angewandt wird. Indizies sind in
 	 * {@link}EffektBeschreibungsIndex definiert
 	 */
 	private Map<EffektBeschreibungsIndex, EffektTeil> effektBeschreibung = null; // Alle EffektTeile welche ueber ihren
-																					// EffektBeschreibungsIndex gesucht
-																					// werden koennen um spaeteres
-																					// Anwenden zu vereinfachen
+
+	// EffektBeschreibungsIndex gesucht
+	// werden koennen um spaeteres
+	// Anwenden zu vereinfachen
 	private EffektTyp typ = null; // Der Typ dieses Effektes
 
 	/**
@@ -50,17 +61,22 @@ public class Effekt
 	{
 		this.typ = typ;
 		this.effektBeschreibung = Collections
-				.synchronizedMap(new HashMap<EffektBeschreibungsIndex, EffektTeil>(effektBeschreibung));
+				.synchronizedMap(new HashMap<>(effektBeschreibung));
 	}
 
-	private static Map<EffektBeschreibungsIndex, EffektTeil> generiereEffektBeschreibung(EffektTeil[] effektTeile)
+	/**
+	 * Erstellt einen Effekt der genau den gegenteiligen Effekt zu diesem hat.
+	 *
+	 * @return Ein Effekt der die Auswirkungen dieses Effektes aufhebt
+	 */
+	public Effekt getNegation()
 	{
-		Map<EffektBeschreibungsIndex, EffektTeil> beschreibung = new HashMap<>();
-		for (EffektTeil teil : effektTeile)
+		Map<EffektBeschreibungsIndex, EffektTeil> neueEffektBeschreibung = new HashMap<>();
+		for (EffektBeschreibungsIndex index : this.effektBeschreibung.keySet())
 		{
-			beschreibung.put(teil.getIndex(), teil);
+			neueEffektBeschreibung.put(index, new EffektTeil(index, -this.effektBeschreibung.get(index).getWert()));
 		}
-		return beschreibung;
+		return new Effekt(this.typ, neueEffektBeschreibung);
 	}
 
 	/**
@@ -114,21 +130,6 @@ public class Effekt
 		// Die Anzahl der Wirkticks um einen vermindern
 		EffektTeil wirkTicks = this.effektBeschreibung.get(EffektBeschreibungsIndex.ANZAHL_WIRK_TICKS);
 		wirkTicks.setWert(wirkTicks.getWert() - 1);
-	}
-
-	/**
-	 * Erstellt einen Effekt der genau den gegenteiligen Effekt zu diesem hat.
-	 * 
-	 * @return Ein Effekt der die Auswirkungen dieses Effektes aufhebt
-	 */
-	public Effekt getNegation()
-	{
-		Map<EffektBeschreibungsIndex, EffektTeil> neueEffektBeschreibung = new HashMap<>();
-		for (EffektBeschreibungsIndex index : this.effektBeschreibung.keySet())
-		{
-			neueEffektBeschreibung.put(index, new EffektTeil(index, -this.effektBeschreibung.get(index).getWert()));
-		}
-		return new Effekt(this.typ, neueEffektBeschreibung);
 	}
 
 }

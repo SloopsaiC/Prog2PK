@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Set;
 
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
-import de.pk.model.gegenstaende.container.Container;
 import de.pk.model.interaktion.aktionen.Aktion;
 import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjektModell;
