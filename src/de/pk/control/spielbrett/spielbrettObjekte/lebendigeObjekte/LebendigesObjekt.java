@@ -42,7 +42,7 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	{
 		if (!zuEntfernen.istTickend())
 		{
-			this.wendeEffektAufModellAn(zuEntfernen, true);
+			this.wendeEffektAufModellAn(zuEntfernen.getNegation());
 		}
 	}
 
@@ -163,7 +163,6 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		for (Effekt momentanerEffekt : this.modell.getEffekte())
 		{
 			this.updateMomentanenEffekt(momentanerEffekt);
-			this.wendeEffektAufModellAn(momentanerEffekt);
 			if (momentanerEffekt.istAbgeklungen())
 			{
 				this.modell.getEffekte().remove(momentanerEffekt); // wenn der Effekt abgeklungen ist, wird er
@@ -214,17 +213,6 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 			}
 		}
 		zuAnwenden.wurdeGewirkt();
-	}
-
-	private void wendeEffektAufModellAn(Effekt zuAnwenden, boolean negiert)
-	{
-		if (negiert)
-		{
-			this.wendeEffektAufModellAn(zuAnwenden.getNegation());
-		} else
-		{
-			this.wendeEffektAufModellAn(zuAnwenden);
-		}
 	}
 
 }
