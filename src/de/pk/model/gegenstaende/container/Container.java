@@ -1,15 +1,10 @@
 package de.pk.model.gegenstaende.container;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import de.pk.control.gegenstaende.GegenstandsHaufen;
 
 public class Container
 {
-	private List<GegenstandsHaufen> inhalt = null; // Der Inhalt dieses Containers
-	private int groesse = 0;
+	private GegenstandsHaufen[] inhalt = null; // Der Inhalt dieses Containers
 
 	/**
 	 * Erstellt einen Container mit gegebener Groesse
@@ -18,8 +13,7 @@ public class Container
 	 */
 	public Container(int maximaleGroesse)
 	{
-		this.inhalt = Collections.synchronizedList(new ArrayList<GegenstandsHaufen>());
-		this.groesse = maximaleGroesse;
+		this.inhalt = new GegenstandsHaufen[maximaleGroesse];
 	}
 
 	/**
@@ -32,7 +26,9 @@ public class Container
 	public GegenstandsHaufen entferneInhalt(int bei)
 	{
 		this.ueberpruefeIndex(bei, true);
-		return this.inhalt.remove(bei);
+		GegenstandsHaufen alterInhalt = this.getInhalt(bei);
+		this.inhalt[bei] = null;
+		return alterInhalt;
 	}
 
 	/**
@@ -56,7 +52,7 @@ public class Container
 	public GegenstandsHaufen getInhalt(int bei)
 	{
 		this.ueberpruefeIndex(bei, true);
-		return this.getInhalt(bei);
+		return this.inhalt[bei];
 
 	}
 
@@ -79,7 +75,11 @@ public class Container
 	public void hinzufuegen(GegenstandsHaufen haufen, int bei)
 	{
 		this.ueberpruefeIndex(bei, true);
+<<<<<<< HEAD
 		this.inhalt.add(bei, haufen);
+=======
+		this.inhalt[bei] = haufen;
+>>>>>>> refs/heads/Phillip
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class Container
 	 */
 	private boolean ueberpruefeIndex(int index, boolean werfeAusnahme)
 	{
-		if ((index > 0) && (index < this.groesse))
+		if ((index > 0) && (index < this.inhalt.length))
 		{
 			return true;
 		}

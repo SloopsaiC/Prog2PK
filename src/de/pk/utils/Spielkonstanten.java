@@ -43,5 +43,8 @@ public class Spielkonstanten
 	public static final String ANWENDUNG_TITEL_SZENE_PFAD_FXML = "TitelSzene.fxml";
 	public static final String ANWENDUNG_DUNGEON_SZENE = "DungeonSzene";
 	public static final String ANWENDUNG_DUNGEON_SZENE_PFAD_FXML = "DungeonSzene.fxml";
-
+	public static final String ANWENDUNG_SCHWIERIGKEIT_WAEHLEN_SZENE = "SchwierigkeitWaehlenSzene";
+	public static final String ANWENDUNG_SCHWIERIGKEIT_WAEHLEN_SZENE_PFAD_FXML = "SchwierigkeitWaehlenSzene.fxml";
+	public static final String ANWENDUNG_WELTKARTE_SZENE = "WeltkarteSzene";
+	public static final String ANWENDUNG_WELTKARTE_SZENE_PFAD_FXML = "WeltkarteSzene.fxml";
 }

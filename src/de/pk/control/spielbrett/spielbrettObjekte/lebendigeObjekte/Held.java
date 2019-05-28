@@ -5,7 +5,6 @@ import java.util.Arrays;
 import de.pk.model.gegenstaende.ausruestung.Accessoire;
 import de.pk.model.gegenstaende.ausruestung.Ruestung;
 import de.pk.model.gegenstaende.ausruestung.Waffe;
-import de.pk.model.gegenstaende.container.Container;
 import de.pk.model.gegenstaende.spezifikationen.Ausruestbar;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldModell;
 

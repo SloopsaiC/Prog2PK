@@ -49,13 +49,18 @@ public class StatusEffekt extends Effekt
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Erst true, da der Effekt ein Mal angewendet werden soll, sonst false.
 	 *
 	 * @see de.pk.model.interaktion.effekt.Effekt#istTickend()
+=======
+	 * Gibt an, ob dieser Effekt gerade tickt und somit beim Wirken beruecksichtigt
+	 * werden soll. Da dies ein StatusEffekt ist, wird hier nur beim ersten ticken
+	 * true zurueck gegeben.
+>>>>>>> refs/heads/Phillip
 	 *
 	 * @return Nur zu Beginn true, da hier dauerhafte StatusEffekte modelliert
-	 *         werden. Fuer kurzlebige Effekte siehe
-	 *         {@link de.pk.model.interaktion.effekt.Effekt}.
+	 *         werden. Fuer kurzlebige Effekte siehe {@link Effekt}.
 	 */
 	@Override
 	public boolean istTickend()

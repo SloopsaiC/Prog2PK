@@ -79,6 +79,8 @@ public class AnwendungFX extends Application
 		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_CREDIT_SZENE_PFAD_FXML);
 		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_OPTIONEN_SZENE_PPFAD_FXML);
 		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE_PFAD_FXML);
+		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_SCHWIERIGKEIT_WAEHLEN_SZENE_PFAD_FXML);
+		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_WELTKARTE_SZENE_PFAD_FXML);
 	}
 
 	public static void starteAnwendung(String[] args)
@@ -100,7 +102,7 @@ public class AnwendungFX extends Application
 		AnwendungFX.anwendungsStage.getIcons()
 				.add(new Image(new File(Spielkonstanten.ANWENDUNG_ANWENDUNGS_ICON).toURI().toURL().toExternalForm()));
 		AnwendungFX.anwendungsStage.setTitle(DE_de.ANWENDUNG_FENSTER_TITEL);
-		AnwendungFX.anwendungsStage.setResizable(false);
+		AnwendungFX.anwendungsStage.setResizable(true);
 		AnwendungFX.anwendungsStage.centerOnScreen();
 		AnwendungFX.anwendungsStage.setOnCloseRequest(windowEvent -> Main.anwendungBeenden());
 		AnwendungFX.anwendungsStage.setScene(AnwendungFX.SZENEN_MAP.get(Spielkonstanten.ANWENDUNG_TITEL_SZENE));
