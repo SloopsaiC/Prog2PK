@@ -1,10 +1,9 @@
 .menue-pane {
-	-fx-background-image: url("../../../ressourcen/bildDateien/WeltKarteBackgroundCity.jpg");
+	-fx-background-image: url("../../../ressourcen/gifs/menue.gif");
  	-fx-background-position: left top;
 	-fx-background-repeat: no-repeat;
 	-fx-background-size: cover;
 }
-
 
 .label {
 	-fx-text-fill: white;

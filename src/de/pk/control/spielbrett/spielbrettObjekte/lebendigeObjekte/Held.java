@@ -5,7 +5,6 @@ import java.util.Arrays;
 import de.pk.model.gegenstaende.ausruestung.Accessoire;
 import de.pk.model.gegenstaende.ausruestung.Ruestung;
 import de.pk.model.gegenstaende.ausruestung.Waffe;
-import de.pk.model.gegenstaende.container.Container;
 import de.pk.model.gegenstaende.spezifikationen.Ausruestbar;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldModell;
 
@@ -124,22 +123,6 @@ public class Held extends LebendigesObjekt
 		{
 			throw new IllegalStateException();
 		}
-	}
-
-	/**
-	 * @see de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt#generiereAuswurf()
-	 */
-	@Override
-	protected Container generiereAuswurf()
-	{
-		return this.getModellAlsHeld().getInventar();
-	}
-
-	@Override
-	protected void hatGetoetet(LebendigesObjekt opfer)
-	{
-		super.hatGetoetet(opfer);
-		this.getModellAlsHeld().fuegeZuInventarHinzu(opfer.generiereAuswurf());
 	}
 
 }

@@ -1,0 +1,63 @@
+.schwierigkeit-pane {
+	-fx-background-image: url("../../../ressourcen/bildDateien/rocks.png");
+ 	-fx-background-position: left top;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, stretch;
+}
+
+.label {
+	-fx-text-fill: white;
+}
+
+.ueberschriftenLabel {
+	-fx-font-weight: bold;
+}
+
+.choice-box .context-menu {
+	-fx-background-color: rgba(0.0,0.0,0.0,0.8);
+}
+
+#choice-box-menu-item:focused  {  
+ 	-fx-background-color: rgba(50.0,0.0,0.0,0.6);
+}  
+
+.image-button {
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, stretch;
+	-fx-background-image: url("../../../ressourcen/bildDateien/Star.png"); 
+}
+
+#neulingButton {	
+	-fx-background-image: url("../../../ressourcen/ButtonIcons/1.png"); 
+}
+
+#dickkopfButton {	
+	-fx-background-image: url("../../../ressourcen/ButtonIcons/12.png"); 
+}
+
+#draufgaengerButton {	
+	-fx-background-image: url("../../../ressourcen/ButtonIcons/35.png"); 
+}
+
+#blutduersterButton {	
+	-fx-background-image: url("../../../ressourcen/ButtonIcons/40.png"); 
+}
+
+.button, .toggle-button, .choice-box   {
+	-fx-color: rgba(0.0,0.0,0.0,0.4);
+}
+
+.button:hover , .toggle-button:hover, .choice-box:hover {
+	-fx-color: rgba(0.0,0.0,0.0,0.6);
+}
+
+.button:pressed, .toggle-button:selected, .choice-box:pressed  {
+	-fx-color: rgba(50.0,0.0,0.0,0.6);
+}
+
+
+
+
+
+

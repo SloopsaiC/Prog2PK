@@ -1,12 +1,12 @@
 .dungeon-pane {
-	-fx-background-image: url("../../../ressourcen/bildDateien/matrix_background.png");
+	-fx-background-image: url("../../../ressourcen/bildDateien/dungeonbackground.png");
  	-fx-background-position: left top;
 	-fx-background-repeat: no-repeat;
 	-fx-background-size: cover, stretch;
 }
 
 .dungeon-grid-pane {
-	-fx-background-image: url("../../../ressourcen/bildDateien/borders.png");
+	-fx-background-image: url("../../../ressourcen/bildDateien/ingameborder.png");
  	-fx-background-position: left top;
 	-fx-background-repeat: no-repeat;
 	-fx-background-size: stretch;

@@ -3,6 +3,7 @@ package de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import de.pk.model.gegenstaende.container.Container;
 import de.pk.model.interaktion.aktionen.Aktion;
 import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjektModell;
@@ -88,9 +89,22 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 		return this.effekte;
 	}
 
+	@Override
+	public boolean istLebendig()
+	{
+		return true;
+	}
+
 	public void setAnzahlPunkteVon(LebendigesObjektPunkteIndex index, int neuerWert)
 	{
 		this.punkte.replace(index, neuerWert);
 	}
+
+	/**
+	 * Definiert das Sterben eines Lebendigen Objekts
+	 *
+	 * @return Einen Container (Inventar/Gegenstaende) des Gestorbenen
+	 */
+	public abstract Container sterben();
 
 }
