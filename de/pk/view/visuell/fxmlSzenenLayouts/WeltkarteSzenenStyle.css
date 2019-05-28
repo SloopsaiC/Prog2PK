@@ -1,0 +1,66 @@
+.weltkarte-pane {
+	-fx-background-image: url("../../../ressourcen/bildDateien/Weltkarte.jpg");
+ 	-fx-background-position: left top;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, stretch;
+}
+
+.label {
+	-fx-text-fill: white;
+}
+
+.image-button {
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover;
+	-fx-background-image: url("../../../ressourcen/bildDateien/Star.png"); 
+}
+
+#dungeon1Button {	
+	-fx-background-image: url("../../../ressourcen/ButtonIcons/7.png"); 
+}
+
+#dungeon2Button {	
+	-fx-background-image: url("../../../ressourcen/ButtonIcons/3.png"); 
+}
+
+#dungeon3Button {	
+	-fx-background-image: url("../../../ressourcen/ButtonIcons/3.png"); 
+}
+
+#dungeon4Button {	
+	-fx-background-image: url("../../../ressourcen/ButtonIcons/2.png"); 
+}
+
+#dungeon5Button {	
+	-fx-background-image: url("../../../ressourcen/ButtonIcons/6.png"); 
+}
+.ueberschriftenLabel {
+	-fx-font-weight: bold;
+}
+
+.choice-box .context-menu {
+	-fx-background-color: rgba(0.0,0.0,0.0,0.8);
+}
+
+#choice-box-menu-item:focused  {  
+ 	-fx-background-color: rgba(50.0,0.0,0.0,0.6);
+}  
+
+.button, .toggle-button, .choice-box   {
+	-fx-color: rgba(0.0,0.0,0.0,0.4);
+}
+
+.button:hover , .toggle-button:hover, .choice-box:hover {
+	-fx-color: rgba(0.0,0.0,0.0,0.6);
+}
+
+.button:pressed, .toggle-button:selected, .choice-box:pressed  {
+	-fx-color: rgba(50.0,0.0,0.0,0.6);
+}
+
+
+
+
+
+
