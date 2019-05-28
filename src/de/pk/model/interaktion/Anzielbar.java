@@ -5,14 +5,14 @@ import de.pk.model.interaktion.effekt.Effekt;
 
 /**
  * Alles was von einer Aktion angezielt werden kann ist "Anzielbar".
- * 
+ *
  * @author Mattheo
  */
 public interface Anzielbar
 {
 	/**
 	 * Fuegt einem Ziel Effekte hinzu welches diese dann verarbeiten kann
-	 * 
+	 *
 	 * @param verursacher Der Verursacher dieses Effektes
 	 * @param hinzufuegen Alle Effekte die diesem Ziel hinzugefuegt werden sollen
 	 */

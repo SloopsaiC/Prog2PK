@@ -1,8 +1,11 @@
 package de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
+import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
 import de.pk.model.interaktion.aktionen.Aktion;
 import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjektModell;
@@ -16,7 +19,8 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 
 	private HashMap<String, Aktion> aktionen = null; // Alle Aktionen die diese Objekt ausfuehren kann, welche durch den
 														// Namen abgebildet werden
-	private ArrayList<Effekt> effekte = null; // Alle Statuseffekte die auf dieses Objekt wirken
+	private Map<Effekt, SpielbrettObjekt> effekteMitVerursacher = null; // Alle Statuseffekte die auf dieses Objekt
+																		// wirken
 
 	/**
 	 * Dient lediglich als super-Konstruktor fuer abgeleitete
@@ -31,7 +35,7 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 		this.punkte.put(LebendigesObjektPunkteIndex.LEBENS_PUNKTE, lebensPunkte);
 		this.punkte.put(LebendigesObjektPunkteIndex.BEWEGUNGS_PUNKTE, bewegungsPunkte);
 		this.aktionen = new HashMap<>();
-		this.effekte = new ArrayList<>();
+		this.effekteMitVerursacher = Collections.synchronizedMap(new HashMap<Effekt, SpielbrettObjekt>());
 	}
 
 	public void aenderePunkteVon(LebendigesObjektPunkteIndex index, int aenderung)
@@ -44,7 +48,7 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 	 */
 	public void entferneEffekt(Effekt entfernen)
 	{
-		this.effekte.remove(entfernen);
+		this.effekteMitVerursacher.remove(entfernen);
 	}
 
 	public void fuegeAktionHinzu(String name, Aktion hinzufuegen)
@@ -55,9 +59,9 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 	/**
 	 * Fuegt einen Effekt hinzu der auf diesen Helden wirkt
 	 */
-	public void fuegeEffektHinzu(Effekt hinzufuegen)
+	public void fuegeEffektHinzu(Effekt hinzufuegen, SpielbrettObjekt verursacher)
 	{
-		this.effekte.add(hinzufuegen);
+		this.effekteMitVerursacher.put(hinzufuegen, verursacher);
 	}
 
 	/**
@@ -83,9 +87,14 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 	 *
 	 * @return Array mit allen Statuseffekten des Lebendigen Objekts
 	 */
-	public ArrayList<Effekt> getEffekte()
+	public Set<Effekt> getEffekte()
 	{
-		return this.effekte;
+		return this.effekteMitVerursacher.keySet();
+	}
+
+	public SpielbrettObjekt getVerursacherVonEffekt(Effekt effekt)
+	{
+		return this.effekteMitVerursacher.get(effekt);
 	}
 
 	public void setAnzahlPunkteVon(LebendigesObjektPunkteIndex index, int neuerWert)

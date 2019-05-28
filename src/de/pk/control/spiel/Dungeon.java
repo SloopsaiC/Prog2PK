@@ -63,11 +63,6 @@ public class Dungeon
 				momentanePos.addiere(KartenGeneratorUtils.getVersatzVonRichtung(richtung)));
 	}
 
-	public Wuerfel getWuerfel()
-	{
-		return this.wuerfel;
-	}
-
 	/**
 	 * @return Die Helden dieses Spiels
 	 */
@@ -84,6 +79,11 @@ public class Dungeon
 	public Spielbrett getSpielbrett()
 	{
 		return this.modell.getSpielbrett();
+	}
+
+	public Wuerfel getWuerfel()
+	{
+		return this.wuerfel;
 	}
 
 	private void initModell(Phase[] phasen)

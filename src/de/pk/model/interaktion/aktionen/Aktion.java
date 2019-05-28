@@ -52,37 +52,27 @@ public class Aktion
 		this.reichweite = reichweite;
 	}
 
-	private boolean wuerfelWurfErfolgreich(float erfolgsWahrscheinlichkeit)
-	{
-		Wuerfel wuerfel = Anwendung.getInstanz().getAktivesSpiel().getAktiverDungeon().getWuerfel();
-		synchronized (wuerfel)
-		{
-			wuerfel.werfen(erfolgsWahrscheinlichkeit);
-			return wuerfel.getValue().warErfolgreich();
-		}
-	}
-
 	/**
 	 * "Wirft einen Wuerfel" um herrauszufinden ob das Anzielen des Ziels
 	 * erfolgreich ist.
-	 * 
+	 *
 	 * @return true, falls das anzielen erfolgreich war, sonst false
 	 */
 	private boolean anzielenErfolgreich(LebendigesObjekt zieler, Anzielbar ziel)
 	{
-		return wuerfelWurfErfolgreich(ziel.getTrefferWahrscheinlichkeit());
+		return this.wuerfelWurfErfolgreich(ziel.getTrefferWahrscheinlichkeit());
 	}
 
 	/**
 	 * Prueft ob alle Ziele welche mit dieser Aktion angezielt wurden momentan
 	 * anzielbar sind und dann ob der Spieler Glueck hatte und er auch trifft
-	 * 
+	 *
 	 * @return true, alle Ziele sind momentan legal und wurden nach dem WuerfelWurf
 	 *         getroffen, sonst false
 	 */
 	private boolean ausfuehrenErfolgreich(LebendigesObjekt wirker, List<Anzielbar> ziele)
 	{
-		if (!wuerfelWurfErfolgreich(this.grundErfolgsWahrscheinlichkeit))
+		if (!this.wuerfelWurfErfolgreich(this.grundErfolgsWahrscheinlichkeit))
 		{
 			return false;
 		}
@@ -100,7 +90,7 @@ public class Aktion
 	 * Fuegt den Zielen die Effekte zu welche fuer sie in dieser Aktion vorgesehen
 	 * wurden. Das erste Ziel bekommt auch den ersten Effekt, das zweite Ziel den
 	 * zweiten usw.
-	 * 
+	 *
 	 * @param wirker Der Wirker dieser Aktion
 	 * @param ziele  Die Ziele die diese Aktion anzielt
 	 */
@@ -122,7 +112,7 @@ public class Aktion
 
 	/**
 	 * Fuehrt diese Aktion mit den gegebenen Zielen aus.
-	 * 
+	 *
 	 * @param wirker Der Verursacher dieser Aktion
 	 * @param ziel   Die Ziele dieser Aktion. Soll auf den Wirker auch ein Effekt
 	 *               gelten, muss er hier auch als Ziel angegeben werden.
@@ -143,7 +133,7 @@ public class Aktion
 	/**
 	 * Bestimmt die Anzahl der Ziele die diese Aktion haben muss. Hierfuer wird
 	 * geschaut wie viele verschiedene Effekte diese Aktion hat
-	 * 
+	 *
 	 * @return Die Anzahl der Ziele die diese Aktion braucht um erfolgreich gewirkt
 	 *         werden zu koennen
 	 */
@@ -163,5 +153,15 @@ public class Aktion
 	public boolean istLegalesZiel(Anzielbar ziel, int entfernung)
 	{
 		return !ziel.istGeschuetzt() && (entfernung <= this.reichweite);
+	}
+
+	private boolean wuerfelWurfErfolgreich(float erfolgsWahrscheinlichkeit)
+	{
+		Wuerfel wuerfel = Anwendung.getInstanz().getAktivesSpiel().getAktiverDungeon().getWuerfel();
+		synchronized (wuerfel)
+		{
+			wuerfel.werfen(erfolgsWahrscheinlichkeit);
+			return wuerfel.getValue().warErfolgreich();
+		}
 	}
 }

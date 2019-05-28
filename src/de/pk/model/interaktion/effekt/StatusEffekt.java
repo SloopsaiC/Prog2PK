@@ -50,7 +50,7 @@ public class StatusEffekt extends Effekt
 
 	/**
 	 * Erst true, da der Effekt ein Mal angewendet werden soll, sonst false.
-	 * 
+	 *
 	 * @see de.pk.model.interaktion.effekt.Effekt#istTickend()
 	 *
 	 * @return Nur zu Beginn true, da hier dauerhafte StatusEffekte modelliert

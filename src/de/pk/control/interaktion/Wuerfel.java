@@ -14,10 +14,10 @@ import javafx.beans.value.ObservableValue;
 
 /**
  * Klasse welche WuerfelWuerfe generiert und alle Beobachter ueber alle Wuerfe.
- * 
+ *
  * Ein Wuerfel hat hierbei allderdings keine Augenzahl oder aehnliches wie in
  * der echten Welt, sondern modelliert nur den Zufall informiert.
- * 
+ *
  * @author Mattheo
  */
 public class Wuerfel implements ObservableValue<WuerfelWurf>
@@ -37,26 +37,48 @@ public class Wuerfel implements ObservableValue<WuerfelWurf>
 		this.invalidationListeners = Collections.synchronizedList(new ArrayList<InvalidationListener>());
 	}
 
-	/**
-	 * Erstellt einen neuen WuerfelWurf und informiert alle Listener darueber, dass
-	 * ein neuer Wurf erfolgt ist.
-	 * 
-	 * @param erfolgsWahrscheinlichkeit Die Wahrscheinlichkeit mit der dieser Wurf
-	 *                                  erfolgreich ist
-	 */
-	public void werfen(float erfolgsWahrscheinlichkeit)
+	@Override
+	public void addListener(ChangeListener<? super WuerfelWurf> listener)
 	{
-		synchronized (this)
+
+		this.changeListeners.add(Objects.requireNonNull(listener));
+	}
+
+	@Override
+	public void addListener(InvalidationListener listener)
+	{
+		this.invalidationListeners.add(Objects.requireNonNull(listener));
+	}
+
+	@Override
+	public WuerfelWurf getValue()
+	{
+		return this.letzterWurf;
+	}
+
+	@Override
+	public void removeListener(ChangeListener<? super WuerfelWurf> listener)
+	{
+		if (!this.changeListeners.contains(listener))
 		{
-			WuerfelWurf alterWurf = this.letzterWurf;
-			this.letzterWurf = new WuerfelWurf(erfolgsWahrscheinlichkeit, ThreadLocalRandom.current().nextFloat());
-			this.veraendert(alterWurf);
+			throw new IllegalArgumentException(AusnahmeNachrichten.WUERFEL_NICHT_GUELTIGER_LISTENER);
 		}
+		this.changeListeners.add(listener);
+	}
+
+	@Override
+	public void removeListener(InvalidationListener listener)
+	{
+		if (!this.invalidationListeners.contains(listener))
+		{
+			throw new IllegalArgumentException(AusnahmeNachrichten.WUERFEL_NICHT_GUELTIGER_LISTENER);
+		}
+		this.invalidationListeners.remove(listener);
 	}
 
 	/**
 	 * Wird aufgerufen wenn ein neuer Wurf erfolgt ist.
-	 * 
+	 *
 	 * @param alterWurf Der vorherige Wurf
 	 */
 	private void veraendert(WuerfelWurf alterWurf)
@@ -71,42 +93,20 @@ public class Wuerfel implements ObservableValue<WuerfelWurf>
 		}
 	}
 
-	@Override
-	public void addListener(ChangeListener<? super WuerfelWurf> listener)
+	/**
+	 * Erstellt einen neuen WuerfelWurf und informiert alle Listener darueber, dass
+	 * ein neuer Wurf erfolgt ist.
+	 *
+	 * @param erfolgsWahrscheinlichkeit Die Wahrscheinlichkeit mit der dieser Wurf
+	 *                                  erfolgreich ist
+	 */
+	public void werfen(float erfolgsWahrscheinlichkeit)
 	{
-
-		this.changeListeners.add(Objects.requireNonNull(listener));
-	}
-
-	@Override
-	public void removeListener(ChangeListener<? super WuerfelWurf> listener)
-	{
-		if (!this.changeListeners.contains(listener))
+		synchronized (this)
 		{
-			throw new IllegalArgumentException(AusnahmeNachrichten.WUERFEL_NICHT_GUELTIGER_LISTENER);
+			WuerfelWurf alterWurf = this.letzterWurf;
+			this.letzterWurf = new WuerfelWurf(erfolgsWahrscheinlichkeit, ThreadLocalRandom.current().nextFloat());
+			this.veraendert(alterWurf);
 		}
-		this.changeListeners.add(listener);
-	}
-
-	@Override
-	public WuerfelWurf getValue()
-	{
-		return this.letzterWurf;
-	}
-
-	@Override
-	public void addListener(InvalidationListener listener)
-	{
-		this.invalidationListeners.add(Objects.requireNonNull(listener));
-	}
-
-	@Override
-	public void removeListener(InvalidationListener listener)
-	{
-		if (!this.invalidationListeners.contains(listener))
-		{
-			throw new IllegalArgumentException(AusnahmeNachrichten.WUERFEL_NICHT_GUELTIGER_LISTENER);
-		}
-		this.invalidationListeners.remove(listener);
 	}
 }

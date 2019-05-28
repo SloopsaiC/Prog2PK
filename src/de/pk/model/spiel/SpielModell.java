@@ -35,12 +35,38 @@ public class SpielModell
 		this.aktiverDungeon = dungeon;
 	}
 
+	public void aendereFragmentAnzahl(int aenderung)
+	{
+		this.fragmentAnzahl += aenderung;
+	}
+
+	public void aendereGoldAnzahl(int aenederung)
+	{
+		this.goldAnzahl += aenederung;
+	}
+
 	/**
 	 * @return Der in diesem Spiel momentan aktive Dungeon
 	 */
 	public Dungeon getAktivenDungeon()
 	{
 		return this.aktiverDungeon;
+	}
+
+	/**
+	 * @return the fragmentAnzahl
+	 */
+	public int getFragmentAnzahl()
+	{
+		return this.fragmentAnzahl;
+	}
+
+	/**
+	 * @return the goldAnzahl
+	 */
+	public int getGoldAnzahl()
+	{
+		return this.goldAnzahl;
 	}
 
 	public Held[] getHelden()
@@ -59,32 +85,6 @@ public class SpielModell
 	public void setHelden(Held[] helden)
 	{
 		this.helden = helden;
-	}
-
-	/**
-	 * @return the goldAnzahl
-	 */
-	public int getGoldAnzahl()
-	{
-		return this.goldAnzahl;
-	}
-
-	public void aendereGoldAnzahl(int aenederung)
-	{
-		this.goldAnzahl += aenederung;
-	}
-
-	/**
-	 * @return the fragmentAnzahl
-	 */
-	public int getFragmentAnzahl()
-	{
-		return this.fragmentAnzahl;
-	}
-
-	public void aendereFragmentAnzahl(int aenderung)
-	{
-		this.fragmentAnzahl += aenderung;
 	}
 
 }

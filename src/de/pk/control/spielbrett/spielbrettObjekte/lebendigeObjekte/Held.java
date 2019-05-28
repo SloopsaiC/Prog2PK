@@ -98,6 +98,15 @@ public class Held extends LebendigesObjekt
 		}
 	}
 
+	/**
+	 * @see de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt#generiereAuswurf()
+	 */
+	@Override
+	protected Container generiereAuswurf()
+	{
+		return this.getModellAlsHeld().getInventar();
+	}
+
 	private HeldModell getModellAlsHeld()
 	{
 		return (HeldModell) super.getModell();
@@ -106,6 +115,13 @@ public class Held extends LebendigesObjekt
 	public Waffe getWaffe()
 	{
 		return this.getModellAlsHeld().getWaffe();
+	}
+
+	@Override
+	public void hatGetoetet(LebendigesObjekt opfer)
+	{
+		super.hatGetoetet(opfer);
+		this.getModellAlsHeld().fuegeZuInventarHinzu(opfer.generiereAuswurf());
 	}
 
 	/**
@@ -124,22 +140,6 @@ public class Held extends LebendigesObjekt
 		{
 			throw new IllegalStateException();
 		}
-	}
-
-	/**
-	 * @see de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt#generiereAuswurf()
-	 */
-	@Override
-	protected Container generiereAuswurf()
-	{
-		return this.getModellAlsHeld().getInventar();
-	}
-
-	@Override
-	protected void hatGetoetet(LebendigesObjekt opfer)
-	{
-		super.hatGetoetet(opfer);
-		this.getModellAlsHeld().fuegeZuInventarHinzu(opfer.generiereAuswurf());
 	}
 
 }

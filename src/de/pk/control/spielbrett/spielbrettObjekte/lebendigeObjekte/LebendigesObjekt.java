@@ -21,33 +21,39 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		this.modell = modell;
 	}
 
+	/**
+	 * Prueft ob ein Effekt den Zustand dieses Objektes so veraendert hat, dass es
+	 * jetzt als "tot" angesehen werden soll. Falls dies so ist wird auch das
+	 * "Sterben" ausgeloest
+	 *
+	 * @param zuUeberpruefen Der Effekt welcher ueberprueft werden soll
+	 */
+	private boolean effektWarToedlich(Effekt zuUeberpruefen)
+	{
+		if (!this.istLebendig())
+		{
+			this.sterben(this.modell.getVerursacherVonEffekt(zuUeberpruefen));
+			return true;
+		}
+		return false;
+	}
+
 	private void entferneAuswirkungenFallsTickend(Effekt zuEntfernen)
 	{
 		if (!zuEntfernen.istTickend())
 		{
-			for (EffektBeschreibungsIndex index : EffektBeschreibungsIndex.values())
-			{
-				try
-				{
-					this.modell.aenderePunkteVon(LebendigesObjektPunkteIndex.uebersetzeAusEffektIndex(index),
-							zuEntfernen.getWertAusBeschreibung(index));
-				} catch (IllegalArgumentException nichtMoeglich)
-				{
-					// Passiert, falls die momentane Aenderung durch den Effekt nicht in einem
-					// lebendigen Objekt gespeichert wird, dementsprechend ist dieser Index nicht in
-					// LebendigesObjektPunkteIndex aufgefuehrt
-					continue;
-				}
-			}
+			this.wendeEffektAufModellAn(zuEntfernen, true);
 		}
 	}
 
 	/**
-	 * Entfernt einen Effekt aus den registrierten Effekten dieses
+	 * Entfernt einen Effekt aus den registrierten Effekten dieses Objektes
+	 * 
+	 * @param zuEntfernen Der Objekt der entfernt werden soll
 	 */
 	public void entferneEffekt(Effekt zuEntfernen)
 	{
-		if (zuEntfernen != null && this.getModell().getEffekte().contains(zuEntfernen))
+		if ((zuEntfernen != null) && this.getModell().getEffekte().contains(zuEntfernen))
 		{
 			this.entferneAuswirkungenFallsTickend(zuEntfernen);
 			this.modell.entferneEffekt(zuEntfernen);
@@ -59,33 +65,6 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		this.modell.fuegeAktionHinzu(name.toLowerCase(), hinzufuegen);
 	}
 
-	protected void hatGetoetet(LebendigesObjekt opfer)
-	{
-		this.getModell().aenderePunkteVon(LebendigesObjektPunkteIndex.ERFAHRUNGSPUNKTE,
-				opfer.getAnzahlPunkteVon(LebendigesObjektPunkteIndex.ERFAHRUNGSPUNKTE_WERT));
-	}
-
-	/**
-	 * Generiert die Items die dieses lebendige Objekt zum Beispiel beim Sterben an
-	 * den Grund fuer dieses uebergibt.
-	 * 
-	 * @return Container, ein Container der die Gegenstaende enthaelt welche durch
-	 *         das Sterben von diesem Objekt "fallen gelassen" werden
-	 */
-	protected abstract Container generiereAuswurf();
-
-	/**
-	 * Wird aufgerufen wenn dieses Objekt auf Grund seines Statuses als "tot"
-	 * angesehen wird
-	 * 
-	 * @param verursacher Der Grund des Todes
-	 */
-	protected void sterben(LebendigesObjekt verursacher)
-	{
-		verursacher.hatGetoetet(this);
-
-	}
-
 	@Override
 	public boolean fuegeEffekteHinzu(SpielbrettObjekt verursacher, Effekt... hinzufuegen)
 	{
@@ -93,20 +72,22 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		{
 			for (Effekt effekt : hinzufuegen)
 			{
-				this.modell.fuegeEffektHinzu(effekt);
+				this.modell.fuegeEffektHinzu(effekt, verursacher);
 			}
 			// Ueberpruefen ob das lebendige Objekt auf Grund der Effekte gestorben ist
-			if (!this.istLebendig())
-			{
-				if (verursacher.istLebendig())
-				{
-					this.sterben((LebendigesObjekt) verursacher);
-				}
-			}
 			return true;
 		}
 		return false;
 	}
+
+	/**
+	 * Generiert die Items die dieses lebendige Objekt zum Beispiel beim Sterben an
+	 * den Grund fuer dieses uebergibt.
+	 *
+	 * @return Container, ein Container der die Gegenstaende enthaelt welche durch
+	 *         das Sterben von diesem Objekt "fallen gelassen" werden
+	 */
+	protected abstract Container generiereAuswurf();
 
 	public Aktion getAktionMitNamen(String name)
 	{
@@ -138,6 +119,13 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		return 1f;
 	}
 
+	@Override
+	public void hatGetoetet(LebendigesObjekt opfer)
+	{
+		this.getModell().aenderePunkteVon(LebendigesObjektPunkteIndex.ERFAHRUNGSPUNKTE,
+				opfer.getAnzahlPunkteVon(LebendigesObjektPunkteIndex.ERFAHRUNGSPUNKTE_WERT));
+	}
+
 	/*
 	 * @see de.pk.model.interaktion.Anzielbar#istGeschuetzt()
 	 */
@@ -152,6 +140,17 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	public boolean istLebendig()
 	{
 		return this.getModell().getAnzahlPunkteVon(LebendigesObjektPunkteIndex.LEBENS_PUNKTE) < 1;
+	}
+
+	/**
+	 * Wird aufgerufen wenn dieses Objekt auf Grund seines Statuses als "tot"
+	 * angesehen wird
+	 *
+	 * @param verursacher Der Grund des Todes
+	 */
+	protected void sterben(SpielbrettObjekt verursacher)
+	{
+		verursacher.hatGetoetet(this);
 	}
 
 	/**
@@ -170,28 +169,42 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		}
 		for (Effekt momentanerEffekt : this.modell.getEffekte())
 		{
-			// Hier wird geschaut ob ein Effekt tickend ist, also eine Aenderung bei dem
-			// Modell im naechsten Tick erzeugen soll, ist dies der Fall wird die durch ihn
-			// definierte Aenderung ausgefuehrt, sonst wird dem Effekt nur mitgeteilt, dass
-			// ein Schritt verstrichen ist
-			if (momentanerEffekt.istTickend())
-			{
-				this.wendeEffektAufModellAn(momentanerEffekt);
-			} else
-			{
-				momentanerEffekt.wurdeGewirkt();
-			}
+			this.updateMomentanenEffekt(momentanerEffekt);
 			if (momentanerEffekt.istAbgeklungen())
 			{
 				this.entferneEffekt(momentanerEffekt); // wenn der Effekt abgeklungen ist, wird er
 														// entfernt.
 			}
+			if (this.effektWarToedlich(momentanerEffekt))
+			{
+				break;
+			}
+		}
+	}
+
+	/**
+	 * Hier wird geschaut ob ein Effekt tickend ist, also eine Aenderung bei dem
+	 * Modell im naechsten Tick erzeugen soll, ist dies der Fall wird die durch ihn
+	 * definierte Aenderung ausgefuehrt, sonst wird dem Effekt nur mitgeteilt, dass
+	 * ein Schritt verstrichen ist.
+	 *
+	 * @param momentanerEffekt Der zu behandelne Effekt
+	 */
+	private void updateMomentanenEffekt(Effekt momentanerEffekt)
+	{
+		if (momentanerEffekt.istTickend())
+		{
+			this.wendeEffektAufModellAn(momentanerEffekt);
+
+		} else
+		{
+			momentanerEffekt.wurdeGewirkt();
 		}
 	}
 
 	/**
 	 * Wendet einen Effekt auf das Modell dieses Objektes an.
-	 * 
+	 *
 	 * @param zuAnwenden Der Effekt welcher auf das Modell angewendet werden soll
 	 */
 	private void wendeEffektAufModellAn(Effekt zuAnwenden)
@@ -212,6 +225,17 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 
 		}
 		zuAnwenden.wurdeGewirkt();
+	}
+
+	private void wendeEffektAufModellAn(Effekt zuAnwenden, boolean negiert)
+	{
+		if (negiert)
+		{
+			this.wendeEffektAufModellAn(zuAnwenden.getNegation());
+		} else
+		{
+			this.wendeEffektAufModellAn(zuAnwenden);
+		}
 	}
 
 }

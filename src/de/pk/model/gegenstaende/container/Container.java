@@ -36,6 +36,17 @@ public class Container
 	}
 
 	/**
+	 * Gibt die tatsaechliche momentane Groesse dieses Containers zurueck, nicht
+	 * jedoch die maximale Groesse.
+	 *
+	 * @return Die momentane Groesse dieses Containers
+	 */
+	public int getAnzahlInhalt()
+	{
+		return this.inhalt.size();
+	}
+
+	/**
 	 * Gibt den Inhalt bei gegebenem Index wieder
 	 *
 	 * @param bei Der Index
@@ -50,6 +61,16 @@ public class Container
 	}
 
 	/**
+	 * Fuegt einen GegenstandsHaufen an den ersten freien Platz hinzu.
+	 *
+	 * @param haufen Der hinzuzufuegende Haufen
+	 */
+	public void hinzufuegen(GegenstandsHaufen haufen)
+	{
+		this.hinzufuegen(haufen, this.inhalt.size());
+	}
+
+	/**
 	 * Fuegt den gegebenen GegenstandsHaufen bei gegebenem Index hinzu
 	 *
 	 * @param haufen Der hinzuzufuegende Haufen
@@ -59,27 +80,6 @@ public class Container
 	{
 		this.ueberpruefeIndex(bei, true);
 		this.inhalt.add(bei, haufen);
-	}
-
-	/**
-	 * Fuegt einen GegenstandsHaufen an den ersten freien Platz hinzu.
-	 * 
-	 * @param haufen Der hinzuzufuegende Haufen
-	 */
-	public void hinzufuegen(GegenstandsHaufen haufen)
-	{
-		this.hinzufuegen(haufen, this.inhalt.size());
-	}
-
-	/**
-	 * Gibt die tatsaechliche momentane Groesse dieses Containers zurueck, nicht
-	 * jedoch die maximale Groesse.
-	 * 
-	 * @return Die momentane Groesse dieses Containers
-	 */
-	public int getAnzahlInhalt()
-	{
-		return this.inhalt.size();
 	}
 
 	/**

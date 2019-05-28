@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import de.pk.control.gegenstaende.GegenstandsHaufen;
-import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
 import de.pk.model.faehigkeiten.Faehigkeit;
 import de.pk.model.gegenstaende.ausruestung.Accessoire;
 import de.pk.model.gegenstaende.ausruestung.Ruestung;
@@ -49,6 +48,19 @@ public class HeldModell extends LebendigesObjektModell
 		this.faehigkeiten.addAll(Arrays.asList(faehigkeiten));
 	}
 
+	public void fuegeZuInventarHinzu(Container hinzufuegen)
+	{
+		for (int i = 0; i < hinzufuegen.getAnzahlInhalt(); i++)
+		{
+			this.fuegeZuInventarHinzu(hinzufuegen.getInhalt(i));
+		}
+	}
+
+	public void fuegeZuInventarHinzu(GegenstandsHaufen hinzufuegen)
+	{
+		this.inventar.hinzufuegen(hinzufuegen);
+	}
+
 	public Map<Integer, Accessoire> getAccessoires()
 	{
 		return this.accessoires;
@@ -87,19 +99,6 @@ public class HeldModell extends LebendigesObjektModell
 	public void setWaffe(Waffe waffe)
 	{
 		this.waffe = waffe;
-	}
-
-	public void fuegeZuInventarHinzu(GegenstandsHaufen hinzufuegen)
-	{
-		this.inventar.hinzufuegen(hinzufuegen);
-	}
-
-	public void fuegeZuInventarHinzu(Container hinzufuegen)
-	{
-		for (int i = 0; i < hinzufuegen.getAnzahlInhalt(); i++)
-		{
-			this.fuegeZuInventarHinzu(hinzufuegen.getInhalt(i));
-		}
 	}
 
 }
