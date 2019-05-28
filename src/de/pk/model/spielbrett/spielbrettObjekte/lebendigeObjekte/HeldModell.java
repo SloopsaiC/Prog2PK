@@ -7,10 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-<<<<<<< HEAD
 import de.pk.control.gegenstaende.GegenstandsHaufen;
-=======
->>>>>>> refs/heads/Phillip
 import de.pk.model.faehigkeiten.Faehigkeit;
 import de.pk.model.gegenstaende.ausruestung.Accessoire;
 import de.pk.model.gegenstaende.ausruestung.Ruestung;
@@ -103,20 +100,4 @@ public class HeldModell extends LebendigesObjektModell
 	{
 		this.waffe = waffe;
 	}
-
-<<<<<<< HEAD
-=======
-	/**
-	 * Definiert das Sterben des Helden.
-	 *
-	 * @return das Inventar des toten Helden als Container
-	 */
-	@Override
-	public Container sterben()
-	{
-		this.sterbeZaehler++;
-		return this.inventar;
-	}
-
->>>>>>> refs/heads/Phillip
 }

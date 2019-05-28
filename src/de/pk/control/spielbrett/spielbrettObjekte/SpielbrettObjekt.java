@@ -1,6 +1,5 @@
 package de.pk.control.spielbrett.spielbrettObjekte;
 
-<<<<<<< HEAD
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
 
 /**
@@ -8,11 +7,8 @@ import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObj
  *
  * @author Mattheo
  */
-=======
->>>>>>> refs/heads/Phillip
 public abstract class SpielbrettObjekt
 {
-<<<<<<< HEAD
 	public abstract void hatGetoetet(LebendigesObjekt opfer);
 
 	/**
@@ -22,7 +18,9 @@ public abstract class SpielbrettObjekt
 	 *
 	 * @return true, dieses Objekt ist lebendig, sonst false
 	 */
-=======
->>>>>>> refs/heads/Phillip
-	public abstract boolean istLebendig();
+
+	public boolean istLebendig()
+	{
+		return false;
+	}
 }

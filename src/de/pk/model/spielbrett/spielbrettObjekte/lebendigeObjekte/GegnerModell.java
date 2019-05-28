@@ -35,15 +35,4 @@ public class GegnerModell extends LebendigesObjektModell
 		return this.hauDraufModifkator;
 	}
 
-	/**
-	 * Definert das Sterben des Gegners
-	 *
-	 * @return Den Auswurf (die Hinerlassenschaften) des Gegners als Container
-	 */
-	@Override
-	public Container sterben()
-	{
-		return this.generiereAuswurf();
-	}
-
 }

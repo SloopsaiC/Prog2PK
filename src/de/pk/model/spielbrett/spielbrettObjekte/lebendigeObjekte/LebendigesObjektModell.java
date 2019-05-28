@@ -5,11 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-<<<<<<< HEAD
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
-=======
 import de.pk.model.gegenstaende.container.Container;
->>>>>>> refs/heads/Phillip
 import de.pk.model.interaktion.aktionen.Aktion;
 import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjektModell;
@@ -101,22 +98,9 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 		return this.effekteMitVerursacher.get(effekt);
 	}
 
-	@Override
-	public boolean istLebendig()
-	{
-		return true;
-	}
-
 	public void setAnzahlPunkteVon(LebendigesObjektPunkteIndex index, int neuerWert)
 	{
 		this.punkte.replace(index, neuerWert);
 	}
-
-	/**
-	 * Definiert das Sterben eines Lebendigen Objekts
-	 *
-	 * @return Einen Container (Inventar/Gegenstaende) des Gestorbenen
-	 */
-	public abstract Container sterben();
 
 }

@@ -1,9 +1,9 @@
 package de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
+import de.pk.model.gegenstaende.container.Container;
 import de.pk.model.interaktion.Anzielbar;
 import de.pk.model.interaktion.aktionen.Aktion;
 import de.pk.model.interaktion.effekt.Effekt;
@@ -21,7 +21,6 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		this.modell = modell;
 	}
 
-<<<<<<< HEAD
 	/**
 	 * Prueft ob ein Effekt den Zustand dieses Objektes so veraendert hat, dass es
 	 * jetzt als "tot" angesehen werden soll. Falls dies so ist wird auch das
@@ -52,33 +51,11 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	 * 
 	 * @param zuEntfernen Der Objekt der entfernt werden soll
 	 */
-=======
->>>>>>> refs/heads/Phillip
 	public void entferneEffekt(Effekt zuEntfernen)
 	{
-<<<<<<< HEAD
 		if ((zuEntfernen != null) && this.getModell().getEffekte().contains(zuEntfernen))
-=======
-		if (zuEntfernen != null)
->>>>>>> refs/heads/Phillip
 		{
-			if (!zuEntfernen.istTickend())
-			{
-				for (EffektBeschreibungsIndex index : EffektBeschreibungsIndex.values())
-				{
-					try
-					{
-						this.modell.aenderePunkteVon(LebendigesObjektPunkteIndex.uebersetzeAusEffektIndex(index),
-								zuEntfernen.getWertAusBeschreibung(index));
-					} catch (IllegalArgumentException nichtMoeglich)
-					{
-						// Passiert, falls die momentane Aenderung durch den Effekt nicht in einem
-						// lebendigen Objekt gespeichert wird, dementsprechend ist dieser Index nicht in
-						// LebendigesObjektPunkteIndex aufgefuehrt
-						continue;
-					}
-				}
-			}
+			this.entferneAuswirkungenFallsTickend(zuEntfernen);
 			this.modell.entferneEffekt(zuEntfernen);
 		}
 	}
@@ -88,18 +65,6 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		this.modell.fuegeAktionHinzu(name.toLowerCase(), hinzufuegen);
 	}
 
-<<<<<<< HEAD
-=======
-	private void hatGetoetet(LebendigesObjekt opfer)
-	{
-		this.getModell().aenderePunkteVon(LebendigesObjektPunkteIndex.ERFAHRUNGSPUNKTE,
-				opfer.getAnzahlPunkteVon(LebendigesObjektPunkteIndex.ERFAHRUNGSPUNKTE_WERT));
-		// Hier sollten am besten noch die Drops integriert werden mache ich morgen und
-		// so
-		// TODO
-	}
-
->>>>>>> refs/heads/Phillip
 	@Override
 	public boolean fuegeEffekteHinzu(SpielbrettObjekt verursacher, Effekt... hinzufuegen)
 	{
@@ -109,23 +74,11 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 			{
 				this.modell.fuegeEffektHinzu(effekt, verursacher);
 			}
-<<<<<<< HEAD
-			// Ueberpruefen ob das lebendige Objekt auf Grund der Effekte gestorben ist
-=======
-			if (this.istTot())
-			{
-				if (verursacher.istLebendig())
-				{
-					((LebendigesObjekt) verursacher).hatGetoetet(this);
-				}
-			}
->>>>>>> refs/heads/Phillip
 			return true;
 		}
 		return false;
 	}
 
-<<<<<<< HEAD
 	/**
 	 * Generiert die Items die dieses lebendige Objekt zum Beispiel beim Sterben an
 	 * den Grund fuer dieses uebergibt.
@@ -134,26 +87,6 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	 *         das Sterben von diesem Objekt "fallen gelassen" werden
 	 */
 	protected abstract Container generiereAuswurf();
-=======
-	public boolean istTot()
-	{
-		return this.getModell().getAnzahlPunkteVon(LebendigesObjektPunkteIndex.LEBENS_PUNKTE) < 1;
-	}
-
-	/**
-	 * Filtert aus einer Liste mit Effekten alle tickenden Effekte heraus.
-	 *
-	 * @param ausgangsListe Die Liste aus der gefiltert werden soll
-	 *
-	 * @return Eine Liste mit allen tickenden Effekten aus der Ausgangsliste
-	 */
-	private ArrayList<Effekt> generiereListeVonTickendenEffektenAus(ArrayList<Effekt> ausgangsListe)
-	{
-		ArrayList<Effekt> tickendeEffekte = new ArrayList<>(ausgangsListe);
-		tickendeEffekte.removeIf(e -> !e.istTickend());
-		return tickendeEffekte;
-	}
->>>>>>> refs/heads/Phillip
 
 	public Aktion getAktionMitNamen(String name)
 	{
@@ -198,17 +131,13 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	@Override
 	public boolean istGeschuetzt()
 	{
-		if (this.getModell().getAnzahlPunkteVon(LebendigesObjektPunkteIndex.IST_GESCHUETZT) > 0)
-		{
-			return true;
-		}
-		return false;
+		return this.getModell().getAnzahlPunkteVon(LebendigesObjektPunkteIndex.IST_GESCHUETZT) > 0;
 	}
 
 	@Override
 	public boolean istLebendig()
 	{
-		return true;
+		return this.getModell().getAnzahlPunkteVon(LebendigesObjektPunkteIndex.LEBENS_PUNKTE) < 1;
 	}
 
 	/**
@@ -231,17 +160,10 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	 */
 	public void update()
 	{
-		for (Effekt momentanerEffekt : this.generiereListeVonTickendenEffektenAus(this.modell.getEffekte()))
-		{
-<<<<<<< HEAD
-			return;
-		}
 		for (Effekt momentanerEffekt : this.modell.getEffekte())
 		{
 			this.updateMomentanenEffekt(momentanerEffekt);
-=======
 			this.wendeEffektAufModellAn(momentanerEffekt);
->>>>>>> refs/heads/Phillip
 			if (momentanerEffekt.istAbgeklungen())
 			{
 				this.modell.getEffekte().remove(momentanerEffekt); // wenn der Effekt abgeklungen ist, wird er
