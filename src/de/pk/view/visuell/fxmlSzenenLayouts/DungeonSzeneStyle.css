@@ -13,7 +13,7 @@
 }
 
 
-#pauseMenueDialogPane {
+#pauseMenueDialogPane, #questLogSplitPane {
 	-fx-background-color: rgba(0.0,0.0,0.0,0.6);
 }
 
@@ -28,13 +28,10 @@
    -fx-background-color: transparent;
 }
 
-#questLogSpiltPane .split-pane-divider {
+#questLogSplitPane .split-pane-divider {
 	-fx-background-color: rgba(100.0,100.0,100.0,0.6);
 }
 
-#questLogSpiltPane {
-	-fx-background-color: rgba(0.0,0.0,0.0,0.6);
-}
 
 
 

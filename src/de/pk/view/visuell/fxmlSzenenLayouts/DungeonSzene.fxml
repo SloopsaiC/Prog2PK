@@ -1440,9 +1440,7 @@
 									maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
 									prefWidth="180.0" visible="false">
 									<header>
-										<SplitPane id="questLogSpiltPane"
-											dividerPositions="0.2" minHeight="-Infinity"
-											orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+										<SplitPane id="questLogSplitPane" dividerPositions="0.2" minHeight="-Infinity" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
 											<items>
 												<VBox alignment="CENTER"
 													SplitPane.resizableWithParent="false">
