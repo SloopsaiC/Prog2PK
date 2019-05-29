@@ -142,16 +142,18 @@ public class DungeonSzeneController implements Initializable
 	 */
 	private double oldY = 0;
 
+
 	/**
 	 * Wird aufergurfen, wenn der aktionButton1Pressed aufgerufen wird.
 	 *
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void aktionButton1Pressed(ActionEvent event)
+	public void aktionButton1Pressed (ActionEvent event)
 	{
-
+		//
 	}
+
 
 	/**
 	 * Wird aufergurfen, wenn der aktionButton2Pressed aufgerufen wird.
@@ -159,10 +161,11 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void aktionButton2Pressed(ActionEvent event)
+	public void aktionButton2Pressed (ActionEvent event)
 	{
 		//
 	}
+
 
 	/**
 	 * Wird aufergurfen, wenn der aktionButton3Pressed aufgerufen wird.
@@ -170,10 +173,11 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void aktionButton3Pressed(ActionEvent event)
+	public void aktionButton3Pressed (ActionEvent event)
 	{
 		//
 	}
+
 
 	/**
 	 * Wird aufergurfen, wenn der aktionButton4Pressed aufgerufen wird.
@@ -181,10 +185,11 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void aktionButton4Pressed(ActionEvent event)
+	public void aktionButton4Pressed (ActionEvent event)
 	{
 		//
 	}
+
 
 	/**
 	 * Wird aufergurfen, wenn der dungeonMenueButton1Pressed aufgerufen wird.
@@ -192,10 +197,11 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void dungeonMenueButton1Pressed(ActionEvent event)
+	public void dungeonMenueButton1Pressed (ActionEvent event)
 	{
 		//
 	}
+
 
 	/**
 	 * Wird aufergurfen, wenn der dungeonMenueButton2Pressed aufgerufen wird.
@@ -203,10 +209,11 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void dungeonMenueButton2Pressed(ActionEvent event)
+	public void dungeonMenueButton2Pressed (ActionEvent event)
 	{
 		//
 	}
+
 
 	/**
 	 * Wird aufergurfen, wenn der dungeonMenueButton3Pressed aufgerufen wird.
@@ -214,10 +221,11 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void dungeonMenueButton3Pressed(ActionEvent event)
+	public void dungeonMenueButton3Pressed (ActionEvent event)
 	{
 		this.pauseMenueDialogPane.setVisible(true);
 	}
+
 
 	/**
 	 * Wird aufergurfen, wenn der heldenInventarButton1Pressed aufgerufen wird.
@@ -225,10 +233,11 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void heldenInventarButton1Pressed(ActionEvent event)
+	public void heldenInventarButton1Pressed (ActionEvent event)
 	{
 		//
 	}
+
 
 	/**
 	 * Wird aufergurfen, wenn der heldenInventarButton2Pressed aufgerufen wird.
@@ -236,9 +245,10 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void heldenInventarButton2Pressed(ActionEvent event)
+	public void heldenInventarButton2Pressed (ActionEvent event)
 	{//
 	}
+
 
 	/**
 	 * Wird aufergurfen, wenn der heldenInventarButton3Pressed aufgerufen wird.
@@ -246,10 +256,11 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void heldenInventarButton3Pressed(ActionEvent event)
+	public void heldenInventarButton3Pressed (ActionEvent event)
 	{
 		//
 	}
+
 
 	/**
 	 * Wird aufergurfen, wenn der heldenInventarButton4Pressed aufgerufen wird.
@@ -257,19 +268,21 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void heldenInventarButton4Pressed(ActionEvent event)
+	public void heldenInventarButton4Pressed (ActionEvent event)
 	{
 		//
 	}
+
 
 	/**
 	 * Wird zu Beginn aufgerufen, um gewisse Komponenten zu initialisieren.
 	 */
 	@Override
-	public void initialize(URL location, ResourceBundle resources)
+	public void initialize (URL location, ResourceBundle resources)
 	{
 		//
 	}
+
 
 	/**
 	 * Wird aufgerufen, wenn mit der Maus ins Fenster geklickt wurde.
@@ -277,11 +290,12 @@ public class DungeonSzeneController implements Initializable
 	 * @param event MouseEvent des Mausklicks
 	 */
 	@FXML
-	public void kartenGridPaneMouseClicked(MouseEvent event)
+	public void kartenGridPaneMouseClicked (MouseEvent event)
 	{
 		this.oldX = event.getX();
 		this.oldY = event.getY();
 	}
+
 
 	/**
 	 * Wird aufgerufen, wenn eine Maustaste heruntergedrueckt ist und die Maus dabei
@@ -290,7 +304,7 @@ public class DungeonSzeneController implements Initializable
 	 * @param event MouseEvent des Bewegens der gedrueckten Maus
 	 */
 	@FXML
-	public void kartenGridPaneMouseDragged(MouseEvent event)
+	public void kartenGridPaneMouseDragged (MouseEvent event)
 	{
 		this.kartenGridPane.setTranslateX(this.kartenGridPane.getTranslateX() + ((event.getX() - this.oldX) / 2));
 		this.oldX = event.getX();
@@ -298,13 +312,14 @@ public class DungeonSzeneController implements Initializable
 		this.oldY = event.getY();
 	}
 
+
 	/**
 	 * Wird Aufgerufen, wenn mit dem Mausrad im Fenster "gescroolt" wird.
 	 *
 	 * @param event ScrollEvent des Mausraddrehens
 	 */
 	@FXML
-	public void kartenGridPaneScroll(ScrollEvent event)
+	public void kartenGridPaneScroll (ScrollEvent event)
 	{
 		// Ein skalierungsFaktor wird je nach Mausrad-Drehrichtung ausgewahlt.
 		double skalierungsFaktor = 1;
@@ -321,17 +336,19 @@ public class DungeonSzeneController implements Initializable
 		this.kartenGridPane.setScaleY(this.kartenGridPane.getScaleY() * skalierungsFaktor);
 	}
 
+
 	/**
 	 * Wird aufergurfen, wenn der pauseMenueBeendenButtonPressed aufgerufen wird.
 	 *
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void pauseMenueBeendenButtonPressed(ActionEvent event)
+	public void pauseMenueBeendenButtonPressed (ActionEvent event)
 	{
 		this.pauseMenueDialogPane.setVisible(false);
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
 	}
+
 
 	/**
 	 * Wird aufergurfen, wenn der pauseMenueZurueckButtonPressed aufgerufen wird.
@@ -339,10 +356,11 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void pauseMenueZurueckButtonPressed(ActionEvent event)
+	public void pauseMenueZurueckButtonPressed (ActionEvent event)
 	{
 		this.pauseMenueDialogPane.setVisible(false);
 	}
+
 
 	/**
 	 * Wird aufgerufen, wenn der questLogButton gedrueckt wurde und entscheidet je
@@ -352,7 +370,7 @@ public class DungeonSzeneController implements Initializable
 	 * @param event ActionEvent fuer das Druecken des Buttons
 	 */
 	@FXML
-	public void questLogButtonPressed(ActionEvent event)
+	public void questLogButtonPressed (ActionEvent event)
 	{
 		if (this.questLogButton.isSelected())
 		{
