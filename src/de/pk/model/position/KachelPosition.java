@@ -29,7 +29,7 @@ public class KachelPosition implements Anzielbar
 			throw new IllegalArgumentException(AusnahmeNachrichten.KACHEL_POSITION_NICHT_GUELTIGE_POSITION);
 		}
 		this.kachel = kachel;
-		this.positionAufDerKachel = positionAufDerKachel;
+		this.positionAufDerKachel = positionAufDerKachel; //
 	}
 
 	@Override
