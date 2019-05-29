@@ -16,7 +16,7 @@ public interface Anzielbar
 	 * @param verursacher Der Verursacher dieses Effektes
 	 * @param hinzufuegen Alle Effekte die diesem Ziel hinzugefuegt werden sollen
 	 */
-	boolean fuegeEffekteHinzu(SpielbrettObjekt verursacher, Effekt... hinzufuegen);
+	void fuegeEffekteHinzu(SpielbrettObjekt verursacher, Effekt... hinzufuegen);
 
 	/**
 	 * Berechnet die Trefferwahrscheinlichkeit auf ein bestimmtes Ziel.

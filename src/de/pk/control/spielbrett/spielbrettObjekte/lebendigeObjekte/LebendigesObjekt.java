@@ -32,13 +32,13 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	{
 		if (!this.istLebendig())
 		{
-			this.sterben(this.modell.getVerursacherVonEffekt(zuUeberpruefen));
+			this.sterben(this.getModell().getVerursacherVonEffekt(zuUeberpruefen));
 			return true;
 		}
 		return false;
 	}
 
-	private void entferneAuswirkungenFallsTickend(Effekt zuEntfernen)
+	private void entferneAuswirkungenFallsNichtTickend(Effekt zuEntfernen)
 	{
 		if (!zuEntfernen.istTickend())
 		{
@@ -47,7 +47,8 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	}
 
 	/**
-	 * Entfernt einen Effekt aus den registrierten Effekten dieses Objektes
+	 * Entfernt einen Effekt aus den registrierten Effekten dieses Objektes und
+	 * macht seine Wirkung rueckgaengig falls der Effekt nicht "tickend" ist
 	 *
 	 * @param zuEntfernen Der Objekt der entfernt werden soll
 	 */
@@ -55,28 +56,26 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	{
 		if ((zuEntfernen != null) && this.getModell().getEffekte().contains(zuEntfernen))
 		{
-			this.entferneAuswirkungenFallsTickend(zuEntfernen);
-			this.modell.entferneEffekt(zuEntfernen);
+			this.entferneAuswirkungenFallsNichtTickend(zuEntfernen);
+			this.getModell().entferneEffekt(zuEntfernen);
 		}
 	}
 
 	public void fuegeAktionHinzu(String name, Aktion hinzufuegen)
 	{
-		this.modell.fuegeAktionHinzu(name.toLowerCase(), hinzufuegen);
+		this.getModell().fuegeAktionHinzu(name.toLowerCase(), hinzufuegen);
 	}
 
 	@Override
-	public boolean fuegeEffekteHinzu(SpielbrettObjekt verursacher, Effekt... hinzufuegen)
+	public void fuegeEffekteHinzu(SpielbrettObjekt verursacher, Effekt... hinzufuegen)
 	{
 		if (hinzufuegen != null)
 		{
 			for (Effekt effekt : hinzufuegen)
 			{
-				this.modell.fuegeEffektHinzu(effekt, verursacher);
+				this.getModell().fuegeEffektHinzu(effekt, verursacher);
 			}
-			return true;
 		}
-		return false;
 	}
 
 	/**
@@ -95,7 +94,7 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 
 	public Set<String> getAktionsNamen()
 	{
-		return this.modell.getAktionen().keySet();
+		return this.getModell().getAktionen().keySet();
 	}
 
 	public int getAnzahlPunkteVon(LebendigesObjektPunkteIndex index)
@@ -165,8 +164,7 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 			this.updateMomentanenEffekt(momentanerEffekt);
 			if (momentanerEffekt.istAbgeklungen())
 			{
-				this.modell.getEffekte().remove(momentanerEffekt); // wenn der Effekt abgeklungen ist, wird er
-																	// entfernt.
+				this.entferneEffekt(momentanerEffekt);// wenn der Effekt abgeklungen ist, wird er entfernt
 			}
 			if (this.effektWarToedlich(momentanerEffekt))
 			{
@@ -208,8 +206,7 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 					.uebersetzeAusLebendigesObjektPunkteIndex(index);
 			if (effektBeschreibung != null)
 			{
-				this.modell.aenderePunkteVon(index, zuAnwenden.getWertAusBeschreibung(
-						EffektBeschreibungsIndex.uebersetzeAusLebendigesObjektPunkteIndex(index)));
+				this.modell.aenderePunkteVon(index, zuAnwenden.getWertAusBeschreibung(effektBeschreibung));
 			}
 		}
 		zuAnwenden.wurdeGewirkt();

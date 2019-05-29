@@ -7,6 +7,7 @@ import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.interaktion.effekt.EffektTyp;
 import de.pk.model.karte.generator.Richtung;
 import de.pk.model.spielbrett.Kachel;
+import de.pk.utils.AusnahmeNachrichten;
 import de.pk.utils.Spielkonstanten;
 
 public class KachelPosition implements Anzielbar
@@ -25,24 +26,22 @@ public class KachelPosition implements Anzielbar
 	{
 		if (!KachelPosition.ueberpruefePosition(positionAufDerKachel))
 		{
-			// TODO: Exception Messages
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(AusnahmeNachrichten.KACHEL_POSITION_NICHT_GUELTIGE_POSITION);
 		}
 		this.kachel = kachel;
 		this.positionAufDerKachel = positionAufDerKachel;
 	}
 
 	@Override
-	public boolean fuegeEffekteHinzu(SpielbrettObjekt verursacher, Effekt... hinzufuegen)
+	public void fuegeEffekteHinzu(SpielbrettObjekt verursacher, Effekt... hinzufuegen)
 	{
 		// Eine Kachel kann keinen Effekt haben, sie sorgt dafuer dass der Verursacher
 		// dieses Effektes hier her bewegt wird.
 		if (hinzufuegen[0].getTyp() != EffektTyp.BEWEGUNG)
 		{
-			return false;
+			throw new IllegalArgumentException(AusnahmeNachrichten.KACHEL_POSITION_NICHT_GUELTIGES_ZIEL_FUER_EFFEKT);
 		}
 		Anwendung.getInstanz().getAktivesSpiel().getAktiverDungeon().getSpielbrett().bewege(verursacher, this);
-		return true;
 	}
 
 	/**

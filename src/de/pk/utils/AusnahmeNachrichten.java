@@ -17,6 +17,10 @@ public class AusnahmeNachrichten
 
 	public static final String WUERFEL_NICHT_GUELTIGER_LISTENER = "Der Listener ist nicht gueltig";
 
+	public static final String KACHEL_POSITION_NICHT_GUELTIGES_ZIEL_FUER_EFFEKT = "Kachel Positionen koennen nur von Bewegungseffekten angezielt werden";
+
+	public static final String KACHEL_POSITION_NICHT_GUELTIGE_POSITION = "Diese Position ist nicht gueltig, liegt also vermutlich nicht auf der Kachel bzw. Spielbrett";
+
 	/**
 	 * Versteckter default Konstruktor, da eine Konstantenklasse nicht instanziiert
 	 * werden sollte.

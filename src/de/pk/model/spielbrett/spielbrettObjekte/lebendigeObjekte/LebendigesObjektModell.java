@@ -80,6 +80,10 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 
 	public int getAnzahlPunkteVon(LebendigesObjektPunkteIndex index)
 	{
+		if (this.punkte.get(index) == null)
+		{
+			return 0;
+		}
 		return this.punkte.get(index);
 	}
 
