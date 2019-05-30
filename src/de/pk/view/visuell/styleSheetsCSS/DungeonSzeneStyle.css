@@ -1,0 +1,142 @@
+.dungeon-pane {
+	-fx-background-image: url("../../../ressourcen/bildDateien/sonstigeBilder/dungeonbackground.png");
+ 	-fx-background-position: left top;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, stretch;
+}
+
+.dungeon-grid-pane {
+	-fx-background-image: url("../../../ressourcen/bildDateien/sonstigeBilder/ingameborder.png");
+ 	-fx-background-position: left top;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: stretch;
+}
+
+
+#pauseMenueDialogPane, #questLogSplitPane {
+	-fx-background-color: rgba(0.0,0.0,0.0,0.6);
+}
+
+#questLogDialogPane {
+	-fx-background-color: transparent;
+}
+
+
+
+
+.split-pane, .split-pane > .split-pane-divider {
+   -fx-background-color: transparent;
+}
+
+#questLogSplitPane .split-pane-divider {
+	-fx-background-color: rgba(100.0,100.0,100.0,0.6);
+}
+
+
+
+
+
+.label {
+	-fx-text-fill: white;
+}
+
+#dungeonNameLabel {
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+}
+
+#levelLabel {
+	-fx-text-fill: rgb(200,200,200);
+}
+
+
+.kachelUntergrundPane {
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover;
+	-fx-background-image: url("../../../ressourcen/bildDateien/kachelUntergruende/2_SCHWER.png"); 
+}
+
+
+
+.button, .toggle-button, .choice-box   {
+	-fx-color: rgba(0.0,0.0,0.0,0.4);
+}
+
+.button:hover , .toggle-button:hover, .choice-box:hover {
+	-fx-color: rgba(0.0,0.0,0.0,0.6);
+}
+
+.button:pressed, .toggle-button:selected, .choice-box:pressed  {
+	-fx-color: rgba(50.0,0.0,0.0,0.6);
+}
+
+
+.image-button {
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover;
+	-fx-background-image: url("../../../ressourcen/bildDateien/labelIcons/Star.png"); 
+}
+
+.image-button:hover {
+	-fx-opacity: 0.5;
+}
+
+.image-button:pressed {
+	-fx-opacity: 0.25;
+}
+
+
+#dungeonMenueButton1 {	
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/Info_BTN.png"); 
+}
+
+#dungeonMenueButton2 {
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/Settings_BTN.png"); 
+}
+
+#dungeonMenueButton3 {
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/Pause_BTN.png"); 
+}
+
+
+#questLogButton {
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/Menu_BTN.png"); 
+}
+
+
+
+
+.progress-indicator .indicator {
+	-fx-background-color: rgba(20.0,20.0,20.0,0.5);
+}
+
+.progress-indicator .percentage {
+	-fx-fill:null; 
+}
+
+.progress-indicator .tick {
+	-fx-background-color: transparent;
+}
+
+
+#lebensPunkteIndikator .progress, #lebensPunkteIndikatorKlein .bar {
+	-fx-background-color: rgb(100.0,10.0,10.0);
+}
+
+#spezielleFaehigkeitIndikator .progress, #spezielleFaehigkeitIndikatorKlein .bar {
+	-fx-background-color: rgb(10.0,100.0,10.0);
+}
+
+
+.progress-bar .track {
+	-fx-background-color: rgba(50.0,50.0,50.0,0.5);
+}
+
+.progress-bar .bar {
+	-fx-background-color: rgb(0.0,50.0,120.0);
+}
+
+
+

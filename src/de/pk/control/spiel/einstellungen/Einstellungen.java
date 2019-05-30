@@ -1,5 +1,11 @@
 package de.pk.control.spiel.einstellungen;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import de.pk.utils.Spielkonstanten;
+import de.pk.view.visuell.AnwendungFX;
+
 /**
  *
  *
@@ -22,6 +28,11 @@ public class Einstellungen
 	 */
 	public static final Aufloesung STANDARD_AUFLOESUNG = Aufloesung.FULL_HD;
 
+	public static final Sprache STANDARD_SPRACHE = Sprache.de;
+
+	private Aufloesung anwendungsAufloesung = Einstellungen.STANDARD_AUFLOESUNG;
+	private Sprache anwendungsSprache = Einstellungen.STANDARD_SPRACHE;
+
 	/**
 	 * Gibt die Instanz der Einstellungs-Klasse zurueck.
 	 *
@@ -31,8 +42,6 @@ public class Einstellungen
 	{
 		return EinstellungsBehaelter.EINSTELLUNGEN;
 	}
-
-	private Aufloesung anwendungsAufloesung = Einstellungen.STANDARD_AUFLOESUNG;
 
 	private Einstellungen()
 	{
@@ -46,6 +55,18 @@ public class Einstellungen
 	public void setAnwendungsAufloesung(Aufloesung anwendungsAufloesung)
 	{
 		this.anwendungsAufloesung = anwendungsAufloesung;
+	}
+
+	public Sprache getAnwendungsSprache()
+	{
+		return this.anwendungsSprache;
+	}
+
+	public void setAnwendungsSprache(Sprache anwendungsSprache)
+	{
+		this.anwendungsSprache = anwendungsSprache;
+		AnwendungFX.aktualisiereSzenenSprache(
+				ResourceBundle.getBundle(Spielkonstanten.LOKALISIERUNG_PFAD, new Locale(anwendungsSprache.toString())));
 	}
 
 }

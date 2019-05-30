@@ -5,8 +5,8 @@ import de.pk.control.spiel.Dungeon;
 import de.pk.control.spiel.Spiel;
 import de.pk.control.spiel.einstellungen.Einstellungen;
 import de.pk.utils.Spielkonstanten;
-import de.pk.utils.lokalisierung.DE_de;
-import de.pk.view.visuell.fxmlSzenenLayouts.AnwendungFX;
+import de.pk.utils.lokalisierung.LokalisierungsKeys;
+import de.pk.view.visuell.AnwendungFX;
 
 /**
  * Die Anwendung verwaltet die Auswahl eines Spielstandes, die Bearbeitung von
@@ -65,8 +65,8 @@ public class Anwendung
 	 */
 	private void neuesSpiel()
 	{
-		Weltkarte weltkarte = new Weltkarte(new Dungeon(DE_de.TESTAUSGABE_DUNGEON_NAME[0]),
-				new Dungeon(DE_de.TESTAUSGABE_DUNGEON_NAME[1]));
+		Weltkarte weltkarte = new Weltkarte(new Dungeon(LokalisierungsKeys.TESTAUSGABE_DUNGEON_NAME[0]),
+				new Dungeon(LokalisierungsKeys.TESTAUSGABE_DUNGEON_NAME[1]));
 		this.aktivesSpiel = new Spiel(weltkarte, Spielkonstanten.STANDARD_HELDEN);
 	}
 

@@ -1,0 +1,119 @@
+.menue-pane, .credits-pane, .schwierigkeit-pane, .weltkarte-pane {
+ 	-fx-background-position: left top;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover;
+}
+
+.menue-pane {
+	-fx-background-image: url("../../../ressourcen/bildDateien/gifs/menue.gif"); }
+
+.credits-pane {
+	-fx-background-image: url("../../../ressourcen/bildDateien/gifs/credits.gif");
+}
+
+.schwierigkeit-pane {
+	-fx-background-image: url("../../../ressourcen/bildDateien/sonstigeBilder/rocks.png");
+}
+
+.weltkarte-pane {
+	-fx-background-image: url("../../../ressourcen/bildDateien/sonstigeBilder/Weltkarte.jpg");
+}
+
+
+
+.label, .button, .toggle-button, .choice-box {
+	-fx-text-fill: white;
+	-fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, rgb(200,200.0,200.0));
+}
+
+
+.ueberschriften-label {
+	-fx-font-weight: bold;
+}
+
+
+
+.choice-box .context-menu {
+	-fx-background-color: rgba(0.0,0.0,0.0,0.8);
+}
+
+#choice-box-menu-item:focused  {  
+ 	-fx-background-color: rgba(50.0,0.0,0.0,0.6);
+}  
+
+
+
+.button, .toggle-button, .choice-box   {
+	-fx-background-color: rgba(0.0,0.0,0.0,0.4), 
+		linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(200,200,200,0,5));
+   	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 0, 1);
+}
+
+.button:hover , .toggle-button:hover, .choice-box:hover {
+	-fx-background-color:  rgba(0.0,0.0,0.0,0.4);
+}
+
+.button:pressed, .toggle-button:selected, .choice-box:pressed  {
+	-fx-background-color:  rgba(50.0,0.0,0.0,0.6);
+}
+
+
+.image-button {
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover;
+}
+
+.image-button:hover {
+	-fx-background-color: transparent;
+	-fx-opacity: 0.5;
+}
+
+.image-button:pressed {
+	-fx-background-color: transparent;
+	-fx-opacity: 0.25;
+}
+
+#neulingButton {	
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/1.png"); 
+}
+
+#dickkopfButton {	
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/12.png"); 
+}
+
+#draufgaengerButton {	
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/35.png"); 
+}
+
+#blutduersterButton {	
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/40.png"); 
+}
+
+
+#dungeon1Button {	
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/7.png"); 
+}
+
+#dungeon2Button {	
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/3.png"); 
+}
+
+#dungeon3Button {	
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/3.png"); 
+}
+
+#dungeon4Button {	
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/2.png"); 
+}
+
+#dungeon5Button {	
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/6.png"); 
+}
+
+
+
+

@@ -1,0 +1,20 @@
+.menue-pane, .dungeon-pane {
+	-fx-pref-width: 682.0;
+	-fx-pref-height: 384.0;
+} 
+
+
+.label, .choice-box, .button, .toggle-button   {
+	-fx-font-size: 10.0;
+	-fx-background-insets: 1.0;
+}
+
+.button, .toggle-button   {
+	-fx-padding: 8.0 15.0 8.0 15.0;
+	-fx-background-radius: 3.0;
+}
+
+
+.ueberschriften-label {
+	-fx-font-size: 15.0;
+}
