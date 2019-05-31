@@ -110,6 +110,7 @@ public class OptionenSzeneController implements Initializable, Lokalisierbar
 			}
 
 		});
+		// TODO Sound Volume anbinden
 		// this.soundVolumeSlider.setValue();
 		this.soundVolumeSlider.valueProperty().addListener(new ChangeListener<Number>()
 		{

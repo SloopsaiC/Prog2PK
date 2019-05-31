@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<fx:root type="javafx.scene.layout.VBox" spacing="10.0"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<!-- fx:controller="de.pk.view.visuell.customControls.heldenStatusAnzeige.HeldenStatusAnzeige"> -->
+	<stylesheets>
+		<URL value="@HeldenStatusAnzeige.css" />
+	</stylesheets>
+	<children>
+		<HBox fx:id="heldenStatusAnzeigeHBox1" spacing="2.0">
+			<children>
+				<StackPane alignment="TOP_CENTER" opacity="0.95">
+					<children>
+						<Circle fill="#173440da" radius="42.0" stroke="BLACK"
+							strokeType="INSIDE" />
+						<Label id="heldenAvatarLabel1" fx:id="heldenAvatarLabel1"
+							alignment="CENTER" contentDisplay="GRAPHIC_ONLY"
+							focusTraversable="false" graphicTextGap="0.0"
+							maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+							minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0"
+							styleClass="image-label" textAlignment="CENTER"
+							StackPane.alignment="TOP_CENTER" />
+					</children>
+				</StackPane>
+				<VBox alignment="BOTTOM_CENTER" spacing="3.0">
+					<children>
+						<ProgressBar id="lebensPunkteIndikatorKlein"
+							fx:id="kleineLebensPunkteAnzeigeProgressBar1" prefWidth="50.0"
+							progress="0.62" />
+						<ProgressBar id="spezielleFaehigkeitIndikatorKlein"
+							fx:id="kleineSpezialFaehigkeitsAnzeigeProgressBar1"
+							prefWidth="50.0" progress="0.31" />
+						<Label id="aktuellerHeldenModusLabel1"
+							fx:id="aktuellerHeldenModusLabel1" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+							graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity"
+							minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0"
+							prefWidth="40.0" styleClass="image-label" textAlignment="CENTER" />
+					</children>
+				</VBox>
+				<VBox alignment="BOTTOM_CENTER" spacing="3.0">
+					<children>
+						<Label id="verbleibendePhasenLabel1"
+							fx:id="verbleibendePhasenLabel1" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+							graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity"
+							minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
+							prefWidth="25.0" styleClass="image-label" textAlignment="CENTER" />
+						<Label id="verbleibendePhasenLabel2"
+							fx:id="verbleibendePhasenLabel2" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+							graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity"
+							minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
+							prefWidth="25.0" styleClass="image-label" textAlignment="CENTER" />
+						<Label id="verbleibendePhasenLabel3"
+							fx:id="verbleibendePhasenLabel3" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+							graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity"
+							minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
+							prefWidth="25.0" styleClass="image-label" textAlignment="CENTER" />
+					</children>
+				</VBox>
+			</children>
+			<VBox.margin>
+				<Insets bottom="5.0" />
+			</VBox.margin>
+		</HBox>
+		<HBox fx:id="heldenStatusAnzeigeHBox2" spacing="1.0">
+			<children>
+				<StackPane alignment="TOP_CENTER" opacity="0.95">
+					<children>
+						<Circle fill="#173440da" radius="31.0" stroke="BLACK"
+							strokeType="INSIDE" />
+						<Label id="heldenAvatarLabel2" fx:id="heldenAvatarLabel2"
+							alignment="CENTER" contentDisplay="GRAPHIC_ONLY"
+							focusTraversable="false" graphicTextGap="0.0"
+							maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+							minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0"
+							styleClass="image-label" textAlignment="CENTER" />
+					</children>
+				</StackPane>
+				<VBox alignment="TOP_CENTER" spacing="3.0">
+					<children>
+						<ProgressBar id="lebensPunkteIndikatorKlein"
+							fx:id="kleineLebensPunkteAnzeigeProgressBar2" prefHeight="15.0"
+							prefWidth="40.0" progress="0.62"
+							styleClass="lebens-punkte-Indikator-klein" />
+						<ProgressBar id="spezielleFaehigkeitIndikatorKlein"
+							fx:id="kleineSpezialFaehigkeitsAnzeigeProgressBar2"
+							prefHeight="15.0" prefWidth="40.0" progress="0.31" />
+						<Label id="aktuellerHeldenModusLabel2"
+							fx:id="aktuellerHeldenModusLabel2" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+							graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity"
+							minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0"
+							prefWidth="30.0" styleClass="image-label" textAlignment="CENTER" />
+					</children>
+				</VBox>
+			</children>
+		</HBox>
+		<HBox fx:id="heldenStatusAnzeigeHBox3" spacing="1.0">
+			<children>
+				<StackPane alignment="TOP_CENTER" opacity="0.95">
+					<children>
+						<Circle fill="#173440da" radius="31.0" stroke="BLACK"
+							strokeType="INSIDE" />
+						<Label id="heldenAvatarLabel3" fx:id="heldenAvatarLabel3"
+							alignment="CENTER" contentDisplay="GRAPHIC_ONLY"
+							focusTraversable="false" graphicTextGap="0.0"
+							maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+							minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0"
+							styleClass="image-label" textAlignment="CENTER" />
+					</children>
+				</StackPane>
+				<VBox alignment="TOP_CENTER" spacing="3.0">
+					<children>
+						<ProgressBar id="lebensPunkteIndikatorKlein"
+							fx:id="kleineLebensPunkteAnzeigeProgressBar3" prefHeight="15.0"
+							prefWidth="40.0" progress="0.62"
+							styleClass="lebens-punkte-Indikator-klein" />
+						<ProgressBar id="spezielleFaehigkeitIndikatorKlein"
+							fx:id="kleineSpezialFaehigkeitsAnzeigeProgressBar3"
+							prefHeight="15.0" prefWidth="40.0" progress="0.31" />
+						<Label id="aktuellerHeldenModusLabel3"
+							fx:id="aktuellerHeldenModusLabel3" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+							graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity"
+							minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0"
+							prefWidth="30.0" styleClass="image-label" textAlignment="CENTER" />
+					</children>
+				</VBox>
+			</children>
+		</HBox>
+		<HBox fx:id="heldenStatusAnzeigeHBox4" spacing="1.0">
+			<children>
+				<StackPane alignment="TOP_CENTER" opacity="0.95">
+					<children>
+						<Circle fill="#173440da" radius="31.0" stroke="BLACK"
+							strokeType="INSIDE" />
+						<Label id="heldenAvatarLabel4" fx:id="heldenAvatarLabel4"
+							alignment="CENTER" contentDisplay="GRAPHIC_ONLY"
+							focusTraversable="false" graphicTextGap="0.0"
+							maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+							minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0"
+							styleClass="image-label" textAlignment="CENTER" />
+					</children>
+				</StackPane>
+				<VBox alignment="TOP_CENTER" spacing="3.0">
+					<children>
+						<ProgressBar id="lebensPunkteIndikatorKlein"
+							fx:id="kleineLebensPunkteAnzeigeProgressBar4" prefHeight="15.0"
+							prefWidth="40.0" progress="0.62"
+							styleClass="lebens-punkte-Indikator-klein" />
+						<ProgressBar id="spezielleFaehigkeitIndikatorKlein"
+							fx:id="kleineSpezialFaehigkeitsAnzeigeProgressBar4"
+							prefHeight="15.0" prefWidth="40.0" progress="0.31" />
+						<Label id="aktuellerHeldenModusLabel4"
+							fx:id="aktuellerHeldenModusLabel4" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+							graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity"
+							minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0"
+							prefWidth="30.0" styleClass="image-label" textAlignment="CENTER" />
+					</children>
+				</VBox>
+			</children>
+		</HBox>
+	</children>
+</fx:root>
