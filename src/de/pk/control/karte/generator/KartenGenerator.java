@@ -2,6 +2,8 @@ package de.pk.control.karte.generator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import de.pk.model.karte.generator.Richtung;
 import de.pk.model.karte.generator.untergruende.KachelUntergrundWertigkeit;
@@ -9,22 +11,17 @@ import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrund;
 import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrundMitRichtung;
 import de.pk.model.position.Position;
 import de.pk.model.spielbrett.Kachel;
+import de.pk.utils.AusnahmeNachrichten;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.WahrscheinlichkeitsUtils;
 import de.pk.utils.karte.generator.KartenGeneratorUtils;
 
 public class KartenGenerator
 {
-	public static Richtung STANDARD_DREH_RICHTUNG = Richtung.OSTEN;
-	private ArrayList<KartenGeneratorUntergrund> registrierteKacheln = null;
-
-	/**
-	 * Erstellt einen KartenGenerator welcher keine registrierten Untergruende hat
-	 */
-	private KartenGenerator()
-	{
-		this(new ArrayList<>());
-	}
+	public static final Richtung STANDARD_DREH_RICHTUNG = Richtung.OSTEN;
+	public static final int MAX_DREHUNGEN_UNTERGRUND = 3; // Die vierte Drehung wuerde die Kachel wieder in den
+															// Grundzustand versetzen
+	private List<KartenGeneratorUntergrund> registrierteKacheln = null;
 
 	/**
 	 * Erstellt einen Generator welcher die gegebenen Untergruende verwendet
@@ -34,7 +31,7 @@ public class KartenGenerator
 	 */
 	public KartenGenerator(ArrayList<KartenGeneratorUntergrund> kacheln)
 	{
-		this.registrierteKacheln = kacheln;
+		this.registrierteKacheln = Collections.synchronizedList(kacheln);
 	}
 
 	/**
@@ -45,13 +42,15 @@ public class KartenGenerator
 	 */
 	public KartenGenerator(KartenGeneratorUntergrund... generatorKacheln)
 	{
-		this();
-		this.registrierteKacheln.addAll(Arrays.asList(generatorKacheln));
+		this(new ArrayList<>(Arrays.asList(generatorKacheln)));
 	}
 
 	/**
 	 * Generiert eine neue Kachel in gegebenener Richtung von gegebener Position aus
-	 * gesehen
+	 * gesehen. Hierbei wird zufaellig ein Untergrund bestimmt und dieser so lange
+	 * gedreht bis er eine Verbindung zu dem vorherigen Untergrund (Der von dem aus
+	 * generiert wird) hat. Ausserdem werden eventuell Gegner auf die Kachel
+	 * gesetzt.
 	 *
 	 * @param anzahlKachelnX   Die maximale Anzahl an Kacheln auf dem Spielbrett in
 	 *                         X-Richtung
@@ -71,41 +70,86 @@ public class KartenGenerator
 	}
 
 	/**
+	 * Dreht einen KartenGeneratorUntergrundMitRichtung "zu" solange bis eine
+	 * Verbindung zu "von" besteht.
+	 * 
+	 * @param von      Der Untergrund zu dem eine Verbindung hergestellt werden soll
+	 * @param zu       Der Untergrund welcher die Verbindung herstellen soll
+	 * @param Richtung die Richtung in der "zu" von "von" aus gesehen ist
+	 * 
+	 * @return Der gedrehte Untergrund
+	 */
+	private KartenGeneratorUntergrundMitRichtung dreheBisVerbindung(KartenGeneratorUntergrundMitRichtung von,
+			KartenGeneratorUntergrundMitRichtung zu, Richtung richtung)
+	{
+		if (!KartenGeneratorUtils.pruefeVerbindung(von, zu, richtung))
+		{
+			// Solange drehen bis eine Verbindung besteht oder der Untergrund ein Mal
+			// gedreht wurde
+			for (int i = 0; i < KartenGenerator.MAX_DREHUNGEN_UNTERGRUND; i++)
+			{
+				if (!KartenGeneratorUtils.pruefeVerbindung(von, zu, richtung))
+				{
+					zu.drehe(KartenGenerator.STANDARD_DREH_RICHTUNG);
+				} else
+				{
+					return zu;
+				}
+			}
+		}
+		// Es konnte nach drei Mal drehen keine Verbindung hergstellt werden -> Es ist
+		// fuer diese Methode nicht moeglich eine Verbindung herzustellen
+		throw new IllegalStateException(AusnahmeNachrichten.KARTEN_GENERATOR_KANN_KEINE_VERBINDUNG_HERSTELLEN);
+	}
+
+	/**
 	 * Generiert einen Untergrund fuer eine Kachel passend zur gegebenen Kachel in
 	 * der bestimmten Richtung. Die Kachelwahrscheinlichkeit ist abhaengig von der
 	 * aktuellen Position
 	 *
-	 * @param anzahlKachelnX   Maximale Anzahl der Kacheln in X-Richtung
-	 * @param anzahlKachelnY   Maximale Anzahl der Kacheln in Y-Richtung
-	 * @param aktuellePosition Die Position in der Kachel
-	 * @param richtung         Die Richtung in der die neue Kachel generiert wird
-	 * @param aktuelleKachel   Die betroffende Kachel
+	 * @param anzahlKachelnX      Maximale Anzahl der Kacheln in X-Richtung
+	 * @param anzahlKachelnY      Maximale Anzahl der Kacheln in Y-Richtung
+	 * @param aktuellePosition    Die Position in der Kachel
+	 * @param richtung            Die Richtung in der die neue Kachel generiert wird
+	 * @param aktuellerUntergrund Die betroffende Kachel
 	 *
 	 * @return KartenGeneratorKachel: Die Kachel die generiert wurde
 	 */
 	public KartenGeneratorUntergrundMitRichtung generiereNeueUntergrundKachel(int anzahlKachelnX, int anzahlKachelnY,
-			Position aktuellePosition, Richtung richtung, KartenGeneratorUntergrundMitRichtung aktuelleKachel)
+			Position aktuellePosition, Richtung richtung, KartenGeneratorUntergrundMitRichtung aktuellerUntergrund)
 	{
 		if (this.registrierteKacheln.size() < 1)
 		{
-			// TODO: Exception Messages
-			throw new IllegalStateException();
+			throw new IllegalStateException(AusnahmeNachrichten.KARTEN_GENERATOR_KEINE_REGISTRIERTEN_KACHELN);
 		}
+		// Generiert einen zufaelligen Untergrund
 		KartenGeneratorUntergrundMitRichtung generiert = this.getUntergrundKachelZumGenerieren(anzahlKachelnX,
-				anzahlKachelnY, aktuellePosition.addiere(KartenGeneratorUtils.getVersatzVonRichtung(richtung)));
-		if (!KartenGeneratorUtils.pruefeVerbindung(aktuelleKachel, generiert, richtung))
-		{
-			while (!KartenGeneratorUtils.pruefeVerbindung(aktuelleKachel, generiert, richtung))
-			{
-				generiert.drehe(KartenGenerator.STANDARD_DREH_RICHTUNG);
-			}
-		}
-		return generiert;
+				anzahlKachelnY, aktuellePosition.addiere(richtung.getVersatz()));
+		return this.dreheBisVerbindung(aktuellerUntergrund, generiert, richtung);
 	}
 
+	/**
+	 * Generiert eine vordefinierte Startkachel um ein sicheren Einstieg in den
+	 * Dungeon zu erlauben.
+	 * 
+	 * @return Die vordefinierte Startkachel.
+	 */
 	public Kachel generiereStartKachel()
 	{
 		return new Kachel(new KartenGeneratorUntergrundMitRichtung(KartenGeneratorUntergrund.START, Richtung.NORDEN));
+	}
+
+	private int getIndexDerZuGenerierendenKachel(float[] wahrscheinlichkeiten)
+	{
+		// Pruefen ob eine Kachel eine maximale Wahrscheinlichkeit angegeben hat
+		int indexMitMaximalerWahrscheinlichkeit = KartenGeneratorUtils
+				.getIndexMitMaximalerWahrscheinlichkeit(wahrscheinlichkeiten);
+		if (indexMitMaximalerWahrscheinlichkeit >= 0)
+		{
+			return indexMitMaximalerWahrscheinlichkeit;
+		}
+		// Sonst per Zufall bestimmen
+		return WahrscheinlichkeitsUtils.getIndexAusWahrscheinlichkeiten(wahrscheinlichkeiten);
 	}
 
 	/**
@@ -119,62 +163,64 @@ public class KartenGenerator
 	 * @param generierePositionY Y-Position auf der die Kachel generiert werden
 	 *                           sollte
 	 *
-	 * @return KartenGeneratorKachel A tile fitting the current Position
+	 * @return KartenGeneratorKachel Eine Kachel die auf die momentane Position
+	 *         passt
 	 */
 	private KartenGeneratorUntergrundMitRichtung getUntergrundKachelZumGenerieren(int anzahlKachelnX,
 			int anzahlKachelnY, Position generierePosition)
 	{
-		// Holt alle Wahrscheinlichkeiten von den Kacheln
+		// Berechnet alle Wahrscheinlichkeiten der Kacheln
 		float[] wahrscheinlichkeiten = this.getWahrscheinlichkeitVonKacheln(anzahlKachelnX, anzahlKachelnY,
 				generierePosition);
-		if (KartenGeneratorUtils.getKachelDieGeneriertWerdenMuss(wahrscheinlichkeiten) >= 0)
-		{
-			return new KartenGeneratorUntergrundMitRichtung(
-					this.registrierteKacheln
-							.get(KartenGeneratorUtils.getKachelDieGeneriertWerdenMuss(wahrscheinlichkeiten)),
-					Richtung.NORDEN);
-		}
 		return new KartenGeneratorUntergrundMitRichtung(
-				this.registrierteKacheln
-						.get(WahrscheinlichkeitsUtils.getIndexAusWahrscheinlichkeiten(wahrscheinlichkeiten)),
+				this.registrierteKacheln.get(this.getIndexDerZuGenerierendenKachel(wahrscheinlichkeiten)),
 				Richtung.NORDEN);
 	}
 
 	/**
 	 * Holt alle Wahrscheinlichkeiten der regestrierten Kacheln ein.
 	 *
-	 * @param anzahlKachelnX The maximum number tiles in X-Richtung
-	 * @param anzahlKachelnY the maximum number tiles in Y-Richtung
-	 * @param positionX      The X-Position to get the probability for
-	 * @param positionY      The Y-Position to get the probability for
+	 * @param anzahlKachelnX Die maximale Anzahl an Kacheln in X-Richtung
+	 * @param anzahlKachelnY Die maximale Anzahl an Kacheln in Y-Richtung
+	 * @param pos            Die Position fuer welche die Wahrscheinlichkeiten
+	 *                       generiert werden sollen
+	 * @return Die Wahrscheinlichkeiten der Kacheln fuer die gegebene Position
 	 */
 	private float[] getWahrscheinlichkeitVonKacheln(int anzahlKachelnX, int anzahlKachelnY, Position pos)
 	{
-		float[] wahrscheinlichkeit = new float[this.registrierteKacheln.size()];
-		for (int i = 0; i < wahrscheinlichkeit.length; i++)
+		float[] wahrscheinlichkeiten = new float[this.registrierteKacheln.size()];
+		for (int i = 0; i < wahrscheinlichkeiten.length; i++)
 		{
-			wahrscheinlichkeit[i] = this.registrierteKacheln.get(i).getVorkommensWahrscheinlichkeit(pos, anzahlKachelnX,
-					anzahlKachelnY);
+			wahrscheinlichkeiten[i] = this.registrierteKacheln.get(i).getVorkommensWahrscheinlichkeit(pos,
+					anzahlKachelnX, anzahlKachelnY);
 		}
-		return wahrscheinlichkeit;
+		return wahrscheinlichkeiten;
 	}
 
 	/**
-	 * Regestriert die Kacheln die der Generator erzeugen soll.
+	 * Registriert die Kacheln die der Generator erzeugen soll.
 	 *
-	 * @param insRegister Die Kachel ins Register
+	 * @param zuRegistrieren Die Kachel welche registriert werden soll
 	 */
-	public void registriereKachel(KartenGeneratorUntergrund insRegister)
+	public void registriereKachel(KartenGeneratorUntergrund zuRegistrieren)
 	{
-		if (this.ueberpruefeRegistrierendeUntergrundKachel(insRegister))
+		if (this.ueberpruefeRegistrierendeUntergrundKachel(zuRegistrieren))
 		{
-			this.registrierteKacheln.add(insRegister);
+			this.registrierteKacheln.add(zuRegistrieren);
 		} else
 		{
 			throw new IllegalArgumentException("Kacheln muessen mindestens ein begehbares Feld am Rand haben!");
 		}
 	}
 
+	/**
+	 * Ueberprueft ob ein Untergrund ein freies Randfeld hat. Dies ist noetig um ihn
+	 * generieren zu koennen, da sonst kein Spieler ihn betreten koennte.
+	 * 
+	 * @param zuUebepruefen Der zu ueberpruefende Untergrund
+	 * 
+	 * @return true, falls der Untergrund ein freies Randfeld hat, sonst false
+	 */
 	private boolean ueberpruefeFreiesRandFeld(KartenGeneratorUntergrund zuUeberpruefen)
 	{
 		for (int val = 0; val < Spielkonstanten.KACHEL_GROESSE_X; val++)

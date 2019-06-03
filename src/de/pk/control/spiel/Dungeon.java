@@ -11,8 +11,8 @@ import de.pk.model.position.Position;
 import de.pk.model.spiel.dungeon.DungeonModell;
 import de.pk.model.spielbrett.Kachel;
 import de.pk.model.spielbrett.Spielbrett;
+import de.pk.utils.AusnahmeNachrichten;
 import de.pk.utils.Spielkonstanten;
-import de.pk.utils.karte.generator.KartenGeneratorUtils;
 
 /**
  * Verwaltet ein Dungeon und sorgt fuer den Ablauf des Spiels.
@@ -21,8 +21,8 @@ import de.pk.utils.karte.generator.KartenGeneratorUtils;
  */
 public class Dungeon
 {
-	private DungeonModell modell = null;
-	private Wuerfel wuerfel = null;
+	private final DungeonModell modell;
+	private Wuerfel wuerfel = null; // Der Wuerfel dieses Dungeons
 
 	public Dungeon(String dungeonName)
 	{
@@ -33,14 +33,13 @@ public class Dungeon
 	{
 		this.modell = new DungeonModell(dungeonName);
 		this.initModell(phasen);
-		this.initSpielbrett();
 		this.wuerfel = new Wuerfel();
 	}
 
 	/**
 	 * Preuft, ob die als naechstes auszufuehrende Phase eine Eingabe benoetigt.
 	 *
-	 * @return
+	 * @return true, die naechste Phase braucht eine Eingabe
 	 */
 	public boolean brauchtEingabeFuerPhase()
 	{
@@ -59,8 +58,7 @@ public class Dungeon
 		Kachel neueKachel = this.modell.getKartenGenerator().generiereNeueKachel(
 				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y, momentanePos,
 				richtung, this.getSpielbrett().getKachelBei(momentanePos));
-		this.modell.getSpielbrett().setzeKachel(neueKachel,
-				momentanePos.addiere(KartenGeneratorUtils.getVersatzVonRichtung(richtung)));
+		this.modell.getSpielbrett().setzeKachel(neueKachel, momentanePos.addiere(richtung.getVersatz()));
 	}
 
 	/**
@@ -92,9 +90,8 @@ public class Dungeon
 		{
 			this.registrierePhase(phase);
 		}
-		// Setze eine Kachel in die Mitte
-		this.modell.getSpielbrett().setzeKachel(this.modell.getKartenGenerator().generiereStartKachel(), new Position(
-				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
+		// Setze die Startkachel in die Mitte
+		this.initSpielbrett();
 	}
 
 	private void initSpielbrett()
@@ -126,15 +123,9 @@ public class Dungeon
 	{
 		if (!this.testeArgumenteRegistierePhase(phase, position))
 		{
-			// TODO: Exception message
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(AusnahmeNachrichten.DUNGEON_PHASEN_INDEX_NICHT_GUELTIG);
 		}
 		this.getPhasen().add(position, phase);
-	}
-
-	public void setPhasen(ArrayList<Phase> phasen)
-	{
-		this.modell.setPhasen(phasen);
 	}
 
 	/**

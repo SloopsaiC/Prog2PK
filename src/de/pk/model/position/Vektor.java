@@ -39,4 +39,16 @@ public class Vektor
 		return (float) Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
 	}
 
+	/**
+	 * Erstellt einen Vektor mit genau entgegen gesetzter Richtung indem alle Teile
+	 * des Vektors mit -1 multipliziert werden.
+	 * 
+	 * @return Ein Vektor der in die genau entgegen gesetzte Richtung dieses Vektors
+	 *         zeigt
+	 */
+	public Vektor getNegierung()
+	{
+		return new Vektor(this.getX() * -1, this.getY() * -1);
+	}
+
 }

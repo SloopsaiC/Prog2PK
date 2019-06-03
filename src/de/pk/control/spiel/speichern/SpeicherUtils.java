@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import com.google.gson.GsonBuilder;
 
 import de.pk.control.spiel.Spiel;
+import de.pk.control.spiel.einstellungen.Einstellungen;
 
 public class SpeicherUtils
 {
@@ -99,5 +100,9 @@ public class SpeicherUtils
 		writer.close();
 	}
 
-	// TODO: Einstellungen laden
+	public static Einstellungen ladeEinstellungen(String pfad)
+	{
+		// TODO
+		return null;
+	}
 }

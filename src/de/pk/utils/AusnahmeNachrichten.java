@@ -21,6 +21,18 @@ public class AusnahmeNachrichten
 
 	public static final String KACHEL_POSITION_NICHT_GUELTIGE_POSITION = "Diese Position ist nicht gueltig, liegt also vermutlich nicht auf der Kachel bzw. Spielbrett";
 
+	public static final String GEGENSTANDS_HAUFEN_HINZUTUEN_NICHT_RICHTIGER_INHALT = "Der Inhalt von zwei GegenstandsHaufen muss gleich sein um sie ineinander tuen zu koennen";
+
+	public static final String GEGENSTANDS_HAUFEN_MENGE_IST_NICHT_GUELTIG = "Neue Menge ist entweder kleiner null, oder groesser der Maximalen Groesse: ";
+
+	public static final String WELTKARTE_DUNGEON_NICHT_ENTHALTEN = "Am angegebenen Index befindet sich kein Dungeon: ";
+
+	public static final String KARTEN_GENERATOR_KEINE_REGISTRIERTEN_KACHELN = "Dieser KartenGenerator hat keine registrierten Kacheln";
+
+	public static final String KARTEN_GENERATOR_KANN_KEINE_VERBINDUNG_HERSTELLEN = "Es kann keine Verbindung zwischen diesen Kacheln hergestellt werden";
+
+	public static final String DUNGEON_PHASEN_INDEX_NICHT_GUELTIG = "Der gegebene Phasenindex ist nicht gueltig";
+
 	/**
 	 * Versteckter default Konstruktor, da eine Konstantenklasse nicht instanziiert
 	 * werden sollte.

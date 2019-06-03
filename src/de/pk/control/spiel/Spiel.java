@@ -6,7 +6,7 @@ import de.pk.model.spiel.SpielModell;
 
 public class Spiel
 {
-	private SpielModell spielModell = null;
+	private final SpielModell spielModell;
 
 	/**
 	 * Erstellt ein Spiel mit default Weltkarte
@@ -29,14 +29,6 @@ public class Spiel
 	public Weltkarte getWeltkarte()
 	{
 		return this.spielModell.getWeltkarte();
-	}
-
-	private void initDungeon(int index)
-	{
-		if (this.getWeltkarte().hatDungeon(index))
-		{
-			this.spielModell.aendereAktivenDungeon(this.getWeltkarte().getDungeonBei(index));
-		}
 	}
 
 	/**

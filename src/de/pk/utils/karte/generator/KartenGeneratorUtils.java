@@ -17,42 +17,19 @@ public class KartenGeneratorUtils
 	 *
 	 * @param wahrscheinlichkeit Alle Wahrscheinlichkeiten die ueberprueft werden
 	 *                           sollen
+	 * @return Der Index der Kachel welche die maximale Wahrscheinlichkeit hat, oder
+	 *         -1, falls keine solche Kachel existert
 	 */
-	public static int getKachelDieGeneriertWerdenMuss(float[] wahrscheinlichkeit)
+	public static int getIndexMitMaximalerWahrscheinlichkeit(float[] wahrscheinlichkeit)
 	{
 		for (int i = 0; i < wahrscheinlichkeit.length; i++)
 		{
-			if (wahrscheinlichkeit[i] == Float.MAX_VALUE)
+			if (wahrscheinlichkeit[i] >= KartenGeneratorUntergrundKonstanten.MAXIMALE_GENERIERUNGS_WAHRSCHEINLICHKEIT)
 			{
 				return i;
 			}
 		}
 		return -1;
-	}
-
-	/**
-	 * Bekommt einen Versatz, der zu der Position addiert wird, um eine Position in
-	 * der bestimmten Richtung zu bekommen.
-	 *
-	 * @param richtung Die Richtung
-	 *
-	 * @return 2D Vektor
-	 */
-	public static Vektor getVersatzVonRichtung(Richtung richtung)
-	{
-		switch (richtung)
-		{
-		case NORDEN:
-			return new Vektor(0, -1);
-		case OSTEN:
-			return new Vektor(1, 0);
-		case SUEDEN:
-			return new Vektor(0, 1);
-		case WESTEN:
-			return new Vektor(-1, 0);
-		default:
-			return new Vektor(0, 0);
-		}
 	}
 
 	/**
@@ -77,14 +54,16 @@ public class KartenGeneratorUtils
 		{
 			while (aktuellePos != null)
 			{
-				KachelUntergrundWertigkeit aktuellerUntergrund = von.getInhaltBei(aktuellePos);
-				if (aktuellerUntergrund.istBetretbar() || zu
-						.getInhaltBei(PositionsUtils
-								.getPositionAufKachelAusAbsoluterPosition(aktuellePos.addiere(checkVektor)))
-						.istBetretbar())
+				KachelUntergrundWertigkeit vonUntergrund = von.getInhaltBei(aktuellePos);
+				KachelUntergrundWertigkeit zuUntergrund = zu.getInhaltBei(PositionsUtils
+						.getPositionAufKachelAusAbsoluterPosition(aktuellePos.addiere(checkVektor.getNegierung())));
+				// Check Vektor wird negiert, da wir hier von der "zu" Kachel aus schauen
+				if (vonUntergrund.istBetretbar() && zuUntergrund.istBetretbar())
 				{
+					// Zwei benachbarte Untergruende sind betretbar -> Verbindung
 					return true;
 				}
+				// Position um den verschiebe Vektor verschieben
 				aktuellePos.addiere(verschiebeVektor);
 			}
 		} catch (IllegalArgumentException fertig)
@@ -106,30 +85,21 @@ public class KartenGeneratorUtils
 	public static boolean pruefeVerbindung(KartenGeneratorUntergrundMitRichtung von,
 			KartenGeneratorUntergrundMitRichtung zu, Richtung richtung)
 	{
-		Vektor verschiebeVektor = null;
-		Vektor checkVektor = null;
+		Vektor verschiebeVektor = richtung.getVerschiebeVektor();
+		Vektor checkVektor = richtung.getVersatz();
 		Position aktuellePos = null;
 		switch (richtung)
 		{
 		case NORDEN:
-			checkVektor = new Vektor(0, 1);
-			verschiebeVektor = new Vektor(1, 0);
+			// Fallthrough, gleiche Startposition
+		case WESTEN:
 			aktuellePos = new Position(0, 0);
 			break;
 		case SUEDEN:
-			checkVektor = new Vektor(0, -1);
-			verschiebeVektor = new Vektor(1, 0);
 			aktuellePos = new Position(0, Spielkonstanten.KACHEL_GROESSE_Y - 1);
 			break;
 		case OSTEN:
-			checkVektor = new Vektor(1, 0);
-			verschiebeVektor = new Vektor(0, 1);
 			aktuellePos = new Position(Spielkonstanten.KACHEL_GROESSE_X - 1, 0);
-			break;
-		case WESTEN:
-			checkVektor = new Vektor(-1, 0);
-			verschiebeVektor = new Vektor(0, 1);
-			aktuellePos = new Position(0, 0);
 			break;
 		default:
 			return false;

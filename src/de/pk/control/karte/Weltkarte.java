@@ -2,10 +2,18 @@ package de.pk.control.karte;
 
 import de.pk.control.spiel.Dungeon;
 import de.pk.model.karte.WeltkarteModell;
+import de.pk.utils.AusnahmeNachrichten;
 
+/**
+ * Speichert die Weltkarte und bietet Methoden an um mit ihr zu interagieren.
+ * 
+ * @see de.pk.model.karte.Weltkarte
+ * 
+ * @author Mattheo
+ */
 public class Weltkarte
 {
-	private WeltkarteModell weltkarteModell = null;
+	private final WeltkarteModell modell;
 
 	/**
 	 * Erstellt eine Weltkarte mit den gegebenen Dungeons
@@ -14,7 +22,7 @@ public class Weltkarte
 	 */
 	public Weltkarte(Dungeon... dungeons)
 	{
-		this.weltkarteModell = new WeltkarteModell(dungeons);
+		this.modell = new WeltkarteModell(dungeons);
 	}
 
 	/**
@@ -24,7 +32,7 @@ public class Weltkarte
 	 */
 	public void fuegeDungeonHinzu(Dungeon hinzufuegen)
 	{
-		this.weltkarteModell.fuegeDungeonHinzu(hinzufuegen);
+		this.modell.fuegeDungeonHinzu(hinzufuegen);
 	}
 
 	/**
@@ -38,18 +46,9 @@ public class Weltkarte
 	{
 		if (!this.hatDungeon(index))
 		{
-			// TODO: Exception messages
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(AusnahmeNachrichten.WELTKARTE_DUNGEON_NICHT_ENTHALTEN + index);
 		}
-		return this.getDungeons()[index];
-	}
-
-	/**
-	 * Wrapper-Methode fuer den internen Gebrauch des Modells
-	 */
-	private Dungeon[] getDungeons()
-	{
-		return this.weltkarteModell.getDungeons();
+		return this.modell.getDungeons().get(index);
 	}
 
 	/**
@@ -62,7 +61,8 @@ public class Weltkarte
 	 */
 	public boolean hatDungeon(int index)
 	{
-		return (index >= 0) && (index < this.getDungeons().length) && (this.getDungeons()[index] != null);
+		return (index >= 0) && (index < this.modell.getDungeons().size())
+				&& (this.modell.getDungeons().get(index) != null);
 	}
 
 }

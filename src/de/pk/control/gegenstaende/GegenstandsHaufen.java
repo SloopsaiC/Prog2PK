@@ -2,37 +2,31 @@ package de.pk.control.gegenstaende;
 
 import de.pk.model.gegenstaende.GegenstandsHaufenModell;
 import de.pk.model.gegenstaende.spezifikationen.Stapelbar;
+import de.pk.utils.AusnahmeNachrichten;
 import de.pk.utils.Spielkonstanten;
 
+/**
+ * Ein GegenstandsHaufen besteht aus mehreren Gegenstaenden gleicher Art als
+ * "Haufen". Er beinhaltet also Stapelbares und realisiert die Eigenschaft des
+ * stapelns, indem er sich merkt, aus wie vielen Gegenstaenden der Haufen
+ * besteht.
+ * 
+ * @see de.pk.model.gegenstaende.GegenstandsHaufenModell
+ * 
+ * @author Mattheo
+ */
 public class GegenstandsHaufen
 {
-
-	/**
-	 * Prueft, ob die Menge groesser als das Maximum oder kleiner 0 ist.
-	 *
-	 * @param menge   zu ueberpruefende Menge
-	 * @param maximum maximale Anzahl, die menge nicht ueberschreiten darf
-	 *
-	 * @throws IllegalArgumentException wenn menge < maximum oder menge < 0
-	 */
-	public static void pruefeMengeGegenMaximum(int menge, int maximum) throws IllegalArgumentException
-	{
-		if ((menge > maximum) || (menge < 0))
-		{
-			// TODO: Exception Message
-			throw new IllegalArgumentException();
-		}
-	}
 
 	/** Das Modell dieses Haufens */
 	private final GegenstandsHaufenModell modell;
 
-	public GegenstandsHaufen(Stapelbar inhalt, int menge) throws IllegalArgumentException
+	public GegenstandsHaufen(Stapelbar inhalt, int menge)
 	{
 		this(inhalt, menge, Spielkonstanten.STANDARD_MAX_ANZAHL_INHALT_GEGENSTANDS_HAUFEN);
 	}
 
-	public GegenstandsHaufen(Stapelbar inhalt, int menge, int maximaleAnzahl) throws IllegalArgumentException
+	public GegenstandsHaufen(Stapelbar inhalt, int menge, int maximaleAnzahl)
 	{
 		this.modell = new GegenstandsHaufenModell(inhalt, menge, maximaleAnzahl);
 	}
@@ -92,8 +86,7 @@ public class GegenstandsHaufen
 	{
 		if (!(this.modell.getInhalt().equals(zusatzInhalt.getInhalt())))
 		{
-			// TODO: Exception Messages
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(AusnahmeNachrichten.GEGENSTANDS_HAUFEN_HINZUTUEN_NICHT_RICHTIGER_INHALT);
 		}
 		try
 		{
@@ -101,6 +94,9 @@ public class GegenstandsHaufen
 			zusatzInhalt.entnehmen(zusatzInhalt.getMenge());
 		} catch (IllegalArgumentException ueberfluss)
 		{
+			// Wenn "setMenge" eine IllegalArgumentException wirft konnte die Menge nicht
+			// gesetzt werden, dies ist vermutlich der Fall, da die maximale Groesse nicht
+			// ausreicht
 			return this.ueberflussBeimHinzutuen(zusatzInhalt);
 		}
 		return null;
@@ -117,6 +113,8 @@ public class GegenstandsHaufen
 	 */
 	private GegenstandsHaufen ueberflussBeimHinzutuen(GegenstandsHaufen ueberfluss)
 	{
+		// Entnimmt die maximale Menge die in diesen GegenstandsHaufen passt und gibt
+		// den Rest zurueck
 		ueberfluss.entnehmen(this.modell.getMaximaleAnzahl() - this.modell.getMenge());
 		this.modell.setMenge(this.modell.getMaximaleAnzahl());
 		return ueberfluss;

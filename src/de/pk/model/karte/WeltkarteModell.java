@@ -2,36 +2,52 @@ package de.pk.model.karte;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import de.pk.control.spiel.Dungeon;
 
 /**
  * Modell der Weltkarte des Spiels
+ * 
+ * @author Mattheo
  */
 public class WeltkarteModell
 {
 
 	private List<Dungeon> dungeons = null;
 
-	public WeltkarteModell(Dungeon[] dungeons)
+	/**
+	 * Erstellt ein Modell einer Weltkarte mit den gegebenen Dungeons.
+	 * 
+	 * @param dungeons Die Dungeons welche auf der Weltkarte sein sollen
+	 */
+	public WeltkarteModell(Dungeon... dungeons)
 	{
 		// Liste von Arrays hat eine fixe Groesse (Groesse des Arrays) und muss deshalb
 		// so "kopiert" werden.
-		List<Dungeon> liste = Arrays.asList(dungeons);
-		this.dungeons = new ArrayList<>();
-		this.dungeons.addAll(liste);
+		this.dungeons = Collections.synchronizedList(new ArrayList<>(Arrays.asList(dungeons)));
 	}
 
+	/**
+	 * Fuegt einen Dungeon zur Weltkarte hinzu
+	 * 
+	 * @param hinzufuegen Der hinzuzufuegende Dungeon
+	 */
 	public void fuegeDungeonHinzu(Dungeon hinzufuegen)
 	{
 		this.dungeons.add(hinzufuegen);
 	}
 
-	public Dungeon[] getDungeons()
+	/**
+	 * Erlaubt Zugriff auf alle Dungeons auf dieser Weltkarte. Diese Liste kann
+	 * nicht bearbeitet werden.
+	 * 
+	 * @return Alle Dungeons auf dieser Weltkarte als Liste
+	 */
+	public List<Dungeon> getDungeons()
 	{
-		return this.dungeons.toArray(new Dungeon[]
-		{});
+		return Collections.unmodifiableList(this.dungeons);
 	}
 
 }

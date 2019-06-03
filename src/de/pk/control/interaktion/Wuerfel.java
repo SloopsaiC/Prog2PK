@@ -16,15 +16,16 @@ import javafx.beans.value.ObservableValue;
  * Klasse welche WuerfelWuerfe generiert und alle Beobachter ueber alle Wuerfe.
  *
  * Ein Wuerfel hat hierbei allderdings keine Augenzahl oder aehnliches wie in
- * der echten Welt, sondern modelliert nur den Zufall informiert.
+ * der echten Welt, sondern modelliert nur den Zufall basierend auf
+ * Wahrscheinlichkeiten. Es koennen Observer registriert werden um alle
+ * WuerfelWuerfe in der GUI anzeigen zu koennen.
  *
  * @author Mattheo
  */
 public class Wuerfel implements ObservableValue<WuerfelWurf>
 {
-
 	private WuerfelWurf letzterWurf = null; // Der letzte Wurf dieses Wuerfels, die "ObservableValue"
-	private List<ChangeListener<? super WuerfelWurf>> changeListeners = null; // Die Lstener die informiert werden
+	private List<ChangeListener<? super WuerfelWurf>> changeListeners = null; // Die Listener die informiert werden
 																				// sollte ein neuer Wurf erfolgen
 	private List<InvalidationListener> invalidationListeners = null; // Siehe changeListeners
 
