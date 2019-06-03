@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.StackPane?>
+
+<fx:root alignment="TOP_RIGHT"
+	type="javafx.scene.layout.StackPane"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<!-- fx:controller="de.pk.view.visuell.customControls.questLog.QuestLog"> -->
+	<stylesheets>
+		<URL value="@../../styleSheetsCSS/StandardSzenenStyle.css" />
+		<URL value="@QuestLog.css" />
+	</stylesheets>
+	<children>
+		<DialogPane id="questLogDialogPane"
+			fx:id="questLogDialogPane" maxHeight="-Infinity" maxWidth="-Infinity"
+			minHeight="-Infinity" minWidth="-Infinity" visible="false">
+			<content>
+				<ScrollPane focusTraversable="false" hbarPolicy="NEVER"
+					maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+					minWidth="-Infinity" prefHeight="200.0">
+					<content>
+						<ListView fx:id="questLogListView"
+							focusTraversable="false" minHeight="-Infinity"
+							minWidth="-Infinity" prefHeight="300.0" prefWidth="180.0" />
+					</content>
+				</ScrollPane>
+			</content>
+			<header>
+				<Label alignment="CENTER" contentDisplay="CENTER"
+					focusTraversable="false" text="Quest Log">
+					<padding>
+						<Insets bottom="13.0" top="13.0" />
+					</padding>
+				</Label>
+			</header>
+		</DialogPane>
+		<ToggleButton id="questLogButton" fx:id="questLogButton"
+			contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+			maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+			minWidth="-Infinity" mnemonicParsing="false"
+			onAction="#questLogButtonPressed" prefHeight="30.0" prefWidth="30.0"
+			styleClass="image-button" text="questLog" textAlignment="CENTER">
+			<StackPane.margin>
+				<Insets right="5.0" top="5.0" />
+			</StackPane.margin>
+			<tooltip>
+				<Tooltip text="Oeffne das Quest Log" />
+			</tooltip>
+		</ToggleButton>
+	</children>
+	<padding>
+		<Insets top="50.0" />
+	</padding>
+</fx:root>

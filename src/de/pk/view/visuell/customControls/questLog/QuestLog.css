@@ -1,0 +1,24 @@
+#questLogDialogPane {
+	-fx-background-color: rgba(50.0,50.0,50.0,0.75);
+}
+
+.scroll-pane {
+	 -fx-background-color: rgba(0.0,0.0,0.0,0.3);
+}
+
+.scroll-pane > .scroll-bar {
+	-fx-background-color: rgba(50.0,50.0,50.0,0.5);
+}
+
+.scroll-pane > .scroll-bar > .thumb {
+-fx-background-color: rgb(0.0,30.0,100.0);
+}
+
+.scroll-pane > .viewport, .list-view {
+	-fx-background-color: transparent;
+}
+
+
+#questLogButton {
+	-fx-background-image: url("../../../../ressourcen/bildDateien/buttonIcons/Menu_BTN.png"); 
+}

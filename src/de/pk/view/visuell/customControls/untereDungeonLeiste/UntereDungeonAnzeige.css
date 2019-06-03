@@ -4,31 +4,8 @@
 
 
 
-
-.label {
-	-fx-text-fill: white;
-}
-
 #levelLabel {
 	-fx-text-fill: rgb(200,200,200);
-}
-
-
-
-
-.image-button {
-	-fx-background-color: transparent;
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover;
-	-fx-background-image: url("../../../../ressourcen/bildDateien/labelIcons/Star.png"); 
-}
-
-.image-button:hover {
-	-fx-opacity: 0.5;
-}
-
-.image-button:pressed {
-	-fx-opacity: 0.25;
 }
 
 

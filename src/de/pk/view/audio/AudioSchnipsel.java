@@ -55,6 +55,9 @@ public class AudioSchnipsel implements Closeable
 		{
 			this.passeLautstaerkeKontinuierlichAn(this.prozentualeLautstaerke,
 					AudioSchnipsel.MINIMALE_PROZENTUALE_LAUTSTAERKE);
+		} else
+		{
+			this.setzeDezibelLautstaerkeAusProzentualerAngabe(this.prozentualeLautstaerke);
 		}
 	}
 

@@ -17,7 +17,7 @@
 	fx:controller="de.pk.view.visuell.szenenController.WeltkarteSzeneController">
 
 	<stylesheets>
-		<URL value="@../styleSheetsCSS/MenueSzenenStyle.css" />
+		<URL value="@../styleSheetsCSS/StandardSzenenStyle.css" />
 	</stylesheets>
 
 	<children>

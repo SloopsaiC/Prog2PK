@@ -14,7 +14,7 @@
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="de.pk.view.visuell.szenenController.CreditsSzeneController">
 	<stylesheets>
-		<URL value="@../styleSheetsCSS/MenueSzenenStyle.css" />
+		<URL value="@../styleSheetsCSS/StandardSzenenStyle.css" />
 	</stylesheets>
 	<children>
 		<BorderPane prefHeight="200.0" prefWidth="200.0"

@@ -21,7 +21,7 @@
 	fx:controller="de.pk.view.visuell.szenenController.SchwierigkeitWaehlenSzeneController">
 
 	<stylesheets>
-		<URL value="@../styleSheetsCSS/MenueSzenenStyle.css" />
+		<URL value="@../styleSheetsCSS/StandardSzenenStyle.css" />
 	</stylesheets>
 	<children>
 		<BorderPane AnchorPane.bottomAnchor="0.0"

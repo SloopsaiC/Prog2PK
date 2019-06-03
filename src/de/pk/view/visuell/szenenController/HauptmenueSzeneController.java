@@ -55,7 +55,7 @@ public class HauptmenueSzeneController implements Initializable, Lokalisierbar
 	public void initialize(URL url, ResourceBundle rb)
 	{
 		HauptmenueSzeneController.audio = new AudioSchnipsel(
-				"src\\de\\pk\\ressourcen\\audioDateien\\hintergrundMusik\\Overworld.wav", 100);
+				"src\\de\\pk\\ressourcen\\audioDateien\\hintergrundMusik\\Overworld.wav", 0);
 		HauptmenueSzeneController.audio.abspielen(false);
 	}
 
@@ -92,13 +92,13 @@ public class HauptmenueSzeneController implements Initializable, Lokalisierbar
 	@Override
 	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
 	{
-		this.creditsButton.setText(sprachRessource.getString(LokalisierungsKeys.CREDTITS));
-		this.hauptmenueLabel.setText(sprachRessource.getString(LokalisierungsKeys.HAUPTMENUE));
-		this.neuesSpielButton.setText(sprachRessource.getString(LokalisierungsKeys.NEUES_SPIEL));
-		this.optionenButton.setText(sprachRessource.getString(LokalisierungsKeys.OPTIONEN));
-		this.spielBeendenButton.setText(sprachRessource.getString(LokalisierungsKeys.BEENDEN));
-		this.spielLadenButton.setText(sprachRessource.getString(LokalisierungsKeys.SPIEL_LADEN));
-		this.zumTitelbildschirmButton.setText(sprachRessource.getString(LokalisierungsKeys.ZUM_TITELBILDSCHIRM));
+		this.creditsButton.setText(sprachRessource.getString(LokalisierungsKeys.CREDTITS_KEY));
+		this.hauptmenueLabel.setText(sprachRessource.getString(LokalisierungsKeys.HAUPTMENUE_KEY));
+		this.neuesSpielButton.setText(sprachRessource.getString(LokalisierungsKeys.NEUES_SPIEL_KEY));
+		this.optionenButton.setText(sprachRessource.getString(LokalisierungsKeys.OPTIONEN_KEY));
+		this.spielBeendenButton.setText(sprachRessource.getString(LokalisierungsKeys.BEENDEN_KEY));
+		this.spielLadenButton.setText(sprachRessource.getString(LokalisierungsKeys.SPIEL_LADEN_KEY));
+		this.zumTitelbildschirmButton.setText(sprachRessource.getString(LokalisierungsKeys.ZUM_TITELBILDSCHIRM_KEY));
 	}
 
 }

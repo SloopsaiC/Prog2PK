@@ -1,0 +1,6 @@
+.kachelUntergrundPane {
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: stretch; 
+	-fx-background-image: url("../../../../ressourcen/bildDateien/kachelUntergruende/KachelUntergrund_2.png"); 
+}

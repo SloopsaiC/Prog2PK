@@ -1,0 +1,35 @@
+#dungeonNameLabel {
+	-fx-font-weight: bold;
+}
+
+
+#dungeonMenueButton1 {	
+	-fx-background-image: url("../../../../ressourcen/bildDateien/buttonIcons/Info_BTN.png"); 
+}
+
+#dungeonMenueButton2 {
+	-fx-background-image: url("../../../../ressourcen/bildDateien/buttonIcons/Settings_BTN.png"); 
+}
+
+#dungeonMenueButton3 {
+	-fx-background-image: url("../../../../ressourcen/bildDateien/buttonIcons/Pause_BTN.png"); 
+}
+
+
+#goldImageLabel {
+	-fx-background-image: url("../../../../ressourcen/bildDateien/labelIcons/gold_beispiel.png");
+}
+
+#fragmenteImageLabel {
+	-fx-background-image: url("../../../../ressourcen/bildDateien/labelIcons/CODEFRAGMENTE.png");
+}
+
+
+
+.progress-bar .track {
+	-fx-background-color: rgba(50.0,50.0,50.0,0.5);
+}
+
+.progress-bar .bar {
+	-fx-background-color: rgb(0.0,50.0,120.0);
+}

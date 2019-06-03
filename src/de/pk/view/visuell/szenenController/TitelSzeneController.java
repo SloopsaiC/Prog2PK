@@ -7,7 +7,6 @@ import de.pk.utils.Spielkonstanten;
 import de.pk.utils.lokalisierung.Lokalisierbar;
 import de.pk.utils.lokalisierung.LokalisierungsKeys;
 import de.pk.view.visuell.AnwendungFX;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -29,11 +28,11 @@ public class TitelSzeneController implements Initializable, Lokalisierbar
 	@Override
 	public void initialize(URL url, ResourceBundle rb)
 	{
-		//
+//
 	}
 
 	@FXML
-	private void startButtonAction(ActionEvent event)
+	private void startButtonAction()
 	{
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
 	}
@@ -41,9 +40,8 @@ public class TitelSzeneController implements Initializable, Lokalisierbar
 	@Override
 	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
 	{
-		this.titelLabel.setText(sprachRessource.getString(LokalisierungsKeys.ANWENDUNGS_TITEL));
-		this.zumHauptmenueButton.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK)
-				+ sprachRessource.getString(LokalisierungsKeys.ZUM_HAUPTMENUE));
+		this.titelLabel.setText(sprachRessource.getString(LokalisierungsKeys.ANWENDUNGS_TITEL_KEY));
+		this.zumHauptmenueButton.setText(sprachRessource.getString(LokalisierungsKeys.ZUM_HAUPTMENUE_KEY));
 	}
 
 }

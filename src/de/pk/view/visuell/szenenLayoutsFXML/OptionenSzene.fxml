@@ -14,7 +14,7 @@
 <AnchorPane id="OptionenPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" styleClass="menue-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pk.view.visuell.szenenController.OptionenSzeneController">
 
 	<stylesheets>
-		<URL value="@../styleSheetsCSS/MenueSzenenStyle.css" />
+		<URL value="@../styleSheetsCSS/StandardSzenenStyle.css" />
 	</stylesheets>
 
 	<children>

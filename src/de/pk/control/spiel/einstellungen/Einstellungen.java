@@ -32,6 +32,7 @@ public class Einstellungen
 
 	private Aufloesung anwendungsAufloesung = Einstellungen.STANDARD_AUFLOESUNG;
 	private Sprache anwendungsSprache = Einstellungen.STANDARD_SPRACHE;
+	private ResourceBundle sprachRessource = null;
 
 	/**
 	 * Gibt die Instanz der Einstellungs-Klasse zurueck.
@@ -45,6 +46,8 @@ public class Einstellungen
 
 	private Einstellungen()
 	{
+		this.sprachRessource = ResourceBundle.getBundle(Spielkonstanten.LOKALISIERUNG_PFAD,
+				new Locale(this.anwendungsSprache.toString()));
 	}
 
 	public Aufloesung getAnwendungsAufloesung()
@@ -62,11 +65,17 @@ public class Einstellungen
 		return this.anwendungsSprache;
 	}
 
+	public ResourceBundle getSprachRessource()
+	{
+		return this.sprachRessource;
+	}
+
 	public void setAnwendungsSprache(Sprache anwendungsSprache)
 	{
 		this.anwendungsSprache = anwendungsSprache;
-		AnwendungFX.aktualisiereSzenenSprache(
-				ResourceBundle.getBundle(Spielkonstanten.LOKALISIERUNG_PFAD, new Locale(anwendungsSprache.toString())));
+		this.sprachRessource = ResourceBundle.getBundle(Spielkonstanten.LOKALISIERUNG_PFAD,
+				new Locale(this.anwendungsSprache.toString()));
+		AnwendungFX.aktualisiereSzenenSprache(this.sprachRessource);
 	}
 
 }

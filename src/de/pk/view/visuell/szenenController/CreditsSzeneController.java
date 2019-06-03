@@ -41,9 +41,9 @@ public class CreditsSzeneController implements Initializable, Lokalisierbar
 	@Override
 	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
 	{
-		this.creditsLabel.setText(sprachRessource.getString(LokalisierungsKeys.CREDTITS));
-		this.zurueckZumHauptmenueButton.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK)
-				+ sprachRessource.getString(LokalisierungsKeys.ZUM_HAUPTMENUE));
+		this.creditsLabel.setText(sprachRessource.getString(LokalisierungsKeys.CREDTITS_KEY));
+		this.zurueckZumHauptmenueButton.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK_KEY)
+				+ sprachRessource.getString(LokalisierungsKeys.ZUM_HAUPTMENUE_KEY));
 	}
 
 }

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root alignment="TOP_CENTER" prefWidth="800.0"
+	type="javafx.scene.layout.StackPane"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<!-- fx:controller="de.pk.view.visuell.customControls.obereDungeonLeiste.ObereDungeonAnzeige"> -->
+	<stylesheets>
+		<URL value="@../../styleSheetsCSS/StandardSzenenStyle.css" />
+		<URL value="@ObereDungeonAnzeige.css" />
+	</stylesheets>
+	<children>
+		<VBox alignment="TOP_CENTER" maxHeight="-Infinity"
+			maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+			spacing="5.0">
+			<children>
+				<Label id="dungeonNameLabel" fx:id="dungeonTitelLabel"
+					alignment="CENTER" contentDisplay="CENTER"
+					styleClass="ueberschriften-label" text="DUNGEON"
+					textAlignment="CENTER" textFill="WHITE" />
+				<ProgressBar id="dungeonFortschrittIndikator"
+					fx:id="dungeonFortschrittProgressBar" prefWidth="200.0"
+					progress="0.34" />
+			</children>
+		</VBox>
+		<VBox alignment="TOP_RIGHT" maxHeight="-Infinity"
+			maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+			prefWidth="128.0" spacing="5.0" StackPane.alignment="TOP_RIGHT">
+			<children>
+				<HBox alignment="TOP_RIGHT" spacing="10.0">
+					<children>
+						<Button id="dungeonMenueButton1"
+							fx:id="dungeonMenueButton1" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+							graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity"
+							minHeight="-Infinity" minWidth="-Infinity"
+							mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0"
+							styleClass="image-button" textAlignment="CENTER" />
+						<Button id="dungeonMenueButton2"
+							fx:id="dungeonMenueButton2" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+							graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity"
+							minHeight="-Infinity" minWidth="-Infinity"
+							mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0"
+							styleClass="image-button" textAlignment="CENTER" />
+						<Button id="dungeonMenueButton3"
+							fx:id="dungeonMenueButton3" alignment="CENTER"
+							contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+							graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity"
+							minHeight="-Infinity" minWidth="-Infinity"
+							mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0"
+							styleClass="image-button" textAlignment="CENTER" />
+					</children>
+				</HBox>
+				<HBox alignment="CENTER_RIGHT" spacing="10.0">
+					<children>
+						<Label id="goldImageLabel" contentDisplay="GRAPHIC_ONLY"
+							focusTraversable="false" maxHeight="-Infinity"
+							maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+							prefHeight="25.0" prefWidth="30.0" styleClass="image-label" />
+						<Label fx:id="goldAnzeigeLabel" focusTraversable="false"
+							text="50" />
+					</children>
+					<padding>
+						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+					</padding>
+				</HBox>
+				<HBox alignment="CENTER_RIGHT" spacing="10.0">
+					<children>
+						<Label id="fragmenteImageLabel"
+							contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+							maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+							minWidth="-Infinity" prefHeight="25.0" prefWidth="30.0"
+							styleClass="image-label" />
+						<Label fx:id="fragmenteAnzeigeLabel"
+							focusTraversable="false" text="50" />
+					</children>
+					<padding>
+						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+					</padding>
+				</HBox>
+			</children>
+		</VBox>
+	</children>
+</fx:root>

@@ -5,15 +5,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
+import de.pk.utils.lokalisierung.Lokalisierbar;
+import de.pk.view.visuell.customControls.heldenStatusAnzeige.heldStatusHBox.HeldStatusHBox;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class HeldenStatusAnzeige extends VBox implements Initializable
+public class HeldenStatusAnzeige extends VBox implements Initializable, Lokalisierbar
 {
 	/**
 	 * Pfad zur fxml-Datei, fuer die diese Klasse der Controller ist.
@@ -24,66 +23,20 @@ public class HeldenStatusAnzeige extends VBox implements Initializable
 	 * Bis zu vier Statusanzeigen koennen dargestellt werden (fuer jeden Helden
 	 * eine). Dieses Array beinhaltet alle vier.
 	 */
-	private HBox[] heldenStatusAnzeigen = null;
-	/**
-	 * Die Helden, dessen Attribute von dieser StatusAnzeige ueberwacht und
-	 * angezeigt werden sollen.
-	 */
-	private Held[] helden = null;
+	private HeldStatusHBox[] heldStatusHBoxen = null;
 
 	// erste Helden-Anzeige:
 	@FXML
-	private HBox heldenStatusAnzeigeHBox1;
-	@FXML
-	private Label heldenAvatarLabel1;
-	@FXML
-	private ProgressBar kleineLebensPunkteAnzeigeProgressBar1;
-	@FXML
-	private ProgressBar kleineSpezialFaehigkeitsAnzeigeProgressBar1;
-	@FXML
-	private Label aktuellerHeldenModusLabel1;
-	@FXML
-	private Label verbleibendePhasenLabel1;
-	@FXML
-	private Label verbleibendePhasenLabel2;
-	@FXML
-	private Label verbleibendePhasenLabel3;
-
+	private HeldStatusHBox heldStatusHBox1;
 	// zweite Helden-Anzeige:
 	@FXML
-	private HBox heldenStatusAnzeigeHBox2;
-	@FXML
-	private Label heldenAvatarLabel2;
-	@FXML
-	private ProgressBar kleineLebensPunkteAnzeigeProgressBar2;
-	@FXML
-	private ProgressBar kleineSpezialFaehigkeitsAnzeigeProgressBar2;
-	@FXML
-	private Label aktuellerHeldenModusLabel2;
-
+	private HeldStatusHBox heldStatusHBox2;
 	// dritte Helden-Anzeige:
 	@FXML
-	private HBox heldenStatusAnzeigeHBox3;
-	@FXML
-	private Label heldenAvatarLabel3;
-	@FXML
-	private ProgressBar kleineLebensPunkteAnzeigeProgressBar3;
-	@FXML
-	private ProgressBar kleineSpezialFaehigkeitsAnzeigeProgressBar3;
-	@FXML
-	private Label aktuellerHeldenModusLabel3;
-
+	private HeldStatusHBox heldStatusHBox3;
 	// vierte Helden-Anzeige:
 	@FXML
-	private HBox heldenStatusAnzeigeHBox4;
-	@FXML
-	private Label heldenAvatarLabel4;
-	@FXML
-	private ProgressBar kleineLebensPunkteAnzeigeProgressBar4;
-	@FXML
-	private ProgressBar kleineSpezialFaehigkeitsAnzeigeProgressBar4;
-	@FXML
-	private Label aktuellerHeldenModusLabel4;
+	private HeldStatusHBox heldStatusHBox4;
 
 	/**
 	 * Erstellt eine neue HeldenStatusAnzeige, indem die fxml-Datei geladen wird und
@@ -96,6 +49,7 @@ public class HeldenStatusAnzeige extends VBox implements Initializable
 		{
 			fxmlLoader.setRoot(this);
 			fxmlLoader.setController(this);
+			fxmlLoader.setClassLoader(getClass().getClassLoader());
 			fxmlLoader.load();
 		} catch (IOException exception)
 		{
@@ -113,14 +67,14 @@ public class HeldenStatusAnzeige extends VBox implements Initializable
 	 */
 	public void setAnzahlHeldenAnzeigen(int anzahlAnzuzeigenderHeldenAnzeigen)
 	{
-		for (int i = 0; i < this.heldenStatusAnzeigen.length; i++)
+		for (int i = 0; i < this.heldStatusHBoxen.length; i++)
 		{
 			if (anzahlAnzuzeigenderHeldenAnzeigen > i)
 			{
-				this.heldenStatusAnzeigen[i].setVisible(true);
+				this.heldStatusHBoxen[i].setVisible(true);
 			} else
 			{
-				this.heldenStatusAnzeigen[i].setVisible(false);
+				this.heldStatusHBoxen[i].setVisible(false);
 			}
 		}
 	}
@@ -128,58 +82,31 @@ public class HeldenStatusAnzeige extends VBox implements Initializable
 	/**
 	 * Legt die Helden fest, die von dieser Anzeige "ueberwacht" werden sollen. Es
 	 * werden somit automatisch immer die aktuellen Werte ihrer Attribute auf die
-	 * entsprechenden Anzeigen dieser StatusAnzeige gelegt. Aendert sich die
-	 * Anzeige-Reihenfolge der hinzugefuegten Helden, muessen diese nicht neu
-	 * hinzugefuegt werden, es reicht ein Aufruf der Methode
-	 * schiebeHeldenEineRundeWeiter().
+	 * entsprechenden Anzeigen dieser StatusAnzeige gelegt.
 	 *
 	 * @param helden Die Helden, dessen Attribute von dieser StatusAnzeige
 	 *               ueberwacht und angezeigt werden sollen.
 	 */
 	public void setHelden(Held[] helden)
 	{
-		this.helden = helden;
-		aktualisiereHeldenAnzeigen(this.helden);
-		this.setAnzahlHeldenAnzeigen(this.helden.length);
-	}
-
-	/**
-	 * Initialisiert die Helden, indem ihren Attributen ChangeListener hinzugefuegt
-	 * werden, die automatisch dafuer sorgen, dass die aktuellen Werte ihrer
-	 * Attribute stets auf die entsprechenden Anzeigen dieser StatusAnzeige gelegt
-	 * werden.
-	 *
-	 * @param helden Die zu ueberwachenden Helden
-	 */
-	private void aktualisiereHeldenAnzeigen(Held[] helden)
-	{
-		// TODO ChangeListener (oder ähnliches) für LP, RP, etc. hinzufügen und Werte
-		// auf
-		// entsprechende Anzeigen (die ganzen Bilder-Labels und ProgressBars) legen.
-
-		// Achtung! Beachte das Weiterschieben der Helden! Reicht es, beim
-		// Weiterschieben, diese Methode erneut aufzurufen, sodass die Listener der
-		// einzelnen Anzeigen auf den naechsten Helden aktualisiert werden?
-	}
-
-	/**
-	 * Schiebt alle Helden um einen Index weiter nach hinten, der letzte Held wird
-	 * an den Anfang geschoben.
-	 */
-	public void schiebeHeldenEineRundeWeiter()
-	{
-		Held[] alteHeldenReihenfolge = this.helden.clone();
-		for (int i = 0; i < alteHeldenReihenfolge.length; i++)
+		for (int i = 0; i < helden.length; i++)
 		{
-			if (i + 1 == this.helden.length)
-			{
-				this.helden[i - i] = alteHeldenReihenfolge[i];
-			} else
-			{
-				this.helden[i + 1] = alteHeldenReihenfolge[i];
-			}
+			this.heldStatusHBoxen[i].setHeld(helden[i]);
 		}
-		aktualisiereHeldenAnzeigen(this.helden);
+		this.setAnzahlHeldenAnzeigen(helden.length);
+	}
+
+	/**
+	 * Markiert die aktuelle HeldenStatusHBox an der Stelle index, indem diese
+	 * umrahmt wird. Setzt die Rahmen aller anderen Boxen wieder zurueck.
+	 */
+	public void markiereAktuelleHeldenStatusHBox(int index)
+	{
+		for (HeldStatusHBox heldStatusHBox : this.heldStatusHBoxen)
+		{
+			heldStatusHBox.entferneUmrandung();
+		}
+		this.heldStatusHBoxen[index].umrandeFarbig();
 	}
 
 	/**
@@ -188,9 +115,17 @@ public class HeldenStatusAnzeige extends VBox implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		this.heldenStatusAnzeigen = new HBox[]
-		{ this.heldenStatusAnzeigeHBox1, this.heldenStatusAnzeigeHBox2, this.heldenStatusAnzeigeHBox3,
-				this.heldenStatusAnzeigeHBox4 };
+		this.heldStatusHBoxen = new HeldStatusHBox[]
+		{ this.heldStatusHBox1, this.heldStatusHBox2, this.heldStatusHBox3, this.heldStatusHBox4 };
+	}
+
+	@Override
+	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	{
+		for (HeldStatusHBox heldStatusHBox : this.heldStatusHBoxen)
+		{
+			heldStatusHBox.aktualisiereTextKomponenten(sprachRessource);
+		}
 	}
 
 }

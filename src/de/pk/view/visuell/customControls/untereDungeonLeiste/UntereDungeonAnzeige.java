@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
+import de.pk.utils.lokalisierung.Lokalisierbar;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.HBox;
 
-public class UntereDungeonAnzeige extends HBox implements Initializable
+public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalisierbar
 {
 	/**
 	 * Pfad zur fxml-Datei, fuer die diese Klasse der Controller ist.
@@ -58,15 +59,15 @@ public class UntereDungeonAnzeige extends HBox implements Initializable
 	private Button heldenInventarButton4;
 	// Buttons fuer wirkende Effekte
 	@FXML
-	private Button wirkendeEffekteButton1;
+	private Label wirkendeEffekteButton1;
 	@FXML
-	private Button wirkendeEffekteButton2;
+	private Label wirkendeEffekteButton2;
 	@FXML
-	private Button wirkendeEffekteButton3;
+	private Label wirkendeEffekteButton3;
 	@FXML
-	private Button wirkendeEffekteButton4;
+	private Label wirkendeEffekteButton4;
 	@FXML
-	private Button wirkendeEffekteButton5;
+	private Label wirkendeEffekteButton5;
 
 	/**
 	 * Erstellt eine neue UntereDungeonAnzeige, indem die fxml-Datei geladen wird
@@ -173,6 +174,12 @@ public class UntereDungeonAnzeige extends HBox implements Initializable
 	public void heldenInventarButton4Pressed(ActionEvent event)
 	{
 		// TODO Inventarplatz 4, Bild anzeigen, etc.
+	}
+
+	@Override
+	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	{
+		// TODO Lokalisierung
 	}
 
 }

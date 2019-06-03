@@ -167,7 +167,7 @@ public class AnwendungFX extends Application
 		AnwendungFX.aktualisiereFensterAufloesung();
 		AnwendungFX.anwendungsStage.getIcons()
 				.add(new Image(new File(Spielkonstanten.ANWENDUNG_ANWENDUNGS_ICON).toURI().toURL().toExternalForm()));
-		AnwendungFX.anwendungsStage.setResizable(true);
+		AnwendungFX.anwendungsStage.setResizable(false);
 		AnwendungFX.anwendungsStage.setOnCloseRequest(windowEvent -> Main.anwendungBeenden());
 		AnwendungFX.anwendungsStage.setScene(AnwendungFX.SZENEN_MAP.get(Spielkonstanten.ANWENDUNG_TITEL_SZENE));
 		AnwendungFX.anwendungsStage.show();
@@ -182,7 +182,7 @@ public class AnwendungFX extends Application
 	 */
 	public static void aktualisiereSzenenSprache(ResourceBundle sprachRessource)
 	{
-		AnwendungFX.anwendungsStage.setTitle(sprachRessource.getString(LokalisierungsKeys.ANWENDUNGS_TITEL));
+		AnwendungFX.anwendungsStage.setTitle(sprachRessource.getString(LokalisierungsKeys.ANWENDUNGS_TITEL_KEY));
 		for (Lokalisierbar controller : AnwendungFX.SZENEN_CONTROLLER_LIST)
 		{
 			controller.aktualisiereTextKomponenten(sprachRessource);

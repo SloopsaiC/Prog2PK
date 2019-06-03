@@ -85,42 +85,26 @@ public class LokalisierungsKeys
 	 * KEYS FUER DIE SPRACH-PROPERTIES ZUM AUSLESEN
 	 *
 	 */
-	public static final String ANWENDUNGS_TITEL = "anwendungsTitel";
-
-	public static final String ZUM_HAUPTMENUE = "zumHauptmenue";
-
-	public static final String AUFLOESUNG_ANWENDEN = "aufloesungAnwenden";
-
-	public static final String AUFLOESUNG = "aufloesung";
-
-	public static final String EINSTELLUNGEN = "einstellungen";
-
-	public static final String LAUTSTAERKE = "lautstaerke";
-
-	public static final String MUSIK = "musik";
-
-	public static final String SOUND = "sound";
-
-	public static final String SPRACHE = "sprache";
-
-	public static final String ZURUECK = "zurueck";
-
-	public static final String TOOLTIP_AUFLOESUNG = "tooltipAufloesung";
-
-	public static final String TOOLTIP_SPRACHE = "tooltipSprache";
-
-	public static final String CREDTITS = "credits";
-
-	public static final String HAUPTMENUE = "hauptmenue";
-
-	public static final String NEUES_SPIEL = "neuesSpiel";
-
-	public static final String OPTIONEN = "optionen";
-
-	public static final String BEENDEN = "beenden";
-
-	public static final String SPIEL_LADEN = "spielLaden";
-
-	public static final String ZUM_TITELBILDSCHIRM = "zumTitelbildschrim";
+	public static final String ANWENDUNGS_TITEL_KEY = "anwendungsTitel";
+	public static final String ZUM_HAUPTMENUE_KEY = "zumHauptmenue";
+	public static final String AUFLOESUNG_ANWENDEN_KEY = "aufloesungAnwenden";
+	public static final String AUFLOESUNG_KEY = "aufloesung";
+	public static final String EINSTELLUNGEN_KEY = "einstellungen";
+	public static final String LAUTSTAERKE_KEY = "lautstaerke";
+	public static final String MUSIK_KEY = "musik";
+	public static final String SOUND_KEY = "sound";
+	public static final String SPRACHE_KEY = "sprache";
+	public static final String ZURUECK_KEY = "zurueck";
+	public static final String TOOLTIP_AUFLOESUNG_KEY = "tooltipAufloesung";
+	public static final String TOOLTIP_SPRACHE_KEY = "tooltipSprache";
+	public static final String CREDTITS_KEY = "credits";
+	public static final String HAUPTMENUE_KEY = "hauptmenue";
+	public static final String NEUES_SPIEL_KEY = "neuesSpiel";
+	public static final String OPTIONEN_KEY = "optionen";
+	public static final String BEENDEN_KEY = "beenden";
+	public static final String SPIEL_LADEN_KEY = "spielLaden";
+	public static final String ZUM_TITELBILDSCHIRM_KEY = "zumTitelbildschrim";
+	public static final String TOOLTIP_QUEST_LOG_OEFFNEN_KEY = "tooltipQuestLogOeffnen";
+	public static final String TOOLTIP_QUEST_LOG_SCHLIESSEN_KEY = "tooltipQuestLogSchliessen";
 
 }

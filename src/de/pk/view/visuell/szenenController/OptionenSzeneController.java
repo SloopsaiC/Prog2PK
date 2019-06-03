@@ -146,18 +146,19 @@ public class OptionenSzeneController implements Initializable, Lokalisierbar
 	@Override
 	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
 	{
-		this.aufloesungAnwendenButton.setText(sprachRessource.getString(LokalisierungsKeys.AUFLOESUNG_ANWENDEN));
-		this.aufloesungsLabel.setText(sprachRessource.getString(LokalisierungsKeys.AUFLOESUNG));
-		this.einstellungenLabel.setText(sprachRessource.getString(LokalisierungsKeys.EINSTELLUNGEN));
-		this.lautstaerkeLabel.setText(sprachRessource.getString(LokalisierungsKeys.LAUTSTAERKE));
-		this.musikLabel.setText(sprachRessource.getString(LokalisierungsKeys.MUSIK));
-		this.soundLabel.setText(sprachRessource.getString(LokalisierungsKeys.SOUND));
-		this.spracheLabel.setText(sprachRessource.getString(LokalisierungsKeys.SPRACHE));
-		this.zurueckZumHauptmenueButton.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK)
-				+ sprachRessource.getString(LokalisierungsKeys.ZUM_HAUPTMENUE));
+		this.aufloesungAnwendenButton.setText(sprachRessource.getString(LokalisierungsKeys.AUFLOESUNG_ANWENDEN_KEY));
+		this.aufloesungsLabel.setText(sprachRessource.getString(LokalisierungsKeys.AUFLOESUNG_KEY));
+		this.einstellungenLabel.setText(sprachRessource.getString(LokalisierungsKeys.EINSTELLUNGEN_KEY));
+		this.lautstaerkeLabel.setText(sprachRessource.getString(LokalisierungsKeys.LAUTSTAERKE_KEY));
+		this.musikLabel.setText(sprachRessource.getString(LokalisierungsKeys.MUSIK_KEY));
+		this.soundLabel.setText(sprachRessource.getString(LokalisierungsKeys.SOUND_KEY));
+		this.spracheLabel.setText(sprachRessource.getString(LokalisierungsKeys.SPRACHE_KEY));
+		this.zurueckZumHauptmenueButton.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK_KEY)
+				+ sprachRessource.getString(LokalisierungsKeys.ZUM_HAUPTMENUE_KEY));
 		this.aufloesungChoiceBox
-				.setTooltip(new Tooltip(sprachRessource.getString(LokalisierungsKeys.TOOLTIP_AUFLOESUNG)));
-		this.spracheChoiceBox.setTooltip(new Tooltip(sprachRessource.getString(LokalisierungsKeys.TOOLTIP_SPRACHE)));
+				.setTooltip(new Tooltip(sprachRessource.getString(LokalisierungsKeys.TOOLTIP_AUFLOESUNG_KEY)));
+		this.spracheChoiceBox
+				.setTooltip(new Tooltip(sprachRessource.getString(LokalisierungsKeys.TOOLTIP_SPRACHE_KEY)));
 	}
 
 }
