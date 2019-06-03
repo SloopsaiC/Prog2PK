@@ -5,7 +5,7 @@ import de.pk.control.spiel.Dungeon;
 import de.pk.control.spiel.einstellungen.Einstellungen;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;
-import de.pk.utils.lokalisierung.DE_de;
+import de.pk.utils.lokalisierung.LokalisierungsKeys;
 import javafx.application.Platform;
 
 /**
@@ -39,7 +39,7 @@ public class Main
 	 */
 	private static void begruessen()
 	{
-		DebugAusgabeKlasse.ausgeben(DE_de.BEGRUESSUNG_BEI_PROGRAMMSTART);
+		DebugAusgabeKlasse.ausgeben(LokalisierungsKeys.BEGRUESSUNG_BEI_PROGRAMMSTART);
 	}
 
 	/**

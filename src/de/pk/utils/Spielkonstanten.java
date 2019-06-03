@@ -29,22 +29,19 @@ public class Spielkonstanten
 	public static final int KACHEL_GROESSE_Y = 5;
 
 	// Bezeichnungen und Pfade der GUI-Elemente
-	/**
-	 * Pfad zum Fenster Icon
-	 */
-	public static final String ANWENDUNG_ANWENDUNGS_ICON = "src\\de\\pk\\ressourcen\\bildDateien\\spadesK.jpg";
+	public static final String ANWENDUNG_ANWENDUNGS_ICON = "src\\de\\pk\\ressourcen\\bildDateien\\sonstigeBilder\\spadesK.jpg";
 	public static final String ANWENDUNG_CREDIT_SZENE = "CreditsSzene";
-	public static final String ANWENDUNG_CREDIT_SZENE_PFAD_FXML = "CreditsSzene.fxml";
 	public static final String ANWENDUNG_HAUPTMENUE_SZENE = "HauptmenueSzene";
-	public static final String ANWENDUNG_HAUPTMENUE_SZENE_PFAD_FXML = "HauptmenueSzene.fxml";
-	public static final String ANWENDUNG_OPTIOEN_SZENE = "OptionenSzene";
-	public static final String ANWENDUNG_OPTIONEN_SZENE_PPFAD_FXML = "OptionenSzene.fxml";
+	public static final String ANWENDUNG_OPTIONEN_SZENE = "OptionenSzene";
 	public static final String ANWENDUNG_TITEL_SZENE = "TitelSzene";
-	public static final String ANWENDUNG_TITEL_SZENE_PFAD_FXML = "TitelSzene.fxml";
 	public static final String ANWENDUNG_DUNGEON_SZENE = "DungeonSzene";
-	public static final String ANWENDUNG_DUNGEON_SZENE_PFAD_FXML = "DungeonSzene.fxml";
 	public static final String ANWENDUNG_SCHWIERIGKEIT_WAEHLEN_SZENE = "SchwierigkeitWaehlenSzene";
-	public static final String ANWENDUNG_SCHWIERIGKEIT_WAEHLEN_SZENE_PFAD_FXML = "SchwierigkeitWaehlenSzene.fxml";
 	public static final String ANWENDUNG_WELTKARTE_SZENE = "WeltkarteSzene";
-	public static final String ANWENDUNG_WELTKARTE_SZENE_PFAD_FXML = "WeltkarteSzene.fxml";
+
+	public static final String FXML_DATEI_ENDUNG = ".fxml";
+	public static final String FXML_DATEI_PFAD = "/de/pk/view/visuell/szenenLayoutsFXML/";
+	public static final String CSS_DATEI_ENDE = ".css";
+	public static final String CSS_DATEI_PFAD = "/de/pk/view/visuell/styleSheetsCSS/aufloesungen/";
+
+	public static final String LOKALISIERUNG_PFAD = "de.pk.ressourcen.lokalisierung.sprache";
 }

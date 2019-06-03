@@ -1,0 +1,11 @@
+.dungeon-pane {
+	-fx-background-image: url("../../../ressourcen/bildDateien/sonstigeBilder/dungeonbackground.png");
+}
+
+.dungeon-border-pane {
+	-fx-background-image: url("../../../ressourcen/bildDateien/sonstigeBilder/border.png");
+	-fx-background-position: left top;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: stretch;
+	-fx-effect: dropshadow(three-pass-box, black, 65, 0.4, 5, 5)
+}

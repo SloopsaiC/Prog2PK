@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.pk.view.visuell.customControls.heldenStatusAnzeige.heldStatusHBox.HeldStatusHBox?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root spacing="5.0" type="javafx.scene.layout.VBox"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1">
+<!-- 	fx:controller="de.pk.view.visuell.customControls.heldenStatusAnzeige.HeldenStatusAnzeige"> -->
+	<stylesheets>
+		<URL value="@../../styleSheetsCSS/StandardSzenenStyle.css" />
+	</stylesheets>
+	<children>
+		<HeldStatusHBox fx:id="heldStatusHBox1" />
+		<HeldStatusHBox fx:id="heldStatusHBox2" />
+		<HeldStatusHBox fx:id="heldStatusHBox3" />
+		<HeldStatusHBox fx:id="heldStatusHBox4" />
+	</children>
+</fx:root>

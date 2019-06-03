@@ -55,6 +55,9 @@ public class AudioSchnipsel implements Closeable
 		{
 			this.passeLautstaerkeKontinuierlichAn(this.prozentualeLautstaerke,
 					AudioSchnipsel.MINIMALE_PROZENTUALE_LAUTSTAERKE);
+		} else
+		{
+			this.setzeDezibelLautstaerkeAusProzentualerAngabe(this.prozentualeLautstaerke);
 		}
 	}
 
@@ -148,7 +151,6 @@ public class AudioSchnipsel implements Closeable
 						AudioSchnipsel.MINIMALE_PROZENTUALE_LAUTSTAERKE,
 						AudioSchnipsel.MAXIMALE_PROZENTUALE_LAUTSTAERKE)
 						/ (float) AudioSchnipsel.MAXIMALE_PROZENTUALE_LAUTSTAERKE)));
-		System.out.println(this.lautstaerkeControl.getValue());
 	}
 
 	public void stoppen(boolean ausblenden)

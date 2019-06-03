@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<fx:root alignment="CENTER" gridLinesVisible="true"
+	type="javafx.scene.layout.GridPane"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<!-- fx:controller="de.pk.view.visuell.kachelGridPane.KachelGridPane"> -->
+	<stylesheets>
+		<URL value="@../../styleSheetsCSS/StandardSzenenStyle.css" />
+		<URL value="@KachelGridPane.css" />
+	</stylesheets>
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="0" GridPane.rowIndex="0" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="1" GridPane.rowIndex="0" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="2" GridPane.rowIndex="0" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="3" GridPane.rowIndex="0" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="4" GridPane.rowIndex="0" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="0" GridPane.rowIndex="1" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="1" GridPane.rowIndex="1" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="2" GridPane.rowIndex="1" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="3" GridPane.rowIndex="1" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="4" GridPane.rowIndex="1" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="0" GridPane.rowIndex="2" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="1" GridPane.rowIndex="2" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="2" GridPane.rowIndex="2" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="3" GridPane.rowIndex="2" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="4" GridPane.rowIndex="2" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="0" GridPane.rowIndex="3" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="1" GridPane.rowIndex="3" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="2" GridPane.rowIndex="3" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="3" GridPane.rowIndex="3" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="4" GridPane.rowIndex="3" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="0" GridPane.rowIndex="4" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="1" GridPane.rowIndex="4" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="2" GridPane.rowIndex="4" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="3" GridPane.rowIndex="4" />
+	<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0"
+		prefWidth="60.0" styleClass="kachelUntergrundPane"
+		GridPane.columnIndex="4" GridPane.rowIndex="4" />
+</fx:root>

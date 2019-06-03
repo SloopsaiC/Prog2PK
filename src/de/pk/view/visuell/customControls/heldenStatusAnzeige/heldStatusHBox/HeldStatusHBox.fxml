@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<fx:root spacing="2.0" type="javafx.scene.layout.HBox"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<!-- fx:controller="de.pk.view.visuell.customControls.heldenStatusAnzeige.heldStatusHBox.HeldStatusHBox"> -->
+	<stylesheets>
+		<URL value="@../../../styleSheetsCSS/StandardSzenenStyle.css" />
+		<URL value="@HeldStatusHBox.css" />
+	</stylesheets>
+	<children>
+		<StackPane alignment="TOP_CENTER" opacity="0.95">
+			<children>
+				<Circle fill="#173440da" radius="35.0" stroke="BLACK"
+					strokeType="INSIDE" />
+				<Label id="heldenAvatarLabel" fx:id="heldenAvatarLabel"
+					alignment="CENTER" contentDisplay="GRAPHIC_ONLY"
+					focusTraversable="false" graphicTextGap="0.0" maxHeight="-Infinity"
+					maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+					prefHeight="60.0" prefWidth="65.0" styleClass="image-label"
+					textAlignment="CENTER" />
+			</children>
+		</StackPane>
+		<VBox alignment="CENTER" spacing="3.0">
+			<children>
+				<ProgressBar id="lebensPunkteIndikatorKlein"
+					fx:id="kleineLebensPunkteAnzeigeProgressBar" prefWidth="45.0"
+					progress="0.62" />
+				<ProgressBar id="spezielleFaehigkeitIndikatorKlein"
+					fx:id="kleineSpezialFaehigkeitsAnzeigeProgressBar" prefWidth="45.0"
+					progress="0.31" />
+				<Label id="aktuellerHeldenModusLabel"
+					fx:id="aktuellerHeldenModusLabel" alignment="CENTER"
+					contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+					graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity"
+					minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0"
+					prefWidth="35.0" styleClass="image-label" textAlignment="CENTER" />
+			</children>
+		</VBox>
+		<VBox alignment="CENTER" spacing="2.0">
+			<children>
+				<Label id="verbleibendePhasenLabel"
+					fx:id="verbleibendePhasenLabel1" alignment="CENTER"
+					contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+					graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity"
+					minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
+					prefWidth="25.0" styleClass="image-label" textAlignment="CENTER" />
+				<Label id="verbleibendePhasenLabel"
+					fx:id="verbleibendePhasenLabel2" alignment="CENTER"
+					contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+					graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity"
+					minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
+					prefWidth="25.0" styleClass="image-label" textAlignment="CENTER" />
+				<Label id="verbleibendePhasenLabel"
+					fx:id="verbleibendePhasenLabel3" alignment="CENTER"
+					contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+					graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity"
+					minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
+					prefWidth="25.0" styleClass="image-label" textAlignment="CENTER" />
+			</children>
+			<HBox.margin>
+				<Insets left="3.0" />
+			</HBox.margin>
+		</VBox>
+	</children>
+	<padding>
+		<Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+	</padding>
+</fx:root>

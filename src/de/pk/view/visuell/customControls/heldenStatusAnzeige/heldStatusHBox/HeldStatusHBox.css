@@ -1,0 +1,18 @@
+.progress-bar .track {
+	-fx-background-color: rgba(50.0,50.0,50.0,0.5);
+}
+
+
+#lebensPunkteIndikatorKlein .bar {
+	-fx-background-color: rgb(100.0,10.0,10.0);
+}
+
+#spezielleFaehigkeitIndikatorKlein .bar {
+	-fx-background-color: rgb(10.0,100.0,10.0);
+}
+
+
+
+#heldenAvatarLabel {
+	-fx-background-image: url("../../../../../ressourcen/bildDateien/lebendigeObjekte/avatar_beispiel.png"); 
+}
