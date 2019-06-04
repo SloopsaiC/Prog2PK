@@ -5,12 +5,17 @@ import java.net.URL;
 import java.util.InputMismatchException;
 import java.util.ResourceBundle;
 
+import de.pk.model.position.KachelPosition;
 import de.pk.model.position.Position;
 import de.pk.model.spielbrett.Spielbrett;
 import de.pk.utils.lokalisierung.Lokalisierbar;
 import de.pk.view.visuell.customControls.kachelGridPane.KachelGridPane;
+import de.pk.view.visuell.events.KachelPositionEvent;
+import de.pk.view.visuell.events.PositionEvent;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -50,6 +55,17 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 	private static final double SKALIERUNG_MAXIMUM = 1.5d;
 
 	/**
+	 * Beinhaltet die x-Koordinate einer alten Position der Maus zum Vergleich mit
+	 * einer Aktuelleren.
+	 */
+	private double oldX = 0;
+	/**
+	 * Beinhaltet die y-Koordinate einer alten Position der Maus zum Vergleich mit
+	 * einer Aktuelleren.
+	 */
+	private double oldY = 0;
+
+	/**
 	 * Erstellt eine neue KarteGridPane, indem die fxml-Datei geladen wird und diese
 	 * Klasse dieser sich selbst als ihr Controller hinzufuegt.
 	 */
@@ -75,6 +91,7 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		// TODO inti?
+
 	}
 
 	@Override
@@ -126,11 +143,49 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 	 */
 	public void verschiebeBeiMouseEvent(MouseEvent event, double oldX, double oldY)
 	{
-		if (event.getButton() == MouseButton.PRIMARY)
+		if (event.getButton() == MouseButton.SECONDARY)
 		{
 			this.setTranslateX(this.getTranslateX() + ((event.getX() - oldX) * VERSCHIEBUNGS_FAKTOR));
 			this.setTranslateY(this.getTranslateY() + ((event.getY() - oldY) * VERSCHIEBUNGS_FAKTOR));
 		}
+	}
+
+	/**
+	 * Wird aufgerufen, wenn mit der Maus ins Fenster geklickt wurde und waehrend
+	 * dieses Klicken andauert.
+	 *
+	 * @param event MouseEvent des Mausklicks
+	 */
+	@FXML
+	public void kartenGridPaneMousePressed(MouseEvent event)
+	{
+		this.oldX = event.getX();
+		this.oldY = event.getY();
+	}
+
+	/**
+	 * Wird aufgerufen, wenn eine Maustaste heruntergedrueckt ist und die Maus dabei
+	 * bewegt wird.
+	 *
+	 * @param event MouseEvent des Bewegens der gedrueckten Maus
+	 */
+	@FXML
+	public void kartenGridPaneMouseDragged(MouseEvent event)
+	{
+		this.verschiebeBeiMouseEvent(event, this.oldX, this.oldY);
+		this.oldX = event.getX();
+		this.oldY = event.getY();
+	}
+
+	/**
+	 * Wird Aufgerufen, wenn mit dem Mausrad im Fenster "gescroolt" wird.
+	 *
+	 * @param event ScrollEvent des Mausraddrehens
+	 */
+	@FXML
+	public void kartenGridPaneScroll(ScrollEvent event)
+	{
+		this.skaliereBeiScrollEvent(event);
 	}
 
 	/**
@@ -158,6 +213,30 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 			}
 		}
 		this.add(kachelGridPane, pos.getX(), pos.getY());
+		this.initEventHandler(kachelGridPane, pos);
+	}
+
+	/**
+	 * Fuegt dem kachelGridPane einen EventHandler hinzu. Wurde auf einen untergrund
+	 * dieser Kachel geklickt, so soll diese mit seiner Position ein neues
+	 * PositionEvent ausloesen.
+	 *
+	 * @param kachelGridPane Das kachelGridPane, dem der EventHandler hinzugefuegt
+	 *                       werden soll
+	 * @param pos            Die Position des kachelGridPanes auf der Karte
+	 */
+	private void initEventHandler(KachelGridPane kachelGridPane, Position pos)
+	{
+		kachelGridPane.addEventHandler(PositionEvent.UNTERGRUND_ANGELICKT, new EventHandler<PositionEvent>()
+		{
+
+			@Override
+			public void handle(PositionEvent event)
+			{
+				KarteGridPane.this.fireEvent(new KachelPositionEvent(KachelPositionEvent.KACHEL_ANGELICKT,
+						new KachelPosition(kachelGridPane.getDarstellendeKachel(), pos)));
+			}
+		});
 	}
 
 	@Override
@@ -169,7 +248,7 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 			if (!this.contains(position.getX(), position.getY()))
 			{
 				KachelGridPane kachelPane = new KachelGridPane();
-				kachelPane.setKachel(spielbrett.getKachelBei(position));
+				kachelPane.setDarstellendeKachel(spielbrett.getKachelBei(position));
 				this.addKachelGridPane(kachelPane, position);
 			}
 		}

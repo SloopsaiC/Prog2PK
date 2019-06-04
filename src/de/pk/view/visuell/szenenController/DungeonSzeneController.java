@@ -4,8 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import de.pk.control.spiel.Dungeon;
-import de.pk.model.position.KachelPosition;
-import de.pk.model.position.Position;
 import de.pk.utils.lokalisierung.Lokalisierbar;
 import de.pk.view.visuell.customControls.heldenStatusAnzeige.HeldenStatusAnzeige;
 import de.pk.view.visuell.customControls.karteGridPane.KarteGridPane;
@@ -13,17 +11,14 @@ import de.pk.view.visuell.customControls.obereDungeonLeiste.ObereDungeonAnzeige;
 import de.pk.view.visuell.customControls.pauseDialog.PauseDialog;
 import de.pk.view.visuell.customControls.questLog.QuestLog;
 import de.pk.view.visuell.customControls.untereDungeonLeiste.UntereDungeonAnzeige;
+import de.pk.view.visuell.events.KachelPositionEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Control;
 import javafx.scene.effect.GaussianBlur;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 
 /**
  * FXML Controller class TODO: An einen Dungeon anbinden und dessen Karte, Name,
@@ -33,16 +28,6 @@ import javafx.scene.layout.GridPane;
  */
 public class DungeonSzeneController implements Initializable, Lokalisierbar
 {
-	/**
-	 * Beinhaltet die x-Koordinate einer alten Position der Maus zum Vergleich mit
-	 * einer Aktuelleren.
-	 */
-	private double oldX = 0;
-	/**
-	 * Beinhaltet die y-Koordinate einer alten Position der Maus zum Vergleich mit
-	 * einer Aktuelleren.
-	 */
-	private double oldY = 0;
 
 	@FXML
 	private BorderPane dungeonBorderPane;
@@ -69,6 +54,28 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 	{
 		initObereAnzeigeButtonEvents();
 		initPauseMenueDialogPaneButtonEvents();
+		initKartenGridPane();
+	}
+
+	/**
+	 * Es wird ein EventHandler fuer das Anklicken einer Kachel der Karte
+	 * hinzugefuegt. Ueber das KachelPositionEvent kann die KachelPosition der
+	 * angeklickten Kachel ausgelesen werden.
+	 */
+	private void initKartenGridPane()
+	{
+		this.karteGridPane.addEventHandler(KachelPositionEvent.KACHEL_ANGELICKT, new EventHandler<KachelPositionEvent>()
+		{
+
+			@Override
+			public void handle(KachelPositionEvent event)
+			{
+				// TODO Testausgabe loeschen!
+				System.out.println("Kachel " + event.getEventKachelPosition().getKachel() + " wurde an der Stelle ("
+						+ event.getEventKachelPosition().getPositionAufDerKachel().getX() + "|"
+						+ event.getEventKachelPosition().getPositionAufDerKachel().getY() + ")  angeklickt.");
+			}
+		});
 	}
 
 	/**
@@ -131,61 +138,10 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 
 	}
 
-	private KachelPosition erstelleKachelPositionAusMouseEvent(MouseEvent event)
-	{
-		Node quelle = ((Node) event.getSource());
-		Integer test = GridPane.getColumnIndex(quelle);
-		Position positionDerKachel = new Position(GridPane.getColumnIndex(quelle.getParent()).intValue(),
-				GridPane.getRowIndex(quelle.getParent()).intValue());
-		return null;
-	}
-
-	/**
-	 * Wird aufgerufen, wenn mit der Maus ins Fenster geklickt wurde und waehrend
-	 * dieses Klicken andauert.
-	 *
-	 * @param event MouseEvent des Mausklicks
-	 */
-	@FXML
-	public void kartenGridPaneMousePressed(MouseEvent event)
-	{
-		this.oldX = event.getX();
-		this.oldY = event.getY();
-		if (this.untereDungeonAnzeige.getAktiveAktion() >= 0)
-		{
-			this.erstelleKachelPositionAusMouseEvent(event);
-		}
-	}
-
 	public void setDungeon(Dungeon dungeon)
 	{
 		this.aktiverDungeon = dungeon;
 		this.karteGridPane.setSpielbrett(this.aktiverDungeon.getSpielbrett());
-	}
-
-	/**
-	 * Wird aufgerufen, wenn eine Maustaste heruntergedrueckt ist und die Maus dabei
-	 * bewegt wird.
-	 *
-	 * @param event MouseEvent des Bewegens der gedrueckten Maus
-	 */
-	@FXML
-	public void kartenGridPaneMouseDragged(MouseEvent event)
-	{
-		this.karteGridPane.verschiebeBeiMouseEvent(event, this.oldX, this.oldY);
-		this.oldX = event.getX();
-		this.oldY = event.getY();
-	}
-
-	/**
-	 * Wird Aufgerufen, wenn mit dem Mausrad im Fenster "gescroolt" wird.
-	 *
-	 * @param event ScrollEvent des Mausraddrehens
-	 */
-	@FXML
-	public void kartenGridPaneScroll(ScrollEvent event)
-	{
-		this.karteGridPane.skaliereBeiScrollEvent(event);
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import de.pk.model.position.Position;
 import de.pk.model.spielbrett.Kachel;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.lokalisierung.Lokalisierbar;
+import de.pk.view.visuell.events.PositionEvent;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.EventHandler;
@@ -15,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.effect.Glow;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -35,12 +37,13 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 	private static final double GLUEHEN_INTENSITAET = 0.75;
 
 	private StackPane[][] untergruende = null;
+	private Kachel darstellendeKachel = null;
 
 	/**
 	 * Erstellt eine neue KachelGridPane, indem die fxml-Datei geladen wird und
 	 * diese Klasse dieser sich selbst als ihr Controller hinzufuegt.
 	 *
-	 * @param kachel Die Kachel, die dieses KachelGridPane als view repraesentiert
+	 * @param darstellendeKachel Die Kachel, die dieses KachelGridPane als view repraesentiert
 	 */
 	public KachelGridPane()
 	{
@@ -62,24 +65,52 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		// TODO vernuenftig initialisieren und konstante
 		this.untergruende = new StackPane[Spielkonstanten.KACHEL_GROESSE_Y][Spielkonstanten.KACHEL_GROESSE_X];
 		for (Node node : this.getChildren())
 		{
 			try
 			{
-				this.untergruende[GridPane.getRowIndex(node).intValue()][GridPane.getColumnIndex(node)
-						.intValue()] = (StackPane) node;
+				final int xKoordinate = GridPane.getColumnIndex(node).intValue();
+				final int yKoordinate = GridPane.getRowIndex(node).intValue();
+				StackPane untergrund = (StackPane) node;
+				this.untergruende[yKoordinate][xKoordinate] = untergrund;
+				initEventHandler(untergrund, new Position(xKoordinate, yKoordinate));
 			} catch (NullPointerException e)
 			{
+				//
 			}
 		}
 	}
 
 	/**
-	 * Legt die Untergruende dieses KachelGridPanes je nach Kachel kachel fest.
+	 * Fuegt dem untergrund einen EventHandler hinzu. Wird auf den Untergrund mit
+	 * der primaeren Maustaste geklickt, so soll dieser mit seiner Position ein
+	 * neues PositionEvent ausloesen.
 	 *
-	 * @param kachel Die Kachel, dessen Untergruende gesetzt werden sollen
+	 * @param untergrund Der Untergrund, dem der EventHandler hinzugefuegt werden
+	 *                   soll
+	 * @param pos        Die Position des Untergrunds auf der Kachel
+	 */
+	private void initEventHandler(StackPane untergrund, Position pos)
+	{
+		untergrund.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>()
+		{
+
+			@Override
+			public void handle(MouseEvent event)
+			{
+				if (event.getButton() == MouseButton.PRIMARY)
+				{
+					KachelGridPane.this.fireEvent(new PositionEvent(PositionEvent.UNTERGRUND_ANGELICKT, pos));
+				}
+			}
+		});
+	}
+
+	/**
+	 * Legt die Untergruende dieses KachelGridPanes je nach Kachel darstellendeKachel fest.
+	 *
+	 * @param darstellendeKachel Die Kachel, dessen Untergruende gesetzt werden sollen
 	 */
 	private void setKachelUntergruende(Kachel kachel)
 	{
@@ -173,9 +204,15 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 		}
 	}
 
-	public void setKachel(Kachel kachel)
+	public Kachel getDarstellendeKachel()
+	{
+		return this.darstellendeKachel;
+	}
+
+	public void setDarstellendeKachel(Kachel kachel)
 	{
 		kachel.addListener(this);
+		this.darstellendeKachel = kachel;
 		this.setKachelUntergruende(kachel);
 	}
 
