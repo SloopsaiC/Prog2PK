@@ -13,11 +13,15 @@ import de.pk.model.position.Position;
 import de.pk.model.position.Vektor;
 import de.pk.utils.PositionsUtils;
 import de.pk.utils.Spielkonstanten;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 
-public class Spielbrett
+public class Spielbrett implements Observable
 {
 	private HashMap<Position, Kachel> spielbrettTeile = null;
 	private ArrayList<LebendigesObjekt> alleLebendigenObjekte = new ArrayList<>();
+
+	private ArrayList<InvalidationListener> listeners = null;
 
 	public Spielbrett()
 	{
@@ -27,6 +31,7 @@ public class Spielbrett
 	public Spielbrett(HashMap<Position, Kachel> spielbrettTeile)
 	{
 		this.spielbrettTeile = spielbrettTeile;
+		this.listeners = new ArrayList<>();
 	}
 
 	/**
@@ -174,8 +179,6 @@ public class Spielbrett
 	public Position getPositionKachel(Kachel kachel)
 	{
 		// Dreht die Map dank der Stream API um und sucht daraus die Position
-		// TODO: Koennte langsam sein und sollte deshalb vielleicht vorab gemacht und
-		// gespeichert werden
 		return this.spielbrettTeile.entrySet().stream()
 				.collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey)).get(kachel);
 	}
@@ -194,6 +197,7 @@ public class Spielbrett
 	public void setAlleLebendigenObjekte(ArrayList<LebendigesObjekt> alleLebendigenObjekte)
 	{
 		this.alleLebendigenObjekte = alleLebendigenObjekte;
+		this.veraendert();
 	}
 
 	/**
@@ -202,6 +206,7 @@ public class Spielbrett
 	public void setSpielbrettTeile(HashMap<Position, Kachel> spielbrettTeile)
 	{
 		this.spielbrettTeile = spielbrettTeile;
+		this.veraendert();
 	}
 
 	/**
@@ -213,6 +218,7 @@ public class Spielbrett
 	public void setzeKachel(Kachel kachel, Position pos)
 	{
 		this.spielbrettTeile.put(pos, kachel);
+		this.veraendert();
 	}
 
 	public void setzeSpielbrettObjekt(KachelPosition position, SpielbrettObjekt zuSetzen)
@@ -222,6 +228,27 @@ public class Spielbrett
 		{
 			this.alleLebendigenObjekte.add((LebendigesObjekt) zuSetzen);
 		}
+		this.veraendert();
+	}
+
+	private void veraendert()
+	{
+		for (InvalidationListener listener : this.listeners)
+		{
+			listener.invalidated(this);
+		}
+	}
+
+	@Override
+	public void addListener(InvalidationListener listener)
+	{
+		this.listeners.add(listener);
+	}
+
+	@Override
+	public void removeListener(InvalidationListener listener)
+	{
+		this.listeners.remove(listener);
 	}
 
 }

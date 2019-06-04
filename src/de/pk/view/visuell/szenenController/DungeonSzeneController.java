@@ -3,6 +3,9 @@ package de.pk.view.visuell.szenenController;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import de.pk.control.spiel.Dungeon;
+import de.pk.model.position.KachelPosition;
+import de.pk.model.position.Position;
 import de.pk.utils.lokalisierung.Lokalisierbar;
 import de.pk.view.visuell.customControls.heldenStatusAnzeige.HeldenStatusAnzeige;
 import de.pk.view.visuell.customControls.karteGridPane.KarteGridPane;
@@ -14,11 +17,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Control;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 /**
  * FXML Controller class TODO: An einen Dungeon anbinden und dessen Karte, Name,
@@ -53,6 +58,8 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 	private ObereDungeonAnzeige obereDungeonAnzeige;
 	@FXML
 	private QuestLog questLog;
+
+	private Dungeon aktiverDungeon = null;
 
 	/**
 	 * Wird zu Beginn aufgerufen, um gewisse Komponenten zu initialisieren.
@@ -124,6 +131,15 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 
 	}
 
+	private KachelPosition erstelleKachelPositionAusMouseEvent(MouseEvent event)
+	{
+		Node quelle = ((Node) event.getSource());
+		Integer test = GridPane.getColumnIndex(quelle);
+		Position positionDerKachel = new Position(GridPane.getColumnIndex(quelle.getParent()).intValue(),
+				GridPane.getRowIndex(quelle.getParent()).intValue());
+		return null;
+	}
+
 	/**
 	 * Wird aufgerufen, wenn mit der Maus ins Fenster geklickt wurde und waehrend
 	 * dieses Klicken andauert.
@@ -135,6 +151,16 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 	{
 		this.oldX = event.getX();
 		this.oldY = event.getY();
+		if (this.untereDungeonAnzeige.getAktiveAktion() >= 0)
+		{
+			this.erstelleKachelPositionAusMouseEvent(event);
+		}
+	}
+
+	public void setDungeon(Dungeon dungeon)
+	{
+		this.aktiverDungeon = dungeon;
+		this.karteGridPane.setSpielbrett(this.aktiverDungeon.getSpielbrett());
 	}
 
 	/**

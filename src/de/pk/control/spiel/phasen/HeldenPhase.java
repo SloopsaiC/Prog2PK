@@ -1,46 +1,27 @@
 package de.pk.control.spiel.phasen;
 
-import de.pk.control.spiel.Dungeon;
+import de.pk.control.app.Anwendung;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
-import de.pk.utils.Spielkonstanten;
+import de.pk.model.position.KachelPosition;
+import javafx.scene.input.MouseEvent;
 
 public class HeldenPhase extends Phase
 {
-
-	private final static boolean BRAUCHT_EINGABE = true;
-	private int anzahlAktionenDieserPhase = 0;
-
 	public HeldenPhase()
 	{
 		super();
 	}
 
-	/**
-	 * @return true
-	 * @see de.pk.control.spiel.phasen.Phase#brauchtEingabe()
-	 */
 	@Override
-	public boolean brauchtEingabe()
+	public void verarbeiteKlickAufKachelPosition(KachelPosition position, int aktiveAktionIndex)
 	{
-		return HeldenPhase.BRAUCHT_EINGABE;
+		//
 	}
 
-	/**
-	 * Gibt true zurueck, falls die Phase als fertig erachtet wird
-	 */
 	@Override
-	public boolean istFertig()
+	public void startePhaseMit(Held held)
 	{
-		return this.anzahlAktionenDieserPhase >= Spielkonstanten.MAX_AKTIONEN_HELDEN_PHASE;
-	}
-
-	/**
-	 * @see de.pk.control.spiel.phasen.Phase#phasenSchritt(Dungeon, Held)
-	 */
-	@Override
-	public void phasenSchritt(Dungeon aktiverDungeonController, Held aktiverHeld)
-	{
-		this.anzahlAktionenDieserPhase++;
+		super.startePhaseMit(held);
 	}
 
 }

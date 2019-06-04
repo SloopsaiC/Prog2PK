@@ -37,16 +37,6 @@ public class Dungeon
 	}
 
 	/**
-	 * Preuft, ob die als naechstes auszufuehrende Phase eine Eingabe benoetigt.
-	 *
-	 * @return true, die naechste Phase braucht eine Eingabe
-	 */
-	public boolean brauchtEingabeFuerPhase()
-	{
-		return this.modell.getMomentanePhase().brauchtEingabe();
-	}
-
-	/**
 	 * Generiert mit dem aktuellen KartenGenerator und fuegt eine neue Kachel in
 	 * gegebener Richtung gesehen von gegebener Position zum Spielbrett hinzu
 	 *
@@ -98,6 +88,8 @@ public class Dungeon
 	{
 		this.modell.getSpielbrett().setzeKachel(this.modell.getKartenGenerator().generiereStartKachel(), new Position(
 				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
+		this.modell.getSpielbrett().setzeKachel(this.modell.getKartenGenerator().generiereStartKachel(), new Position(
+				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2 + 1, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
 	}
 
 	/**
@@ -163,6 +155,11 @@ public class Dungeon
 		{
 			objekt.update();
 		}
+	}
+
+	public Phase getAktivePhase()
+	{
+		return this.getPhasen().get(this.modell.getMomentanePhaseIndex());
 	}
 
 }

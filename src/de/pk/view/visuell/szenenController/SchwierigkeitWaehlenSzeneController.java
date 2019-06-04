@@ -3,6 +3,7 @@ package de.pk.view.visuell.szenenController;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import de.pk.control.app.Anwendung;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.lokalisierung.Lokalisierbar;
 import de.pk.view.visuell.AnwendungFX;
@@ -82,6 +83,8 @@ public class SchwierigkeitWaehlenSzeneController implements Initializable, Lokal
 	public void schwierigkeitsWahlDialogStartButtonPressed(ActionEvent event)
 	{
 		this.schwierigkeitsWahlDialog.setVisible(false);
+		((WeltkarteSzeneController) AnwendungFX.getSzenenController().get(Spielkonstanten.ANWENDUNG_WELTKARTE_SZENE))
+				.setWeltkarte(Anwendung.getInstanz().getAktivesSpiel().getWeltkarte());
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_WELTKARTE_SZENE);
 	}
 

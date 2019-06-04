@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import de.pk.control.app.Main;
@@ -37,7 +38,7 @@ public class AnwendungFX extends Application
 	 */
 	private static final HashMap<String, Scene> SZENEN_MAP = new HashMap<>();
 
-	private static final ArrayList<Lokalisierbar> SZENEN_CONTROLLER_LIST = new ArrayList<>();
+	private static final HashMap<String, Lokalisierbar> SZENEN_CONTROLLER_LIST = new HashMap<>();
 	/**
 	 * Die anwendungsStage ist die Stage des Spiels, auf der sich alle Szenen
 	 * abspielen.
@@ -91,6 +92,11 @@ public class AnwendungFX extends Application
 
 	}
 
+	public static HashMap<String, Lokalisierbar> getSzenenController()
+	{
+		return AnwendungFX.SZENEN_CONTROLLER_LIST;
+	}
+
 	/**
 	 * Fuegt die FXML-Datei mit dem Namen dateiNameDerFXML der SZENEN_MAP als neue
 	 * Szene hinzu. Als String-Name in der SZENEN_MAP dient der dateiNameDerFXML.
@@ -108,7 +114,7 @@ public class AnwendungFX extends Application
 			FXMLLoader loader = new FXMLLoader(AnwendungFX.class.getResource(
 					Spielkonstanten.FXML_DATEI_PFAD + dateiNameDerFXML + Spielkonstanten.FXML_DATEI_ENDUNG));
 			AnwendungFX.SZENEN_MAP.put(dateiNameDerFXML, new Scene(loader.load()));
-			AnwendungFX.SZENEN_CONTROLLER_LIST.add(loader.getController());
+			AnwendungFX.SZENEN_CONTROLLER_LIST.put(dateiNameDerFXML, loader.getController());
 		} catch (IOException e)
 		{
 			e.printStackTrace(); /// TODO: entfernen
@@ -183,7 +189,7 @@ public class AnwendungFX extends Application
 	public static void aktualisiereSzenenSprache(ResourceBundle sprachRessource)
 	{
 		AnwendungFX.anwendungsStage.setTitle(sprachRessource.getString(LokalisierungsKeys.ANWENDUNGS_TITEL_KEY));
-		for (Lokalisierbar controller : AnwendungFX.SZENEN_CONTROLLER_LIST)
+		for (Lokalisierbar controller : AnwendungFX.SZENEN_CONTROLLER_LIST.values())
 		{
 			controller.aktualisiereTextKomponenten(sprachRessource);
 		}

@@ -3,6 +3,7 @@ package de.pk.view.visuell.szenenController;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import de.pk.control.karte.Weltkarte;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.lokalisierung.Lokalisierbar;
 import de.pk.view.visuell.AnwendungFX;
@@ -33,34 +34,43 @@ public class WeltkarteSzeneController implements Initializable, Lokalisierbar
 	@FXML
 	private Button weltkarteInsHauptmenueButton;
 
+	private Weltkarte weltkarte = null;
+
+	private void aktiviereDungeonMitIndex(int index)
+	{
+		((DungeonSzeneController) AnwendungFX.getSzenenController().get(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE))
+				.setDungeon(this.weltkarte.getDungeonBei(index));
+		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE);
+	}
+
 	@FXML
 	public void dungeon1ButtonPressed(ActionEvent event)
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE);
+		this.aktiviereDungeonMitIndex(0);
 	}
 
 	@FXML
 	public void dungeon2ButtonPressed(ActionEvent event)
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE);
+		this.aktiviereDungeonMitIndex(1);
 	}
 
 	@FXML
 	public void dungeon3ButtonPressed(ActionEvent event)
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE);
+		this.aktiviereDungeonMitIndex(2);
 	}
 
 	@FXML
 	public void dungeon4ButtonPressed(ActionEvent event)
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE);
+		this.aktiviereDungeonMitIndex(3);
 	}
 
 	@FXML
 	public void dungeon5ButtonPressed(ActionEvent event)
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE);
+		this.aktiviereDungeonMitIndex(4);
 	}
 
 	@Override
@@ -87,5 +97,10 @@ public class WeltkarteSzeneController implements Initializable, Lokalisierbar
 	{
 		// TODO Auto-generated method stub
 
+	}
+
+	public void setWeltkarte(Weltkarte weltkarte)
+	{
+		this.weltkarte = weltkarte;
 	}
 }

@@ -1,53 +1,28 @@
 package de.pk.control.spiel.phasen;
 
-import de.pk.control.spiel.Dungeon;
-import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
+import de.pk.model.position.KachelPosition;
 public abstract class Phase
 {
+	private Held aktiverHeld = null;
 
-	private final static boolean BRAUCHT_EINGABE_DEFAULT_WERT = false;
-
-	public Phase()
+	protected Phase()
 	{
 	}
 
-	/**
-	 * Gibt an ob die Phase eine Eingabe vom Spieler braucht um sinnvoll umgesetzt
-	 * zu werden. Der Standardwert ist in de.pk.control.spiel.phasen.Phase
-	 * definiert.
-	 *
-	 * @see de.pk.control.spiel.phasen.Phase
-	 * @return True falls fuer die Phase eine Eingabe benoetigt wird, sonst false
-	 */
-	public boolean brauchtEingabe()
+	public Held getAktivenHeld()
 	{
-		return Phase.BRAUCHT_EINGABE_DEFAULT_WERT;
+		return this.aktiverHeld;
 	}
 
-	@Override
-	public Phase clone()
+	public void verarbeiteKlickAufKachelPosition(KachelPosition eingabe, int aktiveAktionIndex)
 	{
-		try
-		{
-			return (Phase) super.clone();
-		} catch (CloneNotSupportedException e)
-		{
-			return null;
-		}
-
+		// Normalerweise reagiert eine Phase auf nichts
 	}
 
-	/**
-	 * Gibt true zurueck, falls die Phase als fertig erachtet wird
-	 */
-	public abstract boolean istFertig();
-
-	/**
-	 * Fuehrt die Phase um einen Tick weiter, dabei werden saemtliche Veraenderungen
-	 * die diese Phase auf den Zustand des Spiels / Dungeons hat registriert um
-	 * spaeter im Dungeon umgesetzt zu werden
-	 */
-	public abstract void phasenSchritt(Dungeon aktiverDungeon, Held aktiverHeld);
-
+	public void startePhaseMit(Held held)
+	{
+		this.aktiverHeld = held;
+	}
 }

@@ -6,8 +6,11 @@ import java.util.InputMismatchException;
 import java.util.ResourceBundle;
 
 import de.pk.model.position.Position;
+import de.pk.model.spielbrett.Spielbrett;
 import de.pk.utils.lokalisierung.Lokalisierbar;
 import de.pk.view.visuell.customControls.kachelGridPane.KachelGridPane;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -16,7 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.GridPane;
 
-public class KarteGridPane extends GridPane implements Initializable, Lokalisierbar
+public class KarteGridPane extends GridPane implements Initializable, Lokalisierbar, InvalidationListener
 {
 	/**
 	 * Pfad zur fxml-Datei, fuer die diese Klasse der Controller ist.
@@ -78,6 +81,12 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
 	{
 		//
+	}
+
+	public void setSpielbrett(Spielbrett spielbrett)
+	{
+		spielbrett.addListener(this);
+		this.invalidated(spielbrett);
 	}
 
 	/**
@@ -149,6 +158,21 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 			}
 		}
 		this.add(kachelGridPane, pos.getX(), pos.getY());
+	}
+
+	@Override
+	public void invalidated(Observable observable)
+	{
+		Spielbrett spielbrett = (Spielbrett) observable;
+		for (Position position : spielbrett.getAlleKachelPositionen())
+		{
+			if (!this.contains(position.getX(), position.getY()))
+			{
+				KachelGridPane kachelPane = new KachelGridPane();
+				kachelPane.setKachel(spielbrett.getKachelBei(position));
+				this.addKachelGridPane(kachelPane, position);
+			}
+		}
 	}
 
 }

@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
+import de.pk.model.interaktion.aktionen.Aktion;
 import de.pk.utils.lokalisierung.Lokalisierbar;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,6 +70,8 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 	@FXML
 	private Label wirkendeEffekteButton5;
 
+	private int aktiveAktionsIndex = -1;
+
 	/**
 	 * Erstellt eine neue UntereDungeonAnzeige, indem die fxml-Datei geladen wird
 	 * und diese Klasse dieser sich selbst als ihr Controller hinzufuegt.
@@ -95,28 +98,9 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 	 * @param held Der Held, dessen Attribute von dieser UntereDungeonAnzeige
 	 *             ueberwacht und angezeigt werden sollen.
 	 */
-	public void setAktuellenHelden(Held held)
+	public void setAktuellerHeld(Held held)
 	{
 		this.held = held;
-		aktualisiereHeldenAnzeige(this.held);
-	}
-
-	/**
-	 * Initialisiert den Helden, indem seinen Attributen ChangeListener hinzugefuegt
-	 * werden, die automatisch dafuer sorgen, dass die aktuellen Werte der Attribute
-	 * stets auf die entsprechenden Anzeigen dieser UntereDungeonAnzeige gelegt
-	 * werden.
-	 *
-	 * @param held Der zu ueberwachende Held
-	 */
-	private void aktualisiereHeldenAnzeige(Held held)
-	{
-		// TODO ChangeListener (oder ähnliches) für LP, EP und WIRKENDE EFFEKTE!
-		// hinzufügen und Werte auf
-		// entsprechende Anzeigen (die ganzen Bilder-Labels und ProgressBars) legen.
-
-		// Achtung! Beachte das Weiterschieben der Helden! Reicht es, wenn diese Methode
-		// jedes Mal bei "setAktuellenHelden()" auferufen wird?
 	}
 
 	/**
@@ -131,25 +115,25 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 	@FXML
 	public void aktionButton1Pressed(ActionEvent event)
 	{
-		// TODO Aktion 1 ausfuehren, Bild anzeigen, etc.
+		this.aktiveAktionsIndex = 0;
 	}
 
 	@FXML
 	public void aktionButton2Pressed(ActionEvent event)
 	{
-		// TODO Aktion 2 ausfuehren, Bild anzeigen, etc.
+		this.aktiveAktionsIndex = 1;
 	}
 
 	@FXML
 	public void aktionButton3Pressed(ActionEvent event)
 	{
-		// TODO Aktion 3 ausfuehren, Bild anzeigen, etc.
+		this.aktiveAktionsIndex = 2;
 	}
 
 	@FXML
 	public void aktionButton4Pressed(ActionEvent event)
 	{
-		// TODO Aktion 4 ausfuehren, Bild anzeigen, etc.
+		this.aktiveAktionsIndex = 3;
 	}
 
 	@FXML
@@ -180,6 +164,11 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
 	{
 		// TODO Lokalisierung
+	}
+
+	public int getAktiveAktion()
+	{
+		return this.aktiveAktionsIndex;
 	}
 
 }

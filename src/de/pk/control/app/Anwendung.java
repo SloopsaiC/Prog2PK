@@ -57,6 +57,7 @@ public class Anwendung
 	private void initAnwendung()
 	{
 		this.anwendungsEinstellungen = Einstellungen.getEinstellungen();
+		this.neuesSpiel();
 	}
 
 	/**

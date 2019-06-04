@@ -8,6 +8,7 @@ import de.pk.model.gegenstaende.ausruestung.Waffe;
 import de.pk.model.gegenstaende.container.Container;
 import de.pk.model.gegenstaende.spezifikationen.Ausruestbar;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldModell;
+import javafx.beans.InvalidationListener;
 
 public class Held extends LebendigesObjekt
 {
@@ -140,6 +141,11 @@ public class Held extends LebendigesObjekt
 		{
 			throw new IllegalStateException();
 		}
+	}
+
+	public void registriereListenerAufModell(InvalidationListener listener)
+	{
+		this.getModellAlsHeld().addListener(listener);
 	}
 
 }

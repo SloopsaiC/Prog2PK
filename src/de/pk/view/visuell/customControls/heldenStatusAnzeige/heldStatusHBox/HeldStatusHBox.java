@@ -5,7 +5,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
+import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektPunkteIndex;
 import de.pk.utils.lokalisierung.Lokalisierbar;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,14 +16,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 
-public class HeldStatusHBox extends HBox implements Initializable, Lokalisierbar
+public class HeldStatusHBox extends HBox implements Initializable, Lokalisierbar, InvalidationListener
 {
 	/**
 	 * Pfad zur fxml-Datei, fuer die diese Klasse der Controller ist.
 	 */
 	private static final String FXML_PFAD = "HeldStatusHBox.fxml";
-
-	private Held held = null;
 
 	@FXML
 	private Label heldenAvatarLabel;
@@ -65,23 +66,7 @@ public class HeldStatusHBox extends HBox implements Initializable, Lokalisierbar
 	 */
 	public void setHeld(Held held)
 	{
-		this.held = held;
-		aktualisiereHeldenAnzeige(this.held);
-	}
-
-	/**
-	 * Initialisiert die HeldStatusHBox, indem seinen Attributen ChangeListener
-	 * hinzugefuegt werden, die automatisch dafuer sorgen, dass die aktuellen Werte
-	 * seiner Attribute stets auf die entsprechenden Anzeigen dieser StatusHBox
-	 * gelegt werden.
-	 *
-	 * @param held Der zu ueberwachende Held
-	 */
-	private void aktualisiereHeldenAnzeige(Held held)
-	{
-		// TODO ChangeListener (oder ähnliches) für LP, RP, etc. hinzufügen und Werte
-		// auf
-		// entsprechende Anzeigen (die ganzen Bilder-Labels und ProgressBars) legen.
+		held.registriereListenerAufModell(this);
 	}
 
 	/**
@@ -114,6 +99,16 @@ public class HeldStatusHBox extends HBox implements Initializable, Lokalisierbar
 	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
 	{
 		// TODO Lokalisierung
+	}
+
+	@Override
+	public void invalidated(Observable observable)
+	{
+		Held held = (Held) observable;
+		this.kleineLebensPunkteAnzeigeProgressBar
+				.setProgress(held.getAnzahlPunkteVon(LebendigesObjektPunkteIndex.AKTUELLE_LEBENS_PUNKTE)
+						/ held.getAnzahlPunkteVon(LebendigesObjektPunkteIndex.MAXIMALE_LEBENS_PUNKTE));
+
 	}
 
 }

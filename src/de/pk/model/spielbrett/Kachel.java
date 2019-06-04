@@ -1,5 +1,6 @@
 package de.pk.model.spielbrett;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -8,16 +9,21 @@ import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
 import de.pk.model.karte.generator.untergruende.KachelUntergrundWertigkeit;
 import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrundMitRichtung;
 import de.pk.model.position.Position;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 
-public class Kachel
+public class Kachel implements Observable
 {
 	private HashMap<Position, SpielbrettObjekt> kachelObjekte = null;
 	private KartenGeneratorUntergrundMitRichtung untergrund = null;
+
+	private ArrayList<InvalidationListener> listeners = null;
 
 	public Kachel(HashMap<Position, SpielbrettObjekt> objekte, KartenGeneratorUntergrundMitRichtung untergrund)
 	{
 		this.kachelObjekte = objekte;
 		this.untergrund = untergrund;
+		this.listeners = new ArrayList<>();
 	}
 
 	public Kachel(KartenGeneratorUntergrundMitRichtung untergrund)
@@ -28,6 +34,7 @@ public class Kachel
 	void entferneBeiPosition(Position zuEntfernen)
 	{
 		this.kachelObjekte.remove(zuEntfernen);
+		this.verandert();
 	}
 
 	/**
@@ -76,11 +83,33 @@ public class Kachel
 	public void stelleAufKachel(Position pos, SpielbrettObjekt obj)
 	{
 		this.kachelObjekte.put(pos, obj);
+		this.verandert();
 	}
 
 	public boolean ueberpruefePosition(Position pos)
 	{
 		return this.kachelObjekte.containsKey(pos);
+	}
+
+	private void verandert()
+	{
+		for (InvalidationListener listener : this.listeners)
+		{
+			listener.invalidated(this);
+		}
+	}
+
+	@Override
+	public void addListener(InvalidationListener listener)
+	{
+		this.listeners.add(listener);
+
+	}
+
+	@Override
+	public void removeListener(InvalidationListener listener)
+	{
+		this.listeners.remove(listener);
 	}
 
 }

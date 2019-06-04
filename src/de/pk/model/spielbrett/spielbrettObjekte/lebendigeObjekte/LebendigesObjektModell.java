@@ -1,5 +1,6 @@
 package de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,8 +10,10 @@ import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
 import de.pk.model.interaktion.aktionen.Aktion;
 import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.spielbrett.spielbrettObjekte.SpielbrettObjektModell;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 
-public abstract class LebendigesObjektModell extends SpielbrettObjektModell
+public abstract class LebendigesObjektModell extends SpielbrettObjektModell implements Observable
 {
 
 	private HashMap<LebendigesObjektPunkteIndex, Integer> punkte = null; // Alle Punkte die ein LebendigesObjekt haben
@@ -22,6 +25,8 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 	private Map<Effekt, SpielbrettObjekt> effekteMitVerursacher = null; // Alle Statuseffekte die auf dieses Objekt
 																		// wirken
 
+	private ArrayList<InvalidationListener> listeners = null;
+
 	/**
 	 * Dient lediglich als super-Konstruktor fuer abgeleitete
 	 * LebendigeObjekt-Klassen
@@ -32,7 +37,7 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 	protected LebendigesObjektModell(int lebensPunkte, int bewegungsPunkte)
 	{
 		this.punkte = new HashMap<>();
-		this.punkte.put(LebendigesObjektPunkteIndex.LEBENS_PUNKTE, lebensPunkte);
+		this.punkte.put(LebendigesObjektPunkteIndex.AKTUELLE_LEBENS_PUNKTE, lebensPunkte);
 		this.punkte.put(LebendigesObjektPunkteIndex.BEWEGUNGS_PUNKTE, bewegungsPunkte);
 		this.aktionen = new HashMap<>();
 		this.effekteMitVerursacher = Collections.synchronizedMap(new HashMap<Effekt, SpielbrettObjekt>());
@@ -41,6 +46,7 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 	public void aenderePunkteVon(LebendigesObjektPunkteIndex index, int aenderung)
 	{
 		this.setAnzahlPunkteVon(index, this.getAnzahlPunkteVon(index) + aenderung);
+		// Set Anzahl sagt bei den Listenern Bescheid
 	}
 
 	/**
@@ -54,6 +60,7 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 	public void fuegeAktionHinzu(String name, Aktion hinzufuegen)
 	{
 		this.aktionen.put(name, hinzufuegen);
+		this.veraendert();
 	}
 
 	/**
@@ -62,6 +69,7 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 	public void fuegeEffektHinzu(Effekt hinzufuegen, SpielbrettObjekt verursacher)
 	{
 		this.effekteMitVerursacher.put(hinzufuegen, verursacher);
+		this.veraendert();
 	}
 
 	/**
@@ -104,6 +112,28 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell
 	public void setAnzahlPunkteVon(LebendigesObjektPunkteIndex index, int neuerWert)
 	{
 		this.punkte.replace(index, neuerWert);
+		this.veraendert();
+	}
+
+	@Override
+	public void addListener(InvalidationListener listener)
+	{
+		this.listeners.add(listener);
+	}
+
+	@Override
+	public void removeListener(InvalidationListener listener)
+	{
+		// Keine Ueberpruefung ob dieses Element vorhanden ist, da die Liste das prueft
+		this.listeners.remove(listener);
+	}
+
+	protected void veraendert()
+	{
+		for (InvalidationListener listener : this.listeners)
+		{
+			listener.invalidated(this);
+		}
 	}
 
 }

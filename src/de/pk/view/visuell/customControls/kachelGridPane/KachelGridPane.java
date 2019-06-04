@@ -8,10 +8,14 @@ import de.pk.model.position.Position;
 import de.pk.model.spielbrett.Kachel;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.lokalisierung.Lokalisierbar;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.effect.Glow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -21,7 +25,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
-public class KachelGridPane extends GridPane implements Initializable, Lokalisierbar
+public class KachelGridPane extends GridPane implements Initializable, Lokalisierbar, InvalidationListener
 {
 	/**
 	 * Pfad zur fxml-Datei, fuer die diese Klasse der Controller ist.
@@ -38,7 +42,7 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 	 *
 	 * @param kachel Die Kachel, die dieses KachelGridPane als view repraesentiert
 	 */
-	public KachelGridPane(Kachel kachel)
+	public KachelGridPane()
 	{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(KachelGridPane.FXML_PFAD));
 		try
@@ -50,7 +54,6 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 		{
 			throw new RuntimeException(exception);
 		}
-		this.setKachelUntergruende(kachel);
 	}
 
 	/**
@@ -69,7 +72,6 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 						.intValue()] = (StackPane) node;
 			} catch (NullPointerException e)
 			{
-//
 			}
 		}
 	}
@@ -135,7 +137,7 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 	}
 
 	/**
-	 * Laestt den Untergrund an der Position pos auf der Kachel gluehen bzw. hell
+	 * Laesst den Untergrund an der Position pos auf der Kachel gluehen bzw. hell
 	 * aufleuchten.
 	 *
 	 * @param pos Position des zu gluehenden Untergrunds auf der Kachel
@@ -171,10 +173,22 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 		}
 	}
 
+	public void setKachel(Kachel kachel)
+	{
+		kachel.addListener(this);
+		this.setKachelUntergruende(kachel);
+	}
+
 	@Override
 	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
 	{
 		//
+	}
+
+	@Override
+	public void invalidated(Observable observable)
+	{
+		this.setKachelUntergruende((Kachel) observable);
 	}
 
 }

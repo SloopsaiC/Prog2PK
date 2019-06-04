@@ -1,5 +1,7 @@
 package de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
@@ -92,9 +94,11 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		return this.getModell().getAktionMitNamen(name);
 	}
 
-	public Set<String> getAktionsNamen()
+	public List<String> getAktionsNamen()
 	{
-		return this.getModell().getAktionen().keySet();
+		ArrayList<String> sorted = new ArrayList<>(this.modell.getAktionen().keySet());
+		sorted.sort(String.CASE_INSENSITIVE_ORDER);
+		return sorted;
 	}
 
 	public int getAnzahlPunkteVon(LebendigesObjektPunkteIndex index)
@@ -136,7 +140,7 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	@Override
 	public boolean istLebendig()
 	{
-		return this.getModell().getAnzahlPunkteVon(LebendigesObjektPunkteIndex.LEBENS_PUNKTE) < 1;
+		return this.getModell().getAnzahlPunkteVon(LebendigesObjektPunkteIndex.AKTUELLE_LEBENS_PUNKTE) < 1;
 	}
 
 	/**
