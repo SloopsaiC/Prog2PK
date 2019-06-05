@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
-import de.pk.model.interaktion.aktionen.Aktion;
 import de.pk.utils.lokalisierung.Lokalisierbar;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -78,7 +77,7 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 	 */
 	public UntereDungeonAnzeige()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(UntereDungeonAnzeige.FXML_PFAD));
+		FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(UntereDungeonAnzeige.FXML_PFAD));
 		try
 		{
 			fxmlLoader.setRoot(this);
@@ -88,33 +87,6 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 		{
 			throw new RuntimeException(exception);
 		}
-	}
-
-	/**
-	 * Legt den aktuellen Helden fest, der von dieser Anzeige "ueberwacht" werden
-	 * sollen. Es werden somit automatisch immer die aktuellen Werte der Attribute
-	 * auf die entsprechenden Anzeigen dieser StatusAnzeige gelegt.
-	 *
-	 * @param held Der Held, dessen Attribute von dieser UntereDungeonAnzeige
-	 *             ueberwacht und angezeigt werden sollen.
-	 */
-	public void setAktuellerHeld(Held held)
-	{
-		this.held = held;
-	}
-
-	/**
-	 * Initialisiert diesen Controller.
-	 */
-	@Override
-	public void initialize(URL location, ResourceBundle resources)
-	{
-		//
-	}
-
-	private void resetAktiveAktion()
-	{
-		this.aktiveAktionsIndex = -1;
 	}
 
 	@FXML
@@ -141,6 +113,17 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 		this.aktiveAktionsIndex = 3;
 	}
 
+	@Override
+	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	{
+		// TODO Lokalisierung
+	}
+
+	public int getAktiveAktion()
+	{
+		return this.aktiveAktionsIndex;
+	}
+
 	@FXML
 	public void heldenInventarButton1Pressed(ActionEvent event)
 	{
@@ -165,15 +148,31 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 		this.resetAktiveAktion();
 	}
 
+	/**
+	 * Initialisiert diesen Controller.
+	 */
 	@Override
-	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	public void initialize(URL location, ResourceBundle resources)
 	{
-		// TODO Lokalisierung
+		//
 	}
 
-	public int getAktiveAktion()
+	private void resetAktiveAktion()
 	{
-		return this.aktiveAktionsIndex;
+		this.aktiveAktionsIndex = -1;
+	}
+
+	/**
+	 * Legt den aktuellen Helden fest, der von dieser Anzeige "ueberwacht" werden
+	 * sollen. Es werden somit automatisch immer die aktuellen Werte der Attribute
+	 * auf die entsprechenden Anzeigen dieser StatusAnzeige gelegt.
+	 *
+	 * @param held Der Held, dessen Attribute von dieser UntereDungeonAnzeige
+	 *             ueberwacht und angezeigt werden sollen.
+	 */
+	public void setAktuellerHeld(Held held)
+	{
+		this.held = held;
 	}
 
 }

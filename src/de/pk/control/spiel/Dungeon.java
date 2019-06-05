@@ -1,7 +1,7 @@
 package de.pk.control.spiel;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import de.pk.control.interaktion.Wuerfel;
 import de.pk.control.spiel.phasen.Phase;
@@ -53,12 +53,22 @@ public class Dungeon
 		this.modell.getSpielbrett().setzeKachel(neueKachel, momentanePos.addiere(richtung.getVersatz()));
 	}
 
+	public Phase getAktivePhase()
+	{
+		return this.getPhasen().get(this.modell.getMomentanePhaseIndex());
+	}
+
 	/**
 	 * @return Die Helden dieses Spiels
 	 */
 	public Held[] getHelden()
 	{
 		return this.modell.getHelden();
+	}
+
+	public String getName()
+	{
+		return this.modell.getName();
 	}
 
 	public List<Phase> getPhasen()
@@ -76,11 +86,6 @@ public class Dungeon
 		return this.wuerfel;
 	}
 
-	public String getName()
-	{
-		return this.modell.getName();
-	}
-
 	private void initModell(Phase[] phasen)
 	{
 		// Setze die Startkachel in die Mitte
@@ -92,10 +97,17 @@ public class Dungeon
 		this.modell.getSpielbrett().setzeKachel(this.modell.getKartenGenerator().generiereStartKachel(), new Position(
 				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
 		this.modell.getSpielbrett().setzeKachel(this.modell.getKartenGenerator().generiereStartKachel(), new Position(
-				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2 + 1, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
+				(Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2) + 1, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
 		this.modell.getSpielbrett().setzeSpielbrettObjekt(
 				new KachelPosition(this.modell.getSpielbrett().getKachelBei(new Position(15, 15)), new Position(0, 0)),
 				Spielkonstanten.STANDARD_HELDEN[0]);
+	}
+
+	public void naechstePhase()
+	{
+		this.updateLebendigeObjekte();
+		this.modell.naechstePhaseAktivieren();
+		this.getAktivePhase().startePhaseMit(this.modell.getAktivenHeld());
 	}
 
 	/**
@@ -157,21 +169,18 @@ public class Dungeon
 	 */
 	private void updateLebendigeObjekte()
 	{
-		for (LebendigesObjekt objekt : this.modell.getSpielbrett().getAlleLebendigenObjekte())
+		ListIterator<LebendigesObjekt> iterator = this.modell.getSpielbrett().getAlleLebendigenObjekte().listIterator();
+		while (iterator.hasNext())
 		{
+			LebendigesObjekt objekt = iterator.next();
 			objekt.update();
+			if (!objekt.istLebendig())
+			{
+				// Tote Objekte vom Spielbrett nehmen
+				this.getSpielbrett().entferneSpielbrettObjektBei(this.getSpielbrett().findeSpielbrettObjekt(objekt));
+				iterator.remove();
+			}
 		}
-	}
-
-	public Phase getAktivePhase()
-	{
-		return this.getPhasen().get(this.modell.getMomentanePhaseIndex());
-	}
-
-	public void naechstePhase()
-	{
-		this.modell.naechstePhaseAktivieren();
-		this.getAktivePhase().startePhaseMit(this.modell.getAktivenHeld());
 	}
 
 }

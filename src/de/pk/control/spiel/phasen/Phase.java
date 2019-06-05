@@ -12,14 +12,14 @@ public abstract class Phase
 	{
 	}
 
+	protected void beendePhase()
+	{
+		Anwendung.getInstanz().getAktivesSpiel().getAktiverDungeon().naechstePhase();
+	}
+
 	public Held getAktivenHeld()
 	{
 		return this.aktiverHeld;
-	}
-
-	public void verarbeiteKlickAufKachelPosition(KachelPosition eingabe, int aktiveAktionIndex)
-	{
-		// Normalerweise reagiert eine Phase auf nichts
 	}
 
 	public void startePhaseMit(Held held)
@@ -27,8 +27,8 @@ public abstract class Phase
 		this.aktiverHeld = held;
 	}
 
-	protected void beendePhase()
+	public void verarbeiteKlickAufKachelPosition(KachelPosition eingabe, int aktiveAktionIndex)
 	{
-		Anwendung.getInstanz().getAktivesSpiel().getAktiverDungeon().naechstePhase();
+		// Normalerweise reagiert eine Phase auf nichts
 	}
 }

@@ -18,8 +18,7 @@ public class Gegner extends LebendigesObjekt
 	@Override
 	protected Container generiereAuswurf()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return new Container(10);
 	}
 
 }

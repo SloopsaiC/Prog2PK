@@ -34,8 +34,9 @@ public class AusnahmeNachrichten
 	public static final String DUNGEON_PHASEN_INDEX_NICHT_GUELTIG = "Der gegebene Phasenindex ist nicht gueltig";
 
 	public static final String KARTEN_GENERATOR_UNTERGRUND_ANFRAGE_AUSSERHALB_VON_KACHEL = "Position ist groesser als eine Kachel";
-	
+
 	public static final String KARTEN_GENERATOR_KACHEL_KEIN_FREIES_FELD = "Kacheln muessen mindestens ein begehbares Feld am Rand haben!";
+
 	/**
 	 * Versteckter default Konstruktor, da eine Konstantenklasse nicht instanziiert
 	 * werden sollte.

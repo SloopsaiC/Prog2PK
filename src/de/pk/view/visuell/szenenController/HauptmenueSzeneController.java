@@ -45,6 +45,18 @@ public class HauptmenueSzeneController implements Initializable, Lokalisierbar
 	@FXML
 	private Button optionenButton;
 
+	@Override
+	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	{
+		this.creditsButton.setText(sprachRessource.getString(LokalisierungsKeys.CREDTITS_KEY));
+		this.hauptmenueLabel.setText(sprachRessource.getString(LokalisierungsKeys.HAUPTMENUE_KEY));
+		this.neuesSpielButton.setText(sprachRessource.getString(LokalisierungsKeys.NEUES_SPIEL_KEY));
+		this.optionenButton.setText(sprachRessource.getString(LokalisierungsKeys.OPTIONEN_KEY));
+		this.spielBeendenButton.setText(sprachRessource.getString(LokalisierungsKeys.BEENDEN_KEY));
+		this.spielLadenButton.setText(sprachRessource.getString(LokalisierungsKeys.SPIEL_LADEN_KEY));
+		this.zumTitelbildschirmButton.setText(sprachRessource.getString(LokalisierungsKeys.ZUM_TITELBILDSCHIRM_KEY));
+	}
+
 	@FXML
 	private void credtisButtonAction(ActionEvent event)
 	{
@@ -87,18 +99,6 @@ public class HauptmenueSzeneController implements Initializable, Lokalisierbar
 	private void zumTitelbildschirmButtonAction(ActionEvent event)
 	{
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_TITEL_SZENE);
-	}
-
-	@Override
-	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
-	{
-		this.creditsButton.setText(sprachRessource.getString(LokalisierungsKeys.CREDTITS_KEY));
-		this.hauptmenueLabel.setText(sprachRessource.getString(LokalisierungsKeys.HAUPTMENUE_KEY));
-		this.neuesSpielButton.setText(sprachRessource.getString(LokalisierungsKeys.NEUES_SPIEL_KEY));
-		this.optionenButton.setText(sprachRessource.getString(LokalisierungsKeys.OPTIONEN_KEY));
-		this.spielBeendenButton.setText(sprachRessource.getString(LokalisierungsKeys.BEENDEN_KEY));
-		this.spielLadenButton.setText(sprachRessource.getString(LokalisierungsKeys.SPIEL_LADEN_KEY));
-		this.zumTitelbildschirmButton.setText(sprachRessource.getString(LokalisierungsKeys.ZUM_TITELBILDSCHIRM_KEY));
 	}
 
 }

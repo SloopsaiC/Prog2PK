@@ -13,7 +13,6 @@ import de.pk.model.gegenstaende.ausruestung.Accessoire;
 import de.pk.model.gegenstaende.ausruestung.Ruestung;
 import de.pk.model.gegenstaende.ausruestung.Waffe;
 import de.pk.model.gegenstaende.container.Container;
-import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 
 public class HeldModell extends LebendigesObjektModell implements Observable
@@ -28,7 +27,6 @@ public class HeldModell extends LebendigesObjektModell implements Observable
 	private Map<Integer, Accessoire> accessoires = null; // Alle Accessiores die dieser Held traegt
 	private List<Faehigkeit> faehigkeiten = null; // Die Faehigkeiten, die der Held hat
 	private int sterbeZaehler = 0;
-
 
 	/**
 	 * Erstellt einen Helden mit Namen, Lebenspunkte und Bewegungspunkten

@@ -1,7 +1,5 @@
 package de.pk.control.app;
 
-import de.pk.control.karte.Weltkarte;
-import de.pk.control.spiel.Dungeon;
 import de.pk.control.spiel.einstellungen.Einstellungen;
 import de.pk.utils.DebugAusgabeKlasse;
 import de.pk.utils.DebugEingabeKlasse;

@@ -45,7 +45,7 @@ public class ObereDungeonAnzeige extends StackPane implements Initializable, Lok
 	 */
 	public ObereDungeonAnzeige()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ObereDungeonAnzeige.FXML_PFAD));
+		FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(ObereDungeonAnzeige.FXML_PFAD));
 		try
 		{
 			fxmlLoader.setRoot(this);
@@ -57,6 +57,12 @@ public class ObereDungeonAnzeige extends StackPane implements Initializable, Lok
 		}
 	}
 
+	@Override
+	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	{
+		// TODO Lokalisierung
+	}
+
 	/**
 	 * Initialisiert diesen Controller.
 	 */
@@ -66,9 +72,9 @@ public class ObereDungeonAnzeige extends StackPane implements Initializable, Lok
 		//
 	}
 
-	public void setAnzuzeigendenDungeonTitel(String dungeonTitel)
+	public void setAnzuzeigendeAnzahlFragmente(int anzahlFragmente)
 	{
-		this.dungeonTitelLabel.setText(dungeonTitel);
+		this.fragmenteAnzeigeLabel.setText(String.valueOf(anzahlFragmente));
 	}
 
 	public void setAnzuzeigendeMengeGold(int mengeGold)
@@ -76,20 +82,14 @@ public class ObereDungeonAnzeige extends StackPane implements Initializable, Lok
 		this.goldAnzeigeLabel.setText(String.valueOf(mengeGold));
 	}
 
-	public void setAnzuzeigendeAnzahlFragmente(int anzahlFragmente)
-	{
-		this.fragmenteAnzeigeLabel.setText(String.valueOf(anzahlFragmente));
-	}
-
 	public void setAnzuzeigendenDungeonFortschritt(int fortschrittInProzent)
 	{
 		this.dungeonFortschrittProgressBar.setProgress(fortschrittInProzent / 100.0d);
 	}
 
-	@Override
-	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	public void setAnzuzeigendenDungeonTitel(String dungeonTitel)
 	{
-		// TODO Lokalisierung
+		this.dungeonTitelLabel.setText(dungeonTitel);
 	}
 
 }

@@ -37,6 +37,13 @@ public class SchwierigkeitWaehlenSzeneController implements Initializable, Lokal
 	@FXML
 	private DialogPane schwierigkeitsWahlDialog;
 
+	@Override
+	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
 	// fuer blutduerster
 	@FXML
 	public void blutduersterButtonPressed(ActionEvent event)
@@ -72,13 +79,6 @@ public class SchwierigkeitWaehlenSzeneController implements Initializable, Lokal
 		this.schwierigkeitsWahlDialog.setVisible(true);
 	}
 
-	// Allgemeine Funktionen
-	@FXML
-	public void zumHauptmenueButtonAction(ActionEvent event)
-	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
-	}
-
 	@FXML
 	public void schwierigkeitsWahlDialogStartButtonPressed(ActionEvent event)
 	{
@@ -94,10 +94,10 @@ public class SchwierigkeitWaehlenSzeneController implements Initializable, Lokal
 		this.schwierigkeitsWahlDialog.setVisible(false);
 	}
 
-	@Override
-	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	// Allgemeine Funktionen
+	@FXML
+	public void zumHauptmenueButtonAction(ActionEvent event)
 	{
-		// TODO Auto-generated method stub
-
+		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
 	}
 }

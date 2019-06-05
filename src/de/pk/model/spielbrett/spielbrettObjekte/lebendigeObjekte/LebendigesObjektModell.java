@@ -45,6 +45,13 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell impl
 		this.listeners = new ArrayList<>();
 	}
 
+	@Override
+	public void addListener(InvalidationListener listener)
+	{
+		this.listeners.add(listener);
+		this.veraendert();
+	}
+
 	public void aenderePunkteVon(LebendigesObjektPunkteIndex index, int aenderung)
 	{
 		this.setAnzahlPunkteVon(index, this.getAnzahlPunkteVon(index) + aenderung);
@@ -111,24 +118,17 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell impl
 		return this.effekteMitVerursacher.get(effekt);
 	}
 
-	public void setAnzahlPunkteVon(LebendigesObjektPunkteIndex index, int neuerWert)
-	{
-		this.punkte.replace(index, neuerWert);
-		this.veraendert();
-	}
-
-	@Override
-	public void addListener(InvalidationListener listener)
-	{
-		this.listeners.add(listener);
-		this.veraendert();
-	}
-
 	@Override
 	public void removeListener(InvalidationListener listener)
 	{
 		// Keine Ueberpruefung ob dieses Element vorhanden ist, da die Liste das prueft
 		this.listeners.remove(listener);
+	}
+
+	public void setAnzahlPunkteVon(LebendigesObjektPunkteIndex index, int neuerWert)
+	{
+		this.punkte.replace(index, neuerWert);
+		this.veraendert();
 	}
 
 	protected void veraendert()

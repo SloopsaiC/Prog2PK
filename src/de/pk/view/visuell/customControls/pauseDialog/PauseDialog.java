@@ -35,7 +35,7 @@ public class PauseDialog extends DialogPane implements Initializable, Lokalisier
 	 */
 	public PauseDialog()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(PauseDialog.FXML_PFAD));
+		FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(PauseDialog.FXML_PFAD));
 		try
 		{
 			fxmlLoader.setRoot(this);
@@ -47,15 +47,6 @@ public class PauseDialog extends DialogPane implements Initializable, Lokalisier
 		}
 	}
 
-	/**
-	 * Initialisiert diesen Controller.
-	 */
-	@Override
-	public void initialize(URL location, ResourceBundle resources)
-	{
-		//
-	}
-
 	@Override
 	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
 	{
@@ -63,14 +54,12 @@ public class PauseDialog extends DialogPane implements Initializable, Lokalisier
 	}
 
 	/**
-	 * Wird aufergurfen, wenn der pauseMenueZurueckButtonPressed aufgerufen wird.
+	 * Initialisiert diesen Controller.
 	 */
-	@FXML
-	public void pauseMenueZurueckButtonPressed()
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
 	{
-		this.setVisible(false);
-		this.getParent().setEffect(null);
-		this.getParent().applyCss();
+		//
 	}
 
 	/**
@@ -83,6 +72,17 @@ public class PauseDialog extends DialogPane implements Initializable, Lokalisier
 		this.getParent().setEffect(null);
 		this.getParent().applyCss();
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
+	}
+
+	/**
+	 * Wird aufergurfen, wenn der pauseMenueZurueckButtonPressed aufgerufen wird.
+	 */
+	@FXML
+	public void pauseMenueZurueckButtonPressed()
+	{
+		this.setVisible(false);
+		this.getParent().setEffect(null);
+		this.getParent().applyCss();
 	}
 
 }

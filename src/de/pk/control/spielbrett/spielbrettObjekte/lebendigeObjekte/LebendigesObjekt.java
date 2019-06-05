@@ -2,7 +2,6 @@ package de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
 import de.pk.model.gegenstaende.container.Container;
@@ -122,11 +121,21 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		return 1f;
 	}
 
+	public void hatAktionAusgefuehrt()
+	{
+		this.modell.aenderePunkteVon(LebendigesObjektPunkteIndex.AKTIONS_PUNKTE, -1);
+	}
+
 	@Override
 	public void hatGetoetet(LebendigesObjekt opfer)
 	{
 		this.getModell().aenderePunkteVon(LebendigesObjektPunkteIndex.ERFAHRUNGSPUNKTE,
 				opfer.getAnzahlPunkteVon(LebendigesObjektPunkteIndex.ERFAHRUNGSPUNKTE_WERT));
+	}
+
+	public boolean istFreundlich()
+	{
+		return false;
 	}
 
 	/*
@@ -144,6 +153,12 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		return this.getModell().getAnzahlPunkteVon(LebendigesObjektPunkteIndex.AKTUELLE_LEBENS_PUNKTE) > 0;
 	}
 
+	public void resetAktionsPunkte()
+	{
+		this.modell.setAnzahlPunkteVon(LebendigesObjektPunkteIndex.AKTIONS_PUNKTE,
+				Spielkonstanten.STANDARD_ANZAHL_AKTIONEN_PRO_PHASE);
+	}
+
 	/**
 	 * Wird aufgerufen wenn dieses Objekt auf Grund seines Statuses als "tot"
 	 * angesehen wird
@@ -153,11 +168,6 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	protected void sterben(SpielbrettObjekt verursacher)
 	{
 		verursacher.hatGetoetet(this);
-	}
-
-	public boolean istFreundlich()
-	{
-		return false;
 	}
 
 	/**
@@ -172,13 +182,13 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		for (Effekt momentanerEffekt : this.modell.getEffekte())
 		{
 			this.updateMomentanenEffekt(momentanerEffekt);
-			if (momentanerEffekt.istAbgeklungen())
-			{
-				this.entferneEffekt(momentanerEffekt);// wenn der Effekt abgeklungen ist, wird er entfernt
-			}
 			if (this.effektWarToedlich(momentanerEffekt))
 			{
 				break;
+			}
+			if (momentanerEffekt.istAbgeklungen())
+			{
+				this.entferneEffekt(momentanerEffekt);// wenn der Effekt abgeklungen ist, wird er entfernt
 			}
 		}
 	}
@@ -203,17 +213,6 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		}
 	}
 
-	public void hatAktionAusgefuehrt()
-	{
-		this.modell.aenderePunkteVon(LebendigesObjektPunkteIndex.AKTIONS_PUNKTE, -1);
-	}
-
-	public void resetAktionsPunkte()
-	{
-		this.modell.setAnzahlPunkteVon(LebendigesObjektPunkteIndex.AKTIONS_PUNKTE,
-				Spielkonstanten.STANDARD_ANZAHL_AKTIONEN_PRO_PHASE);
-	}
-
 	/**
 	 * Wendet einen Effekt auf das Modell dieses Objektes an.
 	 *
@@ -223,11 +222,17 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	{
 		for (LebendigesObjektPunkteIndex index : LebendigesObjektPunkteIndex.values())
 		{
-			EffektBeschreibungsIndex effektBeschreibung = EffektBeschreibungsIndex
-					.uebersetzeAusLebendigesObjektPunkteIndex(index);
-			if (effektBeschreibung != null)
+			try
 			{
-				this.modell.aenderePunkteVon(index, zuAnwenden.getWertAusBeschreibung(effektBeschreibung));
+				EffektBeschreibungsIndex effektBeschreibung = EffektBeschreibungsIndex
+						.uebersetzeAusLebendigesObjektPunkteIndex(index);
+				if (effektBeschreibung != null)
+				{
+					this.modell.aenderePunkteVon(index, zuAnwenden.getWertAusBeschreibung(effektBeschreibung));
+				}
+			} catch (IllegalArgumentException nichtVorhanden)
+			{
+				continue;
 			}
 		}
 		zuAnwenden.wurdeGewirkt();

@@ -45,7 +45,7 @@ public class HeldStatusHBox extends HBox implements Initializable, Lokalisierbar
 	 */
 	public HeldStatusHBox()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(HeldStatusHBox.FXML_PFAD));
+		FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(HeldStatusHBox.FXML_PFAD));
 		try
 		{
 			fxmlLoader.setRoot(this);
@@ -55,6 +55,39 @@ public class HeldStatusHBox extends HBox implements Initializable, Lokalisierbar
 		{
 			throw new RuntimeException(exception);
 		}
+	}
+
+	@Override
+	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	{
+		// TODO Lokalisierung
+	}
+
+	/**
+	 * Entfernt die Umrandung.
+	 */
+	public void entferneUmrandung()
+	{
+		this.setStyle("-fx-border-style: none;");
+	}
+
+	/**
+	 * Initialisiert diesen Controller.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		//
+	}
+
+	@Override
+	public void invalidated(Observable observable)
+	{
+		HeldModell held = (HeldModell) observable;
+		this.kleineLebensPunkteAnzeigeProgressBar
+				.setProgress(held.getAnzahlPunkteVon(LebendigesObjektPunkteIndex.AKTUELLE_LEBENS_PUNKTE)
+						/ held.getAnzahlPunkteVon(LebendigesObjektPunkteIndex.MAXIMALE_LEBENS_PUNKTE));
+
 	}
 
 	/**
@@ -80,39 +113,6 @@ public class HeldStatusHBox extends HBox implements Initializable, Lokalisierbar
 	{
 		this.setStyle("-fx-border-style: solid inside;" + "-fx-border-color: rgb(100.0,30.0,30.0);"
 				+ "-fx-border-width: 3;" + "-fx-border-radius: 10;");
-	}
-
-	/**
-	 * Entfernt die Umrandung.
-	 */
-	public void entferneUmrandung()
-	{
-		this.setStyle("-fx-border-style: none;");
-	}
-
-	/**
-	 * Initialisiert diesen Controller.
-	 */
-	@Override
-	public void initialize(URL location, ResourceBundle resources)
-	{
-		//
-	}
-
-	@Override
-	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
-	{
-		// TODO Lokalisierung
-	}
-
-	@Override
-	public void invalidated(Observable observable)
-	{
-		HeldModell held = (HeldModell) observable;
-		this.kleineLebensPunkteAnzeigeProgressBar
-				.setProgress(held.getAnzahlPunkteVon(LebendigesObjektPunkteIndex.AKTUELLE_LEBENS_PUNKTE)
-						/ held.getAnzahlPunkteVon(LebendigesObjektPunkteIndex.MAXIMALE_LEBENS_PUNKTE));
-
 	}
 
 }

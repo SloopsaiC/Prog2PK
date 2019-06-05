@@ -64,7 +64,7 @@ public enum Richtung
 	/**
 	 * Erstellt einen Vektor der angibt wie die Koordinaten veraendert werden
 	 * muessen um in diese Richtung verschoben zu werden.
-	 * 
+	 *
 	 * @return Ein Vektor, welcher diese Richtung als Vektor darstellt.
 	 */
 	public abstract Vektor getVersatz();
@@ -73,7 +73,7 @@ public enum Richtung
 	 * Erstellt einen Vektor welche die Achse auf der diese Richtung nichts
 	 * veraendert. Wird genutzt um beim pruefen von Verbindungen entlang einer Kante
 	 * zu verschieben, die an einer bestimmten Richtung liegt.
-	 * 
+	 *
 	 * @return Ein Vektor der genutzt werden kann um eine Position zu verschieben
 	 *         waehrend nichts an der Koordinate veraendert wird in die diese
 	 *         Richtung zeigt.

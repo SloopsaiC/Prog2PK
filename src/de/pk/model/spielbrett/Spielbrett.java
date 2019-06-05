@@ -34,6 +34,12 @@ public class Spielbrett implements Observable
 		this.listeners = new ArrayList<>();
 	}
 
+	@Override
+	public void addListener(InvalidationListener listener)
+	{
+		this.listeners.add(listener);
+	}
+
 	/**
 	 * Bekommt die KachelPosition welche aus der Addition des Vektors resultiert
 	 *
@@ -105,10 +111,9 @@ public class Spielbrett implements Observable
 
 	public void entferneSpielbrettObjektBei(KachelPosition position)
 	{
-		SpielbrettObjekt zuEntfernen = position.getKachel().getSpielbrettObjektBei(position.getPositionAufDerKachel());
-		if (zuEntfernen.istLebendig())
+		if (position == null)
 		{
-			this.alleLebendigenObjekte.remove(zuEntfernen);
+			return;
 		}
 		position.getKachel().entferneBeiPosition(position.getPositionAufDerKachel());
 	}
@@ -133,19 +138,31 @@ public class Spielbrett implements Observable
 		return null;
 	}
 
+	private void fuegeInhaltZuLebendigeObjekteHinzu(Kachel kachel)
+	{
+		for (Position pos : kachel.getSpielbrettObjekteMitPos().keySet())
+		{
+			SpielbrettObjekt objektAufPos = kachel.getSpielbrettObjektBei(pos);
+			if ((objektAufPos != null) && objektAufPos.istLebendig())
+			{
+				this.alleLebendigenObjekte.add((LebendigesObjekt) kachel.getSpielbrettObjektBei(pos));
+			}
+		}
+	}
+
 	public Set<Position> getAlleKachelPositionen()
 	{
 		return this.spielbrettTeile.keySet();
 	}
 
-	public int getAnzahlKacheln()
-	{
-		return this.getAlleKachelPositionen().size();
-	}
-
 	public ArrayList<LebendigesObjekt> getAlleLebendigenObjekte()
 	{
 		return this.alleLebendigenObjekte;
+	}
+
+	public int getAnzahlKacheln()
+	{
+		return this.getAlleKachelPositionen().size();
 	}
 
 	/**
@@ -196,6 +213,12 @@ public class Spielbrett implements Observable
 		return this.spielbrettTeile;
 	}
 
+	@Override
+	public void removeListener(InvalidationListener listener)
+	{
+		this.listeners.remove(listener);
+	}
+
 	/**
 	 * @param alleLebendigenObjekte the alleLebendigenObjekte to set
 	 */
@@ -223,13 +246,14 @@ public class Spielbrett implements Observable
 	public void setzeKachel(Kachel kachel, Position pos)
 	{
 		this.spielbrettTeile.put(pos, kachel);
+		this.fuegeInhaltZuLebendigeObjekteHinzu(kachel);
 		this.veraendert();
 	}
 
 	public void setzeSpielbrettObjekt(KachelPosition position, SpielbrettObjekt zuSetzen)
 	{
 		position.getKachel().stelleAufKachel(position.getPositionAufDerKachel(), zuSetzen);
-		if (zuSetzen.istLebendig())
+		if ((zuSetzen != null) && zuSetzen.istLebendig())
 		{
 			this.alleLebendigenObjekte.add((LebendigesObjekt) zuSetzen);
 		}
@@ -242,18 +266,6 @@ public class Spielbrett implements Observable
 		{
 			listener.invalidated(this);
 		}
-	}
-
-	@Override
-	public void addListener(InvalidationListener listener)
-	{
-		this.listeners.add(listener);
-	}
-
-	@Override
-	public void removeListener(InvalidationListener listener)
-	{
-		this.listeners.remove(listener);
 	}
 
 }

@@ -10,9 +10,9 @@ import de.pk.utils.Spielkonstanten;
  * "Haufen". Er beinhaltet also Stapelbares und realisiert die Eigenschaft des
  * stapelns, indem er sich merkt, aus wie vielen Gegenstaenden der Haufen
  * besteht.
- * 
+ *
  * @see de.pk.model.gegenstaende.GegenstandsHaufenModell
- * 
+ *
  * @author Mattheo
  */
 public class GegenstandsHaufen

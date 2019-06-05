@@ -56,6 +56,12 @@ public class SpeicherUtils
 		return schreiber;
 	}
 
+	public static Einstellungen ladeEinstellungen(String pfad)
+	{
+		// TODO
+		return null;
+	}
+
 	/**
 	 * Laedt ein Spiel aus dem gegebenen Pfad
 	 *
@@ -98,11 +104,5 @@ public class SpeicherUtils
 		PrintWriter writer = SpeicherUtils.erstelleWriterInDatei(SpeicherUtils.erstelleDatei(name));
 		new GsonBuilder().enableComplexMapKeySerialization().create().toJson(objekt, writer);
 		writer.close();
-	}
-
-	public static Einstellungen ladeEinstellungen(String pfad)
-	{
-		// TODO
-		return null;
 	}
 }

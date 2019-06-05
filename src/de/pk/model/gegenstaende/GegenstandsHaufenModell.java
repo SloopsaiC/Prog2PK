@@ -5,8 +5,9 @@ import de.pk.utils.AusnahmeNachrichten;
 
 /**
  * Modell (Datenhaltungsklasse) eines GegenstandsHaufens.
- * @see de.pk.control.gegenstaende.GegenstandsHaufen
  * 
+ * @see de.pk.control.gegenstaende.GegenstandsHaufen
+ *
  * @author Mattheo
  */
 public class GegenstandsHaufenModell
@@ -38,23 +39,6 @@ public class GegenstandsHaufenModell
 	}
 
 	/**
-	 * Prueft, ob die Menge groesser als das Maximum oder kleiner 0 ist.
-	 *
-	 * @param menge   zu ueberpruefende Menge
-	 * @param maximum maximale Anzahl, die menge nicht ueberschreiten darf
-	 *
-	 * @throws IllegalArgumentException wenn menge < maximum oder menge < 0
-	 */
-	private void pruefeMengeAufPlausibilitaet(int menge, int maximum) throws IllegalArgumentException
-	{
-		if ((menge > maximum) || (menge < 0))
-		{
-			throw new IllegalArgumentException(
-					AusnahmeNachrichten.GEGENSTANDS_HAUFEN_MENGE_IST_NICHT_GUELTIG + maximum);
-		}
-	}
-
-	/**
 	 * Gibt den Inhalt des Haufens wieder.
 	 *
 	 * @return Stapelbares (Gegenstand), aus dem der Haufen besteht.
@@ -82,6 +66,23 @@ public class GegenstandsHaufenModell
 	public int getMenge()
 	{
 		return this.menge;
+	}
+
+	/**
+	 * Prueft, ob die Menge groesser als das Maximum oder kleiner 0 ist.
+	 *
+	 * @param menge   zu ueberpruefende Menge
+	 * @param maximum maximale Anzahl, die menge nicht ueberschreiten darf
+	 *
+	 * @throws IllegalArgumentException wenn menge < maximum oder menge < 0
+	 */
+	private void pruefeMengeAufPlausibilitaet(int menge, int maximum) throws IllegalArgumentException
+	{
+		if ((menge > maximum) || (menge < 0))
+		{
+			throw new IllegalArgumentException(
+					AusnahmeNachrichten.GEGENSTANDS_HAUFEN_MENGE_IST_NICHT_GUELTIG + maximum);
+		}
 	}
 
 	/**

@@ -31,6 +31,13 @@ public class Kachel implements Observable
 		this(new HashMap<Position, SpielbrettObjekt>(), untergrund);
 	}
 
+	@Override
+	public void addListener(InvalidationListener listener)
+	{
+		this.listeners.add(listener);
+
+	}
+
 	void entferneBeiPosition(Position zuEntfernen)
 	{
 		this.kachelObjekte.remove(zuEntfernen);
@@ -80,6 +87,12 @@ public class Kachel implements Observable
 		return this.kachelObjekte.containsValue(zuUeberpruefen);
 	}
 
+	@Override
+	public void removeListener(InvalidationListener listener)
+	{
+		this.listeners.remove(listener);
+	}
+
 	public void stelleAufKachel(Position pos, SpielbrettObjekt obj)
 	{
 		this.kachelObjekte.put(pos, obj);
@@ -97,19 +110,6 @@ public class Kachel implements Observable
 		{
 			listener.invalidated(this);
 		}
-	}
-
-	@Override
-	public void addListener(InvalidationListener listener)
-	{
-		this.listeners.add(listener);
-
-	}
-
-	@Override
-	public void removeListener(InvalidationListener listener)
-	{
-		this.listeners.remove(listener);
 	}
 
 }

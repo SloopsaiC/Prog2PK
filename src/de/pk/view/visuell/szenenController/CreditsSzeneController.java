@@ -27,6 +27,14 @@ public class CreditsSzeneController implements Initializable, Lokalisierbar
 	private Button zurueckZumHauptmenueButton;
 
 	@Override
+	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	{
+		this.creditsLabel.setText(sprachRessource.getString(LokalisierungsKeys.CREDTITS_KEY));
+		this.zurueckZumHauptmenueButton.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK_KEY)
+				+ sprachRessource.getString(LokalisierungsKeys.ZUM_HAUPTMENUE_KEY));
+	}
+
+	@Override
 	public void initialize(URL url, ResourceBundle rb)
 	{
 		// TODO
@@ -36,14 +44,6 @@ public class CreditsSzeneController implements Initializable, Lokalisierbar
 	private void zumHauptmenueButtonAction(ActionEvent event)
 	{
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
-	}
-
-	@Override
-	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
-	{
-		this.creditsLabel.setText(sprachRessource.getString(LokalisierungsKeys.CREDTITS_KEY));
-		this.zurueckZumHauptmenueButton.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK_KEY)
-				+ sprachRessource.getString(LokalisierungsKeys.ZUM_HAUPTMENUE_KEY));
 	}
 
 }

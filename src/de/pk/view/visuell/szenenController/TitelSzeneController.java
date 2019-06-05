@@ -26,6 +26,13 @@ public class TitelSzeneController implements Initializable, Lokalisierbar
 	private Label titelLabel;
 
 	@Override
+	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	{
+		this.titelLabel.setText(sprachRessource.getString(LokalisierungsKeys.ANWENDUNGS_TITEL_KEY));
+		this.zumHauptmenueButton.setText(sprachRessource.getString(LokalisierungsKeys.ZUM_HAUPTMENUE_KEY));
+	}
+
+	@Override
 	public void initialize(URL url, ResourceBundle rb)
 	{
 //
@@ -35,13 +42,6 @@ public class TitelSzeneController implements Initializable, Lokalisierbar
 	private void startButtonAction()
 	{
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
-	}
-
-	@Override
-	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
-	{
-		this.titelLabel.setText(sprachRessource.getString(LokalisierungsKeys.ANWENDUNGS_TITEL_KEY));
-		this.zumHauptmenueButton.setText(sprachRessource.getString(LokalisierungsKeys.ZUM_HAUPTMENUE_KEY));
 	}
 
 }

@@ -14,19 +14,19 @@ public enum GegnerArt
 	}
 
 	/**
-	 * @return the maxLeben
-	 */
-	public int getMaxLeben()
-	{
-		return this.maxLeben;
-	}
-
-	/**
 	 * @return the bewegungsPunkte
 	 */
 	public int getBewegungsPunkte()
 	{
 		return this.bewegungsPunkte;
+	}
+
+	/**
+	 * @return the maxLeben
+	 */
+	public int getMaxLeben()
+	{
+		return this.maxLeben;
 	}
 
 }

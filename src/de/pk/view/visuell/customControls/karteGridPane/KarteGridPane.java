@@ -71,121 +71,17 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 	 */
 	public KarteGridPane()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(KarteGridPane.FXML_PFAD));
+		FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(KarteGridPane.FXML_PFAD));
 		try
 		{
 			fxmlLoader.setRoot(this);
 			fxmlLoader.setController(this);
-			fxmlLoader.setClassLoader(getClass().getClassLoader());
+			fxmlLoader.setClassLoader(this.getClass().getClassLoader());
 			fxmlLoader.load();
 		} catch (IOException exception)
 		{
 			throw new RuntimeException(exception);
 		}
-	}
-
-	/**
-	 * Initialisiert diesen Controller.
-	 */
-	@Override
-	public void initialize(URL location, ResourceBundle resources)
-	{
-		// TODO inti?
-
-	}
-
-	@Override
-	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
-	{
-		//
-	}
-
-	public void setSpielbrett(Spielbrett spielbrett)
-	{
-		spielbrett.addListener(this);
-		this.invalidated(spielbrett);
-	}
-
-	/**
-	 * Soll aufgerufen werden, wenn ein ScrollEvent vorliegt, dass die Karte zum
-	 * Skalieren veranslassen soll.
-	 *
-	 * @param event ScrollEvent zum Zoomen
-	 */
-	public void skaliereBeiScrollEvent(ScrollEvent event)
-	{
-		// Ein skalierungsFaktor wird je nach Mausrad-Drehrichtung ausgewahlt.
-		double skalierungsFaktor = SKALIERUNGS_FAKTOR;
-		if (event.getDeltaY() < SKALIERUNGS_ZOOM_GRENZE)
-		{
-			skalierungsFaktor = 1 / SKALIERUNGS_FAKTOR;
-		} else if (event.getDeltaY() == SKALIERUNGS_ZOOM_GRENZE)
-		{
-			skalierungsFaktor = SKALIERUNGS_FAKTOR / SKALIERUNGS_FAKTOR;
-		}
-		if (event.isControlDown() && (this.getScaleX() * skalierungsFaktor) > SKALIERUNG_MINIMUM
-				&& (this.getScaleX() * skalierungsFaktor) < SKALIERUNG_MAXIMUM)
-		{
-			// Skaliert die Karte in x- und y-Dimension durch Multiplikation der aktuellen
-			// Skalierung mit dem skalierungsFaktor, wenn STRG gedreuckt ist.
-			this.setScaleX(this.getScaleX() * skalierungsFaktor);
-			this.setScaleY(this.getScaleY() * skalierungsFaktor);
-		}
-	}
-
-	/**
-	 * Soll aufgerufen werden, wenn ein MouseEvent vorliegt, dass die Karte
-	 * verschieben soll.
-	 *
-	 * @param event MouseEvent zum Verschieben
-	 * @param oldX  die vorherige xPosition der Maus beim Druecken des Maustaste
-	 * @param oldY  die vorherige yPosition der Maus beim Druecken des Maustaste
-	 */
-	public void verschiebeBeiMouseEvent(MouseEvent event, double oldX, double oldY)
-	{
-		if (event.getButton() == MouseButton.SECONDARY)
-		{
-			this.setTranslateX(this.getTranslateX() + ((event.getX() - oldX) * VERSCHIEBUNGS_FAKTOR));
-			this.setTranslateY(this.getTranslateY() + ((event.getY() - oldY) * VERSCHIEBUNGS_FAKTOR));
-		}
-	}
-
-	/**
-	 * Wird aufgerufen, wenn mit der Maus ins Fenster geklickt wurde und waehrend
-	 * dieses Klicken andauert.
-	 *
-	 * @param event MouseEvent des Mausklicks
-	 */
-	@FXML
-	public void kartenGridPaneMousePressed(MouseEvent event)
-	{
-		this.oldX = event.getX();
-		this.oldY = event.getY();
-	}
-
-	/**
-	 * Wird aufgerufen, wenn eine Maustaste heruntergedrueckt ist und die Maus dabei
-	 * bewegt wird.
-	 *
-	 * @param event MouseEvent des Bewegens der gedrueckten Maus
-	 */
-	@FXML
-	public void kartenGridPaneMouseDragged(MouseEvent event)
-	{
-		this.verschiebeBeiMouseEvent(event, this.oldX, this.oldY);
-		this.oldX = event.getX();
-		this.oldY = event.getY();
-	}
-
-	/**
-	 * Wird Aufgerufen, wenn mit dem Mausrad im Fenster "gescroolt" wird.
-	 *
-	 * @param event ScrollEvent des Mausraddrehens
-	 */
-	@FXML
-	public void kartenGridPaneScroll(ScrollEvent event)
-	{
-		this.skaliereBeiScrollEvent(event);
 	}
 
 	/**
@@ -202,8 +98,8 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 		{
 			try
 			{
-				if (GridPane.getColumnIndex(node).intValue() == pos.getX()
-						&& GridPane.getRowIndex(node).intValue() == pos.getY())
+				if ((GridPane.getColumnIndex(node).intValue() == pos.getX())
+						&& (GridPane.getRowIndex(node).intValue() == pos.getY()))
 				{
 					throw new InputMismatchException();
 				}
@@ -214,6 +110,12 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 		}
 		this.add(kachelGridPane, pos.getX(), pos.getY());
 		this.initEventHandler(kachelGridPane);
+	}
+
+	@Override
+	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	{
+		//
 	}
 
 	/**
@@ -239,6 +141,16 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 		});
 	}
 
+	/**
+	 * Initialisiert diesen Controller.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		// TODO inti?
+
+	}
+
 	@Override
 	public void invalidated(Observable observable)
 	{
@@ -253,6 +165,94 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 			} catch (InputMismatchException schonVorhanden)
 			{
 			}
+		}
+	}
+
+	/**
+	 * Wird aufgerufen, wenn eine Maustaste heruntergedrueckt ist und die Maus dabei
+	 * bewegt wird.
+	 *
+	 * @param event MouseEvent des Bewegens der gedrueckten Maus
+	 */
+	@FXML
+	public void kartenGridPaneMouseDragged(MouseEvent event)
+	{
+		this.verschiebeBeiMouseEvent(event, this.oldX, this.oldY);
+		this.oldX = event.getX();
+		this.oldY = event.getY();
+	}
+
+	/**
+	 * Wird aufgerufen, wenn mit der Maus ins Fenster geklickt wurde und waehrend
+	 * dieses Klicken andauert.
+	 *
+	 * @param event MouseEvent des Mausklicks
+	 */
+	@FXML
+	public void kartenGridPaneMousePressed(MouseEvent event)
+	{
+		this.oldX = event.getX();
+		this.oldY = event.getY();
+	}
+
+	/**
+	 * Wird Aufgerufen, wenn mit dem Mausrad im Fenster "gescroolt" wird.
+	 *
+	 * @param event ScrollEvent des Mausraddrehens
+	 */
+	@FXML
+	public void kartenGridPaneScroll(ScrollEvent event)
+	{
+		this.skaliereBeiScrollEvent(event);
+	}
+
+	public void setSpielbrett(Spielbrett spielbrett)
+	{
+		spielbrett.addListener(this);
+		this.invalidated(spielbrett);
+	}
+
+	/**
+	 * Soll aufgerufen werden, wenn ein ScrollEvent vorliegt, dass die Karte zum
+	 * Skalieren veranslassen soll.
+	 *
+	 * @param event ScrollEvent zum Zoomen
+	 */
+	public void skaliereBeiScrollEvent(ScrollEvent event)
+	{
+		// Ein skalierungsFaktor wird je nach Mausrad-Drehrichtung ausgewahlt.
+		double skalierungsFaktor = KarteGridPane.SKALIERUNGS_FAKTOR;
+		if (event.getDeltaY() < KarteGridPane.SKALIERUNGS_ZOOM_GRENZE)
+		{
+			skalierungsFaktor = 1 / KarteGridPane.SKALIERUNGS_FAKTOR;
+		} else if (event.getDeltaY() == KarteGridPane.SKALIERUNGS_ZOOM_GRENZE)
+		{
+			skalierungsFaktor = KarteGridPane.SKALIERUNGS_FAKTOR / KarteGridPane.SKALIERUNGS_FAKTOR;
+		}
+		if (event.isControlDown() && ((this.getScaleX() * skalierungsFaktor) > KarteGridPane.SKALIERUNG_MINIMUM)
+				&& ((this.getScaleX() * skalierungsFaktor) < KarteGridPane.SKALIERUNG_MAXIMUM))
+		{
+			// Skaliert die Karte in x- und y-Dimension durch Multiplikation der aktuellen
+			// Skalierung mit dem skalierungsFaktor, wenn STRG gedreuckt ist.
+			this.setScaleX(this.getScaleX() * skalierungsFaktor);
+			this.setScaleY(this.getScaleY() * skalierungsFaktor);
+		}
+	}
+
+	/**
+	 * Soll aufgerufen werden, wenn ein MouseEvent vorliegt, dass die Karte
+	 * verschieben soll.
+	 *
+	 * @param event MouseEvent zum Verschieben
+	 * @param oldX  die vorherige xPosition der Maus beim Druecken des Maustaste
+	 * @param oldY  die vorherige yPosition der Maus beim Druecken des Maustaste
+	 */
+	public void verschiebeBeiMouseEvent(MouseEvent event, double oldX, double oldY)
+	{
+		if (event.getButton() == MouseButton.SECONDARY)
+		{
+			this.setTranslateX(this.getTranslateX() + ((event.getX() - oldX) * KarteGridPane.VERSCHIEBUNGS_FAKTOR));
+			this.setTranslateY(this.getTranslateY() + ((event.getY() - oldY) * KarteGridPane.VERSCHIEBUNGS_FAKTOR));
 		}
 	}
 

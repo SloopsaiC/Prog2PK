@@ -44,17 +44,49 @@ public class HeldenStatusAnzeige extends VBox implements Initializable, Lokalisi
 	 */
 	public HeldenStatusAnzeige()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(HeldenStatusAnzeige.FXML_PFAD));
+		FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(HeldenStatusAnzeige.FXML_PFAD));
 		try
 		{
 			fxmlLoader.setRoot(this);
 			fxmlLoader.setController(this);
-			fxmlLoader.setClassLoader(getClass().getClassLoader());
+			fxmlLoader.setClassLoader(this.getClass().getClassLoader());
 			fxmlLoader.load();
 		} catch (IOException exception)
 		{
 			throw new RuntimeException(exception);
 		}
+	}
+
+	@Override
+	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	{
+		for (HeldStatusHBox heldStatusHBox : this.heldStatusHBoxen)
+		{
+			heldStatusHBox.aktualisiereTextKomponenten(sprachRessource);
+		}
+	}
+
+	/**
+	 * Initialisiert diesen Controller.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		this.heldStatusHBoxen = new HeldStatusHBox[]
+		{ this.heldStatusHBox1, this.heldStatusHBox2, this.heldStatusHBox3, this.heldStatusHBox4 };
+	}
+
+	/**
+	 * Markiert die aktuelle HeldenStatusHBox an der Stelle index, indem diese
+	 * umrahmt wird. Setzt die Rahmen aller anderen Boxen wieder zurueck.
+	 */
+	public void markiereAktuelleHeldenStatusHBox(int index)
+	{
+		for (HeldStatusHBox heldStatusHBox : this.heldStatusHBoxen)
+		{
+			heldStatusHBox.entferneUmrandung();
+		}
+		this.heldStatusHBoxen[index].umrandeFarbig();
 	}
 
 	/**
@@ -94,38 +126,6 @@ public class HeldenStatusAnzeige extends VBox implements Initializable, Lokalisi
 			this.heldStatusHBoxen[i].setHeld(helden[i]);
 		}
 		this.setAnzahlHeldenAnzeigen(helden.length);
-	}
-
-	/**
-	 * Markiert die aktuelle HeldenStatusHBox an der Stelle index, indem diese
-	 * umrahmt wird. Setzt die Rahmen aller anderen Boxen wieder zurueck.
-	 */
-	public void markiereAktuelleHeldenStatusHBox(int index)
-	{
-		for (HeldStatusHBox heldStatusHBox : this.heldStatusHBoxen)
-		{
-			heldStatusHBox.entferneUmrandung();
-		}
-		this.heldStatusHBoxen[index].umrandeFarbig();
-	}
-
-	/**
-	 * Initialisiert diesen Controller.
-	 */
-	@Override
-	public void initialize(URL location, ResourceBundle resources)
-	{
-		this.heldStatusHBoxen = new HeldStatusHBox[]
-		{ this.heldStatusHBox1, this.heldStatusHBox2, this.heldStatusHBox3, this.heldStatusHBox4 };
-	}
-
-	@Override
-	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
-	{
-		for (HeldStatusHBox heldStatusHBox : this.heldStatusHBoxen)
-		{
-			heldStatusHBox.aktualisiereTextKomponenten(sprachRessource);
-		}
 	}
 
 }

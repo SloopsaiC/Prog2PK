@@ -47,15 +47,27 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 
 	private Dungeon aktiverDungeon = null;
 
+	@Override
+	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	{
+		this.pauseMenueDialogPane.aktualisiereTextKomponenten(sprachRessource);
+		this.heldenStatusAnzeige.aktualisiereTextKomponenten(sprachRessource);
+		this.untereDungeonAnzeige.aktualisiereTextKomponenten(sprachRessource);
+		this.obereDungeonAnzeige.aktualisiereTextKomponenten(sprachRessource);
+		this.questLog.aktualisiereTextKomponenten(sprachRessource);
+		this.karteGridPane.aktualisiereTextKomponenten(sprachRessource);
+		// TODO sonstige Lokalisierungen
+	}
+
 	/**
 	 * Wird zu Beginn aufgerufen, um gewisse Komponenten zu initialisieren.
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		initObereAnzeigeButtonEvents();
-		initPauseMenueDialogPaneButtonEvents();
-		initKartenGridPane();
+		this.initObereAnzeigeButtonEvents();
+		this.initPauseMenueDialogPaneButtonEvents();
+		this.initKartenGridPane();
 	}
 
 	/**
@@ -67,15 +79,6 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 	{
 		this.karteGridPane.addEventHandler(KachelPositionEvent.KACHEL_ANGELICKT,
 				(a) -> this.kachelPositionAngeklickt(a));
-	}
-
-	private void kachelPositionAngeklickt(KachelPositionEvent event)
-	{
-		if (this.untereDungeonAnzeige.getAktiveAktion() > -1)
-		{
-			this.aktiverDungeon.getAktivePhase().verarbeiteKlickAufKachelPosition(event.getEventKachelPosition(),
-					this.untereDungeonAnzeige.getAktiveAktion());
-		}
 	}
 
 	/**
@@ -138,6 +141,15 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 
 	}
 
+	private void kachelPositionAngeklickt(KachelPositionEvent event)
+	{
+		if (this.untereDungeonAnzeige.getAktiveAktion() > -1)
+		{
+			this.aktiverDungeon.getAktivePhase().verarbeiteKlickAufKachelPosition(event.getEventKachelPosition(),
+					this.untereDungeonAnzeige.getAktiveAktion());
+		}
+	}
+
 	public void setDungeon(Dungeon dungeon)
 	{
 		Anwendung.getInstanz().getAktivesSpiel().waehleDungeon(dungeon);
@@ -147,18 +159,6 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 		this.obereDungeonAnzeige.setAnzuzeigendenDungeonTitel(dungeon.getName());
 		this.obereDungeonAnzeige.setAnzuzeigendenDungeonFortschritt(50);
 		this.obereDungeonAnzeige.setAnzuzeigendeAnzahlFragmente(10);
-	}
-
-	@Override
-	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
-	{
-		this.pauseMenueDialogPane.aktualisiereTextKomponenten(sprachRessource);
-		this.heldenStatusAnzeige.aktualisiereTextKomponenten(sprachRessource);
-		this.untereDungeonAnzeige.aktualisiereTextKomponenten(sprachRessource);
-		this.obereDungeonAnzeige.aktualisiereTextKomponenten(sprachRessource);
-		this.questLog.aktualisiereTextKomponenten(sprachRessource);
-		this.karteGridPane.aktualisiereTextKomponenten(sprachRessource);
-		// TODO sonstige Lokalisierungen
 	}
 
 }

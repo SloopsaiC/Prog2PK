@@ -9,7 +9,7 @@ import de.pk.control.spiel.Dungeon;
 
 /**
  * Modell der Weltkarte des Spiels
- * 
+ *
  * @author Mattheo
  */
 public class WeltkarteModell
@@ -19,7 +19,7 @@ public class WeltkarteModell
 
 	/**
 	 * Erstellt ein Modell einer Weltkarte mit den gegebenen Dungeons.
-	 * 
+	 *
 	 * @param dungeons Die Dungeons welche auf der Weltkarte sein sollen
 	 */
 	public WeltkarteModell(Dungeon... dungeons)
@@ -31,7 +31,7 @@ public class WeltkarteModell
 
 	/**
 	 * Fuegt einen Dungeon zur Weltkarte hinzu
-	 * 
+	 *
 	 * @param hinzufuegen Der hinzuzufuegende Dungeon
 	 */
 	public void fuegeDungeonHinzu(Dungeon hinzufuegen)
@@ -42,7 +42,7 @@ public class WeltkarteModell
 	/**
 	 * Erlaubt Zugriff auf alle Dungeons auf dieser Weltkarte. Diese Liste kann
 	 * nicht bearbeitet werden.
-	 * 
+	 *
 	 * @return Alle Dungeons auf dieser Weltkarte als Liste
 	 */
 	public List<Dungeon> getDungeons()

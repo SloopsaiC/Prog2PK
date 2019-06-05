@@ -30,10 +30,6 @@ public class Einstellungen
 
 	public static final Sprache STANDARD_SPRACHE = Sprache.de;
 
-	private Aufloesung anwendungsAufloesung = Einstellungen.STANDARD_AUFLOESUNG;
-	private Sprache anwendungsSprache = Einstellungen.STANDARD_SPRACHE;
-	private ResourceBundle sprachRessource = null;
-
 	/**
 	 * Gibt die Instanz der Einstellungs-Klasse zurueck.
 	 *
@@ -43,6 +39,11 @@ public class Einstellungen
 	{
 		return EinstellungsBehaelter.EINSTELLUNGEN;
 	}
+
+	private Aufloesung anwendungsAufloesung = Einstellungen.STANDARD_AUFLOESUNG;
+	private Sprache anwendungsSprache = Einstellungen.STANDARD_SPRACHE;
+
+	private ResourceBundle sprachRessource = null;
 
 	private Einstellungen()
 	{
@@ -55,11 +56,6 @@ public class Einstellungen
 		return this.anwendungsAufloesung;
 	}
 
-	public void setAnwendungsAufloesung(Aufloesung anwendungsAufloesung)
-	{
-		this.anwendungsAufloesung = anwendungsAufloesung;
-	}
-
 	public Sprache getAnwendungsSprache()
 	{
 		return this.anwendungsSprache;
@@ -68,6 +64,11 @@ public class Einstellungen
 	public ResourceBundle getSprachRessource()
 	{
 		return this.sprachRessource;
+	}
+
+	public void setAnwendungsAufloesung(Aufloesung anwendungsAufloesung)
+	{
+		this.anwendungsAufloesung = anwendungsAufloesung;
 	}
 
 	public void setAnwendungsSprache(Sprache anwendungsSprache)

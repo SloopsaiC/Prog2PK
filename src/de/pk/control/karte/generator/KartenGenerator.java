@@ -50,6 +50,42 @@ public class KartenGenerator
 	}
 
 	/**
+	 * Dreht einen KartenGeneratorUntergrundMitRichtung "zu" solange bis eine
+	 * Verbindung zu "von" besteht.
+	 *
+	 * @param von      Der Untergrund zu dem eine Verbindung hergestellt werden soll
+	 * @param zu       Der Untergrund welcher die Verbindung herstellen soll
+	 * @param Richtung die Richtung in der "zu" von "von" aus gesehen ist
+	 *
+	 * @return Der gedrehte Untergrund
+	 */
+	private KartenGeneratorUntergrundMitRichtung dreheBisVerbindung(KartenGeneratorUntergrundMitRichtung von,
+			KartenGeneratorUntergrundMitRichtung zu, Richtung richtung)
+	{
+		if (!KartenGeneratorUtils.pruefeVerbindung(von, zu, richtung))
+		{
+			// Solange drehen bis eine Verbindung besteht oder der Untergrund ein Mal
+			// gedreht wurde
+			for (int i = 0; i < KartenGenerator.MAX_DREHUNGEN_UNTERGRUND; i++)
+			{
+				if (!KartenGeneratorUtils.pruefeVerbindung(von, zu, richtung))
+				{
+					zu.drehe(KartenGenerator.STANDARD_DREH_RICHTUNG);
+				} else
+				{
+					return zu;
+				}
+			}
+		} else
+		{
+			return zu;
+		}
+		// Es konnte nach drei Mal drehen keine Verbindung hergstellt werden -> Es ist
+		// fuer diese Methode nicht moeglich eine Verbindung herzustellen
+		throw new IllegalStateException(AusnahmeNachrichten.KARTEN_GENERATOR_KANN_KEINE_VERBINDUNG_HERSTELLEN);
+	}
+
+	/**
 	 * Generiert eine neue Kachel in gegebenener Richtung von gegebener Position aus
 	 * gesehen. Hierbei wird zufaellig ein Untergrund bestimmt und dieser so lange
 	 * gedreht bis er eine Verbindung zu dem vorherigen Untergrund (Der von dem aus
@@ -82,42 +118,6 @@ public class KartenGenerator
 			}
 		}
 		return generiert;
-	}
-
-	/**
-	 * Dreht einen KartenGeneratorUntergrundMitRichtung "zu" solange bis eine
-	 * Verbindung zu "von" besteht.
-	 * 
-	 * @param von      Der Untergrund zu dem eine Verbindung hergestellt werden soll
-	 * @param zu       Der Untergrund welcher die Verbindung herstellen soll
-	 * @param Richtung die Richtung in der "zu" von "von" aus gesehen ist
-	 * 
-	 * @return Der gedrehte Untergrund
-	 */
-	private KartenGeneratorUntergrundMitRichtung dreheBisVerbindung(KartenGeneratorUntergrundMitRichtung von,
-			KartenGeneratorUntergrundMitRichtung zu, Richtung richtung)
-	{
-		if (!KartenGeneratorUtils.pruefeVerbindung(von, zu, richtung))
-		{
-			// Solange drehen bis eine Verbindung besteht oder der Untergrund ein Mal
-			// gedreht wurde
-			for (int i = 0; i < KartenGenerator.MAX_DREHUNGEN_UNTERGRUND; i++)
-			{
-				if (!KartenGeneratorUtils.pruefeVerbindung(von, zu, richtung))
-				{
-					zu.drehe(KartenGenerator.STANDARD_DREH_RICHTUNG);
-				} else
-				{
-					return zu;
-				}
-			}
-		} else
-		{
-			return zu;
-		}
-		// Es konnte nach drei Mal drehen keine Verbindung hergstellt werden -> Es ist
-		// fuer diese Methode nicht moeglich eine Verbindung herzustellen
-		throw new IllegalStateException(AusnahmeNachrichten.KARTEN_GENERATOR_KANN_KEINE_VERBINDUNG_HERSTELLEN);
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class KartenGenerator
 	/**
 	 * Generiert eine vordefinierte Startkachel um ein sicheren Einstieg in den
 	 * Dungeon zu erlauben.
-	 * 
+	 *
 	 * @return Die vordefinierte Startkachel.
 	 */
 	public Kachel generiereStartKachel()
@@ -241,9 +241,9 @@ public class KartenGenerator
 	/**
 	 * Ueberprueft ob ein Untergrund ein freies Randfeld hat. Dies ist noetig um ihn
 	 * generieren zu koennen, da sonst kein Spieler ihn betreten koennte.
-	 * 
+	 *
 	 * @param zuUebepruefen Der zu ueberpruefende Untergrund
-	 * 
+	 *
 	 * @return true, falls der Untergrund ein freies Randfeld hat, sonst false
 	 */
 	private boolean ueberpruefeFreiesRandFeld(KartenGeneratorUntergrund zuUeberpruefen)

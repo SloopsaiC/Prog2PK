@@ -125,6 +125,12 @@ public class Held extends LebendigesObjekt
 		this.getModellAlsHeld().fuegeZuInventarHinzu(opfer.generiereAuswurf());
 	}
 
+	@Override
+	public boolean istFreundlich()
+	{
+		return true;
+	}
+
 	/**
 	 * Prueft, ob der Held die Faehigkeits-Voraussetzungen erfuellt, um die
 	 * auszuruestende Ausruestung zu tragen.
@@ -146,12 +152,6 @@ public class Held extends LebendigesObjekt
 	public void registriereListenerAufModell(InvalidationListener listener)
 	{
 		this.getModellAlsHeld().addListener(listener);
-	}
-
-	@Override
-	public boolean istFreundlich()
-	{
-		return true;
 	}
 
 }

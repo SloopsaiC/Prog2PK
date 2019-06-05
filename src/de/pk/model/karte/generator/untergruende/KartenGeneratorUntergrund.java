@@ -213,8 +213,8 @@ public enum KartenGeneratorUntergrund
 	 */
 	public KachelUntergrundWertigkeit getInhaltVonRichtungBei(Richtung richtung, Position bei)
 	{
-		if (bei.getX() >= Spielkonstanten.KACHEL_GROESSE_X || bei.getY() >= Spielkonstanten.KACHEL_GROESSE_Y
-				|| bei.getX() < 0 || bei.getY() < 0)
+		if ((bei.getX() >= Spielkonstanten.KACHEL_GROESSE_X) || (bei.getY() >= Spielkonstanten.KACHEL_GROESSE_Y)
+				|| (bei.getX() < 0) || (bei.getY() < 0))
 		{
 			throw new IllegalArgumentException(
 					AusnahmeNachrichten.KARTEN_GENERATOR_UNTERGRUND_ANFRAGE_AUSSERHALB_VON_KACHEL);

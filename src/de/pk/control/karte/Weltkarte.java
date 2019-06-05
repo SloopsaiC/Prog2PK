@@ -6,9 +6,9 @@ import de.pk.utils.AusnahmeNachrichten;
 
 /**
  * Speichert die Weltkarte und bietet Methoden an um mit ihr zu interagieren.
- * 
+ *
  * @see de.pk.model.karte.Weltkarte
- * 
+ *
  * @author Mattheo
  */
 public class Weltkarte

@@ -10,7 +10,8 @@ import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjek
  */
 public enum EffektBeschreibungsIndex
 {
-	ANZAHL_WIRK_TICKS, ANGRIFF, RUESTUNG, LEBENS_PUNKTE, BEWEGUNGSPUNKTE, AKTION_REICHWEITE_AENDERUNG, IST_GESCHUETZT;
+	ANZAHL_WIRK_TICKS, ANGRIFF, RUESTUNG, AKTUELLE_LEBENS_PUNKTE, BEWEGUNGSPUNKTE, AKTION_REICHWEITE_AENDERUNG,
+	IST_GESCHUETZT;
 
 	/**
 	 * Uebersetzt einen LebendigesObjektPunkteIndex in den dazugehoerigen

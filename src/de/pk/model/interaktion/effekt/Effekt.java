@@ -3,6 +3,7 @@ package de.pk.model.interaktion.effekt;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Ein Effekt kann die Attribute von LebendigenObjekten beeinflussen. Er hat
@@ -18,7 +19,7 @@ public class Effekt
 		Map<EffektBeschreibungsIndex, EffektTeil> beschreibung = new HashMap<>();
 		for (EffektTeil teil : effektTeile)
 		{
-			beschreibung.put(teil.getIndex(), teil);
+			beschreibung.put(teil.getIndex(), teil.clone());
 		}
 		return beschreibung;
 	}
@@ -60,8 +61,28 @@ public class Effekt
 	public Effekt(EffektTyp typ, Map<EffektBeschreibungsIndex, EffektTeil> effektBeschreibung)
 	{
 		this.typ = typ;
-		this.effektBeschreibung = Collections
-				.synchronizedMap(new HashMap<>(effektBeschreibung));
+		this.effektBeschreibung = Collections.synchronizedMap(new HashMap<>(effektBeschreibung));
+	}
+
+	@Override
+	public Effekt clone()
+	{
+		return new Effekt(this.typ, this.effektBeschreibung.values().toArray(new EffektTeil[0]));
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+		{
+			return true;
+		}
+		if (obj == null || this.getClass() != obj.getClass())
+		{
+			return false;
+		}
+		Effekt other = (Effekt) obj;
+		return (this.typ == other.typ) && Objects.equals(this.effektBeschreibung, other.effektBeschreibung);
 	}
 
 	/**
@@ -89,11 +110,18 @@ public class Effekt
 
 	public int getWertAusBeschreibung(EffektBeschreibungsIndex index)
 	{
-		if (this.istAbgeklungen())
+		EffektTeil beschreibung = this.effektBeschreibung.get(index);
+		if ((beschreibung == null) || this.istAbgeklungen())
 		{
 			return 0;
 		}
-		return this.effektBeschreibung.get(index).getWert();
+		return beschreibung.getWert();
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(this.effektBeschreibung, this.typ);
 	}
 
 	/**

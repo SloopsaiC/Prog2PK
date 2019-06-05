@@ -23,6 +23,12 @@ public class HeldenPhase extends Phase
 	}
 
 	@Override
+	public void startePhaseMit(Held held)
+	{
+		super.startePhaseMit(held);
+	}
+
+	@Override
 	public void verarbeiteKlickAufKachelPosition(KachelPosition position, int aktiveAktionIndex)
 	{
 		Held aktiverHeld = super.getAktivenHeld();
@@ -33,14 +39,9 @@ public class HeldenPhase extends Phase
 			// Es steht kein Objekt auf der Position, also ist sie selber das Ziel
 			ziel = position;
 		}
-		aktiverHeld.getAktionMitNamen(aktiverHeld.getAktionsNamen().get(aktiveAktionIndex)).fuehreAus(aktiverHeld, position);
+		aktiverHeld.getAktionMitNamen(aktiverHeld.getAktionsNamen().get(aktiveAktionIndex)).fuehreAus(aktiverHeld,
+				ziel);
 		this.beendePhaseFallsHeldKeineAktionsPunkte(aktiverHeld);
-	}
-
-	@Override
-	public void startePhaseMit(Held held)
-	{
-		super.startePhaseMit(held);
 	}
 
 }

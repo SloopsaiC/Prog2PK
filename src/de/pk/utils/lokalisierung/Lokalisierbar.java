@@ -41,6 +41,6 @@ public interface Lokalisierbar
 	 *                        der .properties-Ressource geladen, die die
 	 *                        eingestellte Sprache repraesentiert.
 	 */
-	public abstract void aktualisiereTextKomponenten(ResourceBundle sprachRessource);
+	void aktualisiereTextKomponenten(ResourceBundle sprachRessource);
 
 }

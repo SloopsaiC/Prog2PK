@@ -25,6 +25,12 @@ public class EffektTeil
 		this.wert = aenderung;
 	}
 
+	@Override
+	public EffektTeil clone()
+	{
+		return new EffektTeil(this.index, this.wert);
+	}
+
 	/**
 	 * @return the index
 	 */
@@ -48,4 +54,5 @@ public class EffektTeil
 	{
 		this.wert = wert;
 	}
+
 }

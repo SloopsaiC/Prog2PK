@@ -37,7 +37,7 @@ public class QuestLog extends StackPane implements Initializable, Lokalisierbar
 	 */
 	public QuestLog()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(QuestLog.FXML_PFAD));
+		FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(QuestLog.FXML_PFAD));
 		try
 		{
 			fxmlLoader.setRoot(this);
@@ -47,15 +47,6 @@ public class QuestLog extends StackPane implements Initializable, Lokalisierbar
 		{
 			throw new RuntimeException(exception);
 		}
-	}
-
-	/**
-	 * Initialisiert diesen Controller.
-	 */
-	@Override
-	public void initialize(URL location, ResourceBundle resources)
-	{
-		// TODO ListeView mit Quests fuellen
 	}
 
 	@Override
@@ -70,6 +61,15 @@ public class QuestLog extends StackPane implements Initializable, Lokalisierbar
 			this.questLogButton.setTooltip(
 					new Tooltip(sprachRessource.getString(LokalisierungsKeys.TOOLTIP_QUEST_LOG_OEFFNEN_KEY)));
 		}
+	}
+
+	/**
+	 * Initialisiert diesen Controller.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		// TODO ListeView mit Quests fuellen
 	}
 
 	/**

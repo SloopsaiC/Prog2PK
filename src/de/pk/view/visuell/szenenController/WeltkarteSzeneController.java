@@ -43,6 +43,13 @@ public class WeltkarteSzeneController implements Initializable, Lokalisierbar
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE);
 	}
 
+	@Override
+	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
 	@FXML
 	public void dungeon1ButtonPressed(ActionEvent event)
 	{
@@ -80,6 +87,11 @@ public class WeltkarteSzeneController implements Initializable, Lokalisierbar
 
 	}
 
+	public void setWeltkarte(Weltkarte weltkarte)
+	{
+		this.weltkarte = weltkarte;
+	}
+
 	@FXML
 	public void weltkarteInsHauptmenueButtonPressed(ActionEvent event)
 	{
@@ -90,17 +102,5 @@ public class WeltkarteSzeneController implements Initializable, Lokalisierbar
 	public void weltkarteZurueckButtonPressed(ActionEvent event)
 	{
 		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_SCHWIERIGKEIT_WAEHLEN_SZENE);
-	}
-
-	@Override
-	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	public void setWeltkarte(Weltkarte weltkarte)
-	{
-		this.weltkarte = weltkarte;
 	}
 }

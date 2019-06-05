@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 
 import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
-import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.gegner.Gegner;
 import de.pk.model.position.Position;
 import de.pk.model.spielbrett.Kachel;
 import de.pk.utils.Spielkonstanten;
@@ -52,7 +51,7 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 	 */
 	public KachelGridPane()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(KachelGridPane.FXML_PFAD));
+		FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(KachelGridPane.FXML_PFAD));
 		try
 		{
 			fxmlLoader.setRoot(this);
@@ -64,27 +63,43 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 		}
 	}
 
-	/**
-	 * Initialisiert diesen Controller.
-	 */
 	@Override
-	public void initialize(URL location, ResourceBundle resources)
+	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
 	{
-		this.untergruende = new StackPane[Spielkonstanten.KACHEL_GROESSE_Y][Spielkonstanten.KACHEL_GROESSE_X];
-		for (Node node : this.getChildren())
+		//
+	}
+
+	/**
+	 * Entfernt alle Umrundungen von allen Untergruenden dieser Kachel.
+	 */
+	public void entferneAlleUmrandungen()
+	{
+		for (StackPane[] stackPanes : this.untergruende)
 		{
-			try
+			for (StackPane untergrund : stackPanes)
 			{
-				final int xKoordinate = GridPane.getColumnIndex(node).intValue();
-				final int yKoordinate = GridPane.getRowIndex(node).intValue();
-				StackPane untergrund = (StackPane) node;
-				this.untergruende[yKoordinate][xKoordinate] = untergrund;
-				initEventHandler(untergrund, new Position(xKoordinate, yKoordinate));
-			} catch (NullPointerException e)
-			{
-				//
+				untergrund.setBorder(Border.EMPTY);
 			}
 		}
+	}
+
+	/**
+	 * Entfernt jegliches Gluehen von allen Untergruenden dieser Kachel.
+	 */
+	public void entferneJeglichesGluehen()
+	{
+		for (StackPane[] stackPanes : this.untergruende)
+		{
+			for (StackPane untergrund : stackPanes)
+			{
+				untergrund.setEffect(null);
+			}
+		}
+	}
+
+	public Kachel getDarstellendeKachel()
+	{
+		return this.darstellendeKachel;
 	}
 
 	/**
@@ -110,6 +125,65 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 				}
 			}
 		});
+	}
+
+	/**
+	 * Initialisiert diesen Controller.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		this.untergruende = new StackPane[Spielkonstanten.KACHEL_GROESSE_Y][Spielkonstanten.KACHEL_GROESSE_X];
+		for (Node node : this.getChildren())
+		{
+			try
+			{
+				final int xKoordinate = GridPane.getColumnIndex(node).intValue();
+				final int yKoordinate = GridPane.getRowIndex(node).intValue();
+				StackPane untergrund = (StackPane) node;
+				this.untergruende[yKoordinate][xKoordinate] = untergrund;
+				this.initEventHandler(untergrund, new Position(xKoordinate, yKoordinate));
+			} catch (NullPointerException e)
+			{
+				//
+			}
+		}
+	}
+
+	@Override
+	public void invalidated(Observable observable)
+	{
+		this.setKachelUntergruende((Kachel) observable);
+	}
+
+	public void setDarstellendeKachel(Kachel kachel)
+	{
+		kachel.addListener(this);
+		this.darstellendeKachel = kachel;
+		this.setKachelUntergruende(kachel);
+	}
+
+	/**
+	 * Laesst den Untergrund an der Position pos auf der Kachel gluehen bzw. hell
+	 * aufleuchten.
+	 *
+	 * @param pos Position des zu gluehenden Untergrunds auf der Kachel
+	 */
+	public void setGluehenBeiKachel(Position pos)
+	{
+		this.setGluehenBeiKachel(pos, KachelGridPane.GLUEHEN_INTENSITAET);
+	}
+
+	/**
+	 * Laestt den Untergrund an der Position pos auf der Kachel gluehen bzw. hell
+	 * aufleuchten.
+	 *
+	 * @param pos         Position des zu gluehenden Untergrunds auf der Kachel
+	 * @param intensitaet Die Intensitaet des Gluehens (zwischen 0.0 und 0.1)
+	 */
+	public void setGluehenBeiKachel(Position pos, double intensitaet)
+	{
+		this.untergruende[pos.getY()][pos.getX()].setEffect(new Glow(intensitaet));
 	}
 
 	/**
@@ -177,81 +251,6 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 		// TODO Konstanten
 		this.untergruende[pos.getY()][pos.getX()].setBorder(new Border(
 				new BorderStroke(umrandungsFarbe, BorderStrokeStyle.SOLID, new CornerRadii(10), new BorderWidths(3))));
-	}
-
-	/**
-	 * Entfernt alle Umrundungen von allen Untergruenden dieser Kachel.
-	 */
-	public void entferneAlleUmrandungen()
-	{
-		for (StackPane[] stackPanes : this.untergruende)
-		{
-			for (StackPane untergrund : stackPanes)
-			{
-				untergrund.setBorder(Border.EMPTY);
-			}
-		}
-	}
-
-	/**
-	 * Laesst den Untergrund an der Position pos auf der Kachel gluehen bzw. hell
-	 * aufleuchten.
-	 *
-	 * @param pos Position des zu gluehenden Untergrunds auf der Kachel
-	 */
-	public void setGluehenBeiKachel(Position pos)
-	{
-		this.setGluehenBeiKachel(pos, KachelGridPane.GLUEHEN_INTENSITAET);
-	}
-
-	/**
-	 * Laestt den Untergrund an der Position pos auf der Kachel gluehen bzw. hell
-	 * aufleuchten.
-	 *
-	 * @param pos         Position des zu gluehenden Untergrunds auf der Kachel
-	 * @param intensitaet Die Intensitaet des Gluehens (zwischen 0.0 und 0.1)
-	 */
-	public void setGluehenBeiKachel(Position pos, double intensitaet)
-	{
-		this.untergruende[pos.getY()][pos.getX()].setEffect(new Glow(intensitaet));
-	}
-
-	/**
-	 * Entfernt jegliches Gluehen von allen Untergruenden dieser Kachel.
-	 */
-	public void entferneJeglichesGluehen()
-	{
-		for (StackPane[] stackPanes : this.untergruende)
-		{
-			for (StackPane untergrund : stackPanes)
-			{
-				untergrund.setEffect(null);
-			}
-		}
-	}
-
-	public Kachel getDarstellendeKachel()
-	{
-		return this.darstellendeKachel;
-	}
-
-	public void setDarstellendeKachel(Kachel kachel)
-	{
-		kachel.addListener(this);
-		this.darstellendeKachel = kachel;
-		this.setKachelUntergruende(kachel);
-	}
-
-	@Override
-	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
-	{
-		//
-	}
-
-	@Override
-	public void invalidated(Observable observable)
-	{
-		this.setKachelUntergruende((Kachel) observable);
 	}
 
 }

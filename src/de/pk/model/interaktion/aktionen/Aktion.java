@@ -98,7 +98,13 @@ public class Aktion
 	{
 		for (int i = 0; i < this.getAnzahlZiele(); i++)
 		{
-			ziele.get(i).fuegeEffekteHinzu(wirker, this.effekte.get(i));
+			try
+			{
+				ziele.get(i).fuegeEffekteHinzu(wirker, this.effekte.get(i).clone());
+			} catch (IllegalArgumentException nichtMoeglich)
+			{
+				// Ziel ist nicht moeglich
+			}
 		}
 	}
 

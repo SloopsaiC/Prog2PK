@@ -30,7 +30,7 @@ public enum Trank implements Konsumierbar
 	 * seinen Vorrat wieder auffuellen.
 	 */
 	MEDIZIN(new Effekt(EffektTyp.NORMAL, new EffektTeil(EffektBeschreibungsIndex.ANZAHL_WIRK_TICKS, 1),
-			new EffektTeil(EffektBeschreibungsIndex.LEBENS_PUNKTE, 10)));
+			new EffektTeil(EffektBeschreibungsIndex.AKTUELLE_LEBENS_PUNKTE, 10)));
 
 	/**
 	 * Effekt, der beim Konsumieren ausgeloest wird.

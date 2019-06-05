@@ -70,6 +70,7 @@ public class Anwendung
 		Weltkarte weltkarte = new Weltkarte(new Dungeon(LokalisierungsKeys.TESTAUSGABE_DUNGEON_NAME[0]),
 				new Dungeon(LokalisierungsKeys.TESTAUSGABE_DUNGEON_NAME[1]));
 		Spielkonstanten.STANDARD_HELDEN[0].fuegeAktionHinzu("Bewegung", AktionsVorlagen.BEWEGUNG.getAktion());
+		Spielkonstanten.STANDARD_HELDEN[0].fuegeAktionHinzu("Aua", AktionsVorlagen.AUA.getAktion());
 		this.aktivesSpiel = new Spiel(weltkarte, Spielkonstanten.STANDARD_HELDEN);
 	}
 

@@ -5,5 +5,5 @@ import de.pk.model.spielbrett.Spielbrett;
 
 public interface GegnerStrategie
 {
-	public void naechsterSchritt(Spielbrett spielbrett, KachelPosition eigenePosition);
+	void naechsterSchritt(Spielbrett spielbrett, KachelPosition eigenePosition);
 }

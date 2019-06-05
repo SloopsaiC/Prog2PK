@@ -3,9 +3,7 @@ package de.pk.view.visuell;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import de.pk.control.app.Main;
@@ -61,6 +59,31 @@ public class AnwendungFX extends Application
 	}
 
 	/**
+	 * Aktualisiert alle Komponenten, die einen Text darstellen oder beinhalten,
+	 * hinsichtlich der eingestellten Sprache.
+	 */
+	public static void aktualisiereSzenenSprache()
+	{
+		Einstellungen.getEinstellungen().setAnwendungsSprache(Einstellungen.getEinstellungen().getAnwendungsSprache());
+	}
+
+	/**
+	 * Es wird durch die Controller aller Szenen iteriert um diesem jeweils zu
+	 * signalisieren, dass alle Komponenten, die einen Text darstellen oder
+	 * beinhalten, ihren Inhalt an die (neu) eingestellte Sprache anpassen sollen.
+	 *
+	 * @param sprachRessource Aus dieser Ressource werden die neuen Strings geladen.
+	 */
+	public static void aktualisiereSzenenSprache(ResourceBundle sprachRessource)
+	{
+		AnwendungFX.anwendungsStage.setTitle(sprachRessource.getString(LokalisierungsKeys.ANWENDUNGS_TITEL_KEY));
+		for (Lokalisierbar controller : AnwendungFX.SZENEN_CONTROLLER_LIST.values())
+		{
+			controller.aktualisiereTextKomponenten(sprachRessource);
+		}
+	}
+
+	/**
 	 * Entfernt alle im Code hinzugefuegten css-StyleSheets von allen Szene der
 	 * SZENEN_MAP. Hat keine Auswirkungen auf SytleSheets, die in der fxml-Datei
 	 * einer Szene verlinkt wurden!
@@ -92,11 +115,6 @@ public class AnwendungFX extends Application
 
 	}
 
-	public static HashMap<String, Lokalisierbar> getSzenenController()
-	{
-		return AnwendungFX.SZENEN_CONTROLLER_LIST;
-	}
-
 	/**
 	 * Fuegt die FXML-Datei mit dem Namen dateiNameDerFXML der SZENEN_MAP als neue
 	 * Szene hinzu. Als String-Name in der SZENEN_MAP dient der dateiNameDerFXML.
@@ -120,6 +138,11 @@ public class AnwendungFX extends Application
 			e.printStackTrace(); /// TODO: entfernen
 			Main.anwendungBeenden();
 		}
+	}
+
+	public static HashMap<String, Lokalisierbar> getSzenenController()
+	{
+		return AnwendungFX.SZENEN_CONTROLLER_LIST;
 	}
 
 	/**
@@ -177,31 +200,6 @@ public class AnwendungFX extends Application
 		AnwendungFX.anwendungsStage.setOnCloseRequest(windowEvent -> Main.anwendungBeenden());
 		AnwendungFX.anwendungsStage.setScene(AnwendungFX.SZENEN_MAP.get(Spielkonstanten.ANWENDUNG_TITEL_SZENE));
 		AnwendungFX.anwendungsStage.show();
-	}
-
-	/**
-	 * Es wird durch die Controller aller Szenen iteriert um diesem jeweils zu
-	 * signalisieren, dass alle Komponenten, die einen Text darstellen oder
-	 * beinhalten, ihren Inhalt an die (neu) eingestellte Sprache anpassen sollen.
-	 *
-	 * @param sprachRessource Aus dieser Ressource werden die neuen Strings geladen.
-	 */
-	public static void aktualisiereSzenenSprache(ResourceBundle sprachRessource)
-	{
-		AnwendungFX.anwendungsStage.setTitle(sprachRessource.getString(LokalisierungsKeys.ANWENDUNGS_TITEL_KEY));
-		for (Lokalisierbar controller : AnwendungFX.SZENEN_CONTROLLER_LIST.values())
-		{
-			controller.aktualisiereTextKomponenten(sprachRessource);
-		}
-	}
-
-	/**
-	 * Aktualisiert alle Komponenten, die einen Text darstellen oder beinhalten,
-	 * hinsichtlich der eingestellten Sprache.
-	 */
-	public static void aktualisiereSzenenSprache()
-	{
-		Einstellungen.getEinstellungen().setAnwendungsSprache(Einstellungen.getEinstellungen().getAnwendungsSprache());
 	}
 
 }
