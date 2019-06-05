@@ -143,7 +143,14 @@ public class KartenGenerator
 		// Generiert einen zufaelligen Untergrund
 		KartenGeneratorUntergrundMitRichtung generiert = this.getUntergrundKachelZumGenerieren(anzahlKachelnX,
 				anzahlKachelnY, aktuellePosition.addiere(richtung.getVersatz()));
-		return this.dreheBisVerbindung(aktuellerUntergrund, generiert, richtung);
+		try
+		{
+			return this.dreheBisVerbindung(aktuellerUntergrund, generiert, richtung);
+		} catch (IllegalStateException nichtMoeglich)
+		{
+			return this.generiereNeueUntergrundKachel(anzahlKachelnX, anzahlKachelnY, aktuellePosition, richtung,
+					aktuellerUntergrund);
+		}
 	}
 
 	/**
