@@ -50,13 +50,14 @@ public class KartenGeneratorUtils
 	private static boolean iteriereUndPruefeVerbindung(Vektor verschiebeVektor, Vektor checkVektor,
 			Position aktuellePos, KartenGeneratorUntergrundMitRichtung von, KartenGeneratorUntergrundMitRichtung zu)
 	{
+		Position iterationsPosition = aktuellePos;
 		try
 		{
 			while (aktuellePos != null)
 			{
-				KachelUntergrundWertigkeit vonUntergrund = von.getInhaltBei(aktuellePos);
+				KachelUntergrundWertigkeit vonUntergrund = von.getInhaltBei(iterationsPosition);
 				KachelUntergrundWertigkeit zuUntergrund = zu.getInhaltBei(PositionsUtils
-						.getPositionAufKachelAusAbsoluterPosition(aktuellePos.addiere(checkVektor.getNegierung())));
+						.getPositionAufKachelAusAbsoluterPosition(iterationsPosition.addiere(checkVektor)));
 				// Check Vektor wird negiert, da wir hier von der "zu" Kachel aus schauen
 				if (vonUntergrund.istBetretbar() && zuUntergrund.istBetretbar())
 				{
@@ -64,7 +65,7 @@ public class KartenGeneratorUtils
 					return true;
 				}
 				// Position um den verschiebe Vektor verschieben
-				aktuellePos.addiere(verschiebeVektor);
+				iterationsPosition = iterationsPosition.addiere(verschiebeVektor);
 			}
 		} catch (IllegalArgumentException fertig)
 		{

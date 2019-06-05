@@ -16,7 +16,8 @@ public class ExplorationsPhase extends Phase
 		KachelPosition positionDesHelden = aktiverDungeon.getSpielbrett().findeSpielbrettObjekt(held);
 		Richtung kantenRichtung = positionDesHelden.getKantenRichtungFallsAnKante();
 		// Generiere eine neue Kachel falls der Held am Rand steht
-		if (kantenRichtung != null)
+		if (kantenRichtung != null && aktiverDungeon.getSpielbrett().getKachelBei(aktiverDungeon.getSpielbrett()
+				.getPositionKachel(positionDesHelden.getKachel()).addiere(kantenRichtung.getVersatz())) == null)
 		{
 			aktiverDungeon.generiereUndFuegeNeueKachelZuSpielbrettHinzu(kantenRichtung,
 					aktiverDungeon.getSpielbrett().getPositionKachel(positionDesHelden.getKachel()));

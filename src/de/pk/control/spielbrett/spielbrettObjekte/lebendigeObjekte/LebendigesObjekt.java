@@ -141,7 +141,7 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	@Override
 	public boolean istLebendig()
 	{
-		return this.getModell().getAnzahlPunkteVon(LebendigesObjektPunkteIndex.AKTUELLE_LEBENS_PUNKTE) < 1;
+		return this.getModell().getAnzahlPunkteVon(LebendigesObjektPunkteIndex.AKTUELLE_LEBENS_PUNKTE) > 0;
 	}
 
 	/**
@@ -153,6 +153,11 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 	protected void sterben(SpielbrettObjekt verursacher)
 	{
 		verursacher.hatGetoetet(this);
+	}
+
+	public boolean istFreundlich()
+	{
+		return false;
 	}
 
 	/**

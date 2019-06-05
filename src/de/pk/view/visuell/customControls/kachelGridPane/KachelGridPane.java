@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import de.pk.control.spielbrett.spielbrettObjekte.SpielbrettObjekt;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.gegner.Gegner;
 import de.pk.model.position.Position;
 import de.pk.model.spielbrett.Kachel;
 import de.pk.utils.Spielkonstanten;
@@ -26,6 +29,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class KachelGridPane extends GridPane implements Initializable, Lokalisierbar, InvalidationListener
 {
@@ -43,7 +47,8 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 	 * Erstellt eine neue KachelGridPane, indem die fxml-Datei geladen wird und
 	 * diese Klasse dieser sich selbst als ihr Controller hinzufuegt.
 	 *
-	 * @param darstellendeKachel Die Kachel, die dieses KachelGridPane als view repraesentiert
+	 * @param darstellendeKachel Die Kachel, die dieses KachelGridPane als view
+	 *                           repraesentiert
 	 */
 	public KachelGridPane()
 	{
@@ -108,9 +113,11 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 	}
 
 	/**
-	 * Legt die Untergruende dieses KachelGridPanes je nach Kachel darstellendeKachel fest.
+	 * Legt die Untergruende dieses KachelGridPanes je nach Kachel
+	 * darstellendeKachel fest.
 	 *
-	 * @param darstellendeKachel Die Kachel, dessen Untergruende gesetzt werden sollen
+	 * @param darstellendeKachel Die Kachel, dessen Untergruende gesetzt werden
+	 *                           sollen
 	 */
 	private void setKachelUntergruende(Kachel kachel)
 	{
@@ -122,6 +129,25 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 				this.untergruende[y][x].setStyle("-fx-background-image: "
 						+ "url('/de/pk/ressourcen/bildDateien/kachelUntergruende/KachelUntergrund_2.png'), "
 						+ "url('/de/pk/ressourcen/bildDateien/kachelUntergruende/KachelUntergrund_" + wert + ".png')");
+				SpielbrettObjekt objekt = kachel.getSpielbrettObjektBei(new Position(x, y));
+				if (objekt != null)
+				{
+					if (objekt.istLebendig())
+					{
+						LebendigesObjekt lebendigesObjekt = (LebendigesObjekt) objekt;
+						if (!lebendigesObjekt.istFreundlich())
+						{
+							this.untergruende[y][x].getChildren().add(new Rectangle(10, 10, Color.RED));
+						} else
+						{
+							this.untergruende[y][x].getChildren().add(new Rectangle(10, 10, Color.BLUE));
+						}
+					}
+
+				} else
+				{
+					this.untergruende[y][x].getChildren().clear();
+				}
 			}
 		}
 	}

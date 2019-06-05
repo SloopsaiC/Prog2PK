@@ -4,6 +4,7 @@ import de.pk.control.karte.Weltkarte;
 import de.pk.control.spiel.Dungeon;
 import de.pk.control.spiel.Spiel;
 import de.pk.control.spiel.einstellungen.Einstellungen;
+import de.pk.model.interaktion.aktionen.AktionsVorlagen;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.lokalisierung.LokalisierungsKeys;
 import de.pk.view.visuell.AnwendungFX;
@@ -68,6 +69,7 @@ public class Anwendung
 	{
 		Weltkarte weltkarte = new Weltkarte(new Dungeon(LokalisierungsKeys.TESTAUSGABE_DUNGEON_NAME[0]),
 				new Dungeon(LokalisierungsKeys.TESTAUSGABE_DUNGEON_NAME[1]));
+		Spielkonstanten.STANDARD_HELDEN[0].fuegeAktionHinzu("Bewegung", AktionsVorlagen.BEWEGUNG.getAktion());
 		this.aktivesSpiel = new Spiel(weltkarte, Spielkonstanten.STANDARD_HELDEN);
 	}
 

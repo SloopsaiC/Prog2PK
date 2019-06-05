@@ -33,8 +33,7 @@ public class HeldenPhase extends Phase
 			// Es steht kein Objekt auf der Position, also ist sie selber das Ziel
 			ziel = position;
 		}
-		aktiverHeld.getAktionMitNamen(aktiverHeld.getAktionsNamen().get(aktiveAktionIndex)).fuehreAus(aktiverHeld,
-				aktiverHeld, position);
+		aktiverHeld.getAktionMitNamen(aktiverHeld.getAktionsNamen().get(aktiveAktionIndex)).fuehreAus(aktiverHeld, position);
 		this.beendePhaseFallsHeldKeineAktionsPunkte(aktiverHeld);
 	}
 

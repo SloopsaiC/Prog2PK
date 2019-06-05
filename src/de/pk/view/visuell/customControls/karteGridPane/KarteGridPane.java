@@ -213,7 +213,7 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 			}
 		}
 		this.add(kachelGridPane, pos.getX(), pos.getY());
-		this.initEventHandler(kachelGridPane, pos);
+		this.initEventHandler(kachelGridPane);
 	}
 
 	/**
@@ -225,7 +225,7 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 	 *                       werden soll
 	 * @param pos            Die Position des kachelGridPanes auf der Karte
 	 */
-	private void initEventHandler(KachelGridPane kachelGridPane, Position pos)
+	private void initEventHandler(KachelGridPane kachelGridPane)
 	{
 		kachelGridPane.addEventHandler(PositionEvent.UNTERGRUND_ANGELICKT, new EventHandler<PositionEvent>()
 		{
@@ -234,7 +234,7 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 			public void handle(PositionEvent event)
 			{
 				KarteGridPane.this.fireEvent(new KachelPositionEvent(KachelPositionEvent.KACHEL_ANGELICKT,
-						new KachelPosition(kachelGridPane.getDarstellendeKachel(), pos)));
+						new KachelPosition(kachelGridPane.getDarstellendeKachel(), event.getEventPosition())));
 			}
 		});
 	}
@@ -245,11 +245,13 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 		Spielbrett spielbrett = (Spielbrett) observable;
 		for (Position position : spielbrett.getAlleKachelPositionen())
 		{
-			if (!this.contains(position.getX(), position.getY()))
+			try
 			{
 				KachelGridPane kachelPane = new KachelGridPane();
 				kachelPane.setDarstellendeKachel(spielbrett.getKachelBei(position));
 				this.addKachelGridPane(kachelPane, position);
+			} catch (InputMismatchException schonVorhanden)
+			{
 			}
 		}
 	}

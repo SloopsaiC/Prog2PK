@@ -148,4 +148,10 @@ public class Held extends LebendigesObjekt
 		this.getModellAlsHeld().addListener(listener);
 	}
 
+	@Override
+	public boolean istFreundlich()
+	{
+		return true;
+	}
+
 }

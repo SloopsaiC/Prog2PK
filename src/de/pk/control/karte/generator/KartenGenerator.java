@@ -73,10 +73,13 @@ public class KartenGenerator
 		Kachel generiert = new Kachel(untergrund);
 		if (ThreadLocalRandom.current().nextFloat() <= KartenGeneratorUntergrundKonstanten.WAHRSCHEINLICHKEIT_GEGNER)
 		{
-			generiert.stelleAufKachel(
-					new Position(ThreadLocalRandom.current().nextInt(Spielkonstanten.KACHEL_GROESSE_X),
-							ThreadLocalRandom.current().nextInt(Spielkonstanten.KACHEL_GROESSE_Y)),
-					new Gegner(GegnerArt.ZOMBIE, 1f));
+			Position zufaelligePosition = new Position(
+					ThreadLocalRandom.current().nextInt(Spielkonstanten.KACHEL_GROESSE_X),
+					ThreadLocalRandom.current().nextInt(Spielkonstanten.KACHEL_GROESSE_Y));
+			if (generiert.getUntergrundBei(zufaelligePosition).istBetretbar())
+			{
+				generiert.stelleAufKachel(zufaelligePosition, new Gegner(GegnerArt.ZOMBIE, 1f));
+			}
 		}
 		return generiert;
 	}
@@ -108,6 +111,9 @@ public class KartenGenerator
 					return zu;
 				}
 			}
+		} else
+		{
+			return zu;
 		}
 		// Es konnte nach drei Mal drehen keine Verbindung hergstellt werden -> Es ist
 		// fuer diese Methode nicht moeglich eine Verbindung herzustellen

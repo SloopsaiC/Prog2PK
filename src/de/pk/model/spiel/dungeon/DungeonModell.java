@@ -1,6 +1,8 @@
 package de.pk.model.spiel.dungeon;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import de.pk.control.karte.generator.KartenGenerator;
 import de.pk.control.spiel.phasen.Phase;
@@ -16,14 +18,14 @@ public class DungeonModell
 
 	private String name = null;
 	// Repraesentation der Phasen und der aktuell im Dungeon behandelten Phase
-	private ArrayList<Phase> phasen = null;
+	private List<Phase> phasen = null;
 	private int momentanePhaseIndex = 0;
 	private Held[] helden = null;
 	private int aktiverHeldIndex = 0;
 	private KartenGenerator kartenGenerator = null;
 
-	public DungeonModell(Spielbrett spielbrett, String name, ArrayList<Phase> phasen, int momentanePhaseIndex,
-			Held[] helden, int aktiverHeldIndex, KartenGenerator kartenGenerator)
+	public DungeonModell(Spielbrett spielbrett, String name, List<Phase> phasen, int momentanePhaseIndex, Held[] helden,
+			int aktiverHeldIndex, KartenGenerator kartenGenerator)
 	{
 		this.spielbrett = spielbrett;
 		this.name = name;
@@ -32,11 +34,12 @@ public class DungeonModell
 		this.helden = helden;
 		this.aktiverHeldIndex = aktiverHeldIndex;
 		this.kartenGenerator = kartenGenerator;
+		this.phasen.get(this.momentanePhaseIndex).startePhaseMit(this.getAktivenHeld());
 	}
 
-	public DungeonModell(String name)
+	public DungeonModell(String name, Phase[] phasen)
 	{
-		this(new Spielbrett(), name, new ArrayList<Phase>(), 0, Spielkonstanten.STANDARD_HELDEN, 0,
+		this(new Spielbrett(), name, Arrays.asList(phasen), 0, Spielkonstanten.STANDARD_HELDEN, 0,
 				new KartenGenerator(KartenGeneratorUntergrund.values()));
 	}
 
@@ -84,7 +87,7 @@ public class DungeonModell
 	/**
 	 * @return the phasen
 	 */
-	public ArrayList<Phase> getPhasen()
+	public List<Phase> getPhasen()
 	{
 		return this.phasen;
 	}
@@ -104,6 +107,7 @@ public class DungeonModell
 		{
 			this.naechsterHeld();
 		}
+		this.phasen.get(this.momentanePhaseIndex).startePhaseMit(this.getAktivenHeld());
 	}
 
 	public void naechsterHeld()

@@ -3,6 +3,7 @@ package de.pk.view.visuell.szenenController;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import de.pk.control.app.Anwendung;
 import de.pk.control.spiel.Dungeon;
 import de.pk.utils.lokalisierung.Lokalisierbar;
 import de.pk.view.visuell.customControls.heldenStatusAnzeige.HeldenStatusAnzeige;
@@ -64,18 +65,17 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 	 */
 	private void initKartenGridPane()
 	{
-		this.karteGridPane.addEventHandler(KachelPositionEvent.KACHEL_ANGELICKT, new EventHandler<KachelPositionEvent>()
-		{
+		this.karteGridPane.addEventHandler(KachelPositionEvent.KACHEL_ANGELICKT,
+				(a) -> this.kachelPositionAngeklickt(a));
+	}
 
-			@Override
-			public void handle(KachelPositionEvent event)
-			{
-				// TODO Testausgabe loeschen!
-				System.out.println("Kachel " + event.getEventKachelPosition().getKachel() + " wurde an der Stelle ("
-						+ event.getEventKachelPosition().getPositionAufDerKachel().getX() + "|"
-						+ event.getEventKachelPosition().getPositionAufDerKachel().getY() + ")  angeklickt.");
-			}
-		});
+	private void kachelPositionAngeklickt(KachelPositionEvent event)
+	{
+		if (this.untereDungeonAnzeige.getAktiveAktion() > -1)
+		{
+			this.aktiverDungeon.getAktivePhase().verarbeiteKlickAufKachelPosition(event.getEventKachelPosition(),
+					this.untereDungeonAnzeige.getAktiveAktion());
+		}
 	}
 
 	/**
@@ -140,6 +140,7 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 
 	public void setDungeon(Dungeon dungeon)
 	{
+		Anwendung.getInstanz().getAktivesSpiel().waehleDungeon(dungeon);
 		this.aktiverDungeon = dungeon;
 		this.karteGridPane.setSpielbrett(this.aktiverDungeon.getSpielbrett());
 		this.heldenStatusAnzeige.setHelden(this.aktiverDungeon.getHelden());

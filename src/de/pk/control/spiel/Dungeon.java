@@ -1,12 +1,14 @@
 package de.pk.control.spiel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.pk.control.interaktion.Wuerfel;
 import de.pk.control.spiel.phasen.Phase;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjekt;
 import de.pk.model.karte.generator.Richtung;
+import de.pk.model.position.KachelPosition;
 import de.pk.model.position.Position;
 import de.pk.model.spiel.dungeon.DungeonModell;
 import de.pk.model.spielbrett.Kachel;
@@ -31,7 +33,7 @@ public class Dungeon
 
 	public Dungeon(String dungeonName, Phase[] phasen)
 	{
-		this.modell = new DungeonModell(dungeonName);
+		this.modell = new DungeonModell(dungeonName, phasen);
 		this.initModell(phasen);
 		this.wuerfel = new Wuerfel();
 	}
@@ -59,7 +61,7 @@ public class Dungeon
 		return this.modell.getHelden();
 	}
 
-	public ArrayList<Phase> getPhasen()
+	public List<Phase> getPhasen()
 	{
 		return this.modell.getPhasen();
 	}
@@ -81,10 +83,6 @@ public class Dungeon
 
 	private void initModell(Phase[] phasen)
 	{
-		for (Phase phase : phasen)
-		{
-			this.registrierePhase(phase);
-		}
 		// Setze die Startkachel in die Mitte
 		this.initSpielbrett();
 	}
@@ -95,6 +93,9 @@ public class Dungeon
 				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
 		this.modell.getSpielbrett().setzeKachel(this.modell.getKartenGenerator().generiereStartKachel(), new Position(
 				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X / 2 + 1, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y / 2));
+		this.modell.getSpielbrett().setzeSpielbrettObjekt(
+				new KachelPosition(this.modell.getSpielbrett().getKachelBei(new Position(15, 15)), new Position(0, 0)),
+				Spielkonstanten.STANDARD_HELDEN[0]);
 	}
 
 	/**
