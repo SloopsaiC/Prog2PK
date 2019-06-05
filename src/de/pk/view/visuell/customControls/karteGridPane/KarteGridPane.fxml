@@ -10,8 +10,11 @@
 <fx:root alignment="CENTER" gridLinesVisible="true" hgap="1.0"
 	vgap="1.0" type="javafx.scene.layout.GridPane"
 	xmlns="http://javafx.com/javafx/11.0.1"
-	xmlns:fx="http://javafx.com/fxml/1">
-	<!-- fx:controller="de.pk.view.visuell.karteGridPane.KarteGridPane"> -->
+	xmlns:fx="http://javafx.com/fxml/1"
+	onMouseDragged="#kartenGridPaneMouseDragged"
+	onMousePressed="#kartenGridPaneMousePressed"
+	onScroll="#kartenGridPaneScroll">
+<!-- 	fx:controller="de.pk.view.visuell.karteGridPane.KarteGridPane"> -->
 	<stylesheets>
 		<URL value="@../../styleSheetsCSS/StandardSzenenStyle.css" />
 	</stylesheets>

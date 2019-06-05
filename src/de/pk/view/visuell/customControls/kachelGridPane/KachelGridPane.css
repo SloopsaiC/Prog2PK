@@ -4,3 +4,9 @@
 	-fx-background-size: stretch; 
 	-fx-background-image: url("../../../../ressourcen/bildDateien/kachelUntergruende/KachelUntergrund_2.png"); 
 }
+
+
+.kachelUntergrundPane:hover {
+	-fx-opacity: 0.75;
+}
+

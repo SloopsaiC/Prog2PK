@@ -10,10 +10,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" styleClass="dungeon-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pk.view.visuell.szenenController.DungeonSzeneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0"
+	prefWidth="1024.0" styleClass="dungeon-pane"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="de.pk.view.visuell.szenenController.DungeonSzeneController">
 
 	<stylesheets>
 		<URL value="@../styleSheetsCSS/StandardSzenenStyle.css" />
@@ -21,33 +25,43 @@
 	</stylesheets>
 
 	<children>
-		<StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+		<StackPane AnchorPane.bottomAnchor="0.0"
+			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+			AnchorPane.topAnchor="0.0">
 			<children>
-				<KarteGridPane fx:id="karteGridPane" />
 
-				<BorderPane fx:id="dungeonBorderPane" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" styleClass="dungeon-border-pane" StackPane.alignment="TOP_CENTER">
+				<BorderPane fx:id="dungeonBorderPane" cache="true"
+					maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+					minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0"
+					styleClass="dungeon-border-pane" StackPane.alignment="TOP_CENTER">
 					<padding>
 						<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 					</padding>
 					<top>
-						<ObereDungeonAnzeige fx:id="obereDungeonAnzeige" BorderPane.alignment="TOP_CENTER" />
+						<ObereDungeonAnzeige
+							fx:id="obereDungeonAnzeige" BorderPane.alignment="TOP_CENTER" />
 					</top>
 					<left>
-						<HeldenStatusAnzeige fx:id="heldenStatusAnzeige" BorderPane.alignment="BOTTOM_LEFT" />
+						<HeldenStatusAnzeige
+							fx:id="heldenStatusAnzeige" BorderPane.alignment="BOTTOM_LEFT" />
 					</left>
-					<center>
-						<Pane onMouseDragged="#kartenGridPaneMouseDragged" onMousePressed="#kartenGridPaneMousePressed" onScroll="#kartenGridPaneScroll" opacity="0.0" BorderPane.alignment="CENTER" />
-					</center>
 					<right>
-						<QuestLog fx:id="questLog" BorderPane.alignment="TOP_RIGHT" />
+						<QuestLog fx:id="questLog"
+							BorderPane.alignment="TOP_RIGHT" />
 					</right>
 					<bottom>
-						<UntereDungeonAnzeige fx:id="untereDungeonAnzeige" BorderPane.alignment="BOTTOM_CENTER">
+						<UntereDungeonAnzeige
+							fx:id="untereDungeonAnzeige" BorderPane.alignment="BOTTOM_CENTER">
 							<BorderPane.margin>
 								<Insets />
 							</BorderPane.margin>
 						</UntereDungeonAnzeige>
 					</bottom>
+					<center>
+						<KarteGridPane fx:id="karteGridPane"
+							alignment="CENTER" viewOrder="2.0"
+							BorderPane.alignment="CENTER" />
+					</center>
 				</BorderPane>
 
 				<PauseDialog fx:id="pauseMenueDialogPane" />
