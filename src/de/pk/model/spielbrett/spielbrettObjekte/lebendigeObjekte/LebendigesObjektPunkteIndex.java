@@ -6,7 +6,7 @@ import de.pk.utils.AusnahmeNachrichten;
 public enum LebendigesObjektPunkteIndex
 {
 	ANGRIFF, RUESTUNG, AKTUELLE_LEBENS_PUNKTE, MAXIMALE_LEBENS_PUNKTE, BEWEGUNGS_PUNKTE, AKTION_REICHWEITE_AENDERUNG,
-	IST_GESCHUETZT, ERFAHRUNGSPUNKTE, ERFAHRUNGSPUNKTE_WERT;
+	IST_GESCHUETZT, ERFAHRUNGSPUNKTE, ERFAHRUNGSPUNKTE_WERT, AKTIONS_PUNKTE;
 
 	public static LebendigesObjektPunkteIndex uebersetzeAusEffektIndex(EffektBeschreibungsIndex zuUebersetzen)
 	{

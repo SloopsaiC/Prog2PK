@@ -1,11 +1,13 @@
 package de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte;
 
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.gegner.GegnerArt;
 import de.pk.model.gegenstaende.container.Container;
 
 public class GegnerModell extends LebendigesObjektModell
 {
 
 	private float hauDraufModifkator = 0f; // Die Staerke dieses Gegners
+	private GegnerArt art = null;
 
 	/**
 	 * Erstellt einen Gegner
@@ -14,9 +16,10 @@ public class GegnerModell extends LebendigesObjektModell
 	 * @param bewegungsPunkte     Anzahl der Bewegungspunkte des Gegners
 	 * @param hauDraufModifikator Definiert die Staerke des Gegners
 	 */
-	public GegnerModell(int lebensPunkte, int bewegungsPunkte, int hauDraufModifikator)
+	public GegnerModell(GegnerArt art, float hauDraufModifikator)
 	{
-		super(lebensPunkte, bewegungsPunkte);
+		super(art.getMaxLeben(), art.getBewegungsPunkte());
+		this.art = art;
 		this.hauDraufModifkator = hauDraufModifikator;
 	}
 

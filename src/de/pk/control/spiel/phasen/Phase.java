@@ -1,8 +1,9 @@
 package de.pk.control.spiel.phasen;
 
-
+import de.pk.control.app.Anwendung;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 import de.pk.model.position.KachelPosition;
+
 public abstract class Phase
 {
 	private Held aktiverHeld = null;
@@ -24,5 +25,10 @@ public abstract class Phase
 	public void startePhaseMit(Held held)
 	{
 		this.aktiverHeld = held;
+	}
+
+	protected void beendePhase()
+	{
+		Anwendung.getInstanz().getAktivesSpiel().getAktiverDungeon().naechstePhase();
 	}
 }

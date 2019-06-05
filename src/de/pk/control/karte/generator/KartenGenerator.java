@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.gegner.Gegner;
+import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.gegner.GegnerArt;
 import de.pk.model.karte.generator.Richtung;
 import de.pk.model.karte.generator.untergruende.KachelUntergrundWertigkeit;
 import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrund;
@@ -14,6 +17,7 @@ import de.pk.model.spielbrett.Kachel;
 import de.pk.utils.AusnahmeNachrichten;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.WahrscheinlichkeitsUtils;
+import de.pk.utils.karte.generator.KartenGeneratorUntergrundKonstanten;
 import de.pk.utils.karte.generator.KartenGeneratorUtils;
 
 public class KartenGenerator
@@ -66,7 +70,15 @@ public class KartenGenerator
 	{
 		KartenGeneratorUntergrundMitRichtung untergrund = this.generiereNeueUntergrundKachel(anzahlKachelnX,
 				anzahlKachelnY, aktuellePosition, richtung, aktuelleKachel.getUntergrund());
-		return new Kachel(untergrund);
+		Kachel generiert = new Kachel(untergrund);
+		if (ThreadLocalRandom.current().nextFloat() <= KartenGeneratorUntergrundKonstanten.WAHRSCHEINLICHKEIT_GEGNER)
+		{
+			generiert.stelleAufKachel(
+					new Position(ThreadLocalRandom.current().nextInt(Spielkonstanten.KACHEL_GROESSE_X),
+							ThreadLocalRandom.current().nextInt(Spielkonstanten.KACHEL_GROESSE_Y)),
+					new Gegner(GegnerArt.ZOMBIE, 1f));
+		}
+		return generiert;
 	}
 
 	/**

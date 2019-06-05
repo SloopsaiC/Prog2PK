@@ -21,4 +21,5 @@ public class KartenGeneratorUntergrundKonstanten
 	public static final float SACKGASSE_WAHRSCHEINLICHKEITS_AENDERUNG_FALLS_BEDINGUNG = 0.04f;
 	public static final float KARTENRAND_STANDARD_WAHRSCHEINLICHKEIT = 0.0f;
 	public static final float KARTENRAND_WAHRSCHEINLICHKEITS_ERHOEHUNG_FALLS_BEDINGUNG = KartenGeneratorUntergrundKonstanten.MAXIMALE_GENERIERUNGS_WAHRSCHEINLICHKEIT;
+	public static final float WAHRSCHEINLICHKEIT_GEGNER = 0.5f;
 }

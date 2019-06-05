@@ -18,6 +18,8 @@ public class Spielkonstanten
 	{ new HeldenPhase(), new ExplorationsPhase() };
 	public static final Held[] STANDARD_HELDEN =
 	{ new Held("Dummy", 10, 10) };
+	
+	public static final int STANDARD_ANZAHL_AKTIONEN_PRO_PHASE = 1;
 
 	public static final int STANDARD_GROESSE_DUNGEON_X = 30;
 	public static final int STANDARD_GROESSE_DUNGEON_Y = 30;

@@ -12,6 +12,7 @@ import de.pk.model.interaktion.effekt.Effekt;
 import de.pk.model.interaktion.effekt.EffektBeschreibungsIndex;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektModell;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektPunkteIndex;
+import de.pk.utils.Spielkonstanten;
 
 public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzielbar
 {
@@ -195,6 +196,17 @@ public abstract class LebendigesObjekt extends SpielbrettObjekt implements Anzie
 		{
 			momentanerEffekt.wurdeGewirkt();
 		}
+	}
+
+	public void hatAktionAusgefuehrt()
+	{
+		this.modell.aenderePunkteVon(LebendigesObjektPunkteIndex.AKTIONS_PUNKTE, -1);
+	}
+
+	public void resetAktionsPunkte()
+	{
+		this.modell.setAnzahlPunkteVon(LebendigesObjektPunkteIndex.AKTIONS_PUNKTE,
+				Spielkonstanten.STANDARD_ANZAHL_AKTIONEN_PRO_PHASE);
 	}
 
 	/**

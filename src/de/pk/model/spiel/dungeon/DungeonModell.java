@@ -7,6 +7,7 @@ import de.pk.control.spiel.phasen.Phase;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 import de.pk.model.karte.generator.untergruende.KartenGeneratorUntergrund;
 import de.pk.model.spielbrett.Spielbrett;
+import de.pk.utils.Spielkonstanten;
 
 public class DungeonModell
 {
@@ -35,7 +36,7 @@ public class DungeonModell
 
 	public DungeonModell(String name)
 	{
-		this(new Spielbrett(), name, new ArrayList<Phase>(), 0, new Held[0], 0,
+		this(new Spielbrett(), name, new ArrayList<Phase>(), 0, Spielkonstanten.STANDARD_HELDEN, 0,
 				new KartenGenerator(KartenGeneratorUntergrund.values()));
 	}
 
@@ -99,11 +100,16 @@ public class DungeonModell
 	public void naechstePhaseAktivieren()
 	{
 		this.momentanePhaseIndex = ++this.momentanePhaseIndex % this.phasen.size();
+		if (this.momentanePhaseIndex == 0)
+		{
+			this.naechsterHeld();
+		}
 	}
 
 	public void naechsterHeld()
 	{
 		this.aktiverHeldIndex = ++this.aktiverHeldIndex % this.helden.length;
+		this.helden[this.aktiverHeldIndex].resetAktionsPunkte();
 	}
 
 	public void setHelden(Held[] helden)

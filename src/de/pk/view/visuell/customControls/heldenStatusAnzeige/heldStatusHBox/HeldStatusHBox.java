@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
+import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.HeldModell;
 import de.pk.model.spielbrett.spielbrettObjekte.lebendigeObjekte.LebendigesObjektPunkteIndex;
 import de.pk.utils.lokalisierung.Lokalisierbar;
 import javafx.beans.InvalidationListener;
@@ -66,7 +67,10 @@ public class HeldStatusHBox extends HBox implements Initializable, Lokalisierbar
 	 */
 	public void setHeld(Held held)
 	{
-		held.registriereListenerAufModell(this);
+		if (held != null)
+		{
+			held.registriereListenerAufModell(this);
+		}
 	}
 
 	/**
@@ -104,7 +108,7 @@ public class HeldStatusHBox extends HBox implements Initializable, Lokalisierbar
 	@Override
 	public void invalidated(Observable observable)
 	{
-		Held held = (Held) observable;
+		HeldModell held = (HeldModell) observable;
 		this.kleineLebensPunkteAnzeigeProgressBar
 				.setProgress(held.getAnzahlPunkteVon(LebendigesObjektPunkteIndex.AKTUELLE_LEBENS_PUNKTE)
 						/ held.getAnzahlPunkteVon(LebendigesObjektPunkteIndex.MAXIMALE_LEBENS_PUNKTE));

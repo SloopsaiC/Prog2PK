@@ -38,9 +38,11 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell impl
 	{
 		this.punkte = new HashMap<>();
 		this.punkte.put(LebendigesObjektPunkteIndex.AKTUELLE_LEBENS_PUNKTE, lebensPunkte);
+		this.punkte.put(LebendigesObjektPunkteIndex.MAXIMALE_LEBENS_PUNKTE, lebensPunkte);
 		this.punkte.put(LebendigesObjektPunkteIndex.BEWEGUNGS_PUNKTE, bewegungsPunkte);
 		this.aktionen = new HashMap<>();
 		this.effekteMitVerursacher = Collections.synchronizedMap(new HashMap<Effekt, SpielbrettObjekt>());
+		this.listeners = new ArrayList<>();
 	}
 
 	public void aenderePunkteVon(LebendigesObjektPunkteIndex index, int aenderung)
@@ -119,6 +121,7 @@ public abstract class LebendigesObjektModell extends SpielbrettObjektModell impl
 	public void addListener(InvalidationListener listener)
 	{
 		this.listeners.add(listener);
+		this.veraendert();
 	}
 
 	@Override

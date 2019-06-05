@@ -161,6 +161,10 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 	{
 		this.aktiverDungeon = dungeon;
 		this.karteGridPane.setSpielbrett(this.aktiverDungeon.getSpielbrett());
+		this.heldenStatusAnzeige.setHelden(this.aktiverDungeon.getHelden());
+		this.obereDungeonAnzeige.setAnzuzeigendenDungeonTitel(dungeon.getName());
+		this.obereDungeonAnzeige.setAnzuzeigendenDungeonFortschritt(50);
+		this.obereDungeonAnzeige.setAnzuzeigendeAnzahlFragmente(10);
 	}
 
 	/**

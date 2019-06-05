@@ -43,7 +43,7 @@ public class Dungeon
 	 * @param richtung     Die Richtung in welche generiert werden soll
 	 * @param momentanePos Die momentane Position
 	 */
-	public void generiereUndfuegeNeueKachelZuSpielbrettHinzu(Richtung richtung, Position momentanePos)
+	public void generiereUndFuegeNeueKachelZuSpielbrettHinzu(Richtung richtung, Position momentanePos)
 	{
 		Kachel neueKachel = this.modell.getKartenGenerator().generiereNeueKachel(
 				Spielkonstanten.STANDARD_GROESSE_DUNGEON_X, Spielkonstanten.STANDARD_GROESSE_DUNGEON_Y, momentanePos,
@@ -72,6 +72,11 @@ public class Dungeon
 	public Wuerfel getWuerfel()
 	{
 		return this.wuerfel;
+	}
+
+	public String getName()
+	{
+		return this.modell.getName();
 	}
 
 	private void initModell(Phase[] phasen)
@@ -160,6 +165,12 @@ public class Dungeon
 	public Phase getAktivePhase()
 	{
 		return this.getPhasen().get(this.modell.getMomentanePhaseIndex());
+	}
+
+	public void naechstePhase()
+	{
+		this.modell.naechstePhaseAktivieren();
+		this.getAktivePhase().startePhaseMit(this.modell.getAktivenHeld());
 	}
 
 }

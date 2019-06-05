@@ -138,6 +138,11 @@ public class Spielbrett implements Observable
 		return this.spielbrettTeile.keySet();
 	}
 
+	public int getAnzahlKacheln()
+	{
+		return this.getAlleKachelPositionen().size();
+	}
+
 	public ArrayList<LebendigesObjekt> getAlleLebendigenObjekte()
 	{
 		return this.alleLebendigenObjekte;

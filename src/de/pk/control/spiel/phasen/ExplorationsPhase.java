@@ -1,8 +1,10 @@
 package de.pk.control.spiel.phasen;
 
 import de.pk.control.app.Anwendung;
+import de.pk.control.spiel.Dungeon;
 import de.pk.control.spielbrett.spielbrettObjekte.lebendigeObjekte.Held;
 import de.pk.model.karte.generator.Richtung;
+import de.pk.model.position.KachelPosition;
 
 public class ExplorationsPhase extends Phase
 {
@@ -10,12 +12,16 @@ public class ExplorationsPhase extends Phase
 	@Override
 	public void startePhaseMit(Held held)
 	{
-		Richtung kantenRichtung = Anwendung.getInstanz().getAktivesSpiel().getAktiverDungeon().getSpielbrett()
-				.findeSpielbrettObjekt(held).getKantenRichtungFallsAnKante();
+		Dungeon aktiverDungeon = Anwendung.getInstanz().getAktivesSpiel().getAktiverDungeon();
+		KachelPosition positionDesHelden = aktiverDungeon.getSpielbrett().findeSpielbrettObjekt(held);
+		Richtung kantenRichtung = positionDesHelden.getKantenRichtungFallsAnKante();
+		// Generiere eine neue Kachel falls der Held am Rand steht
 		if (kantenRichtung != null)
 		{
-			
+			aktiverDungeon.generiereUndFuegeNeueKachelZuSpielbrettHinzu(kantenRichtung,
+					aktiverDungeon.getSpielbrett().getPositionKachel(positionDesHelden.getKachel()));
 		}
+		super.beendePhase();
 	}
 
 }

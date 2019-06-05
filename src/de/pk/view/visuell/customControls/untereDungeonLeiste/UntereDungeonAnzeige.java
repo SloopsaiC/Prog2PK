@@ -112,6 +112,11 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 		//
 	}
 
+	private void resetAktiveAktion()
+	{
+		this.aktiveAktionsIndex = -1;
+	}
+
 	@FXML
 	public void aktionButton1Pressed(ActionEvent event)
 	{
@@ -139,25 +144,25 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 	@FXML
 	public void heldenInventarButton1Pressed(ActionEvent event)
 	{
-		// TODO Inventarplatz 1, Bild anzeigen, etc.
+		this.resetAktiveAktion();
 	}
 
 	@FXML
 	public void heldenInventarButton2Pressed(ActionEvent event)
 	{
-		// TODO Inventarplatz 2, Bild anzeigen, etc.
+		this.resetAktiveAktion();
 	}
 
 	@FXML
 	public void heldenInventarButton3Pressed(ActionEvent event)
 	{
-		// TODO Inventarplatz 3, Bild anzeigen, etc.
+		this.resetAktiveAktion();
 	}
 
 	@FXML
 	public void heldenInventarButton4Pressed(ActionEvent event)
 	{
-		// TODO Inventarplatz 4, Bild anzeigen, etc.
+		this.resetAktiveAktion();
 	}
 
 	@Override
