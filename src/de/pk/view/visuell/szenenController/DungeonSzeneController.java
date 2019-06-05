@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import de.pk.control.app.Anwendung;
 import de.pk.control.spiel.Dungeon;
+import de.pk.model.interaktion.WuerfelWurf;
 import de.pk.utils.lokalisierung.Lokalisierbar;
 import de.pk.view.visuell.customControls.heldenStatusAnzeige.HeldenStatusAnzeige;
 import de.pk.view.visuell.customControls.karteGridPane.KarteGridPane;
@@ -13,6 +14,8 @@ import de.pk.view.visuell.customControls.pauseDialog.PauseDialog;
 import de.pk.view.visuell.customControls.questLog.QuestLog;
 import de.pk.view.visuell.customControls.untereDungeonLeiste.UntereDungeonAnzeige;
 import de.pk.view.visuell.events.KachelPositionEvent;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -153,6 +156,16 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 	public void setDungeon(Dungeon dungeon)
 	{
 		Anwendung.getInstanz().getAktivesSpiel().waehleDungeon(dungeon);
+		dungeon.getWuerfel().addListener(new ChangeListener<WuerfelWurf>()
+		{
+			@Override
+			public void changed(ObservableValue<? extends WuerfelWurf> observable, WuerfelWurf oldValue,
+					WuerfelWurf newValue)
+			{
+				System.out.println(newValue.warErfolgreich());
+
+			}
+		});
 		this.aktiverDungeon = dungeon;
 		this.karteGridPane.setSpielbrett(this.aktiverDungeon.getSpielbrett());
 		this.heldenStatusAnzeige.setHelden(this.aktiverDungeon.getHelden());

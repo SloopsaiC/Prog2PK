@@ -60,7 +60,7 @@ public class Aktion
 	 */
 	private boolean anzielenErfolgreich(LebendigesObjekt zieler, Anzielbar ziel)
 	{
-		return this.wuerfelWurfErfolgreich(ziel.getTrefferWahrscheinlichkeit());
+		return this.wuerfelWurfErfolgreich(this.grundErfolgsWahrscheinlichkeit);
 	}
 
 	/**
@@ -72,10 +72,6 @@ public class Aktion
 	 */
 	private boolean ausfuehrenErfolgreich(LebendigesObjekt wirker, List<Anzielbar> ziele)
 	{
-		if (!this.wuerfelWurfErfolgreich(this.grundErfolgsWahrscheinlichkeit))
-		{
-			return false;
-		}
 		for (Anzielbar ziel : ziele)
 		{
 			if (!ziel.istGeschuetzt() && !this.anzielenErfolgreich(wirker, ziel))
