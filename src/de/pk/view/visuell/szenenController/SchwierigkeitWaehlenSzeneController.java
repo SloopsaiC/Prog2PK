@@ -3,20 +3,24 @@ package de.pk.view.visuell.szenenController;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import de.pk.control.app.Anwendung;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.lokalisierung.Lokalisierbar;
+import de.pk.utils.lokalisierung.LokalisierungsKeys;
 import de.pk.view.visuell.AnwendungFX;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
+import javafx.scene.text.Text;
+import de.pk.control.app.Anwendung;
+import de.pk.control.spiel.einstellungen.Einstellungen;
 
 /**
  * FXML Controller class
  *
- * @author Phillip
+ * @author Philipp
  */
 public class SchwierigkeitWaehlenSzeneController implements Initializable, Lokalisierbar
 {
@@ -31,24 +35,29 @@ public class SchwierigkeitWaehlenSzeneController implements Initializable, Lokal
 	@FXML
 	private Button blutduersterButton;
 	@FXML
+	private Label Neuling;
+	@FXML
+	private Label Dickkopf;
+	@FXML
+	private Label Draufgaenger;
+	@FXML
+	private Label Blutduerster;
+	@FXML
 	private Button schwierigkeitsWahlDialogStart;
 	@FXML
 	private Button schwierigkeitsWahlDialogZurueck;
 	@FXML
 	private DialogPane schwierigkeitsWahlDialog;
-
-	@Override
-	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
-	{
-		// TODO Auto-generated method stub
-
-	}
+	@FXML
+	private Text schwierigkeitsWahlDialogText;
 
 	// fuer blutduerster
 	@FXML
 	public void blutduersterButtonPressed(ActionEvent event)
 	{
 		this.schwierigkeitsWahlDialog.setVisible(true);
+		this.schwierigkeitsWahlDialogText.setText(Einstellungen.getEinstellungen().getSprachRessource()
+				.getString(LokalisierungsKeys.BLUTDUERSTER_DIALOG_TEXT_KEY));
 	}
 
 	// fuer Dickkopf
@@ -56,6 +65,8 @@ public class SchwierigkeitWaehlenSzeneController implements Initializable, Lokal
 	public void dickkopfButtonPressed(ActionEvent event)
 	{
 		this.schwierigkeitsWahlDialog.setVisible(true);
+		this.schwierigkeitsWahlDialogText.setText(Einstellungen.getEinstellungen().getSprachRessource()
+				.getString(LokalisierungsKeys.DICKKOPF_DIALOG_TEXT_KEY));
 	}
 
 	// fuer Draufgaenger
@@ -63,13 +74,8 @@ public class SchwierigkeitWaehlenSzeneController implements Initializable, Lokal
 	public void draufgaengerButtonPressed(ActionEvent event)
 	{
 		this.schwierigkeitsWahlDialog.setVisible(true);
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources)
-	{
-		// TODO Auto-generated method stub
-
+		this.schwierigkeitsWahlDialogText.setText(Einstellungen.getEinstellungen().getSprachRessource()
+				.getString(LokalisierungsKeys.DRAUFGAENGER_DIALOG_TEXT_KEY));
 	}
 
 	// fuer Neuling
@@ -77,6 +83,18 @@ public class SchwierigkeitWaehlenSzeneController implements Initializable, Lokal
 	public void neulingButtonPressed(ActionEvent event)
 	{
 		this.schwierigkeitsWahlDialog.setVisible(true);
+		this.schwierigkeitsWahlDialogText.setText(Einstellungen.getEinstellungen().getSprachRessource()
+				.getString(LokalisierungsKeys.NEULING_DIALOG_TEXT_KEY));
+
+	}
+
+	// Allgemeine Funktionen
+	@FXML
+	public void zumHauptmenueButtonAction(ActionEvent event)
+	{
+		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
+		this.schwierigkeitsWahlDialog.setVisible(false);
+		this.schwierigkeitsWahlDialogText.setText(null);
 	}
 
 	@FXML
@@ -94,10 +112,23 @@ public class SchwierigkeitWaehlenSzeneController implements Initializable, Lokal
 		this.schwierigkeitsWahlDialog.setVisible(false);
 	}
 
-	// Allgemeine Funktionen
-	@FXML
-	public void zumHauptmenueButtonAction(ActionEvent event)
+	@Override
+	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
+		this.zurueckZumHauptmenue.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK_KEY)
+				+ sprachRessource.getString(LokalisierungsKeys.ZUM_HAUPTMENUE_KEY));
+		this.Neuling.setText(sprachRessource.getString(LokalisierungsKeys.NEULING_KEY));
+		this.Dickkopf.setText(sprachRessource.getString(LokalisierungsKeys.NEULING_KEY));
+		this.Draufgaenger.setText(sprachRessource.getString(LokalisierungsKeys.NEULING_KEY));
+		this.Blutduerster.setText(sprachRessource.getString(LokalisierungsKeys.NEULING_KEY));
+		this.schwierigkeitsWahlDialogZurueck.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK_KEY));
+		this.schwierigkeitsWahlDialogStart.setText(sprachRessource.getString(LokalisierungsKeys.START_KEY));
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		// TODO Auto-generated method stub
+
 	}
 }

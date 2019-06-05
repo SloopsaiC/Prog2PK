@@ -12,135 +12,82 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0"
-	prefWidth="1024.0" styleClass="schwierigkeit-pane"
-	xmlns="http://javafx.com/javafx/11.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="de.pk.view.visuell.szenenController.SchwierigkeitWaehlenSzeneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" styleClass="schwierigkeit-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pk.view.visuell.szenenController.SchwierigkeitWaehlenSzeneController">
 
 	<stylesheets>
 		<URL value="@../styleSheetsCSS/StandardSzenenStyle.css" />
 	</stylesheets>
 	<children>
-		<BorderPane AnchorPane.bottomAnchor="0.0"
-			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-			AnchorPane.topAnchor="0.0">
+		<BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<center>
-				<StackPane prefHeight="150.0" prefWidth="200.0"
-					BorderPane.alignment="CENTER">
+				<StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 					<children>
 						<GridPane>
 							<columnConstraints>
-								<ColumnConstraints hgrow="SOMETIMES"
-									minWidth="10.0" prefWidth="100.0" />
-								<ColumnConstraints hgrow="SOMETIMES"
-									minWidth="10.0" prefWidth="100.0" />
-								<ColumnConstraints hgrow="SOMETIMES"
-									minWidth="10.0" prefWidth="100.0" />
-								<ColumnConstraints hgrow="SOMETIMES"
-									minWidth="10.0" prefWidth="100.0" />
-								<ColumnConstraints hgrow="SOMETIMES"
-									minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
 							</columnConstraints>
 							<rowConstraints>
-								<RowConstraints minHeight="10.0"
-									prefHeight="30.0" vgrow="SOMETIMES" />
-								<RowConstraints minHeight="10.0"
-									prefHeight="30.0" vgrow="SOMETIMES" />
-								<RowConstraints minHeight="10.0"
-									prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 							</rowConstraints>
 							<children>
-								<Button id="neulingButton" fx:id="neulingButton"
-									contentDisplay="CENTER" mnemonicParsing="false"
-									onAction="#neulingButtonPressed" prefHeight="114.0"
-									prefWidth="147.0" styleClass="image-button"
-									GridPane.columnIndex="1" GridPane.halignment="CENTER"
-									GridPane.rowIndex="1" GridPane.valignment="CENTER">
+								<Button id="neulingButton" fx:id="neulingButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#neulingButtonPressed" prefHeight="114.0" prefWidth="147.0" styleClass="image-button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
 									<GridPane.margin>
 										<Insets top="60.0" />
 									</GridPane.margin>
 								</Button>
-								<Button id="dickkopfButton" fx:id="dickkopfButton"
-									mnemonicParsing="false" onAction="#dickkopfButtonPressed"
-									prefHeight="117.0" prefWidth="147.0" styleClass="image-button"
-									GridPane.columnIndex="2" GridPane.halignment="CENTER"
-									GridPane.rowIndex="1" GridPane.valignment="CENTER">
+								<Button id="dickkopfButton" fx:id="dickkopfButton" mnemonicParsing="false" onAction="#dickkopfButtonPressed" prefHeight="117.0" prefWidth="147.0" styleClass="image-button" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
 									<GridPane.margin>
 										<Insets top="40.0" />
 									</GridPane.margin>
 								</Button>
-								<Button id="draufgaengerButton"
-									fx:id="draufgaengerButton" mnemonicParsing="false"
-									onAction="#draufgaengerButtonPressed" prefHeight="119.0"
-									prefWidth="132.0" styleClass="image-button"
-									GridPane.columnIndex="3" GridPane.halignment="CENTER"
-									GridPane.rowIndex="1" GridPane.valignment="CENTER">
+								<Button id="draufgaengerButton" fx:id="draufgaengerButton" mnemonicParsing="false" onAction="#draufgaengerButtonPressed" prefHeight="119.0" prefWidth="132.0" styleClass="image-button" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
 									<GridPane.margin>
 										<Insets top="80.0" />
 									</GridPane.margin>
 								</Button>
-								<Button id="blutduersterButton"
-									fx:id="blutduersterButton" mnemonicParsing="false"
-									onAction="#blutduersterButtonPressed" prefHeight="110.0"
-									prefWidth="122.0" styleClass="image-button"
-									GridPane.columnIndex="2" GridPane.halignment="CENTER"
-									GridPane.rowIndex="2" GridPane.valignment="CENTER">
+								<Button id="blutduersterButton" fx:id="blutduersterButton" mnemonicParsing="false" onAction="#blutduersterButtonPressed" prefHeight="110.0" prefWidth="122.0" styleClass="image-button" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
 									<GridPane.margin>
 										<Insets top="25.0" />
 									</GridPane.margin>
 								</Button>
-								<Label text="Neuling" GridPane.columnIndex="1"
-									GridPane.halignment="CENTER" GridPane.rowIndex="1"
-									GridPane.valignment="CENTER">
+								<Label fx:id="Neuling" text="Neuling" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
 									<GridPane.margin>
 										<Insets bottom="15.0" />
 									</GridPane.margin>
 								</Label>
-								<Label text="Dickkopf" GridPane.columnIndex="2"
-									GridPane.halignment="CENTER" GridPane.rowIndex="1"
-									GridPane.valignment="CENTER">
+								<Label fx:id="Dickkopf" text="Dickkopf" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
 									<GridPane.margin>
 										<Insets bottom="75.0" />
 									</GridPane.margin>
 								</Label>
-								<Label text="Draufgaenger" GridPane.columnIndex="3"
-									GridPane.halignment="CENTER" GridPane.rowIndex="1"
-									GridPane.valignment="CENTER">
+								<Label fx:id="Draufgaenger" text="Draufgaenger" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
 									<GridPane.margin>
 										<Insets bottom="15.0" />
 									</GridPane.margin>
 								</Label>
-								<Label text="Blutduerster" GridPane.columnIndex="2"
-									GridPane.halignment="CENTER" GridPane.rowIndex="2"
-									GridPane.valignment="CENTER">
+								<Label fx:id="Blutduerster" text="Blutduerster" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
 									<GridPane.margin>
 										<Insets bottom="75.0" />
 									</GridPane.margin>
 								</Label>
 							</children>
 						</GridPane>
-						<DialogPane id="neulingDialog"
-							fx:id="schwierigkeitsWahlDialog" maxHeight="-Infinity"
-							maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-							prefHeight="446.0" prefWidth="914.0" visible="false">
+						<DialogPane id="Dialog" fx:id="schwierigkeitsWahlDialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="914.0" visible="false">
 							<header>
-								<BorderPane prefHeight="200.0" prefWidth="200.0">
+								<BorderPane prefHeight="444.0" prefWidth="906.0">
 									<bottom>
-										<ButtonBar prefHeight="40.0" prefWidth="200.0"
-											BorderPane.alignment="CENTER">
+										<ButtonBar prefHeight="40.0" prefWidth="929.0" BorderPane.alignment="CENTER">
 											<buttons>
-												<Button fx:id="schwierigkeitsWahlDialogZurueck"
-													focusTraversable="false" mnemonicParsing="false"
-													onAction="#schwierigkeitsWahlDialogZurueckButtonPressed"
-													text="Zurueck" />
-												<Button fx:id="schwierigkeitsWahlDialogStart"
-													alignment="CENTER" focusTraversable="false"
-													mnemonicParsing="false"
-													onAction="#schwierigkeitsWahlDialogStartButtonPressed"
-													text="Start" textAlignment="CENTER" />
+												<Button fx:id="schwierigkeitsWahlDialogZurueck" focusTraversable="false" mnemonicParsing="false" onAction="#schwierigkeitsWahlDialogZurueckButtonPressed" text="Zurueck" />
+												<Button fx:id="schwierigkeitsWahlDialogStart" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#schwierigkeitsWahlDialogStartButtonPressed" text="Start" textAlignment="CENTER" />
 											</buttons>
 											<opaqueInsets>
 												<Insets />
@@ -150,6 +97,9 @@
 											</padding>
 										</ButtonBar>
 									</bottom>
+									<center>
+										<Text fx:id="schwierigkeitsWahlDialogText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+									</center>
 								</BorderPane>
 							</header>
 						</DialogPane>
@@ -157,15 +107,10 @@
 				</StackPane>
 			</center>
 			<top>
-				<Label styleClass="ueberschriften-label"
-					text="Schwierigkeitsmenue" textAlignment="CENTER"
-					BorderPane.alignment="CENTER" />
+				<Label styleClass="ueberschriften-label" text="Schwierigkeitsmenue" textAlignment="CENTER" BorderPane.alignment="CENTER" />
 			</top>
 			<bottom>
-				<Button fx:id="zurueckZumHauptmenue" alignment="CENTER"
-					contentDisplay="CENTER" focusTraversable="false"
-					mnemonicParsing="false" onAction="#zumHauptmenueButtonAction"
-					text="Zurueck zum Hauptmenue" BorderPane.alignment="CENTER_RIGHT" />
+				<Button fx:id="zurueckZumHauptmenue" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#zumHauptmenueButtonAction" text="Zurueck zum Hauptmenue" BorderPane.alignment="CENTER_RIGHT" />
 			</bottom>
 			<padding>
 				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
