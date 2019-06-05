@@ -234,7 +234,7 @@ public class KartenGenerator
 			this.registrierteKacheln.add(zuRegistrieren);
 		} else
 		{
-			throw new IllegalArgumentException("Kacheln muessen mindestens ein begehbares Feld am Rand haben!");
+			throw new IllegalArgumentException(AusnahmeNachrichten.KARTEN_GENERATOR_KACHEL_KEIN_FREIES_FELD);
 		}
 	}
 
