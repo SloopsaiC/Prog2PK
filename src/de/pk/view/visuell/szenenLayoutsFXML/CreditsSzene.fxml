@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -9,13 +10,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0"
-	prefWidth="1024.0" styleClass="credits-pane"
-	xmlns="http://javafx.com/javafx/11.0.1"
+	prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1"
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="de.pk.view.visuell.szenenController.CreditsSzeneController">
 	<stylesheets>
 		<URL value="@../styleSheetsCSS/StandardSzenenStyle.css" />
 	</stylesheets>
+	<styleClass>
+		<String fx:value="credits-pane" />
+		<String fx:value="szenen-pane" />
+	</styleClass>
 	<children>
 		<BorderPane prefHeight="200.0" prefWidth="200.0"
 			AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"

@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import de.pk.control.karte.Weltkarte;
-import de.pk.control.spiel.einstellungen.Einstellungen;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.lokalisierung.Lokalisierbar;
 import de.pk.utils.lokalisierung.LokalisierungsKeys;
@@ -45,7 +44,7 @@ public class WeltkarteSzeneController implements Initializable, Lokalisierbar
 	{
 		((DungeonSzeneController) AnwendungFX.getSzenenController().get(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE))
 				.setDungeon(this.weltkarte.getDungeonBei(index));
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE);
+		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE);
 	}
 
 	@FXML
@@ -81,7 +80,7 @@ public class WeltkarteSzeneController implements Initializable, Lokalisierbar
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		// TODO Auto-generated method stub
+		//
 
 	}
 
@@ -93,13 +92,13 @@ public class WeltkarteSzeneController implements Initializable, Lokalisierbar
 	@FXML
 	public void weltkarteInsHauptmenueButtonPressed(ActionEvent event)
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
+		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
 	}
 
 	@FXML
 	public void weltkarteZurueckButtonPressed(ActionEvent event)
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_SCHWIERIGKEIT_WAEHLEN_SZENE);
+		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_SCHWIERIGKEIT_WAEHLEN_SZENE);
 	}
 
 	@Override

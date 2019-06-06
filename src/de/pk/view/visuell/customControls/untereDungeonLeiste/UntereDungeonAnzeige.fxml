@@ -3,6 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ProgressIndicator?>
@@ -67,28 +68,28 @@
 					<children>
 						<HBox alignment="CENTER" spacing="10.0">
 							<children>
-								<Button id="aktionenButton" fx:id="aktionButton1"
+								<ToggleButton id="aktionenButton1" fx:id="aktionButton1"
 									contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
 									maxHeight="-Infinity" maxWidth="-Infinity"
 									minHeight="-Infinity" minWidth="-Infinity"
 									mnemonicParsing="false" onAction="#aktionButton1Pressed"
 									prefHeight="25.0" prefWidth="25.0" styleClass="image-button"
 									text="1" textAlignment="CENTER" />
-								<Button id="aktionenButton" fx:id="aktionButton2"
+								<ToggleButton id="aktionenButton2" fx:id="aktionButton2"
 									contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
 									maxHeight="-Infinity" maxWidth="-Infinity"
 									minHeight="-Infinity" minWidth="-Infinity"
 									mnemonicParsing="false" onAction="#aktionButton2Pressed"
 									prefHeight="25.0" prefWidth="25.0" styleClass="image-button"
 									text="1" textAlignment="CENTER" />
-								<Button id="aktionenButton" fx:id="aktionButton3"
+								<ToggleButton id="aktionenButton3" fx:id="aktionButton3"
 									contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
 									maxHeight="-Infinity" maxWidth="-Infinity"
 									minHeight="-Infinity" minWidth="-Infinity"
 									mnemonicParsing="false" onAction="#aktionButton3Pressed"
 									prefHeight="25.0" prefWidth="25.0" styleClass="image-button"
 									text="1" textAlignment="CENTER" />
-								<Button id="aktionenButton" fx:id="aktionButton4"
+								<ToggleButton id="aktionenButton4" fx:id="aktionButton4"
 									contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
 									maxHeight="-Infinity" maxWidth="-Infinity"
 									minHeight="-Infinity" minWidth="-Infinity"
@@ -99,7 +100,7 @@
 						</HBox>
 						<HBox alignment="CENTER" spacing="10.0">
 							<children>
-								<Button id="faehigkeitenButton"
+								<Button id="faehigkeitenButton1"
 									fx:id="heldenInventarButton1" contentDisplay="GRAPHIC_ONLY"
 									focusTraversable="false" maxHeight="-Infinity"
 									maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
@@ -107,7 +108,7 @@
 									onAction="#heldenInventarButton1Pressed" prefHeight="25.0"
 									prefWidth="25.0" styleClass="image-button" text="2"
 									textAlignment="CENTER" />
-								<Button id="faehigkeitenButton"
+								<Button id="faehigkeitenButton2"
 									fx:id="heldenInventarButton2" contentDisplay="GRAPHIC_ONLY"
 									focusTraversable="false" maxHeight="-Infinity"
 									maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
@@ -115,7 +116,7 @@
 									onAction="#heldenInventarButton2Pressed" prefHeight="25.0"
 									prefWidth="25.0" styleClass="image-button" text="2"
 									textAlignment="CENTER" />
-								<Button id="faehigkeitenButton"
+								<Button id="faehigkeitenButton3"
 									fx:id="heldenInventarButton3" contentDisplay="GRAPHIC_ONLY"
 									focusTraversable="false" maxHeight="-Infinity"
 									maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
@@ -123,7 +124,7 @@
 									onAction="#heldenInventarButton3Pressed" prefHeight="25.0"
 									prefWidth="25.0" styleClass="image-button" text="2"
 									textAlignment="CENTER" />
-								<Button id="faehigkeitenButton"
+								<Button id="faehigkeitenButton4"
 									fx:id="heldenInventarButton4" contentDisplay="GRAPHIC_ONLY"
 									focusTraversable="false" maxHeight="-Infinity"
 									maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"

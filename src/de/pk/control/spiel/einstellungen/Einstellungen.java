@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import de.pk.utils.Spielkonstanten;
 import de.pk.view.visuell.AnwendungFX;
+import de.pk.view.visuell.szenenController.HauptmenueSzeneController;
 
 /**
  *
@@ -27,8 +28,8 @@ public class Einstellungen
 	 * Standard Aufloesung bei erstem Start des Spiels.
 	 */
 	public static final Aufloesung STANDARD_AUFLOESUNG = Aufloesung.FULL_HD;
-
 	public static final Sprache STANDARD_SPRACHE = Sprache.de;
+	private static final int STANDARD_LAUTSTAERKE = 0;
 
 	/**
 	 * Gibt die Instanz der Einstellungs-Klasse zurueck.
@@ -42,6 +43,9 @@ public class Einstellungen
 
 	private Aufloesung anwendungsAufloesung = Einstellungen.STANDARD_AUFLOESUNG;
 	private Sprache anwendungsSprache = Einstellungen.STANDARD_SPRACHE;
+	private boolean vollbild = false;
+	private int musikLautstaerke = Einstellungen.STANDARD_LAUTSTAERKE;
+	private int soundLautstaerke = Einstellungen.STANDARD_LAUTSTAERKE;
 
 	private ResourceBundle sprachRessource = null;
 
@@ -77,6 +81,39 @@ public class Einstellungen
 		this.sprachRessource = ResourceBundle.getBundle(Spielkonstanten.LOKALISIERUNG_PFAD,
 				new Locale(this.anwendungsSprache.toString()));
 		AnwendungFX.aktualisiereSzenenSprache(this.sprachRessource);
+	}
+
+	public void setVollbild(boolean vollbild)
+	{
+		this.vollbild = vollbild;
+	}
+
+	public boolean getVollbild()
+	{
+		return this.vollbild;
+	}
+
+	public int getMusikLautstaerke()
+	{
+		return this.musikLautstaerke;
+	}
+
+	public void setMusikLautstaerke(int musikLautstaerke)
+	{
+		this.musikLautstaerke = musikLautstaerke;
+		// TODO Musik Volume / Musik in eigene Klasse auslagern
+		HauptmenueSzeneController.getAudio().setProzentualeLautstaerke(this.musikLautstaerke, false);
+	}
+
+	public int getSoundLautstaerke()
+	{
+		return this.soundLautstaerke;
+	}
+
+	public void setSoundLautstaerke(int soundLautstaerke)
+	{
+		// TODO Sound Volume anbinden
+		this.soundLautstaerke = soundLautstaerke;
 	}
 
 }

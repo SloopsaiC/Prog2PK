@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.pk.view.visuell.customControls.einstellungenControlPane.EinstellungenControlPane?>
 <?import de.pk.view.visuell.customControls.heldenStatusAnzeige.HeldenStatusAnzeige?>
 <?import de.pk.view.visuell.customControls.karteGridPane.KarteGridPane?>
 <?import de.pk.view.visuell.customControls.obereDungeonLeiste.ObereDungeonAnzeige?>
-<?import de.pk.view.visuell.customControls.pauseDialog.PauseDialog?>
 <?import de.pk.view.visuell.customControls.questLog.QuestLog?>
+<?import de.pk.view.visuell.customControls.unschaerfeFensterDialog.UnschaerfeFensterDialog?>
 <?import de.pk.view.visuell.customControls.untereDungeonLeiste.UntereDungeonAnzeige?>
+<?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0"
-	prefWidth="1024.0" styleClass="dungeon-pane"
-	xmlns="http://javafx.com/javafx/11.0.1"
+	prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1"
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="de.pk.view.visuell.szenenController.DungeonSzeneController">
 
@@ -23,6 +27,10 @@
 		<URL value="@../styleSheetsCSS/StandardSzenenStyle.css" />
 		<URL value="@../styleSheetsCSS/DungeonSzeneStyle.css" />
 	</stylesheets>
+	<styleClass>
+		<String fx:value="dungeon-pane" />
+		<String fx:value="szenen-pane" />
+	</styleClass>
 
 	<children>
 		<StackPane AnchorPane.bottomAnchor="0.0"
@@ -59,12 +67,68 @@
 					</bottom>
 					<center>
 						<KarteGridPane fx:id="karteGridPane"
-							alignment="CENTER" viewOrder="2.0"
-							BorderPane.alignment="CENTER" />
+							alignment="CENTER" viewOrder="2.0" BorderPane.alignment="CENTER" />
 					</center>
 				</BorderPane>
 
-				<PauseDialog fx:id="pauseMenueDialogPane" />
+				<UnschaerfeFensterDialog
+					fx:id="pauseMenueDialogPane" prefHeight="576.0" prefWidth="1024.0">
+					<styleClass>
+						<String fx:value="szenen-pane" />
+					</styleClass>
+					<content>
+						<VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0"
+							spacing="30.0">
+							<children>
+								<Button fx:id="pauseMenueBeendenButton"
+									focusTraversable="false" mnemonicParsing="false"
+									onAction="#pauseMenueBeendenButtonPressed" text="Spiel beenden"
+									textAlignment="CENTER" />
+								<Button fx:id="pauseMenueZurueckButton"
+									alignment="CENTER" contentDisplay="CENTER"
+									focusTraversable="false" maxHeight="-Infinity"
+									maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+									mnemonicParsing="false" onAction="#zurueckButtonPressed"
+									text="Zurueck" StackPane.alignment="BOTTOM_RIGHT" />
+							</children>
+						</VBox>
+					</content>
+					<header>
+						<Label fx:id="pauseLabel" alignment="CENTER"
+							contentDisplay="CENTER" focusTraversable="false" text="Pause"
+							textAlignment="CENTER" />
+					</header>
+				</UnschaerfeFensterDialog>
+				<UnschaerfeFensterDialog
+					fx:id="einstellungenDialogPane" prefHeight="576.0"
+					prefWidth="1024.0" styleClass="szenen-pane"
+					StackPane.alignment="CENTER">
+					<header>
+						<Label fx:id="einstellungenLabel" alignment="CENTER"
+							contentDisplay="CENTER" focusTraversable="false"
+							text="Einstellungen" textAlignment="CENTER"
+							styleClass="ueberschriften-label" />
+					</header>
+					<content>
+						<BorderPane styleClass="szenen-border-pane">
+							<center>
+								<EinstellungenControlPane
+									fx:id="einstellungenControlPane" alignment="CENTER" />
+							</center>
+							<top>
+							</top>
+							<bottom>
+								<Button fx:id="einstellungenZurueckButton"
+									focusTraversable="false" mnemonicParsing="false"
+									onAction="#zurueckButtonPressed" text="Zurueck"
+									BorderPane.alignment="BOTTOM_RIGHT" />
+							</bottom>
+							<padding>
+								<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+							</padding>
+						</BorderPane>
+					</content>
+				</UnschaerfeFensterDialog>
 			</children>
 		</StackPane>
 	</children>

@@ -41,7 +41,7 @@ public class TitelSzeneController implements Initializable, Lokalisierbar
 	@FXML
 	private void startButtonAction()
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
+		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
 	}
 
 }

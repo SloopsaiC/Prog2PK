@@ -25,10 +25,11 @@ public class AudioSchnipsel implements Closeable
 	public static final int MINIMALE_PROZENTUALE_LAUTSTAERKE = 0;
 	public static final int START_FRAME = 0;
 	private static final int LAUTSTAERKE_DEZIBEL_UMRECHNUNGS_FAKTOR = 40;
+	private static final int SLEEP_DAUER_LAUTSTAERKE_FADE = 75;
 
 	private Clip audioClip = null;
 	private FloatControl lautstaerkeControl = null;
-	private int prozentualeLautstaerke = 0;
+	private int prozentualeLautstaerke = MINIMALE_PROZENTUALE_LAUTSTAERKE;
 
 	public AudioSchnipsel(String dateipfad, int lautstaerke)
 	{
@@ -94,18 +95,15 @@ public class AudioSchnipsel implements Closeable
 	{
 		try
 		{
-			synchronized (AudioSchnipsel.this.audioClip)
+			for (int aktuelleLautstaerke = alteProzentualeLautstaerke; aktuelleLautstaerke < neueProzentualeLautstaerke; aktuelleLautstaerke++)
+			{ // lauter
+				this.setzeDezibelLautstaerkeAusProzentualerAngabe(aktuelleLautstaerke);
+				Thread.sleep(AudioSchnipsel.SLEEP_DAUER_LAUTSTAERKE_FADE);
+			} // leiser
+			for (int aktuelleLautstaerke = alteProzentualeLautstaerke; aktuelleLautstaerke > neueProzentualeLautstaerke; aktuelleLautstaerke--)
 			{
-				for (int aktuelleLautstaerke = alteProzentualeLautstaerke; aktuelleLautstaerke < neueProzentualeLautstaerke; aktuelleLautstaerke++)
-				{ // lauter
-					this.setzeDezibelLautstaerkeAusProzentualerAngabe(aktuelleLautstaerke);
-					Thread.sleep(75);
-				} // leiser
-				for (int aktuelleLautstaerke = alteProzentualeLautstaerke; aktuelleLautstaerke > neueProzentualeLautstaerke; aktuelleLautstaerke--)
-				{
-					this.setzeDezibelLautstaerkeAusProzentualerAngabe(aktuelleLautstaerke);
-					Thread.sleep(75);
-				}
+				this.setzeDezibelLautstaerkeAusProzentualerAngabe(aktuelleLautstaerke);
+				Thread.sleep(AudioSchnipsel.SLEEP_DAUER_LAUTSTAERKE_FADE);
 			}
 		} catch (InterruptedException e)
 		{
@@ -129,7 +127,7 @@ public class AudioSchnipsel implements Closeable
 		this.audioClip.setFramePosition(framePosition);
 	}
 
-	public synchronized void setProzentualeLautstaerke(int prozentWert, boolean kontinuierlich)
+	public void setProzentualeLautstaerke(int prozentWert, boolean kontinuierlich)
 	{
 		int alteLautstaerke = this.prozentualeLautstaerke;
 		this.prozentualeLautstaerke = MatheUtils.begrenzeWertAufMinMax(prozentWert,

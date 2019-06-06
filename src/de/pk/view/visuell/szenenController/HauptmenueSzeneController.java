@@ -76,13 +76,13 @@ public class HauptmenueSzeneController implements Initializable, Lokalisierbar
 	@FXML
 	private void menueBarDateiZumTitelbildschirmPressed()
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_TITEL_SZENE);
+		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_TITEL_SZENE);
 	}
 
 	@FXML
 	private void menueBarDateiNeuesSpielPressed()
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_TITEL_SZENE);
+		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_TITEL_SZENE);
 	}
 
 	@FXML
@@ -94,26 +94,26 @@ public class HauptmenueSzeneController implements Initializable, Lokalisierbar
 	@FXML
 	private void menueBarEinstellungenSpieloptionenPressed()
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_OPTIONEN_SZENE);
+		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_OPTIONEN_SZENE);
 	}
 
 	// Buttons
 	@FXML
 	private void credtisButtonAction(ActionEvent event)
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_CREDIT_SZENE);
+		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_CREDIT_SZENE);
 	}
 
 	@FXML
 	private void neuesSpielButtonAction(ActionEvent event)
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_SCHWIERIGKEIT_WAEHLEN_SZENE);
+		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_SCHWIERIGKEIT_WAEHLEN_SZENE);
 	}
 
 	@FXML
 	private void optionenButtonAction(ActionEvent event)
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_OPTIONEN_SZENE);
+		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_OPTIONEN_SZENE);
 	}
 
 	@FXML
@@ -131,7 +131,7 @@ public class HauptmenueSzeneController implements Initializable, Lokalisierbar
 	@FXML
 	private void zumTitelbildschirmButtonAction(ActionEvent event)
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_TITEL_SZENE);
+		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_TITEL_SZENE);
 	}
 
 	// Allgemein
@@ -149,7 +149,7 @@ public class HauptmenueSzeneController implements Initializable, Lokalisierbar
 		this.creditsButton.setText(sprachRessource.getString(LokalisierungsKeys.CREDTITS_KEY));
 		this.hauptmenueLabel.setText(sprachRessource.getString(LokalisierungsKeys.HAUPTMENUE_KEY));
 		this.neuesSpielButton.setText(sprachRessource.getString(LokalisierungsKeys.NEUES_SPIEL_KEY));
-		this.optionenButton.setText(sprachRessource.getString(LokalisierungsKeys.OPTIONEN_KEY));
+		this.optionenButton.setText(sprachRessource.getString(LokalisierungsKeys.EINSTELLUNGEN_KEY));
 		this.spielBeendenButton.setText(sprachRessource.getString(LokalisierungsKeys.BEENDEN_KEY));
 		this.spielLadenButton.setText(sprachRessource.getString(LokalisierungsKeys.SPIEL_LADEN_KEY));
 		this.zumTitelbildschirmButton.setText(sprachRessource.getString(LokalisierungsKeys.ZUM_TITELBILDSCHIRM_KEY));

@@ -10,6 +10,7 @@ import de.pk.model.position.Position;
 import de.pk.model.spielbrett.Kachel;
 import de.pk.utils.Spielkonstanten;
 import de.pk.utils.lokalisierung.Lokalisierbar;
+import de.pk.view.visuell.customControls.spielbrettObjektLabel.SpielbrettObjektLabel;
 import de.pk.view.visuell.events.PositionEvent;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -38,6 +39,19 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 	private static final String FXML_PFAD = "KachelGridPane.fxml";
 
 	private static final double GLUEHEN_INTENSITAET = 0.75;
+
+	private static final double RAND_RADIUS = 10;
+	private static final double LEBENDIGES_OBJEKT_PUNKT_DIMENSION = 15;
+
+	private static final double UMRANDUNG_BREITE = 3;
+
+	public static final Color STANDARD_UMRANDUNGSFARBE = new Color(0.4, 0.1, 0.1, 1.0);
+
+	private static final String CSS_UNTERGRUND_START = "-fx-background-image: "
+			+ "url('/de/pk/ressourcen/bildDateien/kachelUntergruende/KachelUntergrund_2.png'), "
+			+ "url('/de/pk/ressourcen/bildDateien/kachelUntergruende/KachelUntergrund_";
+
+	private static final String CSS_UNTERGRUND_ENDE = ".png')";
 
 	private StackPane[][] untergruende = null;
 	private Kachel darstellendeKachel = null;
@@ -200,9 +214,8 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 			for (int x = 0; x < this.untergruende[y].length; x++)
 			{
 				int wert = kachel.getUntergrundBei(new Position(x, y)).getIntegerWert();
-				this.untergruende[y][x].setStyle("-fx-background-image: "
-						+ "url('/de/pk/ressourcen/bildDateien/kachelUntergruende/KachelUntergrund_2.png'), "
-						+ "url('/de/pk/ressourcen/bildDateien/kachelUntergruende/KachelUntergrund_" + wert + ".png')");
+				this.untergruende[y][x]
+						.setStyle(KachelGridPane.CSS_UNTERGRUND_START + wert + KachelGridPane.CSS_UNTERGRUND_ENDE);
 				SpielbrettObjekt objekt = kachel.getSpielbrettObjektBei(new Position(x, y));
 				if (objekt != null)
 				{
@@ -211,10 +224,12 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 						LebendigesObjekt lebendigesObjekt = (LebendigesObjekt) objekt;
 						if (!lebendigesObjekt.istFreundlich())
 						{
-							this.untergruende[y][x].getChildren().add(new Rectangle(10, 10, Color.RED));
+							this.untergruende[y][x].getChildren().add(new Rectangle(LEBENDIGES_OBJEKT_PUNKT_DIMENSION,
+									LEBENDIGES_OBJEKT_PUNKT_DIMENSION, Color.RED));
 						} else
 						{
-							this.untergruende[y][x].getChildren().add(new Rectangle(10, 10, Color.BLUE));
+							this.untergruende[y][x].getChildren().add(new Rectangle(LEBENDIGES_OBJEKT_PUNKT_DIMENSION,
+									LEBENDIGES_OBJEKT_PUNKT_DIMENSION, Color.BLUE));
 						}
 					}
 
@@ -235,7 +250,7 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 	public void setUmrandungBeiUntergrund(Position pos)
 	{
 		// TODO Konstanten
-		this.setUmrandungBeiUntergrund(pos, new Color(0.4, 0.1, 0.1, 1.0));
+		this.setUmrandungBeiUntergrund(pos, KachelGridPane.STANDARD_UMRANDUNGSFARBE);
 	}
 
 	/**
@@ -248,9 +263,14 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 	 */
 	public void setUmrandungBeiUntergrund(Position pos, Color umrandungsFarbe)
 	{
-		// TODO Konstanten
 		this.untergruende[pos.getY()][pos.getX()].setBorder(new Border(
-				new BorderStroke(umrandungsFarbe, BorderStrokeStyle.SOLID, new CornerRadii(10), new BorderWidths(3))));
+				new BorderStroke(umrandungsFarbe, BorderStrokeStyle.SOLID, new CornerRadii(KachelGridPane.RAND_RADIUS),
+						new BorderWidths(KachelGridPane.UMRANDUNG_BREITE))));
+	}
+
+	public void setzeSpielbrettObjektAufUntergrund(SpielbrettObjektLabel objekt, Position pos)
+	{
+		this.untergruende[pos.getY()][pos.getX()].getChildren().add(objekt);
 	}
 
 }

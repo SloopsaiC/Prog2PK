@@ -15,6 +15,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -30,37 +32,64 @@ public class AnwendungFX extends Application
 {
 
 	/**
-	 * Die SZENEN_MAP beinhaltet alle Szenen, die im Spiel gezeigt werden sollen und
-	 * ordnet diese einem Namen als String zu, mit welchem diese dann aufgerufen
-	 * werden koennen, um z.B. die aktuelle Szene zu wechseln.
+	 * Die SZENEN_ROOT_MAP beinhaltet alle "Szenen" (als Panes, nicht als Scenes!
+	 * Der Einfachhaltheiber aber nachfolgend dennoch "Szenen" genannt), die im
+	 * Spiel gezeigt werden sollen und ordnet diese einem Namen als String zu, mit
+	 * welchem diese dann aufgerufen werden koennen, um z.B. die aktuelle Szene zu
+	 * wechseln.
 	 */
-	private static final HashMap<String, Scene> SZENEN_MAP = new HashMap<>();
+	private static final HashMap<String, Pane> SZENEN_ROOT_MAP = new HashMap<>();
 
-	private static final HashMap<String, Lokalisierbar> SZENEN_CONTROLLER_LIST = new HashMap<>();
 	/**
-	 * Die anwendungsStage ist die Stage des Spiels, auf der sich alle Szenen
-	 * abspielen.
+	 * Die Map beinhaltet alle SzenenControllern und ordnet Ihnen einen Namen zu.
+	 */
+	private static final HashMap<String, Lokalisierbar> SZENEN_CONTROLLER_LIST = new HashMap<>();
+
+	/**
+	 * Die anwendungsStage ist die Stage des Spiels, auf der sich die
+	 * anwendungsSzene abspielt.
 	 */
 	private static Stage anwendungsStage = null;
+	/**
+	 * Die AnwendungsSzene beinhaltet das rootPane und legt dieses als seine einzige
+	 * Szene auf die anwendungsStage.
+	 */
+	private static Scene anwendungsSzene = null;
+	/**
+	 * Das rootPane ist das Fundament fuer alle "Szenen". Sie werden aus
+	 * fxml-Dateien geladen und dem rootPane hinzugefuegt.
+	 */
+	private static Pane rootPane = null;
 
 	/**
 	 * Aktualisiert die Aufloesung des Fensters, indem die Werte fuer alle Groessen,
 	 * Abstaende, etc. aus dem css-StyleSheet fuer die aktuell eingestellte
-	 * Aufloesung geladen werden.
+	 * Aufloesung geladen werden. Die Einstellung "Vollbild" wird ebenfalls
+	 * beachtet.
 	 */
-	public static void aktualisiereFensterAufloesung()
+	public static void aktualisiereFensterAufloesungUndStyleSheets()
 	{
-		AnwendungFX.entferneStyleSheetsVonAllenScenes();
+		AnwendungFX.entferneAlleStyleSheetsVonAnwendungsSzene(); // Alle css werden entfernt
+		AnwendungFX.fuegeAlleLayoutStyleSheetsDerAnwendungsSzeneHinzu(); // Alle "nur-Layot-css" werden hinzugefuegt
+		AnwendungFX.anwendungsStage.setFullScreen(Einstellungen.getEinstellungen().getVollbild());
 		String eingestellteAufloesung = Einstellungen.getEinstellungen().getAnwendungsAufloesung().toString();
-		AnwendungFX.fuegeStyleSheetAllenSzenenHinzu(
-				Spielkonstanten.CSS_DATEI_PFAD + eingestellteAufloesung + Spielkonstanten.CSS_DATEI_ENDE);
+		if (Einstellungen.getEinstellungen().getVollbild()) // bei Vollbild
+		{
+			AnwendungFX.fuegeStyleSheetsAnwendungsSzeneHinzu(Spielkonstanten.CSS_DATEI_PFAD + eingestellteAufloesung
+					+ Spielkonstanten.VOLLBILD_DATEI_ZUSATZ + Spielkonstanten.CSS_DATEI_ENDE);
+		} else
+		{
+			AnwendungFX.fuegeStyleSheetsAnwendungsSzeneHinzu( // bei Fenster
+					Spielkonstanten.CSS_DATEI_PFAD + eingestellteAufloesung + Spielkonstanten.CSS_DATEI_ENDE);
+			AnwendungFX.anwendungsStage.centerOnScreen();
+		}
 		AnwendungFX.anwendungsStage.sizeToScene();
-		AnwendungFX.anwendungsStage.centerOnScreen();
 	}
 
 	/**
-	 * Aktualisiert alle Komponenten, die einen Text darstellen oder beinhalten,
-	 * hinsichtlich der eingestellten Sprache.
+	 * Aktualisiert alle GUI Komponenten, die einen Text darstellen oder beinhalten,
+	 * hinsichtlich der eingestellten Sprache. Hierzu wird eine entsprechende
+	 * Methode in den Einstellungen aufgerufen.
 	 */
 	public static void aktualisiereSzenenSprache()
 	{
@@ -71,6 +100,9 @@ public class AnwendungFX extends Application
 	 * Es wird durch die Controller aller Szenen iteriert um diesem jeweils zu
 	 * signalisieren, dass alle Komponenten, die einen Text darstellen oder
 	 * beinhalten, ihren Inhalt an die (neu) eingestellte Sprache anpassen sollen.
+	 * Diese Methode wird implizit von den Einstellungen aufgerufen. Für das
+	 * Aktualisieren der Sprache sollte "aktualisiereSzenenSprache()" aufgerufen
+	 * werden.
 	 *
 	 * @param sprachRessource Aus dieser Ressource werden die neuen Strings geladen.
 	 */
@@ -84,43 +116,37 @@ public class AnwendungFX extends Application
 	}
 
 	/**
-	 * Entfernt alle im Code hinzugefuegten css-StyleSheets von allen Szene der
-	 * SZENEN_MAP. Hat keine Auswirkungen auf SytleSheets, die in der fxml-Datei
-	 * einer Szene verlinkt wurden!
+	 * Entfernt alle im Code hinzugefuegten css-StyleSheets von der anwendungsSzene.
+	 * Hat keine Auswirkungen auf SytleSheets, die in einer fxml-Datei eines
+	 * customControls verlinkt wurden!
 	 */
-	private static void entferneStyleSheetsVonAllenScenes()
+	private static void entferneAlleStyleSheetsVonAnwendungsSzene()
 	{
-		for (Scene szene : AnwendungFX.SZENEN_MAP.values())
-		{
-			szene.getStylesheets().clear();
-		}
+		AnwendungFX.anwendungsSzene.getStylesheets().clear();
 	}
 
 	/**
-	 * Fuegt alle im Parameter aufgelisteten StyleSheets allen Szenen der SZENEN_MAP
-	 * hinzu. Sobald einer Szene ein neuer StyleSheet hinzugefuegt wurde, wird
-	 * dieser automatisch und sofort angewendet.
+	 * Fuegt alle im Parameter aufgelisteten StyleSheets der anwendungsSzene hinzu.
+	 * Sobald der Szene ein neuer StyleSheet hinzugefuegt wurde, wird dieser
+	 * automatisch und sofort angewendet.
 	 *
-	 * @param pfadeZuCSSDateien Auf alle Szenen anzuwendende StyleSheets
+	 * @param pfadeZuCSSDateien Anzuwendende StyleSheets
 	 */
-	private static void fuegeStyleSheetAllenSzenenHinzu(String... pfadeZuCSSDateien)
+	private static void fuegeStyleSheetsAnwendungsSzeneHinzu(String... pfadeZuCSSDateien)
 	{
 		for (String cssPfad : pfadeZuCSSDateien)
 		{
-			for (Scene szene : AnwendungFX.SZENEN_MAP.values())
-			{
-				szene.getStylesheets().add(AnwendungFX.class.getResource(cssPfad).toExternalForm());
-			}
+			AnwendungFX.anwendungsSzene.getStylesheets().add(AnwendungFX.class.getResource(cssPfad).toExternalForm());
 		}
-
 	}
 
 	/**
-	 * Fuegt die FXML-Datei mit dem Namen dateiNameDerFXML der SZENEN_MAP als neue
-	 * Szene hinzu. Als String-Name in der SZENEN_MAP dient der dateiNameDerFXML.
-	 * Der Pfad wird ueber diesen Dateinamen ermittelt, indem ihm die Endung ".fxml"
-	 * angefuegt wird. Voraussetzung ist, dass alle fxmlSzenen-Dateien im selben
-	 * package unter {@link Spielkonstanten}.FXML_DATEI_PFAD liegen.
+	 * Fuegt die FXML-Datei mit dem Namen dateiNameDerFXML der SZENEN_ROOT_MAP als
+	 * neue Szene hinzu. Als String-Name in der SZENEN_ROOT_MAP dient der
+	 * dateiNameDerFXML. Der Pfad wird ueber diesen Dateinamen ermittelt, indem ihm
+	 * die Endung ".fxml" angefuegt wird. Voraussetzung ist, dass alle
+	 * fxmlSzenen-Dateien im selben package unter
+	 * {@link Spielkonstanten}.FXML_DATEI_PFAD liegen.
 	 *
 	 * @param dateiNameDerFXML Der Name der fxml-Datei fuer die hinzuzufuegende
 	 *                         Szene
@@ -131,22 +157,27 @@ public class AnwendungFX extends Application
 		{
 			FXMLLoader loader = new FXMLLoader(AnwendungFX.class.getResource(
 					Spielkonstanten.FXML_DATEI_PFAD + dateiNameDerFXML + Spielkonstanten.FXML_DATEI_ENDUNG));
-			AnwendungFX.SZENEN_MAP.put(dateiNameDerFXML, new Scene(loader.load()));
+			AnwendungFX.SZENEN_ROOT_MAP.put(dateiNameDerFXML, loader.load());
 			AnwendungFX.SZENEN_CONTROLLER_LIST.put(dateiNameDerFXML, loader.getController());
 		} catch (IOException e)
 		{
-			e.printStackTrace(); /// TODO: entfernen
+			e.printStackTrace();
 			Main.anwendungBeenden();
 		}
 	}
 
+	/**
+	 * Liefert die Controller zu allen regestrierten Szenen.
+	 *
+	 * @return SzenenController
+	 */
 	public static HashMap<String, Lokalisierbar> getSzenenController()
 	{
 		return AnwendungFX.SZENEN_CONTROLLER_LIST;
 	}
 
 	/**
-	 * Hier werden alle Szenen in der SZENEN_MAP registriert und dieser
+	 * Hier werden alle Szenen in der SZENEN_ROOT_MAP registriert und dieser
 	 * hinzugefuegt.
 	 */
 	private static void initSzenen()
@@ -158,6 +189,15 @@ public class AnwendungFX extends Application
 		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_DUNGEON_SZENE);
 		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_SCHWIERIGKEIT_WAEHLEN_SZENE);
 		AnwendungFX.fuegeSzeneHinzu(Spielkonstanten.ANWENDUNG_WELTKARTE_SZENE);
+	}
+
+	/**
+	 * Es werden lediglich die Layout relevanten css-SytleSheets der AnwendungsSzene
+	 * hinzugefuegt.
+	 */
+	private static void fuegeAlleLayoutStyleSheetsDerAnwendungsSzeneHinzu()
+	{
+		fuegeStyleSheetsAnwendungsSzeneHinzu(Spielkonstanten.CSS_LAYOUT_SHEETS);
 	}
 
 	/**
@@ -174,13 +214,15 @@ public class AnwendungFX extends Application
 
 	/**
 	 * Es wird die Szene gewechselt. Die anwendungsStage zeigt dann also die Szene
-	 * szenenName.
+	 * szenenName. Im Detail verbleibt die anwendungsSzene und lediglich dem
+	 * rootPane werden andere Knoten hinzugeordnet.
 	 *
 	 * @param szenenName Der Name der anzuzeigenden Szene.
 	 */
-	public static void wechselSzene(String szenenName)
+	public static void zeigeSzene(String szenenName)
 	{
-		AnwendungFX.anwendungsStage.setScene(AnwendungFX.SZENEN_MAP.get(szenenName));
+		AnwendungFX.rootPane.getChildren().setAll(AnwendungFX.SZENEN_ROOT_MAP.get(szenenName));
+		AnwendungFX.rootPane.applyCss();
 	}
 
 	/**
@@ -190,15 +232,24 @@ public class AnwendungFX extends Application
 	@Override
 	public void start(Stage stage) throws Exception
 	{
+		// Zuweisungen und Instanzierunge des Basis-Geruests
 		AnwendungFX.anwendungsStage = stage;
+		AnwendungFX.rootPane = new Pane();
+		AnwendungFX.anwendungsSzene = new Scene(AnwendungFX.rootPane);
+		AnwendungFX.anwendungsStage.setScene(AnwendungFX.anwendungsSzene);
+		// Initialisierungen von Szene, Sprache und StyleSheets
 		AnwendungFX.initSzenen();
 		AnwendungFX.aktualisiereSzenenSprache();
-		AnwendungFX.aktualisiereFensterAufloesung();
+		AnwendungFX.aktualisiereFensterAufloesungUndStyleSheets();
+		// Einstellungen des Fensters (Stage)
 		AnwendungFX.anwendungsStage.getIcons()
 				.add(new Image(new File(Spielkonstanten.ANWENDUNG_ANWENDUNGS_ICON).toURI().toURL().toExternalForm()));
 		AnwendungFX.anwendungsStage.setResizable(false);
+		AnwendungFX.anwendungsStage.setFullScreenExitHint(new String());
+		AnwendungFX.anwendungsStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 		AnwendungFX.anwendungsStage.setOnCloseRequest(windowEvent -> Main.anwendungBeenden());
-		AnwendungFX.anwendungsStage.setScene(AnwendungFX.SZENEN_MAP.get(Spielkonstanten.ANWENDUNG_TITEL_SZENE));
+		// Setzen einer Start-Szene und anzeigen des Fensters
+		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_TITEL_SZENE);
 		AnwendungFX.anwendungsStage.show();
 	}
 

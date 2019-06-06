@@ -23,6 +23,8 @@ public class QuestLog extends StackPane implements Initializable, Lokalisierbar
 	 * Pfad zur fxml-Datei, fuer die diese Klasse der Controller ist.
 	 */
 	private static final String FXML_PFAD = "QuestLog.fxml";
+	private static final String CSS_HINTERGRUND_OEFFNEN = "-fx-background-image: url('/de/pk/ressourcen/bildDateien/buttonIcons/Menu_BTN.png')";
+	private static final String CSS_HINTERGRUND_SCHLIESSEN = "-fx-background-image: url('/de/pk/ressourcen/bildDateien/buttonIcons/Forward_BTN.png')";
 
 	@FXML
 	private DialogPane questLogDialogPane;
@@ -85,13 +87,11 @@ public class QuestLog extends StackPane implements Initializable, Lokalisierbar
 		if (this.questLogButton.isSelected())
 		{
 			this.questLogDialogPane.setVisible(true);
-			this.questLogButton
-					.setStyle("-fx-background-image: url('/de/pk/ressourcen/bildDateien/buttonIcons/Forward_BTN.png')");
+			this.questLogButton.setStyle(QuestLog.CSS_HINTERGRUND_SCHLIESSEN);
 		} else
 		{
 			this.questLogDialogPane.setVisible(false);
-			this.questLogButton
-					.setStyle("-fx-background-image: url('/de/pk/ressourcen/bildDateien/buttonIcons/Menu_BTN.png')");
+			this.questLogButton.setStyle(QuestLog.CSS_HINTERGRUND_OEFFNEN);
 		}
 		this.aktualisiereTextKomponenten(Einstellungen.getEinstellungen().getSprachRessource());
 	}

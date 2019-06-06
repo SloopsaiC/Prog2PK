@@ -23,6 +23,9 @@ public class HeldStatusHBox extends HBox implements Initializable, Lokalisierbar
 	 * Pfad zur fxml-Datei, fuer die diese Klasse der Controller ist.
 	 */
 	private static final String FXML_PFAD = "HeldStatusHBox.fxml";
+	private static final String CSS_UMRANDUNG_FARBIG = "-fx-border-style: solid inside;"
+			+ "-fx-border-color: rgb(100.0,30.0,30.0);" + "-fx-border-width: 3;" + "-fx-border-radius: 10;";
+	private static final String CSS_KEINE_UMRANDUNG = "-fx-border-style: none;";
 
 	@FXML
 	private Label heldenAvatarLabel;
@@ -60,7 +63,7 @@ public class HeldStatusHBox extends HBox implements Initializable, Lokalisierbar
 	@Override
 	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
 	{
-		// TODO Lokalisierung
+		//
 	}
 
 	/**
@@ -68,7 +71,7 @@ public class HeldStatusHBox extends HBox implements Initializable, Lokalisierbar
 	 */
 	public void entferneUmrandung()
 	{
-		this.setStyle("-fx-border-style: none;");
+		this.setStyle(HeldStatusHBox.CSS_KEINE_UMRANDUNG);
 	}
 
 	/**
@@ -111,8 +114,7 @@ public class HeldStatusHBox extends HBox implements Initializable, Lokalisierbar
 	 */
 	public void umrandeFarbig()
 	{
-		this.setStyle("-fx-border-style: solid inside;" + "-fx-border-color: rgb(100.0,30.0,30.0);"
-				+ "-fx-border-width: 3;" + "-fx-border-radius: 10;");
+		this.setStyle(HeldStatusHBox.CSS_UMRANDUNG_FARBIG);
 	}
 
 }

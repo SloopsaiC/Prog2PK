@@ -40,3 +40,19 @@
 #spezielleFaehigkeitIndikator .progress, #spezielleFaehigkeitIndikatorKlein .bar {
 	-fx-background-color: rgb(10.0,100.0,10.0);
 }
+
+
+#aktionenButton1 {
+	-fx-background-image: url("../../../../ressourcen/bildDateien/buttonIcons/Damage_Icon.png"); 
+}
+
+#aktionenButton2 {
+	-fx-background-image: url("../../../../ressourcen/bildDateien/buttonIcons/Speed_Icon.png"); 
+}
+
+#aktionenButton1:selected, #aktionenButton2:selected, #aktionenButton3:selected, #aktionenButton4:selected {
+	-fx-border-style: solid outside;
+	-fx-border-color: rgb(100.0,30.0,30.0);
+	-fx-border-width: 2;
+	-fx-border-radius: 2;
+}

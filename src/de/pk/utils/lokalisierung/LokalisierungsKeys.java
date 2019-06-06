@@ -101,7 +101,6 @@ public class LokalisierungsKeys
 	public static final String CREDTITS_KEY = "credits";
 	public static final String HAUPTMENUE_KEY = "hauptmenue";
 	public static final String NEUES_SPIEL_KEY = "neuesSpiel";
-	public static final String OPTIONEN_KEY = "optionen";
 	public static final String BEENDEN_KEY = "beenden";
 	public static final String SPIEL_LADEN_KEY = "spielLaden";
 	public static final String ZUM_TITELBILDSCHIRM_KEY = "zumTitelbildschrim";
@@ -109,7 +108,7 @@ public class LokalisierungsKeys
 	public static final String TOOLTIP_QUEST_LOG_SCHLIESSEN_KEY = "tooltipQuestLogSchliessen";
 	public static final String MENUEBARCHECKBOX_KEY = "menueBarCheckBox";
 
-	//Sprachkeys fuer das Schwierigkeitsmenue:
+	// Sprachkeys fuer das Schwierigkeitsmenue:
 	public static final String NEULING_DIALOG_TEXT_KEY = "neulingDialogText";
 	public static final String DICKKOPF_DIALOG_TEXT_KEY = "dickkopfDialogText";
 	public static final String DRAUFGAENGER_DIALOG_TEXT_KEY = "draufgaengerDialogText";
@@ -118,11 +117,14 @@ public class LokalisierungsKeys
 	public static final String DICKKOPF_KEY = "dickkopf";
 	public static final String DRAUFGAENGER_KEY = "draufgaenger";
 	public static final String BLUTDUERSTER_KEY = "blutduerster";
-	
-	//Sprachkeys fuer die Weltkarte:
+
+	// Sprachkeys fuer die Weltkarte:
 	public static final String DUNGEON1INFO_KEY = "dungeon1Info";
 	public static final String DUNGEON2INFO_KEY = "dungeon2Info";
 	public static final String DUNGEON3INFO_KEY = "dungeon3Info";
 	public static final String DUNGEON4INFO_KEY = "dungeon4Info";
 	public static final String DUNGEON5INFO_KEY = "dungeon5Info";
+
+	public static final String PAUSE_KEY = "pause";
+	public static final String VOLLBILD_KEY = "vollbild";
 }

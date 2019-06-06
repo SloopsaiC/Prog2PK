@@ -1,0 +1,22 @@
+.dialog-pane {
+	-fx-background-color: rgba(0.0,0.0,0.0,0.9);
+	-fx-padding: 20;
+	-fx-background-radius: 25;
+}
+
+
+#neulingButton {	
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/1.png"); 
+}
+
+#dickkopfButton {	
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/12.png"); 
+}
+
+#draufgaengerButton {	
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/35.png"); 
+}
+
+#blutduersterButton {	
+	-fx-background-image: url("../../../ressourcen/bildDateien/buttonIcons/40.png"); 
+}

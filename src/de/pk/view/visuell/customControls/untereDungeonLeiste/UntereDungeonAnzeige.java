@@ -14,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 
 public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalisierbar
@@ -23,11 +25,16 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 	 */
 	private static final String FXML_PFAD = "UntereDungeonAnzeige.fxml";
 
+	private static final int AKTIVE_AKTION_INDEX_STANDARD_WERT = -1, AKTIVE_AKTION_INDEX_BUTTON_1 = 0,
+			AKTIVE_AKTION_INDEX_BUTTON_2 = 1, AKTIVE_AKTION_INDEX_BUTTON_3 = 2, AKTIVE_AKTION_INDEX_BUTTON_4 = 3;
+
 	/**
 	 * Der Held, dessen Attribute von dieser UntereDungeonAnzeige ueberwacht und
 	 * angezeigt werden sollen.
 	 */
-	private Held held = null;
+	private Held aktuellerHeld = null;
+
+	private ToggleGroup aktionenToggleButtons = null;
 
 	// Leben, Faehigkeit, Erfahrung:
 	@FXML
@@ -41,13 +48,13 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 
 	// Buttons fuer Aktionen:
 	@FXML
-	private Button aktionButton1;
+	private ToggleButton aktionButton1;
 	@FXML
-	private Button aktionButton2;
+	private ToggleButton aktionButton2;
 	@FXML
-	private Button aktionButton3;
+	private ToggleButton aktionButton3;
 	@FXML
-	private Button aktionButton4;
+	private ToggleButton aktionButton4;
 	// Buttons fuer Inventar:
 	@FXML
 	private Button heldenInventarButton1;
@@ -57,7 +64,7 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 	private Button heldenInventarButton3;
 	@FXML
 	private Button heldenInventarButton4;
-	// Buttons fuer wirkende Effekte
+	// Labels fuer wirkende Effekte
 	@FXML
 	private Label wirkendeEffekteButton1;
 	@FXML
@@ -69,7 +76,7 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 	@FXML
 	private Label wirkendeEffekteButton5;
 
-	private int aktiveAktionsIndex = -1;
+	private int aktiveAktionsIndex = UntereDungeonAnzeige.AKTIVE_AKTION_INDEX_STANDARD_WERT;
 
 	/**
 	 * Erstellt eine neue UntereDungeonAnzeige, indem die fxml-Datei geladen wird
@@ -92,31 +99,31 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 	@FXML
 	public void aktionButton1Pressed(ActionEvent event)
 	{
-		this.aktiveAktionsIndex = 0;
+		this.aktiveAktionsIndex = UntereDungeonAnzeige.AKTIVE_AKTION_INDEX_BUTTON_1;
 	}
 
 	@FXML
 	public void aktionButton2Pressed(ActionEvent event)
 	{
-		this.aktiveAktionsIndex = 1;
+		this.aktiveAktionsIndex = UntereDungeonAnzeige.AKTIVE_AKTION_INDEX_BUTTON_2;
 	}
 
 	@FXML
 	public void aktionButton3Pressed(ActionEvent event)
 	{
-		this.aktiveAktionsIndex = 2;
+		this.aktiveAktionsIndex = UntereDungeonAnzeige.AKTIVE_AKTION_INDEX_BUTTON_3;
 	}
 
 	@FXML
 	public void aktionButton4Pressed(ActionEvent event)
 	{
-		this.aktiveAktionsIndex = 3;
+		this.aktiveAktionsIndex = UntereDungeonAnzeige.AKTIVE_AKTION_INDEX_BUTTON_4;
 	}
 
 	@Override
 	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
 	{
-		// TODO Lokalisierung
+		//
 	}
 
 	public int getAktiveAktion()
@@ -154,12 +161,17 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		//
+		this.aktionenToggleButtons = new ToggleGroup();
+		this.aktionButton1.setToggleGroup(aktionenToggleButtons);
+		this.aktionButton2.setToggleGroup(aktionenToggleButtons);
+		this.aktionButton3.setToggleGroup(aktionenToggleButtons);
+		this.aktionButton4.setToggleGroup(aktionenToggleButtons);
 	}
 
 	private void resetAktiveAktion()
 	{
-		this.aktiveAktionsIndex = -1;
+		this.aktiveAktionsIndex = UntereDungeonAnzeige.AKTIVE_AKTION_INDEX_STANDARD_WERT;
+		this.aktionenToggleButtons.getSelectedToggle().setSelected(false);
 	}
 
 	/**
@@ -167,12 +179,18 @@ public class UntereDungeonAnzeige extends HBox implements Initializable, Lokalis
 	 * sollen. Es werden somit automatisch immer die aktuellen Werte der Attribute
 	 * auf die entsprechenden Anzeigen dieser StatusAnzeige gelegt.
 	 *
-	 * @param held Der Held, dessen Attribute von dieser UntereDungeonAnzeige
-	 *             ueberwacht und angezeigt werden sollen.
+	 * @param aktuellerHeld Der Held, dessen Attribute von dieser
+	 *                      UntereDungeonAnzeige ueberwacht und angezeigt werden
+	 *                      sollen.
 	 */
 	public void setAktuellerHeld(Held held)
 	{
-		this.held = held;
+		this.aktuellerHeld = held;
+	}
+
+	public Held getAktuellerHeld()
+	{
+		return this.aktuellerHeld;
 	}
 
 }

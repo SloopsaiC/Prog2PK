@@ -37,13 +37,13 @@ public class CreditsSzeneController implements Initializable, Lokalisierbar
 	@Override
 	public void initialize(URL url, ResourceBundle rb)
 	{
-		// TODO
+		//
 	}
 
 	@FXML
 	private void zumHauptmenueButtonAction(ActionEvent event)
 	{
-		AnwendungFX.wechselSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
+		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
 	}
 
 }

@@ -6,12 +6,16 @@ import java.util.ResourceBundle;
 import de.pk.control.app.Anwendung;
 import de.pk.control.spiel.Dungeon;
 import de.pk.model.interaktion.WuerfelWurf;
+import de.pk.utils.Spielkonstanten;
 import de.pk.utils.lokalisierung.Lokalisierbar;
+import de.pk.utils.lokalisierung.LokalisierungsKeys;
+import de.pk.view.visuell.AnwendungFX;
+import de.pk.view.visuell.customControls.einstellungenControlPane.EinstellungenControlPane;
 import de.pk.view.visuell.customControls.heldenStatusAnzeige.HeldenStatusAnzeige;
 import de.pk.view.visuell.customControls.karteGridPane.KarteGridPane;
 import de.pk.view.visuell.customControls.obereDungeonLeiste.ObereDungeonAnzeige;
-import de.pk.view.visuell.customControls.pauseDialog.PauseDialog;
 import de.pk.view.visuell.customControls.questLog.QuestLog;
+import de.pk.view.visuell.customControls.unschaerfeFensterDialog.UnschaerfeFensterDialog;
 import de.pk.view.visuell.customControls.untereDungeonLeiste.UntereDungeonAnzeige;
 import de.pk.view.visuell.events.KachelPositionEvent;
 import javafx.beans.value.ChangeListener;
@@ -20,8 +24,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Control;
-import javafx.scene.effect.GaussianBlur;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -33,10 +38,10 @@ import javafx.scene.layout.BorderPane;
 public class DungeonSzeneController implements Initializable, Lokalisierbar
 {
 
+	private Dungeon aktiverDungeon = null;
+
 	@FXML
 	private BorderPane dungeonBorderPane;
-	@FXML
-	private PauseDialog pauseMenueDialogPane;
 	@FXML
 	private KarteGridPane karteGridPane;
 	@FXML
@@ -48,18 +53,39 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 	@FXML
 	private QuestLog questLog;
 
-	private Dungeon aktiverDungeon = null;
+	@FXML
+	private UnschaerfeFensterDialog pauseMenueDialogPane;
+	@FXML
+	private Label pauseLabel;
+	@FXML
+	private Button pauseMenueZurueckButton;
+	@FXML
+	private Button pauseMenueBeendenButton;
+	@FXML
+	private UnschaerfeFensterDialog einstellungenDialogPane;
+	@FXML
+	private Label einstellungenLabel;
+	@FXML
+	private Button einstellungenZurueckButton;
+	@FXML
+	private EinstellungenControlPane einstellungenControlPane;
 
 	@Override
 	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
 	{
-		this.pauseMenueDialogPane.aktualisiereTextKomponenten(sprachRessource);
 		this.heldenStatusAnzeige.aktualisiereTextKomponenten(sprachRessource);
 		this.untereDungeonAnzeige.aktualisiereTextKomponenten(sprachRessource);
 		this.obereDungeonAnzeige.aktualisiereTextKomponenten(sprachRessource);
 		this.questLog.aktualisiereTextKomponenten(sprachRessource);
 		this.karteGridPane.aktualisiereTextKomponenten(sprachRessource);
-		// TODO sonstige Lokalisierungen
+		this.pauseMenueDialogPane.aktualisiereTextKomponenten(sprachRessource);
+		this.einstellungenDialogPane.aktualisiereTextKomponenten(sprachRessource);
+		this.einstellungenControlPane.aktualisiereTextKomponenten(sprachRessource);
+		this.pauseMenueBeendenButton.setText(sprachRessource.getString(LokalisierungsKeys.BEENDEN_KEY));
+		this.pauseMenueZurueckButton.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK_KEY));
+		this.einstellungenZurueckButton.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK_KEY));
+		this.pauseLabel.setText(sprachRessource.getString(LokalisierungsKeys.PAUSE_KEY));
+		this.einstellungenLabel.setText(sprachRessource.getString(LokalisierungsKeys.EINSTELLUNGEN_KEY));
 	}
 
 	/**
@@ -69,7 +95,6 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		this.initObereAnzeigeButtonEvents();
-		this.initPauseMenueDialogPaneButtonEvents();
 		this.initKartenGridPane();
 	}
 
@@ -101,19 +126,18 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 				{
 				case ObereDungeonAnzeige.BEZEICHNER_MENUE_BUTTON_1: // erster MenueButton
 				{
-					DungeonSzeneController.this.heldenStatusAnzeige.markiereAktuelleHeldenStatusHBox(0);
 					break;
 				}
 				case ObereDungeonAnzeige.BEZEICHNER_MENUE_BUTTON_2: // zweiter MenueButton
 				{
-					DungeonSzeneController.this.heldenStatusAnzeige.markiereAktuelleHeldenStatusHBox(3);
+					DungeonSzeneController.this.einstellungenDialogPane.setSichtbar(
+							DungeonSzeneController.this.dungeonBorderPane, DungeonSzeneController.this.karteGridPane);
 					break;
 				}
 				case ObereDungeonAnzeige.BEZEICHNER_MENUE_BUTTON_3: // dritter MenueButton
 				{
-					DungeonSzeneController.this.dungeonBorderPane.setEffect(new GaussianBlur());
-					DungeonSzeneController.this.karteGridPane.setEffect(new GaussianBlur());
-					DungeonSzeneController.this.pauseMenueDialogPane.setVisible(true);
+					DungeonSzeneController.this.pauseMenueDialogPane.setSichtbar(
+							DungeonSzeneController.this.dungeonBorderPane, DungeonSzeneController.this.karteGridPane);
 					break;
 				}
 				}
@@ -122,26 +146,23 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 	}
 
 	/**
-	 * Es wird ein EventHandler fuer die ActionEvents des ZurueckButtons des
-	 * PauseMenueDialogPanes hinzugefuegt.
+	 * Wird aufergurfen, wenn der pauseMenueZurueckButton gedrueckt wurde.
 	 */
-	private void initPauseMenueDialogPaneButtonEvents()
+	@FXML
+	public void zurueckButtonPressed()
 	{
-		this.pauseMenueDialogPane.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>()
-		{
+		this.pauseMenueDialogPane.setUnsichtbar();
+		this.einstellungenDialogPane.setUnsichtbar();
+	}
 
-			@Override
-			public void handle(ActionEvent event)
-			{
-				// fx:id des jeweiligen Buttons, der das ActionEvent ausgeloest hat.
-				if (((Control) event.getTarget()).getId().equals(PauseDialog.BEZEICHNER_ZURUECK_BUTTON)
-						|| ((Control) event.getTarget()).getId().equals(PauseDialog.BEZEICHNER_BEENDEN_BUTTON))
-				{
-					DungeonSzeneController.this.karteGridPane.setEffect(null);
-				}
-			}
-		});
-
+	/**
+	 * Wird aufergurfen, wenn der pauseMenueBeendenButton gedrueckt wurde.
+	 */
+	@FXML
+	public void pauseMenueBeendenButtonPressed()
+	{
+		this.pauseMenueDialogPane.setUnsichtbar();
+		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
 	}
 
 	private void kachelPositionAngeklickt(KachelPositionEvent event)

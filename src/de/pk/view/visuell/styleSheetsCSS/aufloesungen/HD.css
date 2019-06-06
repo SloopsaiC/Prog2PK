@@ -1,10 +1,35 @@
-.menue-pane, .dungeon-pane {
+.szenen-pane {
 	-fx-pref-width: 682.0;
 	-fx-pref-height: 384.0;
 } 
 
+.szenen-border-pane {
+	-fx-padding: 7;
+}
 
-.label, .choice-box, .button, .toggle-button   {
+.wenig-spacing {
+	-fx-spacing: 7;
+}
+
+.medium-spacing {
+	-fx-spacing: 15;
+}
+
+.viel-spacing {
+	-fx-spacing: 35;
+}
+
+.sehr-viel-spacing {
+	-fx-spacing: 60;
+}
+
+
+.lautstaerke-slider {
+	-fx-pref-height: 100;
+	-fx-scale-x: 0.75;
+}
+
+.label, .choice-box, .button, .toggle-button, .check-box {
 	-fx-font-size: 10.0;
 	-fx-background-insets: 1.0;
 }
@@ -14,6 +39,16 @@
 	-fx-background-radius: 3.0;
 }
 
+.image-button {
+	-fx-font-size: 10;
+	-fx-background-insets: 0;
+	-fx-padding: 0;
+	-fx-background-radius: 2;
+}
+
+.optionen-choice-box {
+	-fx-pref-width: 100;
+}
 
 .ueberschriften-label {
 	-fx-font-size: 15.0;

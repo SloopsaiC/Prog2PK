@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root type="javafx.scene.layout.HBox" alignment="CENTER"
+	spacing="100.0" styleClass="sehr-viel-spacing"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<!-- fx:controller="de.pk.view.visuell.customControls.einstellungenControlPane.EinstellungenControlPane"> -->
+	<stylesheets>
+		<URL value="@../../styleSheetsCSS/StandardSzenenStyle.css" />
+		<URL value="@EinstellungenControlPane.css" />
+	</stylesheets>
+	<children>
+		<VBox alignment="CENTER" spacing="20.0"
+			styleClass="medium-spacing">
+			<children>
+				<Label fx:id="aufloesungsLabel" text="Aufloesung" />
+				<ChoiceBox fx:id="aufloesungChoiceBox"
+					focusTraversable="false" prefWidth="150.0"
+					styleClass="optionen-choice-box" />
+				<CheckBox fx:id="vollbildCheckBox" mnemonicParsing="false"
+					onAction="#vollbildCheckBoxAction" text="Vollbild" />
+				<Button fx:id="aufloesungAnwendenButton"
+					focusTraversable="false" mnemonicParsing="false"
+					onAction="#aufloesungAnwendenButtonAction" text="Anwenden" />
+			</children>
+		</VBox>
+		<VBox alignment="CENTER" spacing="20.0"
+			styleClass="medium-spacing">
+			<children>
+				<Label fx:id="spracheLabel" text="Sprache" />
+				<ChoiceBox fx:id="spracheChoiceBox"
+					focusTraversable="false" prefWidth="150.0"
+					styleClass="optionen-choice-box" />
+			</children>
+		</VBox>
+		<VBox alignment="CENTER" maxHeight="-Infinity"
+			maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+			spacing="10.0" styleClass="wenig-spacing">
+			<children>
+				<Label fx:id="lautstaerkeLabel" text="Lautstaerke" />
+				<HBox alignment="CENTER" maxHeight="-Infinity"
+					maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+					spacing="20.0" styleClass="medium-spacing">
+					<children>
+						<VBox alignment="CENTER" maxHeight="-Infinity"
+							maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+							<children>
+								<Slider fx:id="musikVolumeSlider"
+									focusTraversable="false" majorTickUnit="50.0"
+									maxHeight="-Infinity" maxWidth="-Infinity"
+									minHeight="-Infinity" minWidth="-Infinity" minorTickCount="4"
+									onScroll="#mausScrollMusikSliderEvent" orientation="VERTICAL"
+									prefHeight="150.0" snapToTicks="true"
+									styleClass="lautstaerke-slider" value="100.0" />
+								<Label fx:id="musikLabel" text="Musik" />
+							</children>
+						</VBox>
+						<VBox alignment="CENTER" maxHeight="-Infinity"
+							maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+							<children>
+								<Slider fx:id="soundVolumeSlider"
+									focusTraversable="false" majorTickUnit="50.0"
+									maxHeight="-Infinity" maxWidth="-Infinity"
+									minHeight="-Infinity" minWidth="-Infinity" minorTickCount="4"
+									onScroll="#mausScrollSoundSliderEvent" orientation="VERTICAL"
+									prefHeight="150.0" snapToTicks="true"
+									styleClass="lautstaerke-slider" value="100.0" />
+								<Label fx:id="soundLabel" text="Sounds" />
+							</children>
+						</VBox>
+					</children>
+				</HBox>
+			</children>
+		</VBox>
+	</children>
+</fx:root>
