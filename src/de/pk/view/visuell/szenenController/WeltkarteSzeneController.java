@@ -104,7 +104,8 @@ public class WeltkarteSzeneController implements Initializable, Lokalisierbar
 	@Override
 	public void aktualisiereTextKomponenten(ResourceBundle sprachRessource)
 	{
-		this.weltkarteInsHauptmenueButton.setText(sprachRessource.getString(LokalisierungsKeys.ZUM_HAUPTMENUE_KEY));
+		this.weltkarteInsHauptmenueButton.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK_KEY)
+				+ sprachRessource.getString(LokalisierungsKeys.ZUM_HAUPTMENUE_KEY));
 		this.weltkarteZurueckButton.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK_KEY));
 		this.dungeon1Button.setTooltip(new Tooltip(sprachRessource.getString(LokalisierungsKeys.DUNGEON1INFO_KEY)));
 		this.dungeon2Button.setTooltip(new Tooltip(sprachRessource.getString(LokalisierungsKeys.DUNGEON2INFO_KEY)));

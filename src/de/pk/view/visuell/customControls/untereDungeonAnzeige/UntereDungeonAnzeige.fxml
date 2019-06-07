@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root alignment="BOTTOM_CENTER" spacing="15.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+	<!-- fx:controller="de.pk.view.visuell.customControls.untereDungeonAnzeige.UntereDungeonAnzeige"> -->
+	<stylesheets>
+		<URL value="@../../styleSheetsCSS/StandardSzenenStyle.css" />
+		<URL value="@UntereDungeonAnzeige.css" />
+	</stylesheets>
+	<children>
+		<ProgressIndicator id="lebensPunkteIndikator" fx:id="grosseLebensPunkteAnzeigeProgressIndicator" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="70.0" progress="0.67" />
+		<VBox alignment="BOTTOM_CENTER" prefHeight="100.0" spacing="15.0">
+			<children>
+				<HBox alignment="CENTER_LEFT" opacity="0.9" spacing="15.0">
+					<children>
+						<Label id="wirkendeEffekteButton" fx:id="wirkendeEffekteButton1" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="image-label" text="3" textAlignment="CENTER" />
+						<Label id="wirkendeEffekteButton" fx:id="wirkendeEffekteButton2" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="image-label" text="3" textAlignment="CENTER" />
+						<Label id="wirkendeEffekteButton" fx:id="wirkendeEffekteButton3" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="image-label" text="3" textAlignment="CENTER" />
+						<Label id="wirkendeEffekteButton" fx:id="wirkendeEffekteButton4" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="image-label" text="3" textAlignment="CENTER" />
+						<Label id="wirkendeEffekteButton" fx:id="wirkendeEffekteButton5" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="image-label" text="3" textAlignment="CENTER" />
+					</children>
+					<VBox.margin>
+						<Insets left="10.0" right="10.0" />
+					</VBox.margin>
+				</HBox>
+				<HBox alignment="CENTER" spacing="20.0">
+					<children>
+						<HBox alignment="CENTER" spacing="15.0">
+							<children>
+								<ToggleButton id="aktionenButton1" fx:id="aktionButton1" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aktionButton1Pressed" prefHeight="25.0" prefWidth="25.0" styleClass="image-button" text="1" textAlignment="CENTER" />
+								<ToggleButton id="aktionenButton2" fx:id="aktionButton2" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aktionButton2Pressed" prefHeight="25.0" prefWidth="25.0" styleClass="image-button" text="1" textAlignment="CENTER" />
+								<ToggleButton id="aktionenButton3" fx:id="aktionButton3" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aktionButton3Pressed" prefHeight="25.0" prefWidth="25.0" styleClass="image-button" text="1" textAlignment="CENTER" />
+								<ToggleButton id="aktionenButton4" fx:id="aktionButton4" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aktionButton4Pressed" prefHeight="25.0" prefWidth="25.0" styleClass="image-button" text="1" textAlignment="CENTER" />
+							</children>
+						</HBox>
+						<HBox alignment="CENTER" spacing="15.0">
+							<children>
+								<Button id="faehigkeitenButton1" fx:id="heldenInventarButton1" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#heldenInventarButton1Pressed" prefHeight="25.0" prefWidth="25.0" styleClass="image-button" text="2" textAlignment="CENTER" />
+								<Button id="faehigkeitenButton2" fx:id="heldenInventarButton2" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#heldenInventarButton2Pressed" prefHeight="25.0" prefWidth="25.0" styleClass="image-button" text="2" textAlignment="CENTER" />
+								<Button id="faehigkeitenButton3" fx:id="heldenInventarButton3" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#heldenInventarButton3Pressed" prefHeight="25.0" prefWidth="25.0" styleClass="image-button" text="2" textAlignment="CENTER" />
+								<Button id="faehigkeitenButton4" fx:id="heldenInventarButton4" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#heldenInventarButton4Pressed" prefHeight="25.0" prefWidth="25.0" styleClass="image-button" text="2" textAlignment="CENTER" />
+							</children>
+						</HBox>
+					</children>
+				</HBox>
+				<StackPane>
+					<children>
+						<ProgressBar fx:id="erfahrungsPunkteProgressBar" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="300.0" progress="0.77" />
+						<Label id="levelLabel" fx:id="erfahrungsPunkteGesamtLevelLabel" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" text="Lv. 100" textAlignment="CENTER" />
+					</children>
+				</StackPane>
+			</children>
+		</VBox>
+		<ProgressIndicator id="spezielleFaehigkeitIndikator" fx:id="grosseSpezialFaehigkeitsAnzeigeProgressIndicator" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="70.0" progress="0.62" />
+	</children>
+</fx:root>

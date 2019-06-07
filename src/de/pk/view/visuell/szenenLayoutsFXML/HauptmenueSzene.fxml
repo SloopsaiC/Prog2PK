@@ -14,11 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0"
-	prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="de.pk.view.visuell.szenenController.HauptmenueSzeneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pk.view.visuell.szenenController.HauptmenueSzeneController">
 
 	<stylesheets>
 		<URL value="@../styleSheetsCSS/StandardSzenenStyle.css" />
@@ -29,138 +25,77 @@
 	</styleClass>
 
 	<children>
-		<BorderPane prefHeight="576.0" prefWidth="1024.0">
-			<center>
-				<BorderPane prefHeight="554.0" prefWidth="1005.0"
-					BorderPane.alignment="CENTER">
+		<VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<children>
+				<MenuBar fx:id="menueBar" focusTraversable="false" styleClass="image-button">
+					<menus>
+						<Menu mnemonicParsing="false" styleClass="image-button" text="Datei">
+							<items>
+								<MenuItem fx:id="menueBarDateiZumTitelbildschirm" mnemonicParsing="false" onAction="#menueBarDateiZumTitelbildschirmPressed" styleClass="image-button" text="Zum Titelbildschirm" />
+								<MenuItem fx:id="menueBarDateiNeuesSpiel" mnemonicParsing="false" onAction="#menueBarDateiNeuesSpielPressed" styleClass="image-button" text="Neues Spiel" />
+								<MenuItem mnemonicParsing="false" styleClass="image-button" text="Spiel laden" />
+								<MenuItem mnemonicParsing="false" styleClass="image-button" text="Spiel speichern" />
+								<MenuItem mnemonicParsing="false" styleClass="image-button" text="Spiel speichern unter.." />
+								<MenuItem fx:id="menueBarDateiSpielBeenden" mnemonicParsing="false" onAction="#menueBarDateiSpielBeendenPressed" styleClass="image-button" text="Spiel beenden" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Einstellungen">
+							<items>
+								<MenuItem fx:id="menueBarEinstellungenSpieloptionen" mnemonicParsing="false" onAction="#menueBarEinstellungenSpieloptionenPressed" styleClass="image-button" text="Spieloptionen" />
+								<MenuItem mnemonicParsing="false" styleClass="image-button" text="Steuerung" />
+								<MenuItem mnemonicParsing="false" styleClass="image-button" text="Online-Einstellungen" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Spielgeschichte">
+							<items>
+								<MenuItem mnemonicParsing="false" styleClass="image-button" text="Geschichte anzeigen" />
+								<MenuItem mnemonicParsing="false" styleClass="image-button" text="Illustrationen" />
+								<MenuItem mnemonicParsing="false" styleClass="image-button" text="Zu den Autoren" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Hilfe">
+							<items>
+								<MenuItem mnemonicParsing="false" styleClass="image-button" text="Regelheft" />
+								<MenuItem mnemonicParsing="false" styleClass="image-button" text="Support" />
+							</items>
+						</Menu>
+					</menus>
+				</MenuBar>
+				<BorderPane prefHeight="576.0" prefWidth="1024.0" styleClass="szenen-border-pane">
 					<center>
-						<VBox alignment="CENTER" prefHeight="491.0" prefWidth="562.0"
-							spacing="30.0" BorderPane.alignment="CENTER">
+						<VBox alignment="CENTER" spacing="50.0" BorderPane.alignment="CENTER">
 							<children>
-								<Button fx:id="neuesSpielButton" alignment="CENTER"
-									focusTraversable="false" layoutX="260.0" layoutY="95.0"
-									mnemonicParsing="false" onAction="#neuesSpielButtonAction"
-									text="Neues Spiel" textAlignment="CENTER"
-									AnchorPane.bottomAnchor="280.0" AnchorPane.leftAnchor="260.0"
-									AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="95.0" />
-								<Button fx:id="spielLadenButton" focusTraversable="false"
-									layoutX="264.0" layoutY="155.0" mnemonicParsing="false"
-									onAction="#spielLadenButtonAction" text="Spiel laden"
-									textAlignment="CENTER" />
-								<Button fx:id="optionenButton" focusTraversable="false"
-									layoutX="268.0" layoutY="209.0" mnemonicParsing="false"
-									onAction="#optionenButtonAction" text="Optionen"
-									textAlignment="CENTER" />
-								<Button fx:id="creditsButton" focusTraversable="false"
-									layoutX="273.0" layoutY="258.0" mnemonicParsing="false"
-									onAction="#credtisButtonAction" text="Credits"
-									textAlignment="CENTER" />
+								<Button fx:id="neuesSpielButton" alignment="CENTER" focusTraversable="false" layoutX="260.0" layoutY="95.0" mnemonicParsing="false" onAction="#neuesSpielButtonAction" text="Neues Spiel" textAlignment="CENTER" AnchorPane.bottomAnchor="280.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="95.0" />
+								<Button fx:id="spielLadenButton" focusTraversable="false" layoutX="264.0" layoutY="155.0" mnemonicParsing="false" onAction="#spielLadenButtonAction" text="Spiel laden" textAlignment="CENTER" />
+								<Button fx:id="optionenButton" focusTraversable="false" layoutX="268.0" layoutY="209.0" mnemonicParsing="false" onAction="#optionenButtonAction" text="Optionen" textAlignment="CENTER" />
+								<Button fx:id="creditsButton" focusTraversable="false" layoutX="273.0" layoutY="258.0" mnemonicParsing="false" onAction="#credtisButtonAction" text="Credits" textAlignment="CENTER" />
+								<HBox alignment="CENTER" prefHeight="43.0" prefWidth="1004.0" spacing="50.0">
+									<children>
+										<Button fx:id="zumTitelbildschirmButton" focusTraversable="false" mnemonicParsing="false" onAction="#zumTitelbildschirmButtonAction" text="Zum Titelbildschirm">
+											<HBox.margin>
+												<Insets />
+											</HBox.margin>
+										</Button>
+										<Button fx:id="spielBeendenButton" focusTraversable="false" mnemonicParsing="false" onAction="#spielBeendenButtonAction" text="Spiel beenden" />
+									</children>
+								</HBox>
 							</children>
 							<padding>
-								<Insets top="20.0" />
+								<Insets bottom="50.0" top="50.0" />
 							</padding>
 						</VBox>
 					</center>
 					<top>
-						<Label fx:id="hauptmenueLabel"
-							styleClass="ueberschriften-label"
-							text="HAUPT - &quot;MENUE&quot; (aka 5+2 Buttons)"
-							textAlignment="CENTER" BorderPane.alignment="CENTER" />
+						<Label fx:id="hauptmenueLabel" focusTraversable="false" styleClass="ueberschriften-label" text="HAUPT - &quot;MENUE&quot; (aka 5+2 Buttons)" textAlignment="CENTER" BorderPane.alignment="CENTER" />
 					</top>
 					<padding>
 						<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 					</padding>
 					<bottom>
-						<HBox alignment="CENTER" prefHeight="43.0" prefWidth="1004.0"
-							spacing="50.0" BorderPane.alignment="CENTER">
-							<children>
-								<Button fx:id="zumTitelbildschirmButton"
-									focusTraversable="false" mnemonicParsing="false"
-									onAction="#zumTitelbildschirmButtonAction"
-									text="Zum Titelbildschirm">
-									<HBox.margin>
-										<Insets />
-									</HBox.margin>
-								</Button>
-								<Button fx:id="spielBeendenButton"
-									focusTraversable="false" mnemonicParsing="false"
-									onAction="#spielBeendenButtonAction" text="Spiel beenden" />
-							</children>
-						</HBox>
+						<CheckBox fx:id="menueBarCheckBox" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#menueBarController" selected="true" styleClass="label" text="MenueBar anzeigen" BorderPane.alignment="BOTTOM_LEFT" />
 					</bottom>
 				</BorderPane>
-			</center>
-			<top>
-				<MenuBar fx:id="menueBar" prefHeight="0.0"
-					prefWidth="1024.0" styleClass="image-button" visible="false"
-					BorderPane.alignment="CENTER">
-					<menus>
-						<Menu mnemonicParsing="false" styleClass="image-button"
-							text="Datei">
-							<items>
-								<MenuItem fx:id="menueBarDateiZumTitelbildschirm"
-									mnemonicParsing="false"
-									onAction="#menueBarDateiZumTitelbildschirmPressed"
-									styleClass="image-button" text="Zum Titelbildschirm" />
-								<MenuItem fx:id="menueBarDateiNeuesSpiel"
-									mnemonicParsing="false"
-									onAction="#menueBarDateiNeuesSpielPressed"
-									styleClass="image-button" text="Neues Spiel" />
-								<MenuItem mnemonicParsing="false"
-									styleClass="image-button" text="Spiel laden" />
-								<MenuItem mnemonicParsing="false"
-									styleClass="image-button" text="Spiel speichern" />
-								<MenuItem mnemonicParsing="false"
-									styleClass="image-button" text="Spiel speichern unter.." />
-								<MenuItem fx:id="menueBarDateiSpielBeenden"
-									mnemonicParsing="false"
-									onAction="#menueBarDateiSpielBeendenPressed"
-									styleClass="image-button" text="Spiel beenden" />
-							</items>
-						</Menu>
-						<Menu mnemonicParsing="false" text="Einstellungen">
-							<items>
-								<MenuItem fx:id="menueBarEinstellungenSpieloptionen"
-									mnemonicParsing="false"
-									onAction="#menueBarEinstellungenSpieloptionenPressed"
-									styleClass="image-button" text="Spieloptionen" />
-								<MenuItem mnemonicParsing="false"
-									styleClass="image-button" text="Steuerung" />
-								<MenuItem mnemonicParsing="false"
-									styleClass="image-button" text="Online-Einstellungen" />
-							</items>
-						</Menu>
-						<Menu mnemonicParsing="false" text="Spielgeschichte">
-							<items>
-								<MenuItem mnemonicParsing="false"
-									styleClass="image-button" text="Geschichte anzeigen" />
-								<MenuItem mnemonicParsing="false"
-									styleClass="image-button" text="Illustrationen" />
-								<MenuItem mnemonicParsing="false"
-									styleClass="image-button" text="Zu den Autoren" />
-							</items>
-						</Menu>
-						<Menu mnemonicParsing="false" text="Hilfe">
-							<items>
-								<MenuItem mnemonicParsing="false"
-									styleClass="image-button" text="Regelheft" />
-								<MenuItem mnemonicParsing="false"
-									styleClass="image-button" text="Support" />
-							</items>
-						</Menu>
-					</menus>
-				</MenuBar>
-			</top>
-			<bottom>
-				<HBox alignment="CENTER_LEFT" prefHeight="19.0"
-					prefWidth="1024.0" BorderPane.alignment="CENTER_LEFT">
-					<children>
-						<CheckBox fx:id="menueBarCheckBox"
-							mnemonicParsing="false" onAction="#menueBarController"
-							styleClass="label" text="MenueBar anzeigen" />
-					</children>
-				</HBox>
-			</bottom>
-		</BorderPane>
+			</children>
+		</VBox>
 	</children>
 </AnchorPane>

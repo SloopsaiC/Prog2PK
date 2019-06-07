@@ -1,4 +1,4 @@
-.dialog-pane {
+#schwierigkeitsWahlDialog {
 	-fx-background-color: rgba(0.0,0.0,0.0,0.9);
 	-fx-padding: 20;
 	-fx-background-radius: 25;

@@ -1,4 +1,4 @@
-package de.pk.view.visuell.customControls.untereDungeonLeiste;
+package de.pk.view.visuell.customControls.untereDungeonAnzeige;
 
 import java.io.IOException;
 import java.net.URL;

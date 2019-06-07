@@ -23,7 +23,7 @@
 		<String fx:value="szenen-pane" />
 	</styleClass>
 	<children>
-		<BorderPane AnchorPane.bottomAnchor="0.0"
+		<BorderPane styleClass="szenen-border-pane" AnchorPane.bottomAnchor="0.0"
 			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
 			AnchorPane.topAnchor="0.0">
 			<bottom>

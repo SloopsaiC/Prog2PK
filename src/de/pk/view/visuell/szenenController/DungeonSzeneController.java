@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import de.pk.control.app.Anwendung;
+import de.pk.control.app.Main;
 import de.pk.control.spiel.Dungeon;
 import de.pk.model.interaktion.WuerfelWurf;
 import de.pk.utils.Spielkonstanten;
@@ -13,10 +14,10 @@ import de.pk.view.visuell.AnwendungFX;
 import de.pk.view.visuell.customControls.einstellungenControlPane.EinstellungenControlPane;
 import de.pk.view.visuell.customControls.heldenStatusAnzeige.HeldenStatusAnzeige;
 import de.pk.view.visuell.customControls.karteGridPane.KarteGridPane;
-import de.pk.view.visuell.customControls.obereDungeonLeiste.ObereDungeonAnzeige;
+import de.pk.view.visuell.customControls.obereDungeonAnzeige.ObereDungeonAnzeige;
 import de.pk.view.visuell.customControls.questLog.QuestLog;
 import de.pk.view.visuell.customControls.unschaerfeFensterDialog.UnschaerfeFensterDialog;
-import de.pk.view.visuell.customControls.untereDungeonLeiste.UntereDungeonAnzeige;
+import de.pk.view.visuell.customControls.untereDungeonAnzeige.UntereDungeonAnzeige;
 import de.pk.view.visuell.events.KachelPositionEvent;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -27,7 +28,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 
 /**
  * FXML Controller class TODO: An einen Dungeon anbinden und dessen Karte, Name,
@@ -41,7 +42,7 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 	private Dungeon aktiverDungeon = null;
 
 	@FXML
-	private BorderPane dungeonBorderPane;
+	private StackPane dungeonControlsStackPane;
 	@FXML
 	private KarteGridPane karteGridPane;
 	@FXML
@@ -59,6 +60,8 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 	private Label pauseLabel;
 	@FXML
 	private Button pauseMenueZurueckButton;
+	@FXML
+	private Button pauseMenueZumHauptmenueButton;
 	@FXML
 	private Button pauseMenueBeendenButton;
 	@FXML
@@ -81,8 +84,9 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 		this.pauseMenueDialogPane.aktualisiereTextKomponenten(sprachRessource);
 		this.einstellungenDialogPane.aktualisiereTextKomponenten(sprachRessource);
 		this.einstellungenControlPane.aktualisiereTextKomponenten(sprachRessource);
-		this.pauseMenueBeendenButton.setText(sprachRessource.getString(LokalisierungsKeys.BEENDEN_KEY));
 		this.pauseMenueZurueckButton.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK_KEY));
+		this.pauseMenueZumHauptmenueButton.setText(sprachRessource.getString(LokalisierungsKeys.HAUPTMENUE_KEY));
+		this.pauseMenueBeendenButton.setText(sprachRessource.getString(LokalisierungsKeys.BEENDEN_KEY));
 		this.einstellungenZurueckButton.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK_KEY));
 		this.pauseLabel.setText(sprachRessource.getString(LokalisierungsKeys.PAUSE_KEY));
 		this.einstellungenLabel.setText(sprachRessource.getString(LokalisierungsKeys.EINSTELLUNGEN_KEY));
@@ -131,13 +135,15 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 				case ObereDungeonAnzeige.BEZEICHNER_MENUE_BUTTON_2: // zweiter MenueButton
 				{
 					DungeonSzeneController.this.einstellungenDialogPane.setSichtbar(
-							DungeonSzeneController.this.dungeonBorderPane, DungeonSzeneController.this.karteGridPane);
+							DungeonSzeneController.this.dungeonControlsStackPane,
+							DungeonSzeneController.this.karteGridPane);
 					break;
 				}
 				case ObereDungeonAnzeige.BEZEICHNER_MENUE_BUTTON_3: // dritter MenueButton
 				{
 					DungeonSzeneController.this.pauseMenueDialogPane.setSichtbar(
-							DungeonSzeneController.this.dungeonBorderPane, DungeonSzeneController.this.karteGridPane);
+							DungeonSzeneController.this.dungeonControlsStackPane,
+							DungeonSzeneController.this.karteGridPane);
 					break;
 				}
 				}
@@ -162,7 +168,7 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 	public void pauseMenueBeendenButtonPressed()
 	{
 		this.pauseMenueDialogPane.setUnsichtbar();
-		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
+		Main.anwendungBeenden();
 	}
 
 	private void kachelPositionAngeklickt(KachelPositionEvent event)
@@ -193,6 +199,13 @@ public class DungeonSzeneController implements Initializable, Lokalisierbar
 		this.obereDungeonAnzeige.setAnzuzeigendenDungeonTitel(dungeon.getName());
 		this.obereDungeonAnzeige.setAnzuzeigendenDungeonFortschritt(50);
 		this.obereDungeonAnzeige.setAnzuzeigendeAnzahlFragmente(10);
+	}
+
+	@FXML
+	public void pauseMenueZumHauptmenueButtonPressed()
+	{
+		this.pauseMenueDialogPane.setUnsichtbar();
+		AnwendungFX.zeigeSzene(Spielkonstanten.ANWENDUNG_HAUPTMENUE_SZENE);
 	}
 
 }

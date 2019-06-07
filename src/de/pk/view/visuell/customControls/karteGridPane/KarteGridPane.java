@@ -164,6 +164,7 @@ public class KarteGridPane extends GridPane implements Initializable, Lokalisier
 				this.addKachelGridPane(kachelPane, position);
 			} catch (InputMismatchException schonVorhanden)
 			{
+				//
 			}
 		}
 	}

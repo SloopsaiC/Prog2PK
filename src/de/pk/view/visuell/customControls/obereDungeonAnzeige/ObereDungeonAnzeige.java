@@ -1,4 +1,4 @@
-package de.pk.view.visuell.customControls.obereDungeonLeiste;
+package de.pk.view.visuell.customControls.obereDungeonAnzeige;
 
 import java.io.IOException;
 import java.net.URL;

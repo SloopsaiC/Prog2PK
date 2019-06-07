@@ -152,8 +152,9 @@ public class HauptmenueSzeneController implements Initializable, Lokalisierbar
 		this.optionenButton.setText(sprachRessource.getString(LokalisierungsKeys.EINSTELLUNGEN_KEY));
 		this.spielBeendenButton.setText(sprachRessource.getString(LokalisierungsKeys.BEENDEN_KEY));
 		this.spielLadenButton.setText(sprachRessource.getString(LokalisierungsKeys.SPIEL_LADEN_KEY));
-		this.zumTitelbildschirmButton.setText(sprachRessource.getString(LokalisierungsKeys.ZUM_TITELBILDSCHIRM_KEY));
-		this.menueBarCheckBox.setText(sprachRessource.getString(LokalisierungsKeys.MENUEBARCHECKBOX_KEY));
+		this.zumTitelbildschirmButton.setText(sprachRessource.getString(LokalisierungsKeys.ZURUECK_KEY)
+				+ sprachRessource.getString(LokalisierungsKeys.ZUM_TITELBILDSCHIRM_KEY));
+		this.menueBarCheckBox.setText(sprachRessource.getString(LokalisierungsKeys.MENUE_BAR_CHECKBOX_KEY));
 	}
 
 }

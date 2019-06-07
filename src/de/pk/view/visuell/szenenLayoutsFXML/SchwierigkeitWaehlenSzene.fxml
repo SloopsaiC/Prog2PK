@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+<StackPane styleClass="szenen-pane" maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0"
 	prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1"
 	xmlns:fx="http://javafx.com/fxml/1"
@@ -23,13 +23,13 @@
 	<stylesheets>
 		<URL value="@../styleSheetsCSS/StandardSzenenStyle.css" />
 		<URL
-			value="@../styleSheetsCSS/SchwierigkeitWaehlenSzenenStyle.css" />
+			value="@../styleSheetsCSS/SchwierigkeitWaehlenSzeneStyle.css" />
 	</stylesheets>
 	<children>
 		<BorderPane fx:id="schwierigeitsBorderPane">
 			<styleClass>
 				<String fx:value="schwierigkeit-pane" />
-				<String fx:value="szenen-pane" />
+				<String fx:value="szenen-border-pane" />
 			</styleClass>
 			<center>
 				<GridPane>
@@ -138,7 +138,7 @@
 			</padding>
 		</BorderPane>
 		<UnschaerfeFensterDialog
-			fx:id="schwierigkeitsWahlDialog" maxHeight="-Infinity"
+			fx:id="schwierigkeitsWahlDialog" id="schwierigkeitsWahlDialog" maxHeight="-Infinity"
 			maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
 			prefHeight="400.0" prefWidth="800.0" visible="false"
 			StackPane.alignment="CENTER">

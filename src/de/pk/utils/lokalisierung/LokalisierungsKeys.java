@@ -106,7 +106,7 @@ public class LokalisierungsKeys
 	public static final String ZUM_TITELBILDSCHIRM_KEY = "zumTitelbildschrim";
 	public static final String TOOLTIP_QUEST_LOG_OEFFNEN_KEY = "tooltipQuestLogOeffnen";
 	public static final String TOOLTIP_QUEST_LOG_SCHLIESSEN_KEY = "tooltipQuestLogSchliessen";
-	public static final String MENUEBARCHECKBOX_KEY = "menueBarCheckBox";
+	public static final String MENUE_BAR_CHECKBOX_KEY = "menueBarCheckBox";
 
 	// Sprachkeys fuer das Schwierigkeitsmenue:
 	public static final String NEULING_DIALOG_TEXT_KEY = "neulingDialogText";

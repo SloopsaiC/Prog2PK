@@ -42,14 +42,13 @@ public class Spielkonstanten
 
 	public static final String FXML_DATEI_ENDUNG = ".fxml";
 	public static final String FXML_DATEI_PFAD = "/de/pk/view/visuell/szenenLayoutsFXML/";
+	public static final String CSS_DATEI_PFAD = "/de/pk/view/visuell/styleSheetsCSS/";
+	public static final String CSS_DATEI_PFAD_AUFLOESUNG = "/de/pk/view/visuell/styleSheetsCSS/aufloesungen/";
 	public static final String CSS_DATEI_ENDE = ".css";
-	public static final String CSS_DATEI_PFAD = "/de/pk/view/visuell/styleSheetsCSS/aufloesungen/";
 	public static final String VOLLBILD_DATEI_ZUSATZ = "_VOLLBILD";
+	public static final String CSS_SZENEN_SPEZIFISCH_ZUSATZ = "Style";
+	public static final String CSS_STANDARD_LAYOUT_SHEET = "/de/pk/view/visuell/styleSheetsCSS/StandardSzenenStyle.css";
 
 	public static final String LOKALISIERUNG_PFAD = "de.pk.ressourcen.lokalisierung.sprache";
-	public static final String[] CSS_LAYOUT_SHEETS =
-	{ "/de/pk/view/visuell/styleSheetsCSS/StandardSzenenStyle.css",
-			"/de/pk/view/visuell/styleSheetsCSS/DungeonSzeneStyle.css",
-			"/de/pk/view/visuell/styleSheetsCSS/SchwierigkeitWaehlenSzenenStyle.css" };
 
 }

@@ -40,10 +40,11 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 
 	private static final double GLUEHEN_INTENSITAET = 0.75;
 
-	private static final double RAND_RADIUS = 10;
+	private static final double RAND_RADIUS_ABGERUNDET = 10;
+	private static final double RAND_RADIUS_ECKIG = 0;
 	private static final double LEBENDIGES_OBJEKT_PUNKT_DIMENSION = 15;
 
-	private static final double UMRANDUNG_BREITE = 3;
+	private static final double UMRANDUNG_BREITE = 2;
 
 	public static final Color STANDARD_UMRANDUNGSFARBE = new Color(0.4, 0.1, 0.1, 1.0);
 
@@ -162,6 +163,8 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 				//
 			}
 		}
+		this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,
+				new CornerRadii(KachelGridPane.RAND_RADIUS_ECKIG), new BorderWidths(KachelGridPane.UMRANDUNG_BREITE))));
 	}
 
 	@Override
@@ -263,9 +266,9 @@ public class KachelGridPane extends GridPane implements Initializable, Lokalisie
 	 */
 	public void setUmrandungBeiUntergrund(Position pos, Color umrandungsFarbe)
 	{
-		this.untergruende[pos.getY()][pos.getX()].setBorder(new Border(
-				new BorderStroke(umrandungsFarbe, BorderStrokeStyle.SOLID, new CornerRadii(KachelGridPane.RAND_RADIUS),
-						new BorderWidths(KachelGridPane.UMRANDUNG_BREITE))));
+		this.untergruende[pos.getY()][pos.getX()].setBorder(new Border(new BorderStroke(umrandungsFarbe,
+				BorderStrokeStyle.SOLID, new CornerRadii(KachelGridPane.RAND_RADIUS_ABGERUNDET),
+				new BorderWidths(KachelGridPane.UMRANDUNG_BREITE))));
 	}
 
 	public void setzeSpielbrettObjektAufUntergrund(SpielbrettObjektLabel objekt, Position pos)

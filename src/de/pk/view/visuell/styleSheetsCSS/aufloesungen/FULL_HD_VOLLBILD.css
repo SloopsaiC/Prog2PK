@@ -1,4 +1,4 @@
-.szenen-pane {
+.szenen-pane, .szenen-border-pane {
 	-fx-pref-width: 1536;
 	-fx-pref-height: 864;
 } 

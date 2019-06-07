@@ -70,17 +70,18 @@ public class AnwendungFX extends Application
 	public static void aktualisiereFensterAufloesungUndStyleSheets()
 	{
 		AnwendungFX.entferneAlleStyleSheetsVonAnwendungsSzene(); // Alle css werden entfernt
-		AnwendungFX.fuegeAlleLayoutStyleSheetsDerAnwendungsSzeneHinzu(); // Alle "nur-Layot-css" werden hinzugefuegt
+		AnwendungFX.fuegeSzenenBedingteStyleSheetsHinzu(); // Alle "nur-Layot-css" werden wieder hinzugefuegt
 		AnwendungFX.anwendungsStage.setFullScreen(Einstellungen.getEinstellungen().getVollbild());
 		String eingestellteAufloesung = Einstellungen.getEinstellungen().getAnwendungsAufloesung().toString();
 		if (Einstellungen.getEinstellungen().getVollbild()) // bei Vollbild
 		{
-			AnwendungFX.fuegeStyleSheetsAnwendungsSzeneHinzu(Spielkonstanten.CSS_DATEI_PFAD + eingestellteAufloesung
-					+ Spielkonstanten.VOLLBILD_DATEI_ZUSATZ + Spielkonstanten.CSS_DATEI_ENDE);
+			AnwendungFX.fuegeStyleSheetsAnwendungsSzeneHinzu(Spielkonstanten.CSS_DATEI_PFAD_AUFLOESUNG
+					+ eingestellteAufloesung + Spielkonstanten.VOLLBILD_DATEI_ZUSATZ + Spielkonstanten.CSS_DATEI_ENDE);
 		} else
 		{
 			AnwendungFX.fuegeStyleSheetsAnwendungsSzeneHinzu( // bei Fenster
-					Spielkonstanten.CSS_DATEI_PFAD + eingestellteAufloesung + Spielkonstanten.CSS_DATEI_ENDE);
+					Spielkonstanten.CSS_DATEI_PFAD_AUFLOESUNG + eingestellteAufloesung
+							+ Spielkonstanten.CSS_DATEI_ENDE);
 			AnwendungFX.anwendungsStage.centerOnScreen();
 		}
 		AnwendungFX.anwendungsStage.sizeToScene();
@@ -100,7 +101,7 @@ public class AnwendungFX extends Application
 	 * Es wird durch die Controller aller Szenen iteriert um diesem jeweils zu
 	 * signalisieren, dass alle Komponenten, die einen Text darstellen oder
 	 * beinhalten, ihren Inhalt an die (neu) eingestellte Sprache anpassen sollen.
-	 * Diese Methode wird implizit von den Einstellungen aufgerufen. Für das
+	 * Diese Methode wird implizit von den Einstellungen aufgerufen. Fuer das
 	 * Aktualisieren der Sprache sollte "aktualisiereSzenenSprache()" aufgerufen
 	 * werden.
 	 *
@@ -195,9 +196,22 @@ public class AnwendungFX extends Application
 	 * Es werden lediglich die Layout relevanten css-SytleSheets der AnwendungsSzene
 	 * hinzugefuegt.
 	 */
-	private static void fuegeAlleLayoutStyleSheetsDerAnwendungsSzeneHinzu()
+	private static void fuegeSzenenBedingteStyleSheetsHinzu()
 	{
-		fuegeStyleSheetsAnwendungsSzeneHinzu(Spielkonstanten.CSS_LAYOUT_SHEETS);
+		fuegeStyleSheetsAnwendungsSzeneHinzu(Spielkonstanten.CSS_STANDARD_LAYOUT_SHEET);
+		for (String szeneBezeichner : AnwendungFX.SZENEN_ROOT_MAP.keySet())
+		{
+			try
+			{
+				AnwendungFX.fuegeStyleSheetsAnwendungsSzeneHinzu(Spielkonstanten.CSS_DATEI_PFAD + szeneBezeichner
+						+ Spielkonstanten.CSS_SZENEN_SPEZIFISCH_ZUSATZ + Spielkonstanten.CSS_DATEI_ENDE);
+			} catch (NullPointerException e)
+			{
+				//
+			}
+
+		}
+
 	}
 
 	/**
